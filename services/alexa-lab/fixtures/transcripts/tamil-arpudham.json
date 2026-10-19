@@ -1,0 +1,11 @@
+{
+  "id": "tamil-arpudham",
+  "heard": "விக்ரம் பாடல் போடு",
+  "locale": "ta-IN",
+  "alternatives": [
+    { "text": "விக்ரம் பாடல் போடு", "confidence": 0.61 },
+    { "text": "விக்ரம் பாடல் போடுங்க", "confidence": 0.24 },
+    { "text": "vikram paadhal podu", "confidence": 0.09 }
+  ],
+  "note": "Tamil request (blueprint §7.1 non-English locale): 'play the Vikram song' — transliteration alternative included."
+}
