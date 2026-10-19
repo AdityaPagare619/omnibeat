@@ -7,7 +7,8 @@
   ph/sh/ch/th/jh/bh/dh/gh/kh: "phir" ≡ "fir" ≡ फिर after matching).
 - Grammar: wake/verbs (bajao, sunao, chalao, chahiye)/providers (spotify,
   gaana, jiosaavn)/fillers (via, se, ko, par, arey)/live, remix, by-artist.
-- 13 fixtures incl. mangled "lolly pop la gelu", "roger g", "parचलाओ …".
+- 13 fixtures incl. mangled "lolly pop la gelu", "roger g", mixed-script
+  "par चलाओ …".
 
 ## Known gaps (honest)
 - No schwa work: चलाओ → "chlao" not "chalao" (matched phonetically only);

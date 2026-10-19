@@ -41,7 +41,9 @@ function tokenize(text: string): string[] {
   return text
     .normalize("NFKC")
     .toLowerCase()
-    .split(/[^\p{L}\p{N}]+/u)
+    .replace(/[\u0027\u02BC\u2018\u2019\u201B]/gu, "")
+    .replace(/[\u002D\u2010\u2011\u2012\u2013\u2014\u2015]/gu, "")
+    .split(/[^\p{L}\p{M}\p{N}]+/u)
     .filter((t) => t.length > 0);
 }
 
@@ -91,14 +93,28 @@ export function peel(
         continue;
       }
 
-      // 2. artist marker: everything after it belongs to the artist.
+      // 2. artist marker: everything after it belongs to the artist, except
+      //    intent tokens which are still recognised there ("… by oasis live").
       if (matchList(token, intents.artistMarkers)) {
         removed.push({ token, reason: "artist" });
+        const artistTokens: string[] = [];
         for (let j = i + 1; j < raw.length; j++) {
           const rest = raw[j]!;
-          removed.push({ token: rest, reason: "artist" });
+          let hit: IntentName | null = null;
+          for (const name of INTENT_NAMES) {
+            if (matchList(rest, intents[name])) {
+              hit = name;
+              break;
+            }
+          }
+          if (hit !== null) {
+            intent[hit] = true;
+            removed.push({ token: rest, reason: "intent" });
+          } else {
+            artistTokens.push(rest);
+            removed.push({ token: rest, reason: "artist" });
+          }
         }
-        const artistTokens = raw.slice(i + 1);
         if (artistTokens.length > 0) intent.artist = artistTokens.join(" ");
         break;
       }

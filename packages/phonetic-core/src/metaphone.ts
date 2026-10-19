@@ -30,37 +30,48 @@ function encode(input: string, alt: boolean): string {
   const w = clean(input);
   if (w.length === 0) return "";
 
-  // --- initial cluster fixes -------------------------------------------
-  let start = 0;
-  let head = w;
-  if (w.startsWith("GN") || w.startsWith("KN") || w.startsWith("PN") ||
-      w.startsWith("WR") || w.startsWith("X")) {
-    start = 1;
-  } else if (w.startsWith("WH")) {
-    head = `W${w.slice(2)}`;
-  } else if (w.startsWith("AE")) {
-    // AE→E (as in "Aesop"-style openings)
-    head = `E${w.slice(2)}`;
-  }
-
+  // --- initial cluster fixes: head is what gets emitted first -------------
   let out = "";
-  let firstVowelSeen = false;
-  let i = start;
-
-  // The very first letter is always emitted (after the cluster fix above).
-  if (head.length > 0) {
-    out += head[0];
+  let i = 0;
+  if (w.startsWith("WH")) {
+    out = "W";
+    i = 2;
+  } else if (w.startsWith("GN") || w.startsWith("KN") || w.startsWith("PN") || w.startsWith("WR")) {
+    out = w[1]!;
+    i = 2;
+  } else if (w.startsWith("X")) {
+    out = "S";
     i = 1;
-    if (VOWELS.has(head[0]!)) firstVowelSeen = true;
+  } else if (w.startsWith("AE")) {
+    out = "E";
+    i = 2;
+  } else if (w.startsWith("CH")) {
+    // CH: front-vowel palatalisation (primary X / secondary J), else K.
+    out = isFront(w[2]) ? (alt ? "J" : "X") : "K";
+    i = 2;
+  } else if (w.startsWith("PH")) {
+    out = "F";
+    i = 2;
+  } else if (w[0] === "C" && isFront(w[1])) {
+    out = "S"; // city, cell
+    i = 1;
+  } else if (w[0] === "G" && isFront(w[1]) && !w.startsWith("GH")) {
+    out = alt ? "G" : "J"; // gem, girl
+    i = 1;
+  } else {
+    out = w[0]!;
+    i = 1;
   }
+  let firstVowelSeen = VOWELS.has(out[0]!);
 
-  while (i < head.length) {
-    const c = head[i]!;
-    const next = head[i + 1];
-    const prev = i > 0 ? head[i - 1] : undefined;
+  while (i < w.length) {
+    const c = w[i]!;
+    const next = w[i + 1];
+    const prev = i > 0 ? w[i - 1] : undefined;
+    const lastEmitted = out.length > 0 ? out[out.length - 1] : undefined;
 
-    // doubled letters collapse (except CC which can span a boundary)
-    if (c === prev && c !== "C") {
+    // doubled (or post-vowel-dropping doubled) consonants collapse
+    if (c === lastEmitted && !VOWELS.has(c)) {
       i += 1;
       continue;
     }
@@ -81,11 +92,11 @@ function encode(input: string, alt: boolean): string {
         i += 1;
         break;
       case "C":
-        if (next === "I" && head[i + 2] === "A") {
+        if (next === "I" && w[i + 2] === "A") {
           out += "X"; // CIA → X
           i += 1;
         } else if (next === "H") {
-          if (isFront(head[i + 2])) out += alt ? "K" : "X";
+          if (isFront(w[i + 2])) out += alt ? "K" : "X";
           else out += "K";
           i += 1; // consume C; H handled next round unless consumed here
           // consume the H too when it formed CH
@@ -99,7 +110,7 @@ function encode(input: string, alt: boolean): string {
         }
         break;
       case "D":
-        if (next === "G" && isFront(head[i + 2])) {
+        if (next === "G" && isFront(w[i + 2])) {
           out += "J";
           i += 2;
         } else {
@@ -113,10 +124,18 @@ function encode(input: string, alt: boolean): string {
       case "L":
       case "M":
       case "N":
-      case "P":
       case "R":
         out += c;
         i += 1;
+        break;
+      case "P":
+        if (next === "H") {
+          out += "F"; // PH digraph (initial PH is handled before the loop)
+          i += 2;
+        } else {
+          out += "P";
+          i += 1;
+        }
         break;
       case "Q":
         out += "K";
@@ -126,7 +145,7 @@ function encode(input: string, alt: boolean): string {
         if (next === "H") {
           out += alt ? "S" : "X"; // SH
           i += 2;
-        } else if (next === "C" && head[i + 2] === "H") {
+        } else if (next === "C" && w[i + 2] === "H") {
           out += alt ? "SK" : "X"; // SCH
           i += 3;
         } else if (isFront(next)) {
@@ -138,7 +157,7 @@ function encode(input: string, alt: boolean): string {
         }
         break;
       case "T":
-        if (next === "I" && head[i + 2] === "A") {
+        if (next === "I" && w[i + 2] === "A") {
           out += "X"; // TIA
           i += 1;
         } else if (next === "H") {
@@ -169,7 +188,7 @@ function encode(input: string, alt: boolean): string {
         break;
       case "G":
         if (next === "H") {
-          const after = head[i + 2];
+          const after = w[i + 2];
           if (after === undefined || !VOWELS.has(after)) {
             i += 1; // silent GH (bright, dough)
             break;
@@ -178,7 +197,7 @@ function encode(input: string, alt: boolean): string {
           i += 1;
           break;
         }
-        if (next === "N" && head[i + 2] === undefined) {
+        if (next === "N" && w[i + 2] === undefined) {
           i += 1; // silent leading-to-end GN
           break;
         }

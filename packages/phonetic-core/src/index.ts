@@ -18,9 +18,9 @@ import { generateVariants, MAX_VARIANTS } from "./variants.js";
  *
  *   resolveSkeletons(query, alts, pack) → RankedMatch[]
  *
- * Pipeline: transliteration aliases → grammar peeling → bounded respelling
- * variants (≤8) → sound-class skeletons → articulatory-weighted distance,
- * with Double-Metaphone-style token agreement as a tiebreak. Pack data
+ * Pipeline: grammar peeling (script transliteration first) → romanization
+ * aliases on kept tokens → bounded respelling variants (≤8) → sound-class
+ * skeletons → articulatory-weighted distance, with Double-Metaphone-style
  * (grammar, rules, translit maps) drives every step; there is no per-track,
  * per-artist, or per-query special casing anywhere in this package.
  */
@@ -65,20 +65,22 @@ export function resolveSkeletons(
   const cfg: DistanceConfig = resolveConfig(options.weights);
   const maxVariants = Math.min(options.maxVariants ?? MAX_VARIANTS, MAX_VARIANTS);
 
-  // query side: canonical aliases → peel (grammar) → variants → skeletons
-  const canonicalQuery = canonicalize(query, pack.translit);
-  const peeled = peel(canonicalQuery, pack, "query");
+  // query side: peel (grammar matches pre-alias so vocab stays intact) →
+  // canonical aliases on kept tokens → variants → skeletons
+  const peeled = peel(query, pack, "query");
+  const queryTokens = peeled.tokens.map((t) => canonicalize(t, pack.translit));
   const variants =
-    peeled.tokens.length === 0
+    queryTokens.length === 0
       ? [""]
-      : generateVariants(peeled.tokens, pack.rules, maxVariants);
+      : generateVariants(queryTokens, pack.rules, maxVariants);
   const variantSkeletons = variants.map((v) => skeleton(v, pack.rules));
   const queryCodes = peeled.tokens.map((t) => metaphone(t));
 
-  // candidate side: canonical aliases → title-mode peel → skeleton
+  // candidate side: title-mode peel (wake/provider only) → aliases → skeleton
   const perAlt = alts.map((alt, index) => {
-    const canonicalAlt = canonicalize(alt, pack.translit);
-    const altTokens = peel(canonicalAlt, pack, "title").tokens;
+    const altTokens = peel(alt, pack, "title").tokens.map((t) =>
+      canonicalize(t, pack.translit),
+    );
     const altSkeleton = altTokens.map((t) => skeletonToken(t, pack.rules));
     const altCodes = altTokens.map((t) => metaphone(t));
 
@@ -132,13 +134,14 @@ export function explainQuery(
   query: string,
   pack: PhoneticPack,
 ): ResolveContext {
-  const peeled = peel(canonicalize(query, pack.translit), pack, "query");
+  const peeled = peel(query, pack, "query");
+  const queryTokens = peeled.tokens.map((t) => canonicalize(t, pack.translit));
   const variants =
-    peeled.tokens.length === 0
+    queryTokens.length === 0
       ? [""]
-      : generateVariants(peeled.tokens, pack.rules, MAX_VARIANTS);
+      : generateVariants(queryTokens, pack.rules, MAX_VARIANTS);
   return {
-    queryTokens: peeled.tokens,
+    queryTokens,
     variants,
     intent: peeled.intent,
   };

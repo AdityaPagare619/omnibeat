@@ -89,7 +89,7 @@ export function skeleton(text: string, rules: RulesJson): string[] {
     .toLowerCase()
     .replace(APOSTROPHES, "")
     .replace(HYPHENS, "");
-  const raw = cleaned.split(/[^\p{L}\p{N}]+/u);
+  const raw = cleaned.split(/[^\p{L}\p{M}\p{N}]+/u);
   const out: string[] = [];
   for (const token of raw) {
     if (token.length === 0) continue;

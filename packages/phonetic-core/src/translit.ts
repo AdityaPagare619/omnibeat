@@ -59,8 +59,9 @@ export function translit(text: string, map: TranslitJson): string {
   return applyChars(normalized, map.chars);
 }
 
-/** Transliteration + romanization aliases — the pre-matching canonical form. */
+/** Transliteration + romanization aliases — the pre-matching canonical form.
+ *  Canonical forms are lowercase (comparison space, not display space). */
 export function canonicalize(text: string, map: TranslitJson): string {
-  const base = translit(text, map);
+  const base = translit(text.toLowerCase(), map);
   return map.aliases ? applyAliases(base, map.aliases) : base;
 }
