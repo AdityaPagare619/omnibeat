@@ -1,0 +1,6 @@
+{
+  "_comment": "T-TEST dummy rules: trivial normalisations so the pack is structurally complete per blueprint §7.1.",
+  "normalisations": [{ "from": "q", "to": "k" }],
+  "articulatory_classes": {},
+  "respelling_templates": []
+}

@@ -1,0 +1,995 @@
+
+ RUN  v5.0.5 C:/Users/Lenovo/Downloads/omni-wt/t-test-p0-skeletons/tests
+
+ Γ¥» contract/ac04-resolve-deadline.test.ts (3 tests | 3 failed) 318ms
+   Γ¥» AC04-resolve-deadline (3)
+     ├ù AC04-resolve-deadline/enumerated-decision: a valid request returns a decision from the frozen enum 249ms
+     ├ù AC04-resolve-deadline/never-throws: degenerate inputs still yield an enumerated decision or isError tool result 9ms
+     ├ù AC04-resolve-deadline/deadline-1500ms: honours the 1500ms deadline under injected 1000ms upstream latency 52ms
+ Γ¥» contract/ac07-elicitation-fallback.test.ts (2 tests | 2 failed) 339ms
+   Γ¥» AC07-elicitation-fallback (2)
+     ├ù AC07-elicitation-fallback/form-elicitation: ask-decision uses form elicitation when the client advertises it 321ms
+     ├ù AC07-elicitation-fallback/spoken-prompt-fallback: without elicitation the identical decision returns with spoken_prompt 10ms
+ Γ¥» contract/ac02-sse-post-delete.test.ts (5 tests | 5 failed) 341ms
+   Γ¥» AC02-sse-post-delete (5)
+     ├ù AC02-sse-post-delete/post-tools-list: POST carries JSON-RPC results for a live session 248ms
+     ├ù AC02-sse-post-delete/get-sse-stream: GET /mcp opens a text/event-stream for the session 10ms
+     ├ù AC02-sse-post-delete/sse-event-ids: SSE events carry monotonically increasing ids 8ms
+     ├ù AC02-sse-post-delete/last-event-id-resume: reconnect with Last-Event-ID replays with no gap or duplicate 60ms
+     ├ù AC02-sse-post-delete/delete-session: DELETE ends the session and the id is thereafter 404 8ms
+ Γ¥» contract/ac01-negotiation.test.ts (5 tests | 5 failed) 395ms
+   Γ¥» AC01-negotiation (5)
+     ├ù AC01-negotiation/version-2025-11-25: initialize negotiates 2025-11-25 and returns Mcp-Session-Id 290ms
+     ├ù AC01-negotiation/missing-version-400: a later request without MCP-Protocol-Version returns 400 11ms
+     ├ù AC01-negotiation/wrong-version-400: a wrong MCP-Protocol-Version returns 400 52ms
+     ├ù AC01-negotiation/unknown-session-404: an unknown session id returns 404 24ms
+     ├ù AC01-negotiation/origin-403: an Origin mismatch returns 403 10ms
+ Γ¥» contract/ac11-privacy.test.ts (4 tests | 4 failed) 402ms
+   Γ¥» AC11-privacy (4)
+     ├ù AC11-privacy/no-audio-fields-in-any-schema: no tool schema exposes audio-content fields 71ms
+     ├ù AC11-privacy/no-transcripts-at-info-level: transcripts never appear at info log level 26ms
+     ├ù AC11-privacy/alias-memory-listable-and-deletable: saved household aliases can be listed and deleted 283ms
+     ├ù AC11-privacy/privacy-forget-my-data: forget-my-data removes all household data (aliases + receipts) 13ms
+ Γ¥» property/ac09-untrusted-metadata.test.ts (2 tests | 2 failed) 401ms
+   Γ¥» AC09-untrusted-metadata (2)
+     ├ù AC09-untrusted-metadata/returned-as-data-untrusted: adversarial metadata strings come back stripped and marked untrusted 304ms
+     ├ù AC09-untrusted-metadata/never-executed-or-echoed-as-policy: instruction-like metadata never changes server behaviour or is echoed as policy 89ms
+ Γ¥» contract/ac03-tools-list.test.ts (4 tests | 4 failed) 208ms
+   Γ¥» AC03-tools-list (4)
+     ├ù AC03-tools-list/eight-tools: tools/list returns exactly the eight catalogued tools 172ms
+     ├ù AC03-tools-list/valid-input-schema: every tool inputSchema is a valid JSON Schema 10ms
+     ├ù AC03-tools-list/output-schemas: every tool declares an outputSchema 12ms
+     ├ù AC03-tools-list/annotations: every tool carries annotations (readOnly/idempotent/openWorld/destructive) 7ms
+ Γ¥» e2e/ac15-demo-check.test.ts (3 tests | 3 failed) 161ms
+   Γ¥» AC15-demo-check (3)
+     ├ù AC15-demo-check/live: make demo-check passes the 4-act smoke in LIVE mode 99ms
+     ├ù AC15-demo-check/fixture: make demo-check passes the 4-act smoke in FIXTURE mode 28ms
+     ├ù AC15-demo-check/replay: make demo-check passes the 4-act smoke in REPLAY mode 26ms
+ Γ¥» e2e/ac17-clean-clone.test.ts (1 test | 1 failed) 95ms
+   Γ¥» AC17-clean-clone (1)
+     ├ù AC17-clean-clone/fresh-clone-make-demo: documented prerequisites + make demo work from a fresh clone 70ms
+ Γ¥» property/ac06-pack-measurements.test.ts (3 tests | 3 failed) 62ms
+   Γ¥» AC06-pack-measurements (3)
+     ├ù AC06-pack-measurements/measured-wrong-play-rate: every non-experimental shipped pack reports wrong-play rate with CIs 25ms
+     ├ù AC06-pack-measurements/unmeasured-ships-experimental: packs without measurements are tagged experimental 3ms
+     ├ù AC06-pack-measurements/pack-resource-exposed: pack measurements are readable via omnibeat://packs/{locale} 26ms
+ Γ¥» e2e/ac13-continuity.test.ts (3 tests | 3 failed) 93ms
+   Γ¥» AC13-continuity (3)
+     ├ù AC13-continuity/breaker-opens-under-injected-loss: sustained injected loss opens the breaker within the configured window 41ms
+     ├ù AC13-continuity/edge-mode-plays-cached-track: with the breaker open, edge mode plays the cached track 40ms
+     ├ù AC13-continuity/replay-exactly-once: queued commands replay exactly once after reconnect (idempotency) 4ms
+ Γ¥» e2e/ac18-secrets-audit.test.ts (3 tests | 3 failed) 81ms
+   Γ¥» AC18-secrets-audit (3)
+     ├ù AC18-secrets-audit/secret-scan-clean: gitleaks reports zero secrets across history and working tree 42ms
+     ├ù AC18-secrets-audit/no-unwaived-high-findings: dependency audit high/critical findings are zero or explicitly waived and unexpired 4ms
+     ├ù AC18-secrets-audit/containers-non-root: every container stage runs as a non-root USER 25ms
+ Γ¥» property/ac05-calibration.test.ts (2 tests | 2 failed) 52ms
+   Γ¥» AC05-calibration (2)
+     ├ù AC05-calibration/ece-within-tolerance: reliability diagram ECE on the held-out set is within the declared tolerance 39ms
+     ├ù AC05-calibration/diagram-bins-have-ci: every reliability bin reports count and an empirical-accuracy CI 5ms
+ Γ¥» e2e/ac19-a11y.test.ts (3 tests | 3 failed) 49ms
+   Γ¥» AC19-a11y (3)
+     ├ù AC19-a11y/axe-zero-critical: axe-core reports zero critical violations on the console 36ms
+     ├ù AC19-a11y/keyboard-reachable: every interactive control is reachable and operable via keyboard 3ms
+     ├ù AC19-a11y/captions-for-all-speech: every TTS utterance rendered by the console shows captions 3ms
+ Γ¥» e2e/ac14-badge-truth.test.ts (2 tests | 2 failed) 51ms
+   Γ¥» AC14-badge-truth (2)
+     ├ù AC14-badge-truth/badge-equals-ledger-mode: every console badge equals the ledger mode for that turn 37ms
+     ├ù AC14-badge-truth/no-badge-without-ledger-entry: a badge never appears for a turn with no ledger record 3ms
+ Γ¥» e2e/ac12-barge-in.test.ts (2 tests | 2 failed) 52ms
+   Γ¥» AC12-barge-in (2)
+     ├ù AC12-barge-in/ducks-cancels-cuts: >=250ms sustained speech ducks then cancels TTS 41ms
+     ├ù AC12-barge-in/within-one-word-of-speech-mark: cut happens within one word of the speech-mark index 4ms
+ Γ¥» contract/ac16-pack-data-only.test.ts (1 test | 1 failed) 47ms
+   Γ¥» AC16-pack-data-only (1)
+     ├ù AC16-pack-data-only/dummy-pack-loads-data-only: a dummy pack loads from data files alone with zero code changes 39ms
+ Γ¥» contract/ac08-cancellation-200ms.test.ts (2 tests | 2 failed) 46ms
+   Γ¥» AC08-cancellation-200ms (2)
+     ├ù AC08-cancellation-200ms/stops-upstream-within-200ms: cancelled notifications/cancelled aborts the upstream fetch in <=200ms 35ms
+     ├ù AC08-cancellation-200ms/releases-work-no-late-result: after cancellation no tool result arrives and the work is released 4ms
+ Γ¥» e2e/ac20-numbers-map-to-artifacts.test.ts (2 tests | 2 failed) 41ms
+   Γ¥» AC20-numbers-map-to-artifacts (2)
+     ├ù AC20-numbers-map-to-artifacts/claims-map-to-artifacts: every README/Devpost/video number maps to an eval/ or results/ artifact 28ms
+     ├ù AC20-numbers-map-to-artifacts/recorded-commit-stamp: the results manifest pins the commit the numbers were produced at 5ms
+ Γ¥» contract/ac10-ssrf-fetcher.test.ts (2 tests | 2 failed) 118ms
+   Γ¥» AC10-ssrf-fetcher (2)
+     ├ù AC10-ssrf-fetcher/refuses-private-ranges: private and link-local addresses are refused before connect 18ms
+     ├ù AC10-ssrf-fetcher/refuses-off-allowlist-redirect: a redirect escaping the allowlist is refused 93ms
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ» Failed Tests 54 ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»
+
+ FAIL  contract/ac01-negotiation.test.ts > AC01-negotiation > AC01-negotiation/version-2025-11-25: initialize negotiates 2025-11-25 and returns Mcp-Session-Id
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» contract/ac01-negotiation.test.ts:15:17
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/54]ΓÄ»
+
+ FAIL  contract/ac01-negotiation.test.ts > AC01-negotiation > AC01-negotiation/missing-version-400: a later request without MCP-Protocol-Version returns 400
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac01-negotiation.test.ts:32:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/54]ΓÄ»
+
+ FAIL  contract/ac01-negotiation.test.ts > AC01-negotiation > AC01-negotiation/wrong-version-400: a wrong MCP-Protocol-Version returns 400
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac01-negotiation.test.ts:39:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[3/54]ΓÄ»
+
+ FAIL  contract/ac01-negotiation.test.ts > AC01-negotiation > AC01-negotiation/unknown-session-404: an unknown session id returns 404
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» contract/ac01-negotiation.test.ts:48:17
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[4/54]ΓÄ»
+
+ FAIL  contract/ac01-negotiation.test.ts > AC01-negotiation > AC01-negotiation/origin-403: an Origin mismatch returns 403
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» contract/ac01-negotiation.test.ts:57:17
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[5/54]ΓÄ»
+
+ FAIL  contract/ac02-sse-post-delete.test.ts > AC02-sse-post-delete > AC02-sse-post-delete/post-tools-list: POST carries JSON-RPC results for a live session
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac02-sse-post-delete.test.ts:12:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[6/54]ΓÄ»
+
+ FAIL  contract/ac02-sse-post-delete.test.ts > AC02-sse-post-delete > AC02-sse-post-delete/get-sse-stream: GET /mcp opens a text/event-stream for the session
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac02-sse-post-delete.test.ts:18:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[7/54]ΓÄ»
+
+ FAIL  contract/ac02-sse-post-delete.test.ts > AC02-sse-post-delete > AC02-sse-post-delete/sse-event-ids: SSE events carry monotonically increasing ids
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac02-sse-post-delete.test.ts:26:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[8/54]ΓÄ»
+
+ FAIL  contract/ac02-sse-post-delete.test.ts > AC02-sse-post-delete > AC02-sse-post-delete/last-event-id-resume: reconnect with Last-Event-ID replays with no gap or duplicate
+AssertionError: NOT IMPLEMENTED ΓÇö AC02 last-event-id-resume: needs injected-disconnect harness (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» contract/ac02-sse-post-delete.test.ts:51:111
+     49|     // re-delivered, events emitted during downtime ARE delivered, idsΓÇª
+     50|     // and no duplicate id is observed. depends: ARCH contract v0 ΓÇö evΓÇª
+     51|     expect(false, "NOT IMPLEMENTED ΓÇö AC02 last-event-id-resume: needs ΓÇª
+       |                                                                                                               ^
+     52|   });
+     53|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[9/54]ΓÄ»
+
+ FAIL  contract/ac02-sse-post-delete.test.ts > AC02-sse-post-delete > AC02-sse-post-delete/delete-session: DELETE ends the session and the id is thereafter 404
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac02-sse-post-delete.test.ts:55:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[10/54]ΓÄ»
+
+ FAIL  contract/ac03-tools-list.test.ts > AC03-tools-list > AC03-tools-list/eight-tools: tools/list returns exactly the eight catalogued tools
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» fetchTools contract/ac03-tools-list.test.ts:22:23
+ Γ¥» contract/ac03-tools-list.test.ts:27:19
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[11/54]ΓÄ»
+
+ FAIL  contract/ac03-tools-list.test.ts > AC03-tools-list > AC03-tools-list/valid-input-schema: every tool inputSchema is a valid JSON Schema
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» fetchTools contract/ac03-tools-list.test.ts:22:23
+ Γ¥» contract/ac03-tools-list.test.ts:35:19
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[12/54]ΓÄ»
+
+ FAIL  contract/ac03-tools-list.test.ts > AC03-tools-list > AC03-tools-list/output-schemas: every tool declares an outputSchema
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» fetchTools contract/ac03-tools-list.test.ts:22:23
+ Γ¥» contract/ac03-tools-list.test.ts:46:19
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[13/54]ΓÄ»
+
+ FAIL  contract/ac03-tools-list.test.ts > AC03-tools-list > AC03-tools-list/annotations: every tool carries annotations (readOnly/idempotent/openWorld/destructive)
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» fetchTools contract/ac03-tools-list.test.ts:22:23
+ Γ¥» contract/ac03-tools-list.test.ts:59:19
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[14/54]ΓÄ»
+
+ FAIL  contract/ac04-resolve-deadline.test.ts > AC04-resolve-deadline > AC04-resolve-deadline/enumerated-decision: a valid request returns a decision from the frozen enum
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» callResolve contract/ac04-resolve-deadline.test.ts:22:21
+ Γ¥» contract/ac04-resolve-deadline.test.ts:37:18
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[15/54]ΓÄ»
+
+ FAIL  contract/ac04-resolve-deadline.test.ts > AC04-resolve-deadline > AC04-resolve-deadline/never-throws: degenerate inputs still yield an enumerated decision or isError tool result
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» callResolve contract/ac04-resolve-deadline.test.ts:22:21
+ Γ¥» contract/ac04-resolve-deadline.test.ts:52:20
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[16/54]ΓÄ»
+
+ FAIL  contract/ac04-resolve-deadline.test.ts > AC04-resolve-deadline > AC04-resolve-deadline/deadline-1500ms: honours the 1500ms deadline under injected 1000ms upstream latency
+AssertionError: NOT IMPLEMENTED ΓÇö AC04 deadline-1500ms: needs fixture upstream injecting 1000ms latency: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» contract/ac04-resolve-deadline.test.ts:72:110
+     70|     // carries degradation_level and no JSON-RPC error. depends: ARCH ΓÇª
+     71|     // upstream dependency the fixture must delay.
+     72|     expect(false, "NOT IMPLEMENTED ΓÇö AC04 deadline-1500ms: needs fixtuΓÇª
+       |                                                                                                              ^
+     73|   });
+     74| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[17/54]ΓÄ»
+
+ FAIL  contract/ac07-elicitation-fallback.test.ts > AC07-elicitation-fallback > AC07-elicitation-fallback/form-elicitation: ask-decision uses form elicitation when the client advertises it
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» resolveWithCapabilities contract/ac07-elicitation-fallback.test.ts:20:21
+ Γ¥» contract/ac07-elicitation-fallback.test.ts:46:21
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[18/54]ΓÄ»
+
+ FAIL  contract/ac07-elicitation-fallback.test.ts > AC07-elicitation-fallback > AC07-elicitation-fallback/spoken-prompt-fallback: without elicitation the identical decision returns with spoken_prompt
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» resolveWithCapabilities contract/ac07-elicitation-fallback.test.ts:20:21
+ Γ¥» contract/ac07-elicitation-fallback.test.ts:52:21
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[19/54]ΓÄ»
+
+ FAIL  contract/ac08-cancellation-200ms.test.ts > AC08-cancellation-200ms > AC08-cancellation-200ms/stops-upstream-within-200ms: cancelled notifications/cancelled aborts the upstream fetch in <=200ms
+AssertionError: NOT IMPLEMENTED ΓÇö AC08 stops-upstream-within-200ms: needs fixture-upstream abort clock (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» contract/ac08-cancellation-200ms.test.ts:17:119
+     15|     // monotonic clock and asserts <= 200 ms. The server must use AborΓÇª
+     16|     // depends: ARCH contract v0 ΓÇö upstream endpoint the fixture must ΓÇª
+     17|     expect(false, "NOT IMPLEMENTED ΓÇö AC08 stops-upstream-within-200ms:ΓÇª
+       |                                                                                                                       ^
+     18|   });
+     19|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[20/54]ΓÄ»
+
+ FAIL  contract/ac08-cancellation-200ms.test.ts > AC08-cancellation-200ms > AC08-cancellation-200ms/releases-work-no-late-result: after cancellation no tool result arrives and the work is released
+AssertionError: NOT IMPLEMENTED ΓÇö AC08 releases-work-no-late-result: needs SSE + fixture-upstream harness (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» contract/ac08-cancellation-200ms.test.ts:26:122
+     24|     // (c) server-side task/queue accounting shows the request releaseΓÇª
+     25|     //     omnibeat://health has no orphan task for it). depends: ARCHΓÇª
+     26|     expect(false, "NOT IMPLEMENTED ΓÇö AC08 releases-work-no-late-resultΓÇª
+       |                                                                                                                          ^
+     27|   });
+     28| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[21/54]ΓÄ»
+
+ FAIL  contract/ac10-ssrf-fetcher.test.ts > AC10-ssrf-fetcher > AC10-ssrf-fetcher/refuses-private-ranges: private and link-local addresses are refused before connect
+Error: NOT IMPLEMENTED: no fetcher module yet (ARCH contract v0 pending)
+ Γ¥» guardedFetch contract/ac10-ssrf-fetcher.test.ts:33:9
+     31|   //   return safeFetch(url);
+     32|   void url;
+     33|   throw new Error("NOT IMPLEMENTED: no fetcher module yet (ARCH contraΓÇª
+       |         ^
+     34| }
+     35|
+ Γ¥» refusedByFetcher contract/ac10-ssrf-fetcher.test.ts:39:11
+ Γ¥» contract/ac10-ssrf-fetcher.test.ts:51:29
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22/54]ΓÄ»
+
+ FAIL  contract/ac10-ssrf-fetcher.test.ts > AC10-ssrf-fetcher > AC10-ssrf-fetcher/refuses-off-allowlist-redirect: a redirect escaping the allowlist is refused
+Error: NOT IMPLEMENTED: no fetcher module yet (ARCH contract v0 pending)
+ Γ¥» guardedFetch contract/ac10-ssrf-fetcher.test.ts:33:9
+     31|   //   return safeFetch(url);
+     32|   void url;
+     33|   throw new Error("NOT IMPLEMENTED: no fetcher module yet (ARCH contraΓÇª
+       |         ^
+     34| }
+     35|
+ Γ¥» refusedByFetcher contract/ac10-ssrf-fetcher.test.ts:39:11
+ Γ¥» contract/ac10-ssrf-fetcher.test.ts:68:29
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[23/54]ΓÄ»
+
+ FAIL  contract/ac11-privacy.test.ts > AC11-privacy > AC11-privacy/no-audio-fields-in-any-schema: no tool schema exposes audio-content fields
+AssertionError: no schema files found under contract/ or *.schema.json ΓÇö schemas NOT IMPLEMENTED at Phase 0: expected 0 to be greater than 0
+ Γ¥» contract/ac11-privacy.test.ts:29:121
+     27|   it("AC11-privacy/no-audio-fields-in-any-schema: no tool schema exposΓÇª
+     28|     const files = schemaFiles();
+     29|     expect(files.length, "no schema files found under contract/ or *.sΓÇª
+       |                                                                                                                         ^
+     30|     const offenders: string[] = [];
+     31|     for (const file of files) {
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[24/54]ΓÄ»
+
+ FAIL  contract/ac11-privacy.test.ts > AC11-privacy > AC11-privacy/no-transcripts-at-info-level: transcripts never appear at info log level
+AssertionError: NOT IMPLEMENTED ΓÇö AC11 no-transcripts-at-info-level: needs log-capture harness (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» contract/ac11-privacy.test.ts:52:111
+     50|     // session lifecycle (create, call, cancel, delete) and assert theΓÇª
+     51|     // nowhere in info-level records. depends: ARCH contract v0 ΓÇö loggΓÇª
+     52|     expect(false, "NOT IMPLEMENTED ΓÇö AC11 no-transcripts-at-info-levelΓÇª
+       |                                                                                                               ^
+     53|   });
+     54|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[25/54]ΓÄ»
+
+ FAIL  contract/ac11-privacy.test.ts > AC11-privacy > AC11-privacy/alias-memory-listable-and-deletable: saved household aliases can be listed and deleted
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac11-privacy.test.ts:60:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[26/54]ΓÄ»
+
+ FAIL  contract/ac11-privacy.test.ts > AC11-privacy > AC11-privacy/privacy-forget-my-data: forget-my-data removes all household data (aliases + receipts)
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» contract/ac11-privacy.test.ts:73:23
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[27/54]ΓÄ»
+
+ FAIL  contract/ac16-pack-data-only.test.ts > AC16-pack-data-only > AC16-pack-data-only/dummy-pack-loads-data-only: a dummy pack loads from data files alone with zero code changes
+AssertionError: dummy pack fixture must exist at tests/fixtures/packs/xx-TEST: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» contract/ac16-pack-data-only.test.ts:20:105
+     18| describe("AC16-pack-data-only", () => {
+     19|   it("AC16-pack-data-only/dummy-pack-loads-data-only: a dummy pack loaΓÇª
+     20|     expect(repoPathExists(`${DUMMY_PACK}/pack.json`), `dummy pack fixtΓÇª
+       |                                                                                                         ^
+     21|     expect(repoPathExists(`${DUMMY_PACK}/rules.json`), "dummy pack neeΓÇª
+     22|     expect(repoPathExists(`${DUMMY_PACK}/translit.json`), "dummy pack ΓÇª
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[28/54]ΓÄ»
+
+ FAIL  e2e/ac12-barge-in.test.ts > AC12-barge-in > AC12-barge-in/ducks-cancels-cuts: >=250ms sustained speech ducks then cancels TTS
+AssertionError: NOT IMPLEMENTED ΓÇö AC12 ducks-cancels-cuts: Playwright fake-audio harness + TTS events required (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac12-barge-in.test.ts:23:127
+     21|     // (audio element volume drops), then playback cancels (audio elemΓÇª
+     22|     // polly requests), and the console shows the barge-in state.
+     23|     expect(false, "NOT IMPLEMENTED ΓÇö AC12 ducks-cancels-cuts: PlaywrigΓÇª
+       |                                                                                                                               ^
+     24|   });
+     25|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[29/54]ΓÄ»
+
+ FAIL  e2e/ac12-barge-in.test.ts > AC12-barge-in > AC12-barge-in/within-one-word-of-speech-mark: cut happens within one word of the speech-mark index
+AssertionError: NOT IMPLEMENTED ΓÇö AC12 within-one-word-of-speech-mark: speech-mark fixture + Playwright harness (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac12-barge-in.test.ts:32:128
+     30|     // that index (<= 1 word boundary past the current mark). Fixture ΓÇª
+     31|     // speech-mark json are paired so the assertion is deterministic.
+     32|     expect(false, "NOT IMPLEMENTED ΓÇö AC12 within-one-word-of-speech-maΓÇª
+       |                                                                                                                                ^
+     33|   });
+     34| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[30/54]ΓÄ»
+
+ FAIL  e2e/ac13-continuity.test.ts > AC13-continuity > AC13-continuity/breaker-opens-under-injected-loss: sustained injected loss opens the breaker within the configured window
+AssertionError: NOT IMPLEMENTED ΓÇö AC13 breaker-opens-under-injected-loss: Toxiproxy harness (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac13-continuity.test.ts:19:108
+     17|     // toxic; drive requests until failure threshold; assert omnibeat:ΓÇª
+     18|     // breaker OPEN within the configured window (window size read froΓÇª
+     19|     expect(false, "NOT IMPLEMENTED ΓÇö AC13 breaker-opens-under-injectedΓÇª
+       |                                                                                                            ^
+     20|   });
+     21|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[31/54]ΓÄ»
+
+ FAIL  e2e/ac13-continuity.test.ts > AC13-continuity > AC13-continuity/edge-mode-plays-cached-track: with the breaker open, edge mode plays the cached track
+AssertionError: NOT IMPLEMENTED ΓÇö AC13 edge-mode-plays-cached-track: Toxiproxy + warmed cache (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac13-continuity.test.ts:27:110
+     25|     // assert the console plays the cached bytes (audio element plays,ΓÇª
+     26|     // and the console UI shows the offline/edge indicator.
+     27|     expect(false, "NOT IMPLEMENTED ΓÇö AC13 edge-mode-plays-cached-trackΓÇª
+       |                                                                                                              ^
+     28|   });
+     29|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[32/54]ΓÄ»
+
+ FAIL  e2e/ac13-continuity.test.ts > AC13-continuity > AC13-continuity/replay-exactly-once: queued commands replay exactly once after reconnect (idempotency)
+AssertionError: NOT IMPLEMENTED ΓÇö AC13 replay-exactly-once: Toxiproxy + idempotency ledger (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac13-continuity.test.ts:36:107
+     34|     // key) and the client observes exactly one result per queued commΓÇª
+     35|     // v0 ΓÇö queue drain semantics and idempotency-key handling.
+     36|     expect(false, "NOT IMPLEMENTED ΓÇö AC13 replay-exactly-once: ToxiproΓÇª
+       |                                                                                                           ^
+     37|   });
+     38| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[33/54]ΓÄ»
+
+ FAIL  e2e/ac14-badge-truth.test.ts > AC14-badge-truth > AC14-badge-truth/badge-equals-ledger-mode: every console badge equals the ledger mode for that turn
+AssertionError: demo ledger results/demo-ledger.jsonl must exist ΓÇö nothing recorded at Phase 0: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac14-badge-truth.test.ts:27:102
+     25|     // ledger entry from the demo ledger artifact; assert badge.mode =ΓÇª
+     26|     // every turn, with the ledger file itself validated below.
+     27|     expect(repoPathExists(LEDGER), `demo ledger ${LEDGER} must exist ΓÇöΓÇª
+       |                                                                                                      ^
+     28|     const ledger = readRepoJson<LedgerEntry[] | { entries: LedgerEntryΓÇª
+     29|     const entries = Array.isArray(ledger) ? ledger : ledger.entries;
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[34/54]ΓÄ»
+
+ FAIL  e2e/ac14-badge-truth.test.ts > AC14-badge-truth > AC14-badge-truth/no-badge-without-ledger-entry: a badge never appears for a turn with no ledger record
+AssertionError: NOT IMPLEMENTED ΓÇö AC14 no-badge-without-ledger-entry: Playwright + ledger join (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac14-badge-truth.test.ts:38:111
+     36|     // demo; every badged turn must have a matching ledger entry; orphΓÇª
+     37|     // A silent (unbadged) turn with a ledger entry is acceptable; theΓÇª
+     38|     expect(false, "NOT IMPLEMENTED ΓÇö AC14 no-badge-without-ledger-entrΓÇª
+       |                                                                                                               ^
+     39|   });
+     40| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[35/54]ΓÄ»
+
+ FAIL  e2e/ac15-demo-check.test.ts > AC15-demo-check > AC15-demo-check/live: make demo-check passes the 4-act smoke in LIVE mode
+AssertionError: make demo-check (LIVE) must exit 0; output tail:
+: expected 'ENOENT' to be +0 // Object.is equality
+
+- Expected:
+0
+
++ Received:
+"ENOENT"
+
+ Γ¥» e2e/ac15-demo-check.test.ts:34:94
+     32|   it("AC15-demo-check/live: make demo-check passes the 4-act smoke in ΓÇª
+     33|     const { code, stdout } = await runDemoCheck("LIVE");
+     34|     expect(code, `make demo-check (LIVE) must exit 0; output tail:\n${ΓÇª
+       |                                                                                              ^
+     35|     // TODO harness (Phase 2): assert the 4 acts each report PASS in sΓÇª
+     36|     // once J-DEMO fixes the demo-check output format (depends: ARCH/JΓÇª
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[36/54]ΓÄ»
+
+ FAIL  e2e/ac15-demo-check.test.ts > AC15-demo-check > AC15-demo-check/fixture: make demo-check passes the 4-act smoke in FIXTURE mode
+AssertionError: make demo-check (FIXTURE) must exit 0; output tail:
+: expected 'ENOENT' to be +0 // Object.is equality
+
+- Expected:
+0
+
++ Received:
+"ENOENT"
+
+ Γ¥» e2e/ac15-demo-check.test.ts:41:97
+     39|   it("AC15-demo-check/fixture: make demo-check passes the 4-act smoke ΓÇª
+     40|     const { code, stdout } = await runDemoCheck("FIXTURE");
+     41|     expect(code, `make demo-check (FIXTURE) must exit 0; output tail:\ΓÇª
+       |                                                                                                 ^
+     42|   });
+     43|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[37/54]ΓÄ»
+
+ FAIL  e2e/ac15-demo-check.test.ts > AC15-demo-check > AC15-demo-check/replay: make demo-check passes the 4-act smoke in REPLAY mode
+AssertionError: make demo-check (REPLAY) must exit 0; output tail:
+: expected 'ENOENT' to be +0 // Object.is equality
+
+- Expected:
+0
+
++ Received:
+"ENOENT"
+
+ Γ¥» e2e/ac15-demo-check.test.ts:46:96
+     44|   it("AC15-demo-check/replay: make demo-check passes the 4-act smoke iΓÇª
+     45|     const { code, stdout } = await runDemoCheck("REPLAY");
+     46|     expect(code, `make demo-check (REPLAY) must exit 0; output tail:\nΓÇª
+       |                                                                                                ^
+     47|   });
+     48| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[38/54]ΓÄ»
+
+ FAIL  e2e/ac17-clean-clone.test.ts > AC17-clean-clone > AC17-clean-clone/fresh-clone-make-demo: documented prerequisites + make demo work from a fresh clone
+AssertionError: README.md must document prerequisites (a 'Prerequisites' section) ΓÇö AC-17 half the fresh-clone contract: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac17-clean-clone.test.ts:29:7
+     27|       /prerequisit/i.test(text),
+     28|       `${rootReadme} must document prerequisites (a 'Prerequisites' seΓÇª
+     29|     ).toBe(true);
+       |       ^
+     30|     expect(false, "NOT IMPLEMENTED ΓÇö AC17 fresh-clone-make-demo: hermeΓÇª
+     31|   });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39/54]ΓÄ»
+
+ FAIL  e2e/ac18-secrets-audit.test.ts > AC18-secrets-audit > AC18-secrets-audit/secret-scan-clean: gitleaks reports zero secrets across history and working tree
+AssertionError: repo must pin a gitleaks config (.gitleaks.toml) ΓÇö AC-18 contract artifact (NOT IMPLEMENTED at Phase 0): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac18-secrets-audit.test.ts:29:153
+     27|     // (and `gitleaks detect --log-opts="--all"` for history); test asΓÇª
+     28|     // findings. Skeleton asserts the config file that pins the scan cΓÇª
+     29|     expect(repoPathExists(".gitleaks.toml"), "repo must pin a gitleaksΓÇª
+       |                                                                                                                                                         ^
+     30|     expect(false, "NOT IMPLEMENTED ΓÇö AC18 secret-scan-clean: gitleaks ΓÇª
+     31|   });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[40/54]ΓÄ»
+
+ FAIL  e2e/ac18-secrets-audit.test.ts > AC18-secrets-audit > AC18-secrets-audit/no-unwaived-high-findings: dependency audit high/critical findings are zero or explicitly waived and unexpired
+AssertionError: waiver file security/waivers.json must exist (may be an empty list) ΓÇö AC-18 contract artifact: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac18-secrets-audit.test.ts:38:123
+     36|     // or critical finding, or any waiver past its expires date, failsΓÇª
+     37|     // The skeleton validates the waiver artifact contract itself (shaΓÇª
+     38|     expect(repoPathExists(WAIVERS), `waiver file ${WAIVERS} must existΓÇª
+       |                                                                                                                           ^
+     39|     const waivers = readRepoJson<Waiver[]>(WAIVERS);
+     40|     const today = new Date().toISOString().slice(0, 10);
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[41/54]ΓÄ»
+
+ FAIL  e2e/ac18-secrets-audit.test.ts > AC18-secrets-audit > AC18-secrets-audit/containers-non-root: every container stage runs as a non-root USER
+AssertionError: no Dockerfiles found ΓÇö containers NOT IMPLEMENTED at Phase 0 (AC-18): expected 0 to be greater than 0
+ Γ¥» e2e/ac18-secrets-audit.test.ts:50:104
+     48|   it("AC18-secrets-audit/containers-non-root: every container stage ruΓÇª
+     49|     const dockerfiles = findFiles(REPO_ROOT, /^Dockerfile(\..*)?$/i);
+     50|     expect(dockerfiles.length, "no Dockerfiles found ΓÇö containers NOT ΓÇª
+       |                                                                                                        ^
+     51|     for (const file of dockerfiles) {
+     52|       const content = readFileSync(file, "utf8");
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[42/54]ΓÄ»
+
+ FAIL  e2e/ac19-a11y.test.ts > AC19-a11y > AC19-a11y/axe-zero-critical: axe-core reports zero critical violations on the console
+AssertionError: NOT IMPLEMENTED ΓÇö AC19 axe-zero-critical: Playwright + @axe-core/playwright harness (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac19-a11y.test.ts:20:116
+     18|     // across every console route (home, turn detail, ledger, offline-ΓÇª
+     19|     // zero violations with impact critical (also fail serious ΓÇö recorΓÇª
+     20|     expect(false, "NOT IMPLEMENTED ΓÇö AC19 axe-zero-critical: PlaywrighΓÇª
+       |                                                                                                                    ^
+     21|   });
+     22|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[43/54]ΓÄ»
+
+ FAIL  e2e/ac19-a11y.test.ts > AC19-a11y > AC19-a11y/keyboard-reachable: every interactive control is reachable and operable via keyboard
+AssertionError: NOT IMPLEMENTED ΓÇö AC19 keyboard-reachable: Playwright tab sweep (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac19-a11y.test.ts:28:96
+     26|     // reaches it within N tabs, a visible focus ring matches :focus-vΓÇª
+     27|     // Enter/Space activates it. No positive tabindex; no keyboard traΓÇª
+     28|     expect(false, "NOT IMPLEMENTED ΓÇö AC19 keyboard-reachable: PlaywrigΓÇª
+       |                                                                                                ^
+     29|   });
+     30|
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[44/54]ΓÄ»
+
+ FAIL  e2e/ac19-a11y.test.ts > AC19-a11y > AC19-a11y/captions-for-all-speech: every TTS utterance rendered by the console shows captions
+AssertionError: NOT IMPLEMENTED ΓÇö AC19 captions-for-all-speech: Playwright caption observer (Phase 2): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» e2e/ac19-a11y.test.ts:36:108
+     34|     // element is present and non-empty for the duration of that utterΓÇª
+     35|     // captioned frame as an artifact. depends: ARCH contract v0 ΓÇö capΓÇª
+     36|     expect(false, "NOT IMPLEMENTED ΓÇö AC19 captions-for-all-speech: PlaΓÇª
+       |                                                                                                            ^
+     37|   });
+     38| });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[45/54]ΓÄ»
+
+ FAIL  e2e/ac20-numbers-map-to-artifacts.test.ts > AC20-numbers-map-to-artifacts > AC20-numbers-map-to-artifacts/claims-map-to-artifacts: every README/Devpost/video number maps to an eval/ or results/ artifact
+AssertionError: no artifacts under eval/results ΓÇö every marketing number would be unmapped (AC-20, blueprint ┬º7.2 "do not fabricate results"): expected 0 to be greater than 0
+ Γ¥» e2e/ac20-numbers-map-to-artifacts.test.ts:50:7
+     48|       artifacts.length,
+     49|       `no artifacts under ${ARTIFACT_DIRS.join("/")} ΓÇö every marketingΓÇª
+     50|     ).toBeGreaterThan(0);
+       |       ^
+     51|     const artifactText = artifacts.map((f) => readFileSync(f, "utf8"))ΓÇª
+     52|     const unmapped: Array<{ doc: string; number: string }> = [];
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[46/54]ΓÄ»
+
+ FAIL  e2e/ac20-numbers-map-to-artifacts.test.ts > AC20-numbers-map-to-artifacts > AC20-numbers-map-to-artifacts/recorded-commit-stamp: the results manifest pins the commit the numbers were produced at
+AssertionError: results/MANIFEST.json or eval/MANIFEST.json must exist and pin a commit sha (AC-20): expected undefined to be defined
+ Γ¥» e2e/ac20-numbers-map-to-artifacts.test.ts:66:109
+     64|     // run that produced every published number, so a claim can be traΓÇª
+     65|     const manifest = ["results/MANIFEST.json", "eval/MANIFEST.json"].fΓÇª
+     66|     expect(manifest, "results/MANIFEST.json or eval/MANIFEST.json mustΓÇª
+       |                                                                                                             ^
+     67|     const data = JSON.parse(readFileSync(`${REPO_ROOT}/${manifest!}`, ΓÇª
+     68|     expect(data.commit, "manifest must record the commit the numbers wΓÇª
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[47/54]ΓÄ»
+
+ FAIL  property/ac05-calibration.test.ts > AC05-calibration > AC05-calibration/ece-within-tolerance: reliability diagram ECE on the held-out set is within the declared tolerance
+AssertionError: eval artifact eval/calibration/held-out-reliability.json must exist ΓÇö run make eval (NOT IMPLEMENTED at Phase 0): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» property/ac05-calibration.test.ts:34:123
+     32| describe("AC05-calibration", () => {
+     33|   it("AC05-calibration/ece-within-tolerance: reliability diagram ECE oΓÇª
+     34|     expect(repoPathExists(ARTIFACT), `eval artifact ${ARTIFACT} must eΓÇª
+       |                                                                                                                           ^
+     35|     const artifact = readRepoJson<ReliabilityArtifact>(ARTIFACT);
+     36|     expect(artifact.declared_tolerance, "artifact must record the toleΓÇª
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[48/54]ΓÄ»
+
+ FAIL  property/ac05-calibration.test.ts > AC05-calibration > AC05-calibration/diagram-bins-have-ci: every reliability bin reports count and an empirical-accuracy CI
+AssertionError: eval artifact eval/calibration/held-out-reliability.json must exist ΓÇö run make eval (NOT IMPLEMENTED at Phase 0): expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» property/ac05-calibration.test.ts:46:123
+     44|
+     45|   it("AC05-calibration/diagram-bins-have-ci: every reliability bin repΓÇª
+     46|     expect(repoPathExists(ARTIFACT), `eval artifact ${ARTIFACT} must eΓÇª
+       |                                                                                                                           ^
+     47|     const artifact = readRepoJson<ReliabilityArtifact>(ARTIFACT);
+     48|     expect(artifact.bins.length, "reliability diagram must have bins")ΓÇª
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[49/54]ΓÄ»
+
+ FAIL  property/ac06-pack-measurements.test.ts > AC06-pack-measurements > AC06-pack-measurements/measured-wrong-play-rate: every non-experimental shipped pack reports wrong-play rate with CIs
+AssertionError: no locale packs found under packages/phonetic-core/packs ΓÇö packs are NOT IMPLEMENTED at Phase 0: expected 0 to be greater than 0
+ Γ¥» property/ac06-pack-measurements.test.ts:39:109
+     37|   it("AC06-pack-measurements/measured-wrong-play-rate: every non-experΓÇª
+     38|     const packs = loadPacks();
+     39|     expect(packs.length, `no locale packs found under ${PACKS_DIR} ΓÇö pΓÇª
+       |                                                                                                             ^
+     40|     for (const { file, manifest } of packs) {
+     41|       if (manifest.status === "experimental") continue;
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[50/54]ΓÄ»
+
+ FAIL  property/ac06-pack-measurements.test.ts > AC06-pack-measurements > AC06-pack-measurements/unmeasured-ships-experimental: packs without measurements are tagged experimental
+AssertionError: no locale packs found under packages/phonetic-core/packs ΓÇö packs are NOT IMPLEMENTED at Phase 0: expected 0 to be greater than 0
+ Γ¥» property/ac06-pack-measurements.test.ts:54:109
+     52|   it("AC06-pack-measurements/unmeasured-ships-experimental: packs withΓÇª
+     53|     const packs = loadPacks();
+     54|     expect(packs.length, `no locale packs found under ${PACKS_DIR} ΓÇö pΓÇª
+       |                                                                                                             ^
+     55|     for (const { file, manifest } of packs) {
+     56|       const measured = manifest.measured?.wrong_play_rate?.point !== uΓÇª
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[51/54]ΓÄ»
+
+ FAIL  property/ac06-pack-measurements.test.ts > AC06-pack-measurements > AC06-pack-measurements/pack-resource-exposed: pack measurements are readable via omnibeat://packs/{locale}
+AssertionError: packs directory packages/phonetic-core/packs must exist: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ Γ¥» property/ac06-pack-measurements.test.ts:65:82
+     63|   it("AC06-pack-measurements/pack-resource-exposed: pack measurements ΓÇª
+     64|     // depends: ARCH contract v0 ΓÇö resources/read transport for omnibeΓÇª
+     65|     expect(repoPathExists(PACKS_DIR), `packs directory ${PACKS_DIR} muΓÇª
+       |                                                                                  ^
+     66|     expect(false, "NOT IMPLEMENTED ΓÇö AC06 pack-resource-exposed: needsΓÇª
+     67|   });
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[52/54]ΓÄ»
+
+ FAIL  property/ac09-untrusted-metadata.test.ts > AC09-untrusted-metadata > AC09-untrusted-metadata/returned-as-data-untrusted: adversarial metadata strings come back stripped and marked untrusted
+Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+     61|     });
+     62|   } catch (err) {
+     63|     throw new Error(
+       |           ^
+     64|       `NOT IMPLEMENTED: OmniBeat MCP server unreachable at ${MCP_URL} ΓÇª
+     65|         `(AC skeletons require the Phase-1 server). Original: ${(err aΓÇª
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» resolveWithTrackCatalog property/ac09-untrusted-metadata.test.ts:25:21
+ Γ¥» property/ac09-untrusted-metadata.test.ts:48:18
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[53/54]ΓÄ»
+
+ FAIL  property/ac09-untrusted-metadata.test.ts > AC09-untrusted-metadata > AC09-untrusted-metadata/never-executed-or-echoed-as-policy: instruction-like metadata never changes server behaviour or is echoed as policy
+Error: Property failed after 1 tests
+{ seed: 658075132, path: "0:0:0", endOnFailure: true }
+Counterexample: [" "]
+Shrunk 2 time(s)
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+ Γ¥» buildError node_modules/fast-check/lib/fast-check.js:2469:16
+ Γ¥» asyncThrowIfFailed node_modules/fast-check/lib/fast-check.js:2481:8
+
+Caused by: Error: NOT IMPLEMENTED: OmniBeat MCP server unreachable at http://127.0.0.1:8787/mcp (AC skeletons require the Phase-1 server). Original: fetch failed
+ Γ¥» postRpc helpers/mcp.ts:63:11
+ Γ¥» initialize helpers/mcp.ts:72:15
+ Γ¥» resolveWithTrackCatalog property/ac09-untrusted-metadata.test.ts:25:21
+ Γ¥» property/ac09-untrusted-metadata.test.ts:64:20
+ Γ¥» AsyncProperty.run node_modules/fast-check/lib/fast-check.js:1217:19
+ Γ¥» asyncPropertyExecution node_modules/fast-check/lib/fast-check.js:2564:14
+ Γ¥» asyncRunIt node_modules/fast-check/lib/fast-check.js:2557:15
+ Γ¥» property/ac09-untrusted-metadata.test.ts:62:5
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[54/54]ΓÄ»
+
+
+ Test Files  20 failed (20)
+      Tests  54 failed (54)
+   Start at  18:37:54
+   Duration  4.78s (tests 42%, import 30%, transform 21%, worker 7%, environment 1%)
+
+    Isolate  20 workers spawned ┬╖ ~871ms startup each (spawn + environment, per file)
+             at least ~1.62s faster with isolate: false ΓÇö reuses workers across files instead of one per file
+

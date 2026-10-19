@@ -1,0 +1,13 @@
+{
+  "id": "xx-TEST",
+  "scripts": ["Latn"],
+  "status": "experimental",
+  "reviewer": null,
+  "grammar": {
+    "wake_words": [],
+    "verbs": ["play"],
+    "provider_words": [],
+    "fillers": []
+  },
+  "_comment": "T-TEST dummy pack: synthetic data-only locale used by AC16-pack-data-only. No measurements yet, therefore tagged experimental (AC-06)."
+}
