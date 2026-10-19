@@ -1,0 +1,1651 @@
+{
+  "$ref": "#/$defs/omnibeat-contract-v0",
+  "$defs": {
+    "Track": {
+      "type": "object",
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artist": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "studio",
+            "live",
+            "remix",
+            "karaoke",
+            "cover",
+            "unknown"
+          ]
+        },
+        "canonical_ids": {
+          "type": "object",
+          "properties": {
+            "musicbrainz": {
+              "type": "string"
+            },
+            "isrc": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "artwork_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "untrusted": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "required": [
+        "candidate_id",
+        "title",
+        "artist"
+      ],
+      "additionalProperties": false
+    },
+    "omnibeat-contract-v0": {
+      "type": "object",
+      "properties": {
+        "tools": {
+          "type": "object",
+          "properties": {
+            "music_resolve_request": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "transcript": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300,
+                      "description": "What the user said, as text from speech recognition."
+                    },
+                    "asr_alternatives": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "text": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "confidence": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "maxItems": 5,
+                      "description": "ASR n-best alternatives, up to 5."
+                    },
+                    "locale": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 64,
+                      "description": "BCP-47 tag of the recogniser locale, e.g. en-IN. Optional."
+                    },
+                    "surface": {
+                      "type": "string",
+                      "enum": [
+                        "screenless",
+                        "screen",
+                        "tv"
+                      ],
+                      "description": "Device surface: screenless, screen, or tv."
+                    },
+                    "household_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Opaque id; enables opt-in alias memory."
+                    },
+                    "profile": {
+                      "type": "string",
+                      "enum": [
+                        "standard",
+                        "kids"
+                      ],
+                      "default": "standard"
+                    },
+                    "style": {
+                      "type": "string",
+                      "enum": [
+                        "brief",
+                        "normal",
+                        "detailed"
+                      ],
+                      "default": "normal"
+                    },
+                    "context": {
+                      "type": "object",
+                      "properties": {
+                        "pending_choice": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "transcript",
+                    "surface"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "decision": {
+                      "type": "string",
+                      "enum": [
+                        "play",
+                        "ask",
+                        "repair",
+                        "not_found"
+                      ]
+                    },
+                    "confidence": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/input/properties/asr_alternatives/items/properties/confidence"
+                    },
+                    "resolution_id": {
+                      "type": "string"
+                    },
+                    "track": {
+                      "$ref": "#/$defs/Track"
+                    },
+                    "candidates": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/Track"
+                      },
+                      "maxItems": 3
+                    },
+                    "spoken_prompt": {
+                      "type": "object",
+                      "properties": {
+                        "speak_short": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "speak_normal": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "speak_long": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "speak_short",
+                        "speak_normal",
+                        "speak_long"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "display_hint": {
+                      "type": "string",
+                      "enum": [
+                        "none",
+                        "cards",
+                        "tv_cards"
+                      ]
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "source": {
+                            "type": "string"
+                          },
+                          "signal": {
+                            "type": "string"
+                          },
+                          "weight": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "source",
+                          "signal",
+                          "weight"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "degradation_level": {
+                      "type": "string",
+                      "enum": [
+                        "L0",
+                        "L1",
+                        "L2"
+                      ]
+                    },
+                    "trace_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "decision",
+                    "confidence",
+                    "spoken_prompt",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "music_preview_hooks": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "candidate_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "minItems": 1,
+                      "description": "Candidate ids from music_resolve_request to build hooks for."
+                    },
+                    "max_seconds": {
+                      "type": "number",
+                      "minimum": 1,
+                      "maximum": 4,
+                      "default": 3,
+                      "description": "Maximum clip length in seconds (≤ 4). Default 3."
+                    }
+                  },
+                  "required": [
+                    "candidate_ids"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "clips": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "candidate_id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "uri": {
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "Resource URI, e.g. omnibeat://hooks/{candidate_id}.m4a"
+                          },
+                          "mimeType": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "window": {
+                            "type": "object",
+                            "properties": {
+                              "start_seconds": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "end_seconds": {
+                                "type": "number",
+                                "minimum": 0
+                              }
+                            },
+                            "required": [
+                              "start_seconds",
+                              "end_seconds"
+                            ],
+                            "additionalProperties": false,
+                            "description": "Window inside the 30 s preview that was extracted (§6.4)."
+                          }
+                        },
+                        "required": [
+                          "candidate_id",
+                          "uri",
+                          "mimeType",
+                          "window"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "method": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Hook heuristic id, e.g. energy-flux-v1 (§6.4). Honest heuristic: a loud, dense section, not guaranteed to be the chorus."
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "Heuristic confidence; published hit rate lives in the eval report (§6.4)."
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "clips",
+                    "method",
+                    "confidence",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "music_confirm_selection": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "resolution_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "resolution_id from the music_resolve_request that was answered."
+                    },
+                    "chosen_candidate_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "The candidate the user chose (or that was finally played)."
+                    },
+                    "remember_alias": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Save 'when I say X I mean Y' for this household. Default false; only set true when the user explicitly consented (§6.3)."
+                    },
+                    "idempotency_key": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Client-generated key; retrying with the same key returns the same receipt (§8.6)."
+                    }
+                  },
+                  "required": [
+                    "resolution_id",
+                    "chosen_candidate_id",
+                    "idempotency_key"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "receipt_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Action receipt id; answerable via music_explain_last_action (§6.7)."
+                    },
+                    "alias_saved": {
+                      "type": "boolean"
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "receipt_id",
+                    "alias_saved",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "music_explain_last_action": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "household_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Opaque household id; pass at least one identifier (household or session)."
+                    },
+                    "session_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "MCP session id; pass at least one identifier (household or session)."
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "explanation": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "receipt": {
+                      "type": "object",
+                      "properties": {
+                        "heard": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "What was heard, as text (§6.7)."
+                        },
+                        "alternatives": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/input/properties/asr_alternatives/items"
+                          }
+                        },
+                        "confidence": {
+                          "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/input/properties/asr_alternatives/items/properties/confidence"
+                        },
+                        "trigger": {
+                          "type": "string",
+                          "enum": [
+                            "voice",
+                            "routine",
+                            "external"
+                          ],
+                          "description": "What triggered the action: voice vs routine vs external (§6.7)."
+                        },
+                        "at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "When the action happened, ISO-8601 UTC (§6.7 stores the time)."
+                        }
+                      },
+                      "required": [
+                        "heard",
+                        "alternatives",
+                        "confidence",
+                        "trigger",
+                        "at"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "explanation",
+                    "receipt",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "session_set_response_style": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "style": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/input/properties/style"
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Why the style changed, e.g. barge_in (user interrupted), short_answer, routine."
+                    }
+                  },
+                  "required": [
+                    "style",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "style": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/input/properties/style"
+                    },
+                    "applies_until": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO-8601 UTC instant until which the style applies. CONTRACT DRAFT: blueprint §5.2 gives no type or expiry semantics — assumes the session-store TTL; AMBIGUITY flagged to ORCH (see docs/ARCHITECTURE.md)."
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "style",
+                    "applies_until",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "music_plan_offline_cache": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "household_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Opaque household id; enables history-aware selection (§6.6)."
+                    },
+                    "slots": {
+                      "type": "object",
+                      "properties": {
+                        "emergency": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "default": 5,
+                          "description": "Number of 'emergency vibe' tracks to cache. Default 5."
+                        },
+                        "next_up": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "default": 3,
+                          "description": "How many queued tracks to cache next. Default 3."
+                        }
+                      },
+                      "additionalProperties": false,
+                      "default": {
+                        "emergency": 5,
+                        "next_up": 3
+                      },
+                      "description": "Slot counts; defaults 5 + next 3 (§5.2, §6.6)."
+                    },
+                    "mood_hint": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Optional free-text mood hint for selection."
+                    },
+                    "byte_budget": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Hard byte budget for the cache plan. Required: blueprint §5.2 names it as key input but ships no default, so the caller must state it."
+                    }
+                  },
+                  "required": [
+                    "byte_budget"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "plan": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "track": {
+                                "$ref": "#/$defs/Track"
+                              },
+                              "url": {
+                                "type": "string",
+                                "format": "uri",
+                                "description": "Prefetch URL (only cacheable tracks, §6.6)."
+                              },
+                              "bytes": {
+                                "type": "integer",
+                                "minimum": 1
+                              },
+                              "ttl_seconds": {
+                                "type": "integer",
+                                "minimum": 1
+                              }
+                            },
+                            "required": [
+                              "track",
+                              "url",
+                              "bytes",
+                              "ttl_seconds"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "expires_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Plan expiry (§5.2: plan with expiry)."
+                        }
+                      },
+                      "required": [
+                        "items",
+                        "expires_at"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "task": {
+                      "type": "object",
+                      "properties": {
+                        "task_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "Task handle for the cache-preparation task [VERIFY R-SPEC-05]."
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "Task status token [VERIFY R-SPEC-05: exact vocabulary comes from the spec task states — deliberately not enumerated here to avoid inventing codes.]"
+                        }
+                      },
+                      "required": [
+                        "task_id",
+                        "status"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "plan",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "account_link_music_service": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "provider": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Music provider identifier to link [VERIFY R-MUSIC-01: blueprint §5.2 names only 'provider' — the identifier vocabulary depends on which providers R-MUSIC clears (terms, previews, OAuth); do not enumerate until then.]"
+                    }
+                  },
+                  "required": [
+                    "provider"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "linked",
+                        "already_linked",
+                        "pending"
+                      ],
+                      "description": "Link status. CONTRACT DRAFT vocabulary (blueprint §5.2 says 'link status' only): linked/already_linked on success; pending while URL-mode elicitation is outstanding. Final handshake lands with notifications/elicitation/complete [VERIFY R-SPEC-04]."
+                    },
+                    "provider": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "provider",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            },
+            "privacy_forget_my_data": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "household_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Opaque household id whose aliases and receipts are deleted."
+                    }
+                  },
+                  "required": [
+                    "household_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "aliases_deleted": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "receipts_deleted": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "trace_id": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                    }
+                  },
+                  "required": [
+                    "aliases_deleted",
+                    "receipts_deleted",
+                    "trace_id"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "input",
+                "output"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "music_resolve_request",
+            "music_preview_hooks",
+            "music_confirm_selection",
+            "music_explain_last_action",
+            "session_set_response_style",
+            "music_plan_offline_cache",
+            "account_link_music_service",
+            "privacy_forget_my_data"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "jsonRpcError": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "enum": [
+                    -32700,
+                    -32600,
+                    -32601,
+                    -32602,
+                    -32603,
+                    -32042
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "data": {}
+              },
+              "required": [
+                "code",
+                "message"
+              ],
+              "additionalProperties": false
+            },
+            "toolErrorResult": {
+              "type": "object",
+              "properties": {
+                "isError": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "UPSTREAM_TIMEOUT",
+                    "UPSTREAM_RATE_LIMITED",
+                    "NO_CONFIDENT_MATCH",
+                    "UNSUPPORTED_LOCALE",
+                    "CONSENT_REQUIRED",
+                    "SESSION_EXPIRED"
+                  ]
+                },
+                "spoken_prompt": {
+                  "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/spoken_prompt"
+                },
+                "trace_id": {
+                  "$ref": "#/$defs/omnibeat-contract-v0/properties/tools/properties/music_resolve_request/properties/output/properties/trace_id"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "isError",
+                "code",
+                "spoken_prompt",
+                "trace_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "jsonRpcError",
+            "toolErrorResult"
+          ],
+          "additionalProperties": false
+        },
+        "elicitation": {
+          "type": "object",
+          "properties": {
+            "formRequest": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "const": "elicitation/create"
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "requestedSchema": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "object"
+                        },
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "choice": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "string"
+                                },
+                                "enum": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "minItems": 1
+                                },
+                                "titles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "description": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "enum"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "choice"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "required": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "const": "choice"
+                          },
+                          "minItems": 1,
+                          "maxItems": 1
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "properties",
+                        "required"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "requestedSchema"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "method",
+                "params"
+              ],
+              "additionalProperties": false
+            },
+            "formResponse": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "accept",
+                    "decline",
+                    "cancel"
+                  ]
+                },
+                "content": {
+                  "type": "object",
+                  "properties": {
+                    "choice": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "choice"
+                  ],
+                  "additionalProperties": false
+                },
+                "reason": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "action"
+              ],
+              "additionalProperties": false
+            },
+            "companion": {
+              "type": "object",
+              "properties": {
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "choice": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "resource_links": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "uri": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "mimeType": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "uri",
+                            "name",
+                            "mimeType"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "artwork_url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "track": {
+                        "$ref": "#/$defs/Track"
+                      }
+                    },
+                    "required": [
+                      "choice",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1,
+                  "maxItems": 3
+                }
+              },
+              "required": [
+                "options"
+              ],
+              "additionalProperties": false
+            },
+            "urlElicitationRequired": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "const": -32042
+                },
+                "message": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "elicitationId": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "elicitationId",
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "code",
+                "message",
+                "data"
+              ],
+              "additionalProperties": false
+            },
+            "elicitationComplete": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "const": "notifications/elicitation/complete"
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "elicitationId": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "action": {
+                      "type": "string",
+                      "enum": [
+                        "accept",
+                        "decline",
+                        "cancel"
+                      ]
+                    },
+                    "content": {}
+                  },
+                  "required": [
+                    "elicitationId"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "method",
+                "params"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "formRequest",
+            "formResponse",
+            "companion",
+            "urlElicitationRequired",
+            "elicitationComplete"
+          ],
+          "additionalProperties": false
+        },
+        "traceEnvelope": {
+          "type": "object",
+          "properties": {
+            "event_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Monotonic id per trace connection; the console dedupes and orders on it (the lab's own id, distinct from the MCP SSE event id)."
+            },
+            "trace_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "One trace id per user turn, propagated host → MCP → upstream (§8.7)."
+            },
+            "span_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "OpenTelemetry span id when emitted from a span (§4.1)."
+            },
+            "ts": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO-8601 UTC emission time."
+            },
+            "source": {
+              "type": "string",
+              "enum": [
+                "alexa-lab",
+                "omnibeat-mcp"
+              ],
+              "description": "Emitting process; alexa-lab relays server-side spans it receives (§4.1, §8.7 propagation)."
+            },
+            "badge": {
+              "type": "string",
+              "enum": [
+                "LIVE",
+                "REPLAY",
+                "FIXTURE"
+              ],
+              "description": "Truthful mode label for the turn: LIVE | REPLAY | FIXTURE (§4.2, AC-14)."
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "session",
+                "request",
+                "response",
+                "notification",
+                "elicitation",
+                "cancellation",
+                "progress",
+                "error"
+              ]
+            },
+            "direction": {
+              "type": "string",
+              "enum": [
+                "client_to_server",
+                "server_to_client"
+              ]
+            },
+            "mcp": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "description": "JSON-RPC method, e.g. tools/call."
+                },
+                "tool": {
+                  "type": "string",
+                  "description": "Tool name for tools/call."
+                },
+                "session_id": {
+                  "type": "string",
+                  "description": "Mcp-Session-Id header value (§5.1)."
+                },
+                "protocol_version": {
+                  "type": "string",
+                  "description": "MCP-Protocol-Version header value (§5.1)."
+                },
+                "sse_event_id": {
+                  "type": "string",
+                  "description": "SSE event id from the server stream; reconnects resume with Last-Event-ID [VERIFY R-SPEC-01]."
+                },
+                "latency_ms": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "elicitation_id": {
+                  "type": "string",
+                  "description": "Elicitation id for elicitation events (§5.4)."
+                },
+                "frame": {
+                  "description": "Raw JSON-RPC frame for the inspector drill-down (§11.2). The emitter is responsible for redacting secrets; heard text appears deliberately — the inspector is the product's transparency surface."
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "event_id",
+            "trace_id",
+            "ts",
+            "source",
+            "badge",
+            "kind",
+            "direction"
+          ],
+          "additionalProperties": false
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "type": "object",
+              "properties": {
+                "thresholds": {
+                  "type": "object",
+                  "properties": {
+                    "screen": {
+                      "type": "object",
+                      "properties": {
+                        "tPlay": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "m": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "tPlay",
+                        "m"
+                      ],
+                      "additionalProperties": false,
+                      "default": {
+                        "tPlay": 0.85,
+                        "m": 0.25
+                      }
+                    },
+                    "screenless": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/config/properties/decision/properties/thresholds/properties/screen",
+                      "default": {
+                        "tPlay": 0.88,
+                        "m": 0.3
+                      }
+                    },
+                    "tv": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/config/properties/decision/properties/thresholds/properties/screen",
+                      "default": {
+                        "tPlay": 0.85,
+                        "m": 0.25
+                      }
+                    },
+                    "kids": {
+                      "$ref": "#/$defs/omnibeat-contract-v0/properties/config/properties/decision/properties/thresholds/properties/screen",
+                      "default": {
+                        "tPlay": 0.93,
+                        "m": 0.35
+                      }
+                    },
+                    "tCover": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 0.7
+                    },
+                    "askMaxCandidates": {
+                      "type": "number",
+                      "const": 3,
+                      "default": 3
+                    }
+                  },
+                  "additionalProperties": false,
+                  "default": {}
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "latency": {
+              "type": "object",
+              "properties": {
+                "peel": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidateGeneration": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "hedge": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "fusion": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "phonetic": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "versionSafety": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "score": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "decision": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "evidence": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "totalDeadline": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "peel",
+                "candidateGeneration",
+                "hedge",
+                "fusion",
+                "phonetic",
+                "versionSafety",
+                "score",
+                "decision",
+                "evidence",
+                "totalDeadline"
+              ],
+              "additionalProperties": false,
+              "default": {
+                "peel": 2,
+                "candidateGeneration": 600,
+                "hedge": 250,
+                "fusion": 5,
+                "phonetic": 10,
+                "versionSafety": 3,
+                "score": 1,
+                "decision": 1,
+                "evidence": 1,
+                "totalDeadline": 1500
+              }
+            },
+            "serverCircuitBreaker": {
+              "type": "object",
+              "properties": {
+                "failureThreshold": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 5
+                },
+                "windowMs": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 30000
+                },
+                "halfOpenProbeMs": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 15000
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "clientCircuitBreaker": {
+              "type": "object",
+              "properties": {
+                "rttLimitMs": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 1200
+                },
+                "probeCount": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 5
+                },
+                "failThresholdInWindow": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 3
+                },
+                "consecutiveFailuresToOpen": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 2
+                },
+                "successesToClose": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 3
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "caches": {
+              "type": "object",
+              "properties": {
+                "catalogTtlMs": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 86400000
+                },
+                "negativeTtlMs": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 600000
+                },
+                "hookEphemeralTtlMs": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 600000
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "memory": {
+              "type": "object",
+              "properties": {
+                "aliasRetentionDays": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "default": 90
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "flags": {
+              "type": "object",
+              "properties": {
+                "autocompleteEnabled": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "rerankEnabled": {
+                  "type": "boolean",
+                  "default": false
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "sources": {
+              "type": "object",
+              "properties": {
+                "sourceEnabled": {
+                  "type": "object",
+                  "properties": {
+                    "deezer": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "itunes": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "musicbrainz": {
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "autocomplete": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "fixtures": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  },
+                  "additionalProperties": false,
+                  "default": {}
+                },
+                "providerOrder": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "deezer",
+                      "itunes",
+                      "musicbrainz",
+                      "autocomplete",
+                      "fixtures"
+                    ]
+                  },
+                  "default": [
+                    "deezer",
+                    "itunes",
+                    "musicbrainz",
+                    "autocomplete",
+                    "fixtures"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "rateLimits": {
+              "type": "object",
+              "properties": {
+                "musicBrainzRequestsPerSecond": {
+                  "type": "number",
+                  "minimum": 0.01,
+                  "default": 1
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "supportedLocales": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 64
+              },
+              "default": [
+                "hi-IN",
+                "en-IN",
+                "es-US",
+                "es-MX",
+                "ko-KR",
+                "ja-JP",
+                "pt-BR",
+                "en-NG",
+                "en-ZA",
+                "en-US"
+              ]
+            },
+            "security": {
+              "type": "object",
+              "properties": {
+                "allowedOrigins": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "default": [
+                    "http://localhost:3000",
+                    "http://localhost:4000"
+                  ]
+                },
+                "requireBearerAuth": {
+                  "type": "boolean",
+                  "default": false
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "tools",
+        "errors",
+        "elicitation",
+        "traceEnvelope",
+        "config"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

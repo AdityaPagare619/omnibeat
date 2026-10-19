@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "properties": {
+    "explanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "heard": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What was heard, as text (§6.7)."
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "confidence": {
+          "$ref": "#/properties/receipt/properties/alternatives/items/properties/confidence"
+        },
+        "trigger": {
+          "type": "string",
+          "enum": [
+            "voice",
+            "routine",
+            "external"
+          ],
+          "description": "What triggered the action: voice vs routine vs external (§6.7)."
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the action happened, ISO-8601 UTC (§6.7 stores the time)."
+        }
+      },
+      "required": [
+        "heard",
+        "alternatives",
+        "confidence",
+        "trigger",
+        "at"
+      ],
+      "additionalProperties": false
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "explanation",
+    "receipt",
+    "trace_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

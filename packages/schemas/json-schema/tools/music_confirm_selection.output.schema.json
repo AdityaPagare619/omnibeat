@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Action receipt id; answerable via music_explain_last_action (§6.7)."
+    },
+    "alias_saved": {
+      "type": "boolean"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "receipt_id",
+    "alias_saved",
+    "trace_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

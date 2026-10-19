@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "candidate_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "description": "Candidate ids from music_resolve_request to build hooks for."
+    },
+    "max_seconds": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 3,
+      "description": "Maximum clip length in seconds (≤ 4). Default 3."
+    }
+  },
+  "required": [
+    "candidate_ids"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

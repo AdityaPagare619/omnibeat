@@ -1,0 +1,95 @@
+{
+  "type": "object",
+  "properties": {
+    "jsonRpcError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "enum": [
+            -32700,
+            -32600,
+            -32601,
+            -32602,
+            -32603,
+            -32042
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {}
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false
+    },
+    "toolErrorResult": {
+      "type": "object",
+      "properties": {
+        "isError": {
+          "type": "boolean",
+          "const": true
+        },
+        "code": {
+          "type": "string",
+          "enum": [
+            "UPSTREAM_TIMEOUT",
+            "UPSTREAM_RATE_LIMITED",
+            "NO_CONFIDENT_MATCH",
+            "UNSUPPORTED_LOCALE",
+            "CONSENT_REQUIRED",
+            "SESSION_EXPIRED"
+          ]
+        },
+        "spoken_prompt": {
+          "type": "object",
+          "properties": {
+            "speak_short": {
+              "type": "string",
+              "minLength": 1
+            },
+            "speak_normal": {
+              "type": "string",
+              "minLength": 1
+            },
+            "speak_long": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "speak_short",
+            "speak_normal",
+            "speak_long"
+          ],
+          "additionalProperties": false
+        },
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "isError",
+        "code",
+        "spoken_prompt",
+        "trace_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "jsonRpcError",
+    "toolErrorResult"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

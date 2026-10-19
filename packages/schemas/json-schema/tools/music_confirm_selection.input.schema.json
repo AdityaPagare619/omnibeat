@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "resolution_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "resolution_id from the music_resolve_request that was answered."
+    },
+    "chosen_candidate_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The candidate the user chose (or that was finally played)."
+    },
+    "remember_alias": {
+      "type": "boolean",
+      "default": false,
+      "description": "Save 'when I say X I mean Y' for this household. Default false; only set true when the user explicitly consented (§6.3)."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Client-generated key; retrying with the same key returns the same receipt (§8.6)."
+    }
+  },
+  "required": [
+    "resolution_id",
+    "chosen_candidate_id",
+    "idempotency_key"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

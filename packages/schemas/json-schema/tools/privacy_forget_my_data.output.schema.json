@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "aliases_deleted": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "receipts_deleted": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "aliases_deleted",
+    "receipts_deleted",
+    "trace_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}
