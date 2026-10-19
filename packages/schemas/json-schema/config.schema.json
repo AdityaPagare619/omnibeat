@@ -1,0 +1,358 @@
+{
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "object",
+      "properties": {
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "screen": {
+              "type": "object",
+              "properties": {
+                "tPlay": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "m": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "tPlay",
+                "m"
+              ],
+              "additionalProperties": false,
+              "default": {
+                "tPlay": 0.85,
+                "m": 0.25
+              }
+            },
+            "screenless": {
+              "$ref": "#/properties/decision/properties/thresholds/properties/screen",
+              "default": {
+                "tPlay": 0.88,
+                "m": 0.3
+              }
+            },
+            "tv": {
+              "$ref": "#/properties/decision/properties/thresholds/properties/screen",
+              "default": {
+                "tPlay": 0.85,
+                "m": 0.25
+              }
+            },
+            "kids": {
+              "$ref": "#/properties/decision/properties/thresholds/properties/screen",
+              "default": {
+                "tPlay": 0.93,
+                "m": 0.35
+              }
+            },
+            "tCover": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.7
+            },
+            "askMaxCandidates": {
+              "type": "number",
+              "const": 3,
+              "default": 3
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "latency": {
+      "type": "object",
+      "properties": {
+        "peel": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidateGeneration": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hedge": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fusion": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "phonetic": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "versionSafety": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalDeadline": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "peel",
+        "candidateGeneration",
+        "hedge",
+        "fusion",
+        "phonetic",
+        "versionSafety",
+        "score",
+        "decision",
+        "evidence",
+        "totalDeadline"
+      ],
+      "additionalProperties": false,
+      "default": {
+        "peel": 2,
+        "candidateGeneration": 600,
+        "hedge": 250,
+        "fusion": 5,
+        "phonetic": 10,
+        "versionSafety": 3,
+        "score": 1,
+        "decision": 1,
+        "evidence": 1,
+        "totalDeadline": 1500
+      }
+    },
+    "serverCircuitBreaker": {
+      "type": "object",
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 5
+        },
+        "windowMs": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 30000
+        },
+        "halfOpenProbeMs": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 15000
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "clientCircuitBreaker": {
+      "type": "object",
+      "properties": {
+        "rttLimitMs": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1200
+        },
+        "probeCount": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 5
+        },
+        "failThresholdInWindow": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 3
+        },
+        "consecutiveFailuresToOpen": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 2
+        },
+        "successesToClose": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 3
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "caches": {
+      "type": "object",
+      "properties": {
+        "catalogTtlMs": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 86400000
+        },
+        "negativeTtlMs": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 600000
+        },
+        "hookEphemeralTtlMs": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 600000
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "memory": {
+      "type": "object",
+      "properties": {
+        "aliasRetentionDays": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 90
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "flags": {
+      "type": "object",
+      "properties": {
+        "autocompleteEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "rerankEnabled": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "sources": {
+      "type": "object",
+      "properties": {
+        "sourceEnabled": {
+          "type": "object",
+          "properties": {
+            "deezer": {
+              "type": "boolean",
+              "default": true
+            },
+            "itunes": {
+              "type": "boolean",
+              "default": true
+            },
+            "musicbrainz": {
+              "type": "boolean",
+              "default": true
+            },
+            "autocomplete": {
+              "type": "boolean",
+              "default": false
+            },
+            "fixtures": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "providerOrder": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "deezer",
+              "itunes",
+              "musicbrainz",
+              "autocomplete",
+              "fixtures"
+            ]
+          },
+          "default": [
+            "deezer",
+            "itunes",
+            "musicbrainz",
+            "autocomplete",
+            "fixtures"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "rateLimits": {
+      "type": "object",
+      "properties": {
+        "musicBrainzRequestsPerSecond": {
+          "type": "number",
+          "minimum": 0.01,
+          "default": 1
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "supportedLocales": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 64
+      },
+      "default": [
+        "hi-IN",
+        "en-IN",
+        "es-US",
+        "es-MX",
+        "ko-KR",
+        "ja-JP",
+        "pt-BR",
+        "en-NG",
+        "en-ZA",
+        "en-US"
+      ]
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "http://localhost:3000",
+            "http://localhost:4000"
+          ]
+        },
+        "requireBearerAuth": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

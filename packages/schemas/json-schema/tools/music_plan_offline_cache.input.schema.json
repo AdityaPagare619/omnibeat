@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "household_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque household id; enables history-aware selection (§6.6)."
+    },
+    "slots": {
+      "type": "object",
+      "properties": {
+        "emergency": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 5,
+          "description": "Number of 'emergency vibe' tracks to cache. Default 5."
+        },
+        "next_up": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 3,
+          "description": "How many queued tracks to cache next. Default 3."
+        }
+      },
+      "additionalProperties": false,
+      "default": {
+        "emergency": 5,
+        "next_up": 3
+      },
+      "description": "Slot counts; defaults 5 + next 3 (§5.2, §6.6)."
+    },
+    "mood_hint": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional free-text mood hint for selection."
+    },
+    "byte_budget": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Hard byte budget for the cache plan. Required: blueprint §5.2 names it as key input but ships no default, so the caller must state it."
+    }
+  },
+  "required": [
+    "byte_budget"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

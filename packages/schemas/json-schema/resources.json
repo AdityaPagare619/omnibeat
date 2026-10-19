@@ -1,0 +1,46 @@
+{
+  "resources": [
+    {
+      "uri": "omnibeat://eval/latest",
+      "name": "eval-latest",
+      "title": "Latest evaluation report",
+      "description": "The most recent evaluation report (JSON + Markdown), readable by any MCP client (blueprint §5.3).",
+      "mimeType": "application/json",
+      "subscribable": false
+    },
+    {
+      "uri": "omnibeat://health",
+      "name": "health",
+      "title": "Upstream health",
+      "description": "Upstream status and circuit breaker states (blueprint §5.3); also the circuit-breaker probe target for clients (§6.6).",
+      "mimeType": "application/json",
+      "subscribable": false
+    }
+  ],
+  "resourceTemplates": [
+    {
+      "uriTemplate": "omnibeat://session/{id}/context",
+      "name": "session-context",
+      "title": "Session resolution context",
+      "description": "Current resolution state; notifications/resources/updated drives the UI (blueprint §5.3).",
+      "mimeType": "application/json",
+      "subscribable": true
+    },
+    {
+      "uriTemplate": "omnibeat://packs/{locale}",
+      "name": "locale-pack",
+      "title": "Locale pack manifest",
+      "description": "Locale pack manifest: rules, test counts, measured accuracy (blueprint §5.3).",
+      "mimeType": "application/json",
+      "subscribable": false
+    },
+    {
+      "uriTemplate": "omnibeat://hooks/{candidate_id}.m4a",
+      "name": "hook-clip",
+      "title": "Ephemeral hook clip",
+      "description": "Ephemeral 3 s hook clip for a candidate; preview-only, short-lived cache, no redistribution (blueprint §5.3, §6.4, §9.1.5).",
+      "mimeType": "audio/mp4",
+      "subscribable": false
+    }
+  ]
+}

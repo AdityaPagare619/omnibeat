@@ -1,0 +1,111 @@
+{
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Monotonic id per trace connection; the console dedupes and orders on it (the lab's own id, distinct from the MCP SSE event id)."
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One trace id per user turn, propagated host → MCP → upstream (§8.7)."
+    },
+    "span_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "OpenTelemetry span id when emitted from a span (§4.1)."
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC emission time."
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "alexa-lab",
+        "omnibeat-mcp"
+      ],
+      "description": "Emitting process; alexa-lab relays server-side spans it receives (§4.1, §8.7 propagation)."
+    },
+    "badge": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "REPLAY",
+        "FIXTURE"
+      ],
+      "description": "Truthful mode label for the turn: LIVE | REPLAY | FIXTURE (§4.2, AC-14)."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "session",
+        "request",
+        "response",
+        "notification",
+        "elicitation",
+        "cancellation",
+        "progress",
+        "error"
+      ]
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "client_to_server",
+        "server_to_client"
+      ]
+    },
+    "mcp": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "JSON-RPC method, e.g. tools/call."
+        },
+        "tool": {
+          "type": "string",
+          "description": "Tool name for tools/call."
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Mcp-Session-Id header value (§5.1)."
+        },
+        "protocol_version": {
+          "type": "string",
+          "description": "MCP-Protocol-Version header value (§5.1)."
+        },
+        "sse_event_id": {
+          "type": "string",
+          "description": "SSE event id from the server stream; reconnects resume with Last-Event-ID [VERIFY R-SPEC-01]."
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "elicitation_id": {
+          "type": "string",
+          "description": "Elicitation id for elicitation events (§5.4)."
+        },
+        "frame": {
+          "description": "Raw JSON-RPC frame for the inspector drill-down (§11.2). The emitter is responsible for redacting secrets; heard text appears deliberately — the inspector is the product's transparency surface."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "event_id",
+    "trace_id",
+    "ts",
+    "source",
+    "badge",
+    "kind",
+    "direction"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

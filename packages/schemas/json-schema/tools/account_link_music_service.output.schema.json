@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "linked",
+        "already_linked",
+        "pending"
+      ],
+      "description": "Link status. CONTRACT DRAFT vocabulary (blueprint §5.2 says 'link status' only): linked/already_linked on success; pending while URL-mode elicitation is outstanding. Final handshake lands with notifications/elicitation/complete [VERIFY R-SPEC-04]."
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "status",
+    "provider",
+    "trace_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

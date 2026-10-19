@@ -1,0 +1,144 @@
+{
+  "type": "object",
+  "properties": {
+    "plan": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "track": {
+                "$ref": "#/$defs/Track"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "Prefetch URL (only cacheable tracks, §6.6)."
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "ttl_seconds": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "track",
+              "url",
+              "bytes",
+              "ttl_seconds"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Plan expiry (§5.2: plan with expiry)."
+        }
+      },
+      "required": [
+        "items",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    },
+    "task": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Task handle for the cache-preparation task [VERIFY R-SPEC-05]."
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Task status token [VERIFY R-SPEC-05: exact vocabulary comes from the spec task states — deliberately not enumerated here to avoid inventing codes.]"
+        }
+      },
+      "required": [
+        "task_id",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "plan",
+    "trace_id"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Track": {
+      "type": "object",
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artist": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "studio",
+            "live",
+            "remix",
+            "karaoke",
+            "cover",
+            "unknown"
+          ]
+        },
+        "canonical_ids": {
+          "type": "object",
+          "properties": {
+            "musicbrainz": {
+              "type": "string"
+            },
+            "isrc": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "artwork_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "untrusted": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "required": [
+        "candidate_id",
+        "title",
+        "artist"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

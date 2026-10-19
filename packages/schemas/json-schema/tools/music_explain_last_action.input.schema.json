@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "household_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque household id; pass at least one identifier (household or session)."
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "MCP session id; pass at least one identifier (household or session)."
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

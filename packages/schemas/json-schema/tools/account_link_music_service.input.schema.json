@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Music provider identifier to link [VERIFY R-MUSIC-01: blueprint §5.2 names only 'provider' — the identifier vocabulary depends on which providers R-MUSIC clears (terms, previews, OAuth); do not enumerate until then.]"
+    }
+  },
+  "required": [
+    "provider"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

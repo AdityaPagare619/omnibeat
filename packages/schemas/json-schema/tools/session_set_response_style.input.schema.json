@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "style": {
+      "type": "string",
+      "enum": [
+        "brief",
+        "normal",
+        "detailed"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Why the style changed, e.g. barge_in (user interrupted), short_answer, routine."
+    }
+  },
+  "required": [
+    "style",
+    "reason"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$comment": "Generated from Zod by packages/schemas/scripts/generate-json-schema.ts — DO NOT EDIT."
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@omnibeat/schemas",
+  "version": "0.1.0",
+  "description": "OmniBeat contract v0 — Zod single source of truth for omnibeat-mcp, alexa-lab, and lab-console (MCP 2025-11-25, Streamable HTTP).",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./json-schema/*": "./json-schema/*"
+  },
+  "files": [
+    "dist",
+    "json-schema"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node dist/scripts/generate-json-schema.js",
+    "generate": "node dist/scripts/generate-json-schema.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "typescript": "5.6.3",
+    "vitest": "2.1.8",
+    "zod-to-json-schema": "3.23.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
