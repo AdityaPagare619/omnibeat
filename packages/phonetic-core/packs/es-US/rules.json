@@ -1,0 +1,93 @@
+{
+  "id": "es-US",
+  "digraphs": {
+    "ch": "c",
+    "rr": "r",
+    "qu": "k",
+    "gu": "g"
+  },
+  "vowels": {
+    "aa": "a",
+    "ee": "e",
+    "oo": "o",
+    "ii": "i",
+    "uu": "u"
+  },
+  "articulatory": {
+    "vowels": ["a", "e", "i", "o", "u"],
+    "places": {
+      "b": "bilabial",
+      "p": "bilabial",
+      "m": "bilabial",
+      "f": "labiodental",
+      "v": "labiodental",
+      "d": "alveolar",
+      "t": "alveolar",
+      "n": "alveolar",
+      "s": "alveolar",
+      "z": "alveolar",
+      "l": "alveolar",
+      "r": "alveolar",
+      "c": "postalveolar",
+      "j": "postalveolar",
+      "x": "postalveolar",
+      "g": "velar",
+      "k": "velar",
+      "y": "palatal",
+      "w": "bilabial",
+      "h": "glottal"
+    },
+    "manners": {
+      "b": "stop",
+      "p": "stop",
+      "d": "stop",
+      "t": "stop",
+      "g": "stop",
+      "k": "stop",
+      "m": "nasal",
+      "n": "nasal",
+      "s": "fricative",
+      "z": "fricative",
+      "f": "fricative",
+      "v": "fricative",
+      "x": "fricative",
+      "h": "fricative",
+      "c": "affricate",
+      "j": "affricate",
+      "l": "liquid",
+      "r": "liquid",
+      "y": "glide",
+      "w": "glide"
+    },
+    "voicing": {
+      "b": "voiced",
+      "p": "voiceless",
+      "d": "voiced",
+      "t": "voiceless",
+      "g": "voiced",
+      "k": "voiceless",
+      "m": "voiced",
+      "n": "voiced",
+      "s": "voiceless",
+      "z": "voiced",
+      "f": "voiceless",
+      "v": "voiced",
+      "x": "voiceless",
+      "h": "voiceless",
+      "c": "voiceless",
+      "j": "voiced",
+      "l": "voiced",
+      "r": "voiced",
+      "y": "voiced",
+      "w": "voiced"
+    },
+    "heights": { "a": "low", "e": "mid", "i": "high", "o": "mid", "u": "high" },
+    "frontness": { "a": "center", "e": "front", "i": "front", "o": "back", "u": "back" }
+  },
+  "respelling": [
+    { "id": "vowel-a-length", "kind": "vowel-length", "from": "a", "to": "aa" },
+    { "id": "vowel-e-length", "kind": "vowel-length", "from": "e", "to": "ee" },
+    { "id": "aspirate-ch", "kind": "aspirate", "from": "c", "to": "ch" },
+    { "id": "aspirate-g", "kind": "aspirate", "from": "g", "to": "gu" }
+  ]
+}

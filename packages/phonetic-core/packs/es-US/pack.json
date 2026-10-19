@@ -1,0 +1,17 @@
+{
+  "id": "es-US",
+  "scripts": ["Latn"],
+  "grammar": {
+    "wakeWords": ["oye", "okay", "hey", "alexa", "hola"],
+    "verbs": ["reproduce", "reproducir", "pon", "poner", "coloca", "busca", "buscar"],
+    "providerWords": ["spotify", "youtube", "deezer", "pandora", "soundcloud", "applemusic"],
+    "fillers": ["por", "favor", "la", "el", "los", "las", "un", "una", "de", "en", "y", "que", "al", "del", "cancion", "canciones", "dale"],
+    "intents": {
+      "live": ["live", "vivo"],
+      "remix": ["remix", "rmx"],
+      "acoustic": ["acoustic", "acustica"],
+      "original": ["original", "oficial"],
+      "artistMarkers": ["by"]
+    }
+  }
+}

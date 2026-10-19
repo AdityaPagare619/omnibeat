@@ -1,0 +1,17 @@
+{
+  "id": "en-US",
+  "scripts": ["Latn"],
+  "grammar": {
+    "wakeWords": ["hey", "ok", "okay", "alexa", "computer", "echo"],
+    "verbs": ["play", "put", "queue", "shuffle", "repeat", "start", "find", "search", "request"],
+    "providerWords": ["spotify", "pandora", "youtube", "soundcloud", "deezer", "tidal", "shazam", "applemusic"],
+    "fillers": ["please", "can", "you", "could", "would", "some", "song", "songs", "music", "track", "tracks", "playlist"],
+    "intents": {
+      "live": ["live"],
+      "remix": ["remix", "rmx"],
+      "acoustic": ["acoustic"],
+      "original": ["original", "official"],
+      "artistMarkers": ["by"]
+    }
+  }
+}

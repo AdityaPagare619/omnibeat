@@ -1,0 +1,12 @@
+{"input":"hey alexa play blinding lights by the weeknd on spotify","expect":"Blinding Lights","mode":"peel"}
+{"input":"could you queue bicycle race please","expect":"Bicycle Race","mode":"peel"}
+{"input":"SHUFFLE wonderwall!!","expect":"Wonderwall","mode":"peel"}
+{"input":"don't stop me now","expect":"Dont Stop Me Now","mode":"peel"}
+{"input":"queue the wall by pink floyd","expect":"The Wall","mode":"peel"}
+{"input":"alexa, find \"bohemian rhapsody\" please","expect":"Bohemian Rhapsody","mode":"peel"}
+{"input":"play wonderwall by oasis live","expect":"Wonderwall","mode":"peel"}
+{"input":"blinding lites","expect":"Blinding Lights","mode":"match"}
+{"input":"nite fever","expect":"Night Fever","mode":"match"}
+{"input":"smels like teen spirit","expect":"Smells Like Teen Spirit","mode":"match"}
+{"input":"bohemian rhapsoddy","expect":"Bohemian Rhapsody","mode":"match"}
+{"input":"play don't stop me now live","expect":"Dont Stop Me Now","mode":"match"}
