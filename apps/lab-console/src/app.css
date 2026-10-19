@@ -1,0 +1,834 @@
+/* OmniBeat lab-console — hand-rolled, no UI kit (blueprint §11.2 design
+   direction: restrained, high-contrast, large type for a 10-foot TV view;
+   monospace only for wire data; no neon; colour used for state only; every
+   colour has a text label). */
+
+:root {
+  --bg: #0b0e11;
+  --bg-panel: #12161b;
+  --bg-raise: #1a2029;
+  --line: #2a323c;
+  --fg: #e8eef4;
+  --fg-dim: #9fb0c0;
+  --fg-mono: #cdd9e5;
+  --accent: #4aa3ff;
+  --play: #3fb950;
+  --ask: #d29922;
+  --repair: #58a6ff;
+  --notfound: #f85149;
+  --open: #f85149;
+  --half: #d29922;
+  --closed: #3fb950;
+  --unknown: #6b7c8d;
+  --focus: #7ee787;
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.console {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Focus rings everywhere — keyboard reachability is an acceptance criterion. */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+
+/* ------------------------------------------------------------- top bar */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 1.1rem;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.wordmark {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+}
+
+.topbar-badges {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-raise);
+  color: var(--fg);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.chip-spec {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chip-muted {
+  color: var(--fg-dim);
+}
+
+.chip-badge.badge-live {
+  border-color: var(--play);
+  color: var(--play);
+}
+.chip-badge.badge-replay {
+  border-color: var(--ask);
+  color: var(--ask);
+}
+.chip-badge.badge-fixture {
+  border-color: var(--repair);
+  color: var(--repair);
+}
+.chip-badge.badge-typed {
+  border-color: var(--fg-dim);
+  color: var(--fg-dim);
+}
+
+.chip-untrusted {
+  border-color: var(--ask);
+  color: var(--ask);
+  font-size: 0.72rem;
+}
+
+.chip-edge {
+  border-color: var(--half);
+  color: var(--half);
+}
+
+.conn-open {
+  border-color: var(--play);
+  color: var(--play);
+}
+.conn-connecting {
+  border-color: var(--ask);
+  color: var(--ask);
+}
+.conn-offline {
+  border-color: var(--notfound);
+  color: var(--notfound);
+}
+
+.switch {
+  font: inherit;
+  font-weight: 700;
+  padding: 0.32rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-raise);
+  color: var(--fg);
+  cursor: pointer;
+}
+.switch-on {
+  border-color: var(--play);
+  color: var(--play);
+}
+.switch-off {
+  border-color: var(--notfound);
+  color: var(--notfound);
+}
+
+.surface-group {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.surface-btn {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.85rem;
+  background: transparent;
+  color: var(--fg-dim);
+  border: none;
+  cursor: pointer;
+}
+.surface-active {
+  background: var(--accent);
+  color: #06121f;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------- banner */
+
+.banner {
+  background: #3a1417;
+  color: #ffd7d5;
+  border-bottom: 1px solid var(--notfound);
+  padding: 0.55rem 1.1rem;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------- grid */
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.1fr) minmax(360px, 1.4fr) minmax(260px, 0.9fr);
+  gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  flex: 1;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.9rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.45rem;
+}
+
+.sub-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-dim);
+}
+
+.empty-note {
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+.hint-strip {
+  margin: 0;
+  padding: 0.5rem 0.7rem;
+  border-left: 3px solid var(--ask);
+  background: #241d0c;
+  color: #f2d9a1;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* ------------------------------------------------------------- voice */
+
+.orb-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.orb {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #2b3947, #131a21 70%);
+  border: 1px solid var(--line);
+  flex: none;
+}
+
+.orb-speaking {
+  border-color: var(--accent);
+  animation: orb-pulse 1.15s ease-in-out infinite;
+}
+
+@keyframes orb-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 163, 255, 0.55);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(74, 163, 255, 0);
+    transform: scale(1.06);
+  }
+}
+
+.orb-state {
+  display: flex;
+  flex-direction: column;
+}
+
+.state-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.state-sub {
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+}
+
+.say-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.say-input {
+  flex: 1;
+  min-width: 160px;
+  font: inherit;
+  padding: 0.5rem 0.7rem;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.48rem 0.95rem;
+  background: var(--bg-raise);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  cursor: pointer;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-say {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mic-hint {
+  color: var(--fg-dim);
+  font-size: 0.8rem;
+}
+
+.transcripts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 3rem;
+}
+
+.transcript {
+  margin: 0;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.transcript-tag {
+  color: var(--fg-dim);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.4rem;
+}
+
+.transcript-partial {
+  color: var(--fg-dim);
+  border-style: dashed;
+}
+
+.transcript-empty {
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+.tts-bubble {
+  padding: 0.55rem 0.75rem;
+  border-radius: 9px;
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  font-size: 1rem;
+}
+
+.tts-tag {
+  color: var(--accent);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tts-cut {
+  color: var(--notfound);
+  text-decoration-thickness: 2px;
+}
+
+.tts-cut-note {
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+}
+
+/* ------------------------------------------------------------- resolution */
+
+.heard {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.heard-tag {
+  color: var(--fg-dim);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 0.5rem;
+}
+
+.decision-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.decision-chip {
+  padding: 0.25rem 0.85rem;
+  border-radius: 7px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  border: 1px solid;
+}
+.dec-play {
+  color: var(--play);
+  border-color: var(--play);
+}
+.dec-ask {
+  color: var(--ask);
+  border-color: var(--ask);
+}
+.dec-repair {
+  color: var(--repair);
+  border-color: var(--repair);
+}
+.dec-notfound {
+  color: var(--notfound);
+  border-color: var(--notfound);
+}
+.dec-unknown {
+  color: var(--unknown);
+  border-color: var(--unknown);
+}
+
+.decision-sub {
+  color: var(--fg-dim);
+  font-size: 0.82rem;
+}
+
+.meter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.meter {
+  position: relative;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: visible;
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px 0 0 4px;
+  transition: width 240ms ease;
+}
+
+.meter-marker {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--fg);
+}
+
+.meter-marker-label {
+  position: absolute;
+  top: -18px;
+  left: 4px;
+  font-size: 0.7rem;
+  color: var(--fg-dim);
+  white-space: nowrap;
+}
+
+.meter-caption {
+  color: var(--fg-dim);
+  font-size: 0.83rem;
+}
+
+.candidates,
+.evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.candidate {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--bg);
+}
+
+.candidate-main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.candidate-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.candidate-meta {
+  color: var(--fg-dim);
+  font-size: 0.88rem;
+  margin-top: 0.15rem;
+}
+
+.evidence-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.evidence-source {
+  font-weight: 600;
+}
+
+.evidence-signal {
+  color: var(--fg-dim);
+}
+
+.evidence-weight {
+  color: var(--fg-dim);
+  font-family: var(--mono);
+  font-size: 0.82em;
+}
+
+.btn-explain {
+  align-self: flex-start;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.explain-result {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg);
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------- continuity */
+
+.breaker-block,
+.edge-block,
+.chaos-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.breaker-state {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.breaker-closed {
+  color: var(--closed);
+}
+.breaker-open {
+  color: var(--open);
+}
+.breaker-half {
+  color: var(--half);
+}
+.breaker-unknown {
+  color: var(--unknown);
+}
+
+.breaker-sub {
+  color: var(--fg-dim);
+  font-size: 0.82rem;
+}
+
+.chaos-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chaos-log {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* ------------------------------------------------------------- wire inspector */
+
+.wire {
+  border-top: 1px solid var(--line);
+  background: var(--bg-panel);
+  padding: 0.7rem 1.1rem 1rem;
+}
+
+.wire-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.wire-head .panel-title {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.wire-filters {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  cursor: pointer;
+}
+
+.filter-active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.wire-count {
+  margin-left: auto;
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+}
+
+.wire-empty {
+  padding: 1rem 0;
+}
+
+.wire-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.wire-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.wire-table th {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  background: var(--bg-raise);
+  color: var(--fg-dim);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: sticky;
+  top: 0;
+}
+
+.wire-table td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.wire-table .num {
+  text-align: right;
+}
+
+.wire-row {
+  cursor: pointer;
+  /* Spring-ish entrance for each new frame. */
+  animation: row-in 320ms cubic-bezier(0.22, 1.4, 0.36, 1);
+}
+
+.wire-row:hover {
+  background: var(--bg-raise);
+}
+
+.wire-row-open {
+  background: var(--bg-raise);
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px) scaleY(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.row-expand {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  padding: 0 0.2rem;
+}
+
+.wire-detail td {
+  white-space: normal;
+  background: var(--bg);
+}
+
+.wire-detail-meta {
+  color: var(--fg-dim);
+  padding: 0.3rem 0;
+  word-break: break-all;
+}
+
+.wire-json {
+  margin: 0.3rem 0 0.4rem;
+  padding: 0.6rem;
+  background: #0a0d10;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--fg-mono);
+  max-height: 260px;
+  overflow: auto;
+}
+
+/* ------------------------------------------------------------- TV mode */
+
+.tv-mode {
+  --bg: #000000;
+  --bg-panel: #0a0a0a;
+  --bg-raise: #161616;
+  --line: #3c3c3c;
+  --fg: #ffffff;
+  --fg-dim: #c9c9c9;
+}
+
+.tv-mode body,
+.tv-mode {
+  font-size: 22px;
+}
+
+.tv-mode .panel-title {
+  font-size: 1.25rem;
+}
+
+.tv-mode .candidate-title,
+.tv-mode .heard {
+  font-size: 1.35rem;
+}
+
+.tv-mode .breaker-state {
+  font-size: 2.1rem;
+}
+
+.tv-mode .wire-scroll {
+  max-height: 380px;
+}
+
+.tv-mode .wire-table {
+  font-size: 1rem;
+}
+
+.tv-mode .chip {
+  font-size: 0.95rem;
+}
+
+.tv-mode .btn,
+.tv-mode .say-input {
+  font-size: 1.05rem;
+  padding: 0.6rem 1.1rem;
+}
