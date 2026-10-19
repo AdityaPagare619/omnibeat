@@ -1,0 +1,52 @@
+# OWNERS.yaml — path globs map to owning agent (Charter Part 3)
+# Cross-owner changes require an ARCH-approved contract change first.
+version: 0
+effective: 2026-10-19
+
+owners:
+  ".omni/**": ORCH
+  "research/seed/**": DOC-JUDGE
+  "research/claims/**": ORCH            # scouts deliver cards to ORCH (DEC-0004)
+  "research/QUESTIONS.md": ORCH
+  "research/AUDIT_OF_PRIOR_RESEARCH.md": DOC-JUDGE
+  "research/KEEP_ADAPT_CUT.md": DOC-JUDGE
+  "research/spikes/**": agent-of-record (spike author), reviewed by ORCH
+  "docs/00_OMNIBEAT_V3_BLUEPRINT.md": HUMAN (frozen; ORCH may fix typos only)
+  "docs/ARCHITECTURE.md": ARCH
+  "docs/ADRs/**": ARCH
+  "docs/MCP_PROTOCOL_PROOF.md": B-MCP
+  "docs/EVAL_REPORT.md": B-EVAL          # generated; committed by ORCH after G2
+  "docs/FRICTION_LOG.md": ORCH
+  "docs/PRIVACY_AND_ETHICS.md": ORCH
+  "docs/THREAT_MODEL.md": B-MCP
+  "docs/RUNBOOK.md": B-INFRA
+  "docs/DEMO_SCRIPT.md": ORCH
+  "packages/schemas/**": ARCH
+  "packages/phonetic-core/**": B-PHON
+  "packages/eval/**": B-EVAL
+  "services/omnibeat-mcp/**": B-MCP
+  "services/alexa-lab/**": B-HOST
+  "apps/lab-console/**": B-CONSOLE
+  "fixtures/**": B-EVAL
+  "eval/**": B-EVAL
+  "tests/contract/**": T-TEST
+  "tests/e2e/**": T-TEST
+  "tests/property/**": T-TEST
+  "tests/adversarial/**": RED-TEAM
+  "tests/chaos/**": RED-TEAM
+  "tests/load/**": B-INFRA
+  "tests/security/**": RED-TEAM
+  "tests/a11y/**": B-CONSOLE
+  "Makefile": B-INFRA
+  "docker-compose.yml": B-INFRA
+  ".github/workflows/**": B-INFRA
+  "README.md": ORCH
+  "LICENSE": ORCH
+
+concurrency_defaults:
+  writing_builders: 4
+  research_scouts: 6
+  judges: 2
+  note: >-
+    Reduced below charter defaults if the machine census shows constrained capacity.
+    Windows laptop, no docker daemon: builders capped at 4, judges at 2.
