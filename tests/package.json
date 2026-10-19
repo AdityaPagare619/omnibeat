@@ -1,0 +1,20 @@
+{
+  "name": "@omnibeat/acceptance-tests",
+  "version": "0.0.0",
+  "private": true,
+  "description": "OmniBeat acceptance-test skeletons for AC-01..AC-20 (Phase 0). ALL tests are expected to FAIL RED until the corresponding implementation lands — see README.md 'Expected failure inventory'.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@vitest/coverage-v8": "^5.0.5",
+    "ajv": "^8.20.0",
+    "fast-check": "^4.10.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
