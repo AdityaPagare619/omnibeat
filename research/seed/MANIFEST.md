@@ -21,3 +21,16 @@ Generated: 2026-10-19T12:25:15.7731738Z
 | DOCUMENT_9 (Makefile runbook / rubric map) | - | - | MISSING |
 | Principal systems bible documents 1-5 | - | - | UNVERIFIED (possibly contained in MASTER-BLUEPRINT.txt; DOC-JUDGE to confirm) |
 | polyglot-phonetic-judo package | - | - | MISSING |
+
+---
+
+## DOC-JUDGE AUDIT APPENDIX (2026-10-19, branch agent/doc-judge/p0-audit)
+
+Corrections discovered while auditing (original rows left intact; see research/AUDIT_OF_PRIOR_RESEARCH.md §2-§3 for receipts):
+
+1. **Hash rows for GROUND-TRUTH-AND-IDEA-BANK.md and omnibeat-v2-final-architecture.md match LF-normalised content, not the delivered CRLF bytes.** Raw-file SHA-256: `6cd0cee7990b992deeb54d7f9f5d852a476e39bba3f2b013b53410460dab77859` (21,101 B) and `a6f62d6f5ea54710c5958022ad2c5815f6899dbc4e7638a104ed58e00d80e411` (16,501 B). Re-hashing after CRLF→LF reproduces the original manifest values exactly. Process fix: hash LF-normalised content and state that, or hash raw bytes at generation time.
+2. **DOCUMENT_7, DOCUMENT_8 and DOCUMENT_9 are missing as standalone files but their content is PRESENT** inside `DOCUMENT 6_ EDGE DSP ENGINE...txt` (section headers at lines 260, 970, 1113). Any scope that assumed the content was lost is wrong.
+3. **"Principal systems bible documents 1-5" are PRESENT** in `I WOULD REQUEST YOU NOW SEE USE THESE FOR YOUR-SE....txt` (Docs 1-5 at lines 4, 35, 171, 298, 351) — not in MASTER-BLUEPRINT.txt as the row above guessed.
+4. **The polyglot-phonetic-judo package is missing as a package directory, but its full source, tsconfig, 25-test spec and README are PRESENT** in `Yes, generate the complete standalone open-source....txt` (lines 11-774). Extracted and executed by this audit: **6 of 25 tests pass**; see audit findings F-01..F-03.
+5. **MASTER-BLUEPRINT.txt is truncated**: it announces "5 mandatory rules" (line 440) but ends at rule 4 (444 lines total).
+6. **RESEARCH-THESIS-1.txt contains 2 recipes, not the 5 the Charter describes**, and no "Kitchen Panic" framing.
