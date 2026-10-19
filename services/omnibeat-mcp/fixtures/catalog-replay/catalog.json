@@ -1,0 +1,1047 @@
+{
+  "schema": "omnibeat.replay-catalog.v0",
+  "captured_at": "2026-10-19T15:11:55.247Z",
+  "notes": "REAL upstream responses (iTunes Search + MusicBrainz WS/2) captured from this machine by scripts/capture-fixtures.mjs. Served badged REPLAY. Previews are never persisted (CLM-MUS-003).",
+  "entries": [
+    {
+      "key": "raja ji",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-19T15:11:33.185Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=raja%20ji&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_6762846296",
+                "title": "Raja Ji (Insta Mix)",
+                "artist": "Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi",
+                "year": 2024,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/09/4c/e2094c26-29f6-21b0-8a58-d514b8485767/198588099131.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1561347433",
+                "title": "Raja Ji (feat. Gurlez Akhtar)",
+                "artist": "Deep Chahal",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e1/83/3c/e1833c6a-a102-d4aa-63b7-812bcb81683d/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1717474423",
+                "title": "Raja Ji (feat. Shivani Yadav)",
+                "artist": "Sanket Upadhyay, Sumit Ghanghas & Ashu Twinkle",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/3e/98/35/3e983518-e88f-b87b-5ee6-ab3a58aa4142/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1694964781",
+                "title": "Raja Ji",
+                "artist": "Pawan Singh & Shivani Singh",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/3c/87/7e/3c877ebf-9ace-7a55-a474-f1f3d1bf791c/197338612651.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1574519928",
+                "title": "Raja Ji (feat. Makk Makk)",
+                "artist": "Monika Sharma & Fateh",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/10/dd/92/10dd927a-062b-61b4-8e61-f441481c4c07/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6764890135",
+                "title": "Raja Ji",
+                "artist": "Meet Bros & Priyanka Singh",
+                "year": 2022,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/50/62/1f/50621f7c-dfb8-569d-609f-cd5cc276526f/8902357306939.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1730097432",
+                "title": "Raja Ji",
+                "artist": "Danny",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/fe/2a/6c/fe2a6c1c-6f61-9d3e-6e7c-944fab3556c1/8905285102239.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1533708576",
+                "title": "Raja Ji",
+                "artist": "Fjarsamband",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/3a/c8/e8/3ac8e876-93c4-52b1-265a-2a4ec40f5fd7/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-19T15:11:33.185Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=raja%20ji",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_c16e69b7-d22d-41c8-8266-0e59332afeef",
+                "title": "Raja Ji (Insta mix)",
+                "artist": "Anurag Saikia, Manoj Tiwari, Arya Nand Singh & Shashwat Dwivedi",
+                "year": 2024,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "c16e69b7-d22d-41c8-8266-0e59332afeef"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8a247aef-a61d-4890-b9d4-7e65ec9e79af",
+                "title": "Kariya Sadi Raja Ji",
+                "artist": "Dream Suraj & Saraswati Sargam",
+                "year": 2025,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8a247aef-a61d-4890-b9d4-7e65ec9e79af"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_7985707c-168c-42d0-b99c-b94ac6e0810e",
+                "title": "Talk By Raja Ji",
+                "artist": "Rajaji",
+                "year": 2013,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "7985707c-168c-42d0-b99c-b94ac6e0810e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_b7af6934-87c3-4cfa-b3a7-1ac92a066942",
+                "title": "Bijali Raja Ji Pe Giri Ho",
+                "artist": "Rangila Bihari & Shristi Bharti",
+                "year": 2024,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "b7af6934-87c3-4cfa-b3a7-1ac92a066942"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_df65ff99-557a-46b4-a2b2-dcbfca1d74f0",
+                "title": "Ji ji ji",
+                "artist": "Juan Carlos Baglietto",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "df65ff99-557a-46b4-a2b2-dcbfca1d74f0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_3cf5a831-b543-407f-8523-5937de3312ce",
+                "title": "Ji Ji Ji",
+                "artist": "Árbol",
+                "year": 2006,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "3cf5a831-b543-407f-8523-5937de3312ce"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_0be01a91-1b94-4b13-85ce-d2286e647efc",
+                "title": "Ji ji ji",
+                "artist": "Patricio Rey y sus Redonditos de Ricota",
+                "year": 2001,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "0be01a91-1b94-4b13-85ce-d2286e647efc"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_0c308879-28e2-4341-a3a5-50b21cc89da0",
+                "title": "Ji ji ji",
+                "artist": "Patricio Rey y sus Redonditos de Ricota",
+                "year": 1989,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "0c308879-28e2-4341-a3a5-50b21cc89da0"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "kala chashma",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-19T15:11:37.839Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=kala%20chashma&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1529568809",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar & Indeep Bakshi",
+                "year": 2016,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/14/b8/58/14b85883-40a4-0a2e-de65-130f55726ee6/840780180390.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1697827282",
+                "title": "Kala Chashma - Trending Version",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar & Indeep Bakshi",
+                "year": 2023,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a7/dd/e6/a7dde62b-2dc6-72ad-17ff-1e13a316cb5b/840214495540.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6820434286",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c2/82/c6/c282c63f-876f-9c0c-14aa-204c000c1a01/8909024123752.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6802276188",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/86/35/ee/8635eeea-d38e-1221-2ca6-aabcd481004f/8909024120539.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1656360357",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/6a/37/21/6a372105-748d-8c32-31b8-5716dde2e793/840214461491.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1810439905",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f4/3e/65/f43e658f-cacd-d53c-656c-1d69edb88af7/8909024074924.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1696959970",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/47/67/5f/47675f29-6968-ab36-ced1-5a345a9a63ec/840214493263.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1741467369",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a4/bf/50/a4bf5033-8ebc-3e87-c669-fbd180dd7d40/8718857798101.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "tera ban jaunga",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-19T15:11:41.167Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=tera%20ban%20jaunga&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1468448744",
+                "title": "Tera Ban Jaunga",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2019,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/f6/70/84/f6708434-0123-ff36-0ac3-7401e8cf0f94/8902894360807_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1477822594",
+                "title": "Tera Ban Jaunga Reprise (From \"T-Series Acoustics\")",
+                "artist": "Akhil Sachdeva",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/ae/ef/58/aeef58a5-dddf-854f-8081-82eb6480d1f3/8903431745385_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1682455738",
+                "title": "Tera Ban Jaunga - Deep House Mix",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2023,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/31/36/f3/3136f363-23a0-2b39-fb35-43e5d1f929b3/8903431935366_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1754377896",
+                "title": "Tera Ban Jaunga (Slowed)",
+                "artist": "Honest Garden & LofiBoi",
+                "year": 2006,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/54/91/a2/5491a28a-e7b3-bcef-bdc6-4b0e4da4e625/5063535155435_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1478764362",
+                "title": "Tera Ban Jaunga (From \"Kabir Singh\")",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/82/08/bb/8208bb48-e21f-3403-0572-0cd82d22f130/8903431746146_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1476918883",
+                "title": "Tera Ban Jaunga (From \"Kabir Singh\")",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/d5/88/c9/d588c9bb-1e72-b1e2-b1be-8a8989f323b4/8903431744654_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1521726083",
+                "title": "Tera Ban Jaunga (From \"Kabir Singh\")",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/1e/cc/a6/1ecca6f7-273f-e2fb-72a6-1af9eb14223a/8903431778888_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1500271500",
+                "title": "Tera Ban Jaunga (From \"Kabir Singh\")",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/7e/fd/68/7efd6872-703e-c305-e146-67c96130d8b6/8903431769565_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-19T15:11:41.167Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=tera%20ban%20jaunga",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_195d5e57-96b8-4fd4-9212-3d17d2334a1f",
+                "title": "Tera Ban Jaunga",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2019,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "195d5e57-96b8-4fd4-9212-3d17d2334a1f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f40b69f3-01f8-4eb8-922f-d976a0841da6",
+                "title": "Tera Ban Jaunga Reprise",
+                "artist": "Akhil Sachdeva",
+                "year": 2019,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f40b69f3-01f8-4eb8-922f-d976a0841da6"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_cae3a33a-c5f9-4b5a-9a80-157223452afd",
+                "title": "Tera Ban Jaunga (From \"Kabir Singh\")",
+                "artist": "Akhil Sachdeva & Tulsi Kumar",
+                "year": 2024,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "cae3a33a-c5f9-4b5a-9a80-157223452afd"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f31da28c-b9db-484b-82bb-2b9457ea2cf5",
+                "title": "Tera Ban Jaunga (From \"Kabir Singh\")",
+                "artist": "Akhil Sachdeva, Tulsi Kumar & Kumaar",
+                "year": 2025,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f31da28c-b9db-484b-82bb-2b9457ea2cf5"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_e6750727-64d3-4c12-933a-43014b970385",
+                "title": "Tera Ban Jaunga Melodic Afro House Remix",
+                "artist": "Akhil Sachdeva, Tulsi Kumar",
+                "year": 2025,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "e6750727-64d3-4c12-933a-43014b970385"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ead73175-9bf7-4a83-b687-9ef4c51686e0",
+                "title": "Phool Ban Jaunga Shart Yeh Hai",
+                "artist": "Mahendra Kapoor & Lata Mangeshkar",
+                "year": 1966,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ead73175-9bf7-4a83-b687-9ef4c51686e0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c567b29f-9112-41ea-a9a5-7bef625d5095",
+                "title": "Dulhan Tu Dulha Main Ban Jaunga",
+                "artist": "Anuradha Paudwal & Debashish Dasgupta",
+                "year": 1991,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "c567b29f-9112-41ea-a9a5-7bef625d5095"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_49b82b49-7f85-4a7b-aed4-10f96565928d",
+                "title": "Tera Ban Gaya Hoon",
+                "artist": "Nikhita Gandhi & Saaj Bhatt",
+                "year": 2023,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "49b82b49-7f85-4a7b-aed4-10f96565928d"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "brown munde",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-19T15:11:44.560Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=brown%20munde&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1531596345",
+                "title": "Brown Munde",
+                "artist": "AP Dhillon, Gminxr, Gurinder Gill & Shinda Kahlon",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/26/a3/ac/26a3ac64-69e4-95ec-80ab-1f5a477537d2/859742042973_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1551648561",
+                "title": "Brown Munde",
+                "artist": "JOELSON O REI DO SOM AUTOMOTIVO",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/4a/64/02/4a640253-9793-a7df-c2d5-6f2c065909d4/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1668350464",
+                "title": "Brown Munde",
+                "artist": "Inderbeer",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/48/2f/3e/482f3e7b-65de-6d61-3017-72ba39f7f8a2/198015508175.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1602395953",
+                "title": "Brown Munde",
+                "artist": "Ichpal",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/69/4c/43/694c433b-ccb5-54d8-76a3-0ea0141e9f3a/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1635796630",
+                "title": "Brown Munde",
+                "artist": "Gurinder Gill",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/6c/3f/d3/6c3fd3e0-acc2-f5e0-5839-c398a96a33e6/483913.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1733309189",
+                "title": "Brown Munde",
+                "artist": "Amm Boii",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6e/9c/ab/6e9cabe9-e87e-496c-5b36-2d13e70f0d53/5063440448523_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1869038289",
+                "title": "Brown Munde",
+                "artist": "Manny Bassi Wala",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/3c/48/d0/3c48d080-f4d1-2421-0524-5e50e88c2e5d/840336422714.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1633068305",
+                "title": "Brown Munde",
+                "artist": "SKELETRAP",
+                "year": 2022,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/9f/c2/9b/9fc29b4b-af89-1279-13f5-e8a61bb15dcf/5063112976828_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "chaap tilak sab teri",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-19T15:11:47.967Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=chaap%20tilak%20sab%20teri&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_595033878",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 1984,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b0/77/b6/b077b6f9-c6a8-cf6a-1746-d476bcfb6b0d/887845211163.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_590829932",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nahid Akhtar",
+                "year": 1987,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music127/v4/cf/77/ba/cf77ba61-bd06-2fde-3f4d-1b09c911c1ad/887845274915.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_950189289",
+                "title": "Chaap Tilak",
+                "artist": "Abida Parveen & Rahat Fateh Ali Khan",
+                "year": 2014,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music5/v4/53/59/d7/5359d72e-b248-707c-c6b7-c397f001e9f8/0742832416917.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1105904559",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Hamza Akram Qawwal & Taimoor Akram Qawwal",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music60/v4/1e/d9/a9/1ed9a9f7-66a2-7f75-eab4-28eaf435d739/190374643764.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1773452780",
+                "title": "Chaap Tilak Sab Cheeni Re Mose Naina Milaike",
+                "artist": "Roshni Pandey",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/10/05/5b/10055b74-98c1-d161-745e-44efa2c41249/751451517844.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1562310247",
+                "title": "Chaap Tilak Sab Chheeni",
+                "artist": "Fareed Ayaz, Abu Muhammad aur Humnawa Live with Tasawwuf",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/cd/0d/2d/cd0d2d53-b427-09f3-8f5d-b45264017388/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1831230334",
+                "title": "Chaap Tilak (feat. Vidhi Sharma)",
+                "artist": "Curtain Blue & Gaurav Raina",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/af/da/e2/afdae200-9588-9a62-feae-853f6c9768eb/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1833958588",
+                "title": "Chaap Tilak (Wedding Edition)",
+                "artist": "Parindey",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d0/96/95/d0969518-d0dd-0267-1b6c-7bef1b14ffea/859715081947_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-19T15:11:47.967Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=chaap%20tilak%20sab%20teri",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_83ac96d8-efa9-4478-ad7b-d741769c300c",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2012,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "83ac96d8-efa9-4478-ad7b-d741769c300c"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_faaa85d1-0ad5-43d4-9857-225075f6f114",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2012,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "faaa85d1-0ad5-43d4-9857-225075f6f114"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2cecfe50-a66c-4194-8f59-634ac19f2deb",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nusrat Fateh Ali Khan & Saieen Zahoor",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2cecfe50-a66c-4194-8f59-634ac19f2deb"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_b339ca07-724c-4755-a10b-ce2d8ba0cb41",
+                "title": "Chaap Tilak Sab Cheen",
+                "artist": "Nusrat Fateh Ali Khan",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "b339ca07-724c-4755-a10b-ce2d8ba0cb41"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_77b47913-29db-49e6-86cb-fb76b3f912b1",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nusrat Fateh Ali Khan",
+                "version": "studio",
+                "canonical_ids": {
+                  "musicbrainz": "77b47913-29db-49e6-86cb-fb76b3f912b1"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8caefd1c-1b70-4138-b95a-945bdc3a8bdb",
+                "title": "Chaap Tilak Sab Cheeni",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2014,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8caefd1c-1b70-4138-b95a-945bdc3a8bdb"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_710df25e-5d11-45e0-8e53-e1f25bd566d4",
+                "title": "Chaap Tilak Sab Chheeni Re",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2012,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "710df25e-5d11-45e0-8e53-e1f25bd566d4"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c049bf58-81e9-43a9-b92a-6f620b5b65b0",
+                "title": "Chaap Tilak",
+                "artist": "Namita Choudhary",
+                "year": 2020,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "c049bf58-81e9-43a9-b92a-6f620b5b65b0"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "काला चश्मा",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-19T15:11:51.808Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A4%BE%20%E0%A4%9A%E0%A4%B6%E0%A5%8D%E0%A4%AE%E0%A4%BE&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1529568809",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar & Indeep Bakshi",
+                "year": 2016,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/14/b8/58/14b85883-40a4-0a2e-de65-130f55726ee6/840780180390.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1696959970",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/47/67/5f/47675f29-6968-ab36-ced1-5a345a9a63ec/840214493263.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1810439905",
+                "title": "Kala Chashma",
+                "artist": "Amar Arshi, Badshah, Neha Kakkar, Indeep Bakshi, Prem & Hardeep & Kumaar",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f4/3e/65/f43e658f-cacd-d53c-656c-1d69edb88af7/8909024074924.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1435665488",
+                "title": "Janewale Babu Kiya Hai Tune Jadu",
+                "artist": "Sudha Malhotra",
+                "year": 1961,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/3e/e9/01/3ee901db-a0ff-31ee-c0e3-72bbfdf04342/191773225742.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1435665481",
+                "title": "Ankhon Men Koi Yaadon Men Koi",
+                "artist": "Kamal Barot & Minoo Purshottam",
+                "year": 1961,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/3e/e9/01/3ee901db-a0ff-31ee-c0e3-72bbfdf04342/191773225742.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6801776618",
+                "title": "तेरे काला चश्मा",
+                "artist": "24KINETIC",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ac/42/d1/ac42d192-610a-8c13-d50d-c735c4cdc51a/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6770803043",
+                "title": "कालो चश्मा",
+                "artist": "Anmolofficial",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/26/fa/e3/26fae393-7753-0e3f-c52d-fce51686e4c8/5063959738580_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6783118892",
+                "title": "चश्मा काला",
+                "artist": "Chandni Ka Saya Barsaat Mein",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f4/ac/7b/f4ac7b12-61a9-b554-30eb-11f660761c50/1151200.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capture_log": [
+    {
+      "url": "https://itunes.apple.com/search?term=raja%20ji&entity=song&media=music&limit=8",
+      "http_status": 200,
+      "latency_ms": 1267,
+      "bytes": 12488
+    },
+    {
+      "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=raja%20ji",
+      "http_status": 200,
+      "latency_ms": 767,
+      "bytes": 16619
+    },
+    {
+      "url": "https://itunes.apple.com/search?term=kala%20chashma&entity=song&media=music&limit=8",
+      "http_status": 200,
+      "latency_ms": 500,
+      "bytes": 13801
+    },
+    {
+      "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=kala%20chashma",
+      "http_status": 503,
+      "latency_ms": 220,
+      "bytes": 83
+    },
+    {
+      "url": "https://itunes.apple.com/search?term=tera%20ban%20jaunga&entity=song&media=music&limit=8",
+      "http_status": 200,
+      "latency_ms": 481,
+      "bytes": 14027
+    },
+    {
+      "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=tera%20ban%20jaunga",
+      "http_status": 200,
+      "latency_ms": 285,
+      "bytes": 21205
+    },
+    {
+      "url": "https://itunes.apple.com/search?term=brown%20munde&entity=song&media=music&limit=8",
+      "http_status": 200,
+      "latency_ms": 534,
+      "bytes": 12191
+    },
+    {
+      "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=brown%20munde",
+      "http_status": 503,
+      "latency_ms": 244,
+      "bytes": 83
+    },
+    {
+      "url": "https://itunes.apple.com/search?term=chaap%20tilak%20sab%20teri&entity=song&media=music&limit=8",
+      "http_status": 200,
+      "latency_ms": 504,
+      "bytes": 13047
+    },
+    {
+      "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=chaap%20tilak%20sab%20teri",
+      "http_status": 200,
+      "latency_ms": 711,
+      "bytes": 59510
+    },
+    {
+      "url": "https://itunes.apple.com/search?term=%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A4%BE%20%E0%A4%9A%E0%A4%B6%E0%A5%8D%E0%A4%AE%E0%A4%BE&entity=song&media=music&limit=8",
+      "http_status": 200,
+      "latency_ms": 601,
+      "bytes": 13645
+    },
+    {
+      "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=alias%3A%22%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A4%BE%20%E0%A4%9A%E0%A4%B6%E0%A5%8D%E0%A4%AE%E0%A4%BE%22",
+      "http_status": 503,
+      "latency_ms": 216,
+      "bytes": 83
+    }
+  ]
+}
