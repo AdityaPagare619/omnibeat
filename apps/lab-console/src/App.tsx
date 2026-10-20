@@ -249,6 +249,7 @@ export function App(): JSX.Element {
                 pair={i === 0 ? (abMap.get(abKey(e.turn)) ?? null) : null}
                 bargeIn={bargeIns[e.id] ?? null}
                 bargeBusy={bargeBusy}
+                playing={i === 0 && speaking}
                 onBargeIn={() => void sendBargeIn()}
                 onPick={pickCandidate}
                 pickDisabled={busy}

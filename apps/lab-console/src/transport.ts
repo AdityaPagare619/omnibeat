@@ -106,7 +106,14 @@ export class TraceTransport {
     }
     if (this.ws !== null) {
       this.ws.onclose = null;
-      this.ws.close();
+      this.ws.onerror = null;
+      this.ws.onmessage = null;
+      // Closing a still-CONNECTING socket triggers a spurious browser console
+      // warning ("WebSocket closed before established") under React StrictMode
+      // double-mount. Detach handlers and let the in-flight handshake settle.
+      if (this.ws.readyState !== WebSocket.CONNECTING) {
+        this.ws.close();
+      }
       this.ws = null;
     }
   }

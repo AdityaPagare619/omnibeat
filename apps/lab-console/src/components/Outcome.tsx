@@ -195,11 +195,14 @@ export function SpokenBubble({
   turn,
   bargeIn,
   busy,
+  playing,
   onBargeIn,
 }: {
   turn: TurnResponse;
   bargeIn: BargeInResponse | null;
   busy: boolean;
+  /** Host speech actually in flight (clock from the turn receipt), not a stale snapshot. */
+  playing: boolean;
   onBargeIn: () => void;
 }): JSX.Element {
   const text = spokenText(turn);
@@ -228,7 +231,7 @@ export function SpokenBubble({
             : `barge-in: nothing was cancelled (host reason: ${bargeIn.reason ?? "not reported"}, atMs ${bargeIn.atMs})`}
         </p>
       ) : null}
-      {turn.tts.playing ? (
+      {playing ? (
         <button type="button" className="btn btn-quiet" data-testid="barge-btn" disabled={busy} onClick={onBargeIn}>
           {busy ? "interrupting…" : "Interrupt (barge-in)"}
         </button>
@@ -325,6 +328,7 @@ export interface TurnEntryProps {
   pair: { on?: AbSummary; off?: AbSummary } | null;
   bargeIn: BargeInResponse | null;
   bargeBusy: boolean;
+  playing: boolean;
   onBargeIn: () => void;
   onPick: (c: MusicCandidate) => void;
   pickDisabled: boolean;
@@ -332,7 +336,7 @@ export interface TurnEntryProps {
 }
 
 export function TurnEntry(props: TurnEntryProps): JSX.Element {
-  const { turn, pair, bargeIn, bargeBusy, onBargeIn, onPick, pickDisabled, newest } = props;
+  const { turn, pair, bargeIn, bargeBusy, playing, onBargeIn, onPick, pickDisabled, newest } = props;
   const view = decisionView(turn);
   const candidate = primaryCandidate(turn);
 
@@ -382,7 +386,7 @@ export function TurnEntry(props: TurnEntryProps): JSX.Element {
           <Shortlist candidates={turn.candidates} onPick={onPick} disabled={pickDisabled} />
         ) : null}
 
-        <SpokenBubble turn={turn} bargeIn={bargeIn} busy={bargeBusy} onBargeIn={onBargeIn} />
+        <SpokenBubble turn={turn} bargeIn={bargeIn} busy={bargeBusy} playing={playing} onBargeIn={onBargeIn} />
 
         {pair ? <AbCompare pair={pair} showHint={newest} /> : null}
 
