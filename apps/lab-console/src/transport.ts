@@ -1,21 +1,26 @@
 /**
  * Trace transport — the ONLY seam between the console and the wire.
  *
- * Everything the wire inspector renders arrives through this class's handlers.
- * Tests mock exactly this module (never the components), so rendering tests
- * prove the real message path end to end (blueprint §2 row 3, §11.2).
+ * Live envelope (trace-bus.ts `send`): `{type:"replay", frames[], replayLimit}`
+ * on connect (last 200 frames), then `{type:"frame", frame}` per emission.
+ * Everything the proof strip renders arrives through this class's handlers —
+ * tests mock exactly this module (never the components), so rendering tests
+ * exercise the real message path end to end.
+ *
+ * Non-conforming messages are dropped and counted (`onDropped`), never
+ * rendered as if they were frames.
  */
-import { isTraceEnvelope, type TraceEnvelope } from "./types";
+import { isTraceMessage, type Frame, type TraceMessage } from "./types";
 
 export type TransportStatus = "connecting" | "open" | "offline";
 
 export interface TransportHandlers {
   /** Status transitions; `attempt` is the reconnect attempt counter (0 = first connect). */
   onStatus(status: TransportStatus, detail: string): void;
-  /** Only envelopes that pass the runtime gate reach this handler. */
-  onEnvelope(envelope: TraceEnvelope, generation: number): void;
-  /** Messages that failed the envelope gate — dropped, counted, surfaced honestly. */
-  onDropped(raw: string, generation: number): void;
+  /** Frames that pass the runtime gate, in wire order (replay frames first). */
+  onFrames(frames: Frame[], kind: "replay" | "frame"): void;
+  /** Messages that failed the gate — dropped, counted, surfaced honestly. */
+  onDropped(raw: string): void;
 }
 
 const RECONNECT_MS = 3000;
@@ -25,8 +30,6 @@ export class TraceTransport {
   private timer: ReturnType<typeof setTimeout> | null = null;
   private closedByUs = false;
   private attempt = 0;
-  /** Bumped on every successful open; dedupe keys are `${generation}:${event_id}` across reconnects. */
-  private generation = 0;
 
   constructor(
     private readonly url: string,
@@ -49,8 +52,13 @@ export class TraceTransport {
     this.ws = ws;
 
     ws.onopen = () => {
-      this.generation += 1;
       this.attempt = 0;
+      // A reconnect without a page reload must resync: ask for the head again.
+      try {
+        ws.send(JSON.stringify({ type: "hello" }));
+      } catch {
+        /* the replay on connect already covers this */
+      }
       this.handlers.onStatus("open", `trace stream connected — ${this.url}`);
     };
     ws.onmessage = (ev: MessageEvent) => {
@@ -59,14 +67,16 @@ export class TraceTransport {
       try {
         parsed = JSON.parse(raw);
       } catch {
-        this.handlers.onDropped(raw.slice(0, 500), this.generation);
+        this.handlers.onDropped(raw.slice(0, 500));
         return;
       }
-      if (isTraceEnvelope(parsed)) {
-        this.handlers.onEnvelope(parsed, this.generation);
-      } else {
-        this.handlers.onDropped(raw.slice(0, 500), this.generation);
+      if (!isTraceMessage(parsed)) {
+        this.handlers.onDropped(raw.slice(0, 500));
+        return;
       }
+      const msg: TraceMessage = parsed;
+      if (msg.type === "replay") this.handlers.onFrames(msg.frames, "replay");
+      else this.handlers.onFrames([msg.frame], "frame");
     };
     ws.onerror = () => {
       /* onclose always follows; handled there */
