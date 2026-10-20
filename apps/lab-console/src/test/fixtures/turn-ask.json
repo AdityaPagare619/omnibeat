@@ -1,0 +1,317 @@
+{
+  "traceId": "trn-63f2996f",
+  "badge": "FIXTURE",
+  "asrLabel": "TYPED",
+  "mode": "mcp",
+  "heard": "play raja ji",
+  "alternatives": [
+    {
+      "text": "play raja ji",
+      "confidence": 1
+    }
+  ],
+  "decision": "ask",
+  "spoken": "I found a couple: Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi, or Raja Ji (feat. Gurlez Akhtar) by Deep Chahal. Which one?",
+  "spokenPrompt": {
+    "speak_short": "Did you mean Raja Ji (Insta Mix) or Raja Ji (feat. Gurlez Akhtar)?",
+    "speak_normal": "I found a couple: Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi, or Raja Ji (feat. Gurlez Akhtar) by Deep Chahal. Which one?",
+    "speak_long": "I found three: Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi, or Raja Ji (feat. Gurlez Akhtar) by Deep Chahal, or Raja Ji (feat. Shivani Yadav) by Sanket Upadhyay, Sumit Ghanghas & Ashu Twinkle. Which one, or say none of these."
+  },
+  "candidates": [
+    {
+      "candidate_id": "it_6762846296",
+      "title": "Raja Ji (Insta Mix)",
+      "artist": "Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi",
+      "year": 2024,
+      "version": "remix",
+      "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/09/4c/e2094c26-29f6-21b0-8a58-d514b8485767/198588099131.jpg/100x100bb.jpg",
+      "untrusted": true
+    },
+    {
+      "candidate_id": "it_1561347433",
+      "title": "Raja Ji (feat. Gurlez Akhtar)",
+      "artist": "Deep Chahal",
+      "year": 2021,
+      "version": "unknown",
+      "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e1/83/3c/e1833c6a-a102-d4aa-63b7-812bcb81683d/cover.jpg/100x100bb.jpg",
+      "untrusted": true
+    },
+    {
+      "candidate_id": "it_1717474423",
+      "title": "Raja Ji (feat. Shivani Yadav)",
+      "artist": "Sanket Upadhyay, Sumit Ghanghas & Ashu Twinkle",
+      "year": 2023,
+      "version": "unknown",
+      "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/3e/98/35/3e983518-e88f-b87b-5ee6-ab3a58aa4142/cover.jpg/100x100bb.jpg",
+      "untrusted": true
+    }
+  ],
+  "confidence": 0.909,
+  "responseStyle": "normal",
+  "tts": {
+    "playing": true,
+    "durationMs": 7500,
+    "marks": [
+      {
+        "index": 0,
+        "word": "I",
+        "startMs": 0,
+        "endMs": 250
+      },
+      {
+        "index": 1,
+        "word": "found",
+        "startMs": 250,
+        "endMs": 500
+      },
+      {
+        "index": 2,
+        "word": "a",
+        "startMs": 500,
+        "endMs": 750
+      },
+      {
+        "index": 3,
+        "word": "couple:",
+        "startMs": 750,
+        "endMs": 1000
+      },
+      {
+        "index": 4,
+        "word": "Raja",
+        "startMs": 1000,
+        "endMs": 1250
+      },
+      {
+        "index": 5,
+        "word": "Ji",
+        "startMs": 1250,
+        "endMs": 1500
+      },
+      {
+        "index": 6,
+        "word": "(Insta",
+        "startMs": 1500,
+        "endMs": 1750
+      },
+      {
+        "index": 7,
+        "word": "Mix)",
+        "startMs": 1750,
+        "endMs": 2000
+      },
+      {
+        "index": 8,
+        "word": "by",
+        "startMs": 2000,
+        "endMs": 2250
+      },
+      {
+        "index": 9,
+        "word": "Anurag",
+        "startMs": 2250,
+        "endMs": 2500
+      },
+      {
+        "index": 10,
+        "word": "Saikia,",
+        "startMs": 2500,
+        "endMs": 2750
+      },
+      {
+        "index": 11,
+        "word": "Arya",
+        "startMs": 2750,
+        "endMs": 3000
+      },
+      {
+        "index": 12,
+        "word": "Nand",
+        "startMs": 3000,
+        "endMs": 3250
+      },
+      {
+        "index": 13,
+        "word": "Singh,",
+        "startMs": 3250,
+        "endMs": 3500
+      },
+      {
+        "index": 14,
+        "word": "Manoj",
+        "startMs": 3500,
+        "endMs": 3750
+      },
+      {
+        "index": 15,
+        "word": "Tiwari",
+        "startMs": 3750,
+        "endMs": 4000
+      },
+      {
+        "index": 16,
+        "word": "&",
+        "startMs": 4000,
+        "endMs": 4250
+      },
+      {
+        "index": 17,
+        "word": "Shashwat",
+        "startMs": 4250,
+        "endMs": 4500
+      },
+      {
+        "index": 18,
+        "word": "Dwivedi,",
+        "startMs": 4500,
+        "endMs": 4750
+      },
+      {
+        "index": 19,
+        "word": "or",
+        "startMs": 4750,
+        "endMs": 5000
+      },
+      {
+        "index": 20,
+        "word": "Raja",
+        "startMs": 5000,
+        "endMs": 5250
+      },
+      {
+        "index": 21,
+        "word": "Ji",
+        "startMs": 5250,
+        "endMs": 5500
+      },
+      {
+        "index": 22,
+        "word": "(feat.",
+        "startMs": 5500,
+        "endMs": 5750
+      },
+      {
+        "index": 23,
+        "word": "Gurlez",
+        "startMs": 5750,
+        "endMs": 6000
+      },
+      {
+        "index": 24,
+        "word": "Akhtar)",
+        "startMs": 6000,
+        "endMs": 6250
+      },
+      {
+        "index": 25,
+        "word": "by",
+        "startMs": 6250,
+        "endMs": 6500
+      },
+      {
+        "index": 26,
+        "word": "Deep",
+        "startMs": 6500,
+        "endMs": 6750
+      },
+      {
+        "index": 27,
+        "word": "Chahal.",
+        "startMs": 6750,
+        "endMs": 7000
+      },
+      {
+        "index": 28,
+        "word": "Which",
+        "startMs": 7000,
+        "endMs": 7250
+      },
+      {
+        "index": 29,
+        "word": "one?",
+        "startMs": 7250,
+        "endMs": 7500
+      }
+    ],
+    "words": 30
+  },
+  "latencyMs": 480,
+  "mcp": {
+    "state": "online",
+    "sessionId": "3b33b48e-4f21-44f5-8068-aa13ac12b5c0",
+    "serverInfo": {
+      "name": "omnibeat-mcp",
+      "version": "0.1.0"
+    },
+    "reconnectAttempt": 0,
+    "url": "http://localhost:8080/mcp"
+  },
+  "breaker": {
+    "state": "closed",
+    "consecutiveFails": 0,
+    "recentRttMs": [
+      7,
+      3,
+      4,
+      4,
+      480
+    ],
+    "slowInWindow": 0,
+    "openedAt": null,
+    "transitions": 3,
+    "lastTransitionAt": 1792481408697,
+    "lastTransitionReason": "healthz status 200",
+    "edgeMode": false
+  },
+  "edgeMode": false,
+  "resolutionId": "res_c7d020f9-7b47-4693-9acc-f6c94214b0a3",
+  "evidence": [
+    {
+      "source": "heard",
+      "signal": "raw \"play raja ji\" -> peeled \"raja ji\"",
+      "weight": 0.1
+    },
+    {
+      "source": "peel",
+      "signal": "removed [play]; stage 0.093 ms / budget 2 ms (inline locale table, SWAP POINT for B-PHON)",
+      "weight": 0.05
+    },
+    {
+      "source": "deezer",
+      "signal": "FIXTURE skipped: adapter not shipped in P1: demoted/off by default (DEC-0010, CLM-MUS-010..013) (0 ms)",
+      "weight": 0
+    },
+    {
+      "source": "autocomplete",
+      "signal": "FIXTURE skipped: kill-switch off by default (blueprint 8.4, CLM-MUS-003 family) (0 ms)",
+      "weight": 0
+    },
+    {
+      "source": "itunes",
+      "signal": "LIVE 3 hit(s) in 315 ms - attribution: provided courtesy of iTunes (CLM-MUS-003)",
+      "weight": 0.2
+    },
+    {
+      "source": "musicbrainz",
+      "signal": "LIVE network: fetch failed (465 ms)",
+      "weight": 0
+    },
+    {
+      "source": "runner",
+      "signal": "hedged soft cutoff at 315 ms (pending sources kept to their 600 ms cap; no duplicate requests - upstream rate budgets respected)",
+      "weight": 0.05
+    },
+    {
+      "source": "local:scoring",
+      "signal": "uncalibrated v0 logistic weights: it_6762846296 sim=1.00 agree=1 p=0.909; it_1561347433 sim=1.00 agree=1 p=0.909; it_1717474423 sim=1.00 agree=1 p=0.909 (asr=1)",
+      "weight": 0.3
+    },
+    {
+      "source": "local:decision",
+      "signal": "play if p1>=0.85 AND margin>=0.25; ask if top3>=0.7 (surface=screen, profile=standard); got p1=0.909 margin=0.000 top3=2.727",
+      "weight": 0.1
+    }
+  ],
+  "degradationLevel": "L1",
+  "serverTraceId": "tr_07e1f34e-01c5-4f70-b165-f1fc1204e941"
+}

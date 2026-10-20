@@ -1,0 +1,35 @@
+{
+  "cancelled": true,
+  "cutAtWord": 5,
+  "atMs": 1400,
+  "reason": "interrupted",
+  "wordsCompleted": 5,
+  "cutWord": "Ji",
+  "traceId": "trn-7958d064",
+  "cancel": {
+    "delivered": true
+  },
+  "style": {
+    "style": "brief",
+    "appliesUntil": "2026-10-20T08:17:59.679Z"
+  },
+  "styleError": null,
+  "breaker": {
+    "state": "closed",
+    "consecutiveFails": 0,
+    "recentRttMs": [
+      4,
+      10,
+      3,
+      641,
+      19
+    ],
+    "slowInWindow": 0,
+    "openedAt": null,
+    "transitions": 3,
+    "lastTransitionAt": 1792481408697,
+    "lastTransitionReason": "healthz status 200",
+    "edgeMode": false
+  },
+  "edgeMode": false
+}

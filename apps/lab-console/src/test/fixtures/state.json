@@ -1,0 +1,229 @@
+{
+  "breaker": {
+    "state": "closed",
+    "consecutiveFails": 0,
+    "recentRttMs": [
+      4,
+      10,
+      3,
+      641,
+      19
+    ],
+    "slowInWindow": 0,
+    "openedAt": null,
+    "transitions": 3,
+    "lastTransitionAt": 1792481408697,
+    "lastTransitionReason": "healthz status 200",
+    "edgeMode": false
+  },
+  "mcp": {
+    "state": "online",
+    "sessionId": "3b33b48e-4f21-44f5-8068-aa13ac12b5c0",
+    "serverInfo": {
+      "name": "omnibeat-mcp",
+      "version": "0.1.0"
+    },
+    "reconnectAttempt": 0,
+    "url": "http://localhost:8080/mcp"
+  },
+  "chaos": {
+    "latencyMs": 0,
+    "failNext": 0,
+    "injections": 0
+  },
+  "tts": {
+    "playing": false,
+    "traceId": "trn-7958d064",
+    "text": "I found a couple: Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi, or Raja Ji (feat. Gurlez Akhtar) by Deep Chahal. Which one?",
+    "marks": [
+      {
+        "index": 0,
+        "word": "I",
+        "startMs": 0,
+        "endMs": 250
+      },
+      {
+        "index": 1,
+        "word": "found",
+        "startMs": 250,
+        "endMs": 500
+      },
+      {
+        "index": 2,
+        "word": "a",
+        "startMs": 500,
+        "endMs": 750
+      },
+      {
+        "index": 3,
+        "word": "couple:",
+        "startMs": 750,
+        "endMs": 1000
+      },
+      {
+        "index": 4,
+        "word": "Raja",
+        "startMs": 1000,
+        "endMs": 1250
+      },
+      {
+        "index": 5,
+        "word": "Ji",
+        "startMs": 1250,
+        "endMs": 1500
+      },
+      {
+        "index": 6,
+        "word": "(Insta",
+        "startMs": 1500,
+        "endMs": 1750
+      },
+      {
+        "index": 7,
+        "word": "Mix)",
+        "startMs": 1750,
+        "endMs": 2000
+      },
+      {
+        "index": 8,
+        "word": "by",
+        "startMs": 2000,
+        "endMs": 2250
+      },
+      {
+        "index": 9,
+        "word": "Anurag",
+        "startMs": 2250,
+        "endMs": 2500
+      },
+      {
+        "index": 10,
+        "word": "Saikia,",
+        "startMs": 2500,
+        "endMs": 2750
+      },
+      {
+        "index": 11,
+        "word": "Arya",
+        "startMs": 2750,
+        "endMs": 3000
+      },
+      {
+        "index": 12,
+        "word": "Nand",
+        "startMs": 3000,
+        "endMs": 3250
+      },
+      {
+        "index": 13,
+        "word": "Singh,",
+        "startMs": 3250,
+        "endMs": 3500
+      },
+      {
+        "index": 14,
+        "word": "Manoj",
+        "startMs": 3500,
+        "endMs": 3750
+      },
+      {
+        "index": 15,
+        "word": "Tiwari",
+        "startMs": 3750,
+        "endMs": 4000
+      },
+      {
+        "index": 16,
+        "word": "&",
+        "startMs": 4000,
+        "endMs": 4250
+      },
+      {
+        "index": 17,
+        "word": "Shashwat",
+        "startMs": 4250,
+        "endMs": 4500
+      },
+      {
+        "index": 18,
+        "word": "Dwivedi,",
+        "startMs": 4500,
+        "endMs": 4750
+      },
+      {
+        "index": 19,
+        "word": "or",
+        "startMs": 4750,
+        "endMs": 5000
+      },
+      {
+        "index": 20,
+        "word": "Raja",
+        "startMs": 5000,
+        "endMs": 5250
+      },
+      {
+        "index": 21,
+        "word": "Ji",
+        "startMs": 5250,
+        "endMs": 5500
+      },
+      {
+        "index": 22,
+        "word": "(feat.",
+        "startMs": 5500,
+        "endMs": 5750
+      },
+      {
+        "index": 23,
+        "word": "Gurlez",
+        "startMs": 5750,
+        "endMs": 6000
+      },
+      {
+        "index": 24,
+        "word": "Akhtar)",
+        "startMs": 6000,
+        "endMs": 6250
+      },
+      {
+        "index": 25,
+        "word": "by",
+        "startMs": 6250,
+        "endMs": 6500
+      },
+      {
+        "index": 26,
+        "word": "Deep",
+        "startMs": 6500,
+        "endMs": 6750
+      },
+      {
+        "index": 27,
+        "word": "Chahal.",
+        "startMs": 6750,
+        "endMs": 7000
+      },
+      {
+        "index": 28,
+        "word": "Which",
+        "startMs": 7000,
+        "endMs": 7250
+      },
+      {
+        "index": 29,
+        "word": "one?",
+        "startMs": 7250,
+        "endMs": 7500
+      }
+    ],
+    "durationMs": 7500,
+    "startedAt": 1792482479616,
+    "cutAtMs": 1400
+  },
+  "responseStyle": "brief",
+  "trace": {
+    "frames": 848,
+    "clients": 0
+  }
+}
