@@ -524,7 +524,35 @@ export class AgentLoop {
     spoken: string;
     confidence?: number;
   }): TurnResponse {
-    const breakerSnapshot = this.deps.breaker.snapshot();
+    const { breaker, mcp, tts, bus } = this.deps;
+    const breakerSnapshot = breaker.snapshot();
+
+    // A real host still SPEAKS its honest failure line — which is exactly what
+    // makes barge-in testable while the MCP is down: the interrupt then cuts a
+    // real utterance and sends a real (delivered:false) notifications/cancelled.
+    let speech = { playing: false, durationMs: 0, marks: [] as SpeechMark[], words: 0 };
+    if (args.spoken.trim().length > 0) {
+      const playback = tts.start(args.spoken, args.traceId);
+      speech = {
+        playing: playback.playing,
+        durationMs: playback.durationMs,
+        marks: playback.marks,
+        words: playback.marks.length,
+      };
+      bus.emit({
+        direction: "internal",
+        method: "tts.started",
+        payload: {
+          reason: "honest error line",
+          decision: "error",
+          errorCode: args.error.code,
+          words: speech.words,
+          durationMs: speech.durationMs,
+          engine: "synthetic (no Polly — ESC-001)",
+        },
+      });
+    }
+
     return {
       traceId: args.traceId,
       badge: args.badge,
@@ -537,9 +565,9 @@ export class AgentLoop {
       candidates: [],
       confidence: args.confidence ?? 0,
       responseStyle: this.style,
-      tts: { playing: false, durationMs: 0, marks: [], words: 0 },
+      tts: speech,
       latencyMs: Date.now() - args.startedAt,
-      mcp: this.deps.mcp.snapshot(),
+      mcp: mcp.snapshot(),
       breaker: breakerSnapshot,
       edgeMode: breakerSnapshot.edgeMode,
       error: args.error,

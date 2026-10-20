@@ -396,6 +396,67 @@ export class McpHostClient {
     });
   }
 
+  /**
+   * Send `notifications/cancelled` for a barge-in.
+   *
+   * Online → the real notification goes over the transport (the fetch tap
+   * emits the wire frame). Offline / no request id → a local `host→mcp` frame
+   * with `delivered:false` so the inspector still shows the intent without
+   * pretending it left the process.
+   */
+  async sendCancelled(opts: {
+    reason: string;
+    cutAtWord: number;
+    wordsCompleted: number;
+    atMs: number;
+  }): Promise<{ delivered: boolean; code?: McpErrorCode }> {
+    const requestId = this.lastToolsCallId;
+    const inFlight = this.pendingRequestCount("tools/call") > 0;
+
+    if (!this.isOnline || requestId === undefined) {
+      const code: McpErrorCode = this.isOnline ? "MCP_PROTOCOL_ERROR" : "MCP_OFFLINE";
+      this.bus.emit({
+        direction: "host→mcp",
+        method: "notifications/cancelled",
+        ...(requestId !== undefined ? { requestId } : {}),
+        ...(this.sessionId !== undefined ? { sessionId: this.sessionId } : {}),
+        payload: {
+          jsonrpc: "2.0",
+          method: "notifications/cancelled",
+          params: { requestId: requestId ?? null, reason: opts.reason },
+          delivered: false,
+          inFlight,
+          cutAtWord: opts.cutAtWord,
+          wordsCompleted: opts.wordsCompleted,
+          atMs: opts.atMs,
+          code,
+          note:
+            requestId === undefined
+              ? "no tools/call has been dispatched in this process yet"
+              : "MCP session offline — cancellation was not sent",
+        },
+      });
+      return { delivered: false, code };
+    }
+
+    try {
+      await this.client?.notification({
+        method: "notifications/cancelled",
+        params: { requestId, reason: opts.reason },
+      });
+      return { delivered: true };
+    } catch (err) {
+      const mapped = toMcpError(err);
+      this.bus.emit({
+        direction: "internal",
+        method: "notifications/cancelled.failed",
+        ...(requestId !== undefined ? { requestId } : {}),
+        payload: { code: mapped.code, error: describeError(err) },
+      });
+      return { delivered: false, code: mapped.code };
+    }
+  }
+
   // ─────────────────────────────────────────────────── health probing ────
 
   /** GET <origin>/healthz — feeds the circuit breaker. */
@@ -596,8 +657,40 @@ export class McpHostClient {
 
     if (record.verb === "POST" && contentType.includes("json")) {
       const text = await res.text();
-      this.emitInbound(parseJsonMessages(text), record);
+      const messages = parseJsonMessages(text);
+      if (messages.length === 0) {
+        // Capture gap must be visible: the SDK still gets this body, but the
+        // inspector would see no response frame.
+        this.bus.emit({
+          direction: "internal",
+          method: "tap.diagnose",
+          payload: {
+            stage: "post_json_empty",
+            verb: record.verb,
+            contentType,
+            status: res.status,
+            bodyLength: text.length,
+            head: text.slice(0, 160),
+          },
+        });
+      }
+      this.emitInbound(messages, record);
       return new Response(text, { status: res.status, statusText: res.statusText, headers });
+    }
+
+    // 202/204 are the normal ack for a JSON-RPC *notification* — nothing to tap.
+    if (record.verb === "POST" && res.status === 200) {
+      this.bus.emit({
+        direction: "internal",
+        method: "tap.diagnose",
+        payload: {
+          stage: "post_unhandled_content_type",
+          verb: record.verb,
+          contentType,
+          status: res.status,
+          hasBody: body !== null,
+        },
+      });
     }
 
     return new Response(body, { status: res.status, statusText: res.statusText, headers });
@@ -606,37 +699,72 @@ export class McpHostClient {
   private async readSse(stream: ReadableStream<Uint8Array>, record: HttpRecord): Promise<void> {
     const reader = stream.getReader();
     const decoder = new TextDecoder();
+    const boundary = /\r?\n\r?\n/; // SSE events end with a blank line (LF or CRLF)
     let buffer = "";
+    let bytes = 0;
+    let emitted = 0;
     try {
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
+        bytes += value.byteLength;
         buffer += decoder.decode(value, { stream: true });
-        let idx: number;
-        while ((idx = buffer.indexOf("\n\n")) !== -1) {
-          const chunk = buffer.slice(0, idx);
-          buffer = buffer.slice(idx + 2);
-          this.handleSseEvent(chunk, record);
+        let match: RegExpExecArray | null;
+        while ((match = boundary.exec(buffer)) !== null) {
+          const end = match.index + match[0].length;
+          const chunk = buffer.slice(0, end);
+          buffer = buffer.slice(end);
+          emitted += this.handleSseEvent(chunk, record);
         }
       }
-      if (buffer.trim()) this.handleSseEvent(buffer, record);
+      if (buffer.trim()) emitted += this.handleSseEvent(buffer, record);
     } finally {
       reader.releaseLock?.();
     }
+    if (bytes > 0 && emitted === 0) {
+      this.bus.emit({
+        direction: "internal",
+        method: "tap.diagnose",
+        payload: {
+          stage: "sse_stream_read_but_no_messages",
+          verb: record.verb,
+          bytes,
+        },
+      });
+    }
   }
 
-  private handleSseEvent(chunk: string, record: HttpRecord): void {
+  /** Parse one SSE event block; returns how many JSON-RPC frames it yielded. */
+  private handleSseEvent(chunk: string, record: HttpRecord): number {
     let eventId: string | undefined;
     const dataLines: string[] = [];
     for (const line of chunk.split(/\r?\n/)) {
       if (line.startsWith("id:")) eventId = line.slice(3).trim();
       else if (line.startsWith("data:")) dataLines.push(line.slice(5).trimStart());
     }
-    if (dataLines.length === 0) return;
-    const messages = parseJsonMessages(dataLines.join("\n"));
+    if (dataLines.length === 0) return 0;
+    if (dataLines.every((line) => line.trim().length === 0)) {
+      // SSE keep-alive (`data:` with no payload) — nothing to frame.
+      return 0;
+    }
+    // Per spec a multi-line `data:` field is joined with "\n"; if our block
+    // boundary was off we may hold several events, so fall back to per-line.
+    let messages = parseJsonRpcText(dataLines.join("\n"));
+    if (messages.length === 0) {
+      messages = dataLines.flatMap((line) => parseJsonRpcText(line));
+    }
+    if (messages.length === 0) {
+      this.bus.emit({
+        direction: "internal",
+        method: "tap.diagnose",
+        payload: { stage: "sse_event_unparsable", head: chunk.slice(0, 160) },
+      });
+      return 0;
+    }
     for (const msg of messages) {
       this.emitInbound([msg], record, eventId, Date.now() - record.startedAt);
     }
+    return messages.length;
   }
 
   private emitInbound(
@@ -778,13 +906,54 @@ function parseJsonMessages(input: unknown): JSONRPCMessage[] {
   return [];
 }
 
+/** Parse SSE `data:` payload TEXT into JSON-RPC messages ([] when invalid). */
+function parseJsonRpcText(text: string): JSONRPCMessage[] {
+  const trimmed = text.trim();
+  if (trimmed.length === 0) return [];
+  try {
+    return parseJsonMessages(JSON.parse(trimmed));
+  } catch {
+    return [];
+  }
+}
+
 export function describeError(err: unknown): string {
   if (err instanceof Error) {
+    const parts: string[] = [];
     const cause = (err as { cause?: unknown }).cause;
-    const causeText = cause instanceof Error ? ` (${cause.message})` : "";
-    return `${err.name}: ${err.message}${causeText}`;
+    if (cause instanceof Error) {
+      // undici/fetch wraps ECONNREFUSED; on dual-stack hosts the cause is an
+      // AggregateError whose own message is empty — surface the inner errors.
+      const inner = (cause as unknown as { errors?: unknown[] }).errors;
+      if (Array.isArray(inner) && inner.length > 0) {
+        const innerText = inner
+          .map((e) => {
+            if (e instanceof Error) return e.message || codeOf(e) || e.name;
+            return String(e);
+          })
+          .filter(Boolean)
+          .join("; ");
+        if (innerText) parts.push(innerText);
+      } else if (cause.message) {
+        parts.push(cause.message);
+      }
+      if (cause.message === "" && parts.length === 0) {
+        const fallback = codeOf(cause);
+        if (fallback) parts.push(fallback);
+      }
+    }
+    if (parts.length === 0) {
+      const own = codeOf(err);
+      if (own && own !== err.message) parts.push(own);
+    }
+    return parts.length > 0 ? `${err.name}: ${err.message} (${parts.join(" | ")})` : `${err.name}: ${err.message}`;
   }
   return String(err);
+}
+
+function codeOf(err: unknown): string | undefined {
+  const code = (err as { code?: unknown }).code;
+  return typeof code === "string" && code.length > 0 ? code : undefined;
 }
 
 /** Map any thrown value onto the lab's honest error vocabulary. */

@@ -71,7 +71,6 @@ describe("barge-in state machine", () => {
 
     const before = bus.size();
     const result = await bargeIn.cut(800);
-
     expect(result.cancelled).toBe(true);
     expect(result.cutAtWord).toBe(3); // "four" starts at 750ms
     expect(result.cutWord).toBe("four");
@@ -80,6 +79,11 @@ describe("barge-in state machine", () => {
     expect(tts.isPlaying()).toBe(false);
 
     const frames = bus.since(before);
+    const cut = frames.find((f) => f.method === "barge_in.cut");
+    expect(cut, "a barge_in.cut detail frame must be emitted").toBeDefined();
+    expect((cut?.payload as { cutAtWord?: number }).cutAtWord).toBe(3);
+    expect((cut?.payload as { words?: number }).words).toBe(6);
+
     const cancelled = frames.find((f) => f.method === "notifications/cancelled");
     expect(cancelled, "a cancellation frame must be emitted").toBeDefined();
     expect(cancelled?.direction).toBe("host→mcp");
@@ -90,6 +94,8 @@ describe("barge-in state machine", () => {
       params: { requestId: string | null; reason: string };
       inFlight: boolean;
       cutAtWord: number;
+      delivered: boolean;
+      code?: string;
     };
     expect(payload.jsonrpc).toBe("2.0");
     expect(payload.method).toBe("notifications/cancelled");
@@ -97,6 +103,10 @@ describe("barge-in state machine", () => {
     expect(payload.params.reason).toContain("of 6");
     expect(payload.cutAtWord).toBe(3);
     expect(payload.inFlight).toBe(false);
+    // The session was never up in this fixture: the frame must say so.
+    expect(payload.delivered).toBe(false);
+    expect(payload.code).toBe("MCP_OFFLINE");
+    expect(result.cancel).toEqual({ delivered: false, code: "MCP_OFFLINE" });
   });
 
   it("requests brief style and admits when the server is unreachable", async () => {

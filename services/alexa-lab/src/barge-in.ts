@@ -24,6 +24,12 @@ export interface BargeInResult {
   wordsCompleted: number;
   cutWord: string | null;
   traceId: string | null;
+  /**
+   * Did `notifications/cancelled` actually leave this process? `delivered:false`
+   * (with `code`) means the MCP session was down — the frame still shows the
+   * intent, and the lab says so rather than implying the server was told.
+   */
+  cancel: { delivered: boolean; code?: string } | null;
   style: { style: string; appliesUntil?: string } | null;
   styleError: { code: string; message: string } | null;
 }
@@ -56,6 +62,7 @@ export class BargeInController {
         wordsCompleted: 0,
         cutWord: null,
         traceId,
+        cancel: null,
         style: null,
         styleError: null,
       };
@@ -76,6 +83,7 @@ export class BargeInController {
         wordsCompleted: 0,
         cutWord: null,
         traceId,
+        cancel: null,
         style: null,
         styleError: null,
       };
@@ -87,26 +95,29 @@ export class BargeInController {
     const wordsCompleted = wordsCompletedAt(marks, atMs);
     const cutWord = marks[cutAtWord]?.word ?? null;
 
-    // notifications/cancelled — JSON-RPC notification shape (spec §3.10).
-    const requestId = mcp.lastToolsCallRequestId();
-    const inFlight = mcp.pendingRequestCount("tools/call") > 0;
+    // Host-side detail frame: what was cut, and from what playback.
     bus.emit({
-      direction: "host→mcp",
-      method: "notifications/cancelled",
+      direction: "internal",
+      method: "barge_in.cut",
       ...(traceId ? { traceId } : {}),
-      ...(requestId !== undefined ? { requestId } : {}),
       payload: {
-        jsonrpc: "2.0",
-        method: "notifications/cancelled",
-        params: {
-          requestId: requestId ?? null,
-          reason: `barge_in at ${atMs}ms → cut at word ${cutAtWord} of ${marks.length}`,
-        },
-        inFlight,
+        atMs,
         cutAtWord,
         wordsCompleted,
-        marks: marks.map((m) => ({ index: m.index, startMs: m.startMs, endMs: m.endMs })),
+        cutWord,
+        words: marks.length,
+        marks: marks.map((m) => ({ index: m.index, word: m.word, startMs: m.startMs, endMs: m.endMs })),
       },
+    });
+
+    // notifications/cancelled — JSON-RPC notification shape (spec §3.10),
+    // really sent when the session is up, honestly local when it is not.
+    const inFlight = mcp.pendingRequestCount("tools/call") > 0;
+    const cancel = await mcp.sendCancelled({
+      reason: `barge_in at ${atMs}ms → cut at word ${cutAtWord} of ${marks.length}`,
+      cutAtWord,
+      wordsCompleted,
+      atMs,
     });
 
     // Ask the server for brevity on the next answer (§6.5 step 4).
@@ -155,6 +166,7 @@ export class BargeInController {
       wordsCompleted,
       cutWord,
       traceId,
+      cancel,
       style,
       styleError,
     };

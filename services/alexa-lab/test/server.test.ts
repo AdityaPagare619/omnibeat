@@ -79,6 +79,12 @@ describe("alexa-lab HTTP surface — MCP OFFLINE is honest", () => {
     expect(body.breaker.state).toBe("closed");
     expect(body.edgeMode).toBe(false);
 
+    // The host speaks its honest failure line — TTS is armed from the turn
+    // body itself (no wall-clock dependence) so barge-in has something to cut.
+    expect(body.tts.playing).toBe(true);
+    expect(body.tts.words).toBeGreaterThan(5);
+    expect(body.tts.marks[1]?.startMs).toBe(250);
+
     // The trace shows the attempt, the refusal, and NO invented decision.
     const frames = runtime.bus.recent();
     const attempt = frames.find(
@@ -135,15 +141,56 @@ describe("alexa-lab HTTP surface — MCP OFFLINE is honest", () => {
     expect(status).toBe(400);
     expect(body.error.code).toBe("ASR_NO_INPUT");
     expect(body.decision).toBe("error");
+    // A real host still speaks its failure line — asserted on THIS response, so
+    // no wall-clock time can elapse before the check. That is what makes the
+    // barge-in below testable while the MCP is down.
+    expect(body.tts.playing).toBe(true);
+    expect(body.tts.words).toBeGreaterThan(5);
+    expect(body.tts.marks[0]?.startMs).toBe(0);
+    expect(body.tts.marks[1]?.startMs).toBe(250);
+    expect(body.tts.durationMs).toBe(body.tts.words * 250);
+  });
+
+  it("POST /barge-in {atMs:800} cuts the spoken line and reports delivered:false", async () => {
+    // Deterministic utterance: 6 words @250ms → at 800ms the cut is word 3.
+    runtime.tts.start("one two three four five six", "trn-http-barge");
+    const { status, body } = await post("/barge-in", { atMs: 800 });
+    expect(status).toBe(200);
+    expect(body.cancelled).toBe(true);
+    expect(body.cutAtWord).toBe(3);
+    expect(body.cutWord).toBe("four");
+    expect(body.wordsCompleted).toBe(3);
+    expect(body.cancel.delivered).toBe(false);
+    expect(["MCP_OFFLINE", "MCP_CIRCUIT_OPEN"]).toContain(body.cancel.code);
+    expect(body.style).toBeNull();
+    expect(body.styleError).not.toBeNull();
+    expect(runtime.tts.isPlaying()).toBe(false);
+
+    const frames = runtime.bus.recent();
+    const cut = frames.find((f) => f.method === "barge_in.cut");
+    expect((cut?.payload as { cutAtWord?: number }).cutAtWord).toBe(3);
+    const cancelled = frames.find((f) => f.method === "notifications/cancelled");
+    expect(cancelled?.direction).toBe("host→mcp");
+    expect((cancelled?.payload as { delivered?: boolean }).delivered).toBe(false);
+    expect(
+      (cancelled?.payload as { params?: { reason?: string } }).params?.reason,
+    ).toContain("cut at word 3");
+    expect(
+      frames.some(
+        (f) => f.method === "session.style.failed" || f.method === "session.style.brief",
+      ),
+    ).toBe(true);
   });
 
   it("POST /barge-in with nothing playing returns cancelled:false", async () => {
+    runtime.tts.stop();
     const { status, body } = await post("/barge-in", { atMs: 800 });
     expect(status).toBe(200);
     expect(body.cancelled).toBe(false);
     expect(body.reason).toBe("tts_idle");
     expect(body.cutAtWord).toBeNull();
     expect(body.style).toBeNull();
+    expect(body.cancel).toBeNull();
   });
 
   it("POST /barge-in validates its body", async () => {
@@ -153,26 +200,34 @@ describe("alexa-lab HTTP surface — MCP OFFLINE is honest", () => {
   });
 
   it("POST /chaos injects a labelled fault that the breaker observes", async () => {
-    const armed = await post("/chaos", { failNext: 1 });
+    // Deterministic starting point: earlier tests may already have tripped the
+    // breaker, and a tripped breaker SUPPRESSES probes (by design).
+    runtime.breaker.reset();
+    const armed = await post("/chaos", { failNext: 2 });
     expect(armed.status).toBe(200);
-    expect(armed.body.chaos.failNext).toBe(1);
+    expect(armed.body.chaos.failNext).toBe(2);
 
-    const probe = await post("/probe", {});
-    expect(probe.body.probe.ok).toBe(false);
-    expect(probe.body.probe.code).toBe("CHAOS_INJECTED");
+    const first = await post("/probe", {});
+    expect(first.body.probe.ok).toBe(false);
+    expect(first.body.probe.code).toBe("CHAOS_INJECTED");
+    expect(runtime.breaker.state).toBe("closed"); // strike 1 of 2
+
+    const second = await post("/probe", {});
+    expect(second.body.probe.ok).toBe(false);
+    expect(second.body.probe.code).toBe("CHAOS_INJECTED");
 
     const frames = runtime.bus.recent();
     const chaosFrame = frames.find((f) => f.method === "chaos.updated");
-    expect((chaosFrame?.payload as { failNext?: number }).failNext).toBe(1);
+    expect((chaosFrame?.payload as { failNext?: number }).failNext).toBe(2);
     expect(
-      frames.some(
+      frames.filter(
         (f) =>
           f.method === "GET /healthz" &&
           (f.payload as { code?: string }).code === "CHAOS_INJECTED",
-      ),
-    ).toBe(true);
+      ).length,
+    ).toBe(2);
 
-    // Two strikes (the MCP_OFFLINE turn + this probe) open the breaker.
+    // Two strikes (both chaos-injected, both labelled) open the breaker.
     expect(runtime.breaker.state).toBe("open");
     expect(runtime.breaker.snapshot().edgeMode).toBe(true);
     expect(
