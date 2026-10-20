@@ -1,0 +1,12 @@
+{"input":"reproduce la canción despacito en spotify","expect":"Despacito","mode":"peel"}
+{"input":"reproduce bailando en spotify","expect":"Bailando","mode":"peel"}
+{"input":"reproduce la canción bailando en spotify","expect":"Bailando","mode":"peel"}
+{"input":"oye reproduce macarena por favor","expect":"Macarena","mode":"peel"}
+{"input":"reproduce bailando remix en spotify","expect":"Bailando","mode":"peel"}
+{"input":"reproduce asereje en spotify","expect":"Asereje","mode":"peel"}
+{"input":"reproduce en vivo bailando","expect":"Bailando","mode":"peel"}
+{"input":"reproduce la bamba en spotify","expect":"La Bamba","mode":"match"}
+{"input":"ya no me yamas","expect":"Ya No Me Llamas","mode":"match"}
+{"input":"despasito","expect":"Despacito","mode":"match"}
+{"input":"ya no me llamaz","expect":"Ya No Me Llamas","mode":"match"}
+{"input":"dansa kuduro","expect":"Danza Kuduro","mode":"match"}

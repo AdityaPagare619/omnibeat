@@ -1,0 +1,13 @@
+{"input":"mujhe tum yaad aana chahiye via spotify","expect":"Mujhe Tum Yaad Aana","mode":"peel"}
+{"input":"मुझे तुम याद आना","expect":"Mujhe Tum Yaad Aana","mode":"match"}
+{"input":"hey alexa lollipop lagelu baja do spotify","expect":"Lollipop Lagelu","mode":"peel"}
+{"input":"shaam savere chalao","expect":"Shaam Savere","mode":"peel"}
+{"input":"चाँद सितारे spotify","expect":"Chaand Sitaare","mode":"peel"}
+{"input":"chahiye sunao mujhe","expect":"Mujhe","mode":"peel"}
+{"input":"sunao lollipop lagelu by nusrat","expect":"Lollipop Lagelu","mode":"peel"}
+{"input":"lolly pop la gelu","expect":"Lollipop Lagelu","mode":"match"}
+{"input":"roger g","expect":"Raja Ji","mode":"match"}
+{"input":"rajoo ji","expect":"Raja Ji","mode":"match"}
+{"input":"play lollipop lagelu live","expect":"Lollipop Lagelu","mode":"match"}
+{"input":"par चलाओ lollipop lagelu spotify","expect":"Lollipop Lagelu","mode":"match"}
+{"input":"raja ji sunao","expect":"Raja Ji","mode":"peel"}

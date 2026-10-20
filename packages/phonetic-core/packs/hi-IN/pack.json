@@ -1,0 +1,17 @@
+{
+  "id": "hi-IN",
+  "scripts": ["Latn", "Deva"],
+  "grammar": {
+    "wakeWords": ["hey", "ok", "okay", "alexa", "computer", "hello"],
+    "verbs": ["play", "chalao", "chal", "bajao", "baja", "sunao", "suna", "lagao", "laga", "gaao", "gao", "chahiye", "dikhao"],
+    "providerWords": ["spotify", "gaana", "jiosaavn", "wynk", "shazam", "youtube", "soundcloud", "pandora"],
+    "fillers": ["via", "se", "ko", "ne", "do", "please", "aur", "arey", "arre", "oye", "par"],
+    "intents": {
+      "live": ["live"],
+      "remix": ["remix", "rmx"],
+      "acoustic": ["acoustic", "acustik"],
+      "original": ["original", "official"],
+      "artistMarkers": ["by"]
+    }
+  }
+}
