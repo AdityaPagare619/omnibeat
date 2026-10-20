@@ -1,81 +1,79 @@
-import type { ConsoleBadge, Surface } from "../types";
 import type { TransportStatus } from "../transport";
+import { Rise } from "./motion";
 
-interface Props {
-  badges: ConsoleBadge[];
+interface TopBarProps {
   mcpOn: boolean;
   onMcpToggle: (next: boolean) => void;
-  surface: Surface;
-  onSurfaceChange: (s: Surface) => void;
   status: TransportStatus;
   statusDetail: string;
+  systemOpen: boolean;
+  onToggleSystem: () => void;
+  breakerState: string;
+  mcpState: string;
 }
 
-const SURFACES: ReadonlyArray<{ id: Surface; label: string }> = [
-  { id: "screenless", label: "Dot" },
-  { id: "screen", label: "Show" },
-  { id: "tv", label: "TV" },
-];
+/**
+ * Header — brand, wire status, the A/B switch, and the (collapsed) system
+ * drawer trigger. Nothing here competes with the conversation: the protocol
+ * chips live on the proof strip where the wire is (brief §proof strip).
+ */
+export function TopBar(props: TopBarProps): JSX.Element {
+  const { mcpOn, onMcpToggle, status, statusDetail, systemOpen, onToggleSystem, breakerState, mcpState } = props;
 
-export function TopBar(props: Props): JSX.Element {
-  const { badges, mcpOn, onMcpToggle, surface, onSurfaceChange, status, statusDetail } = props;
   return (
-    <header className="topbar" role="banner">
-      <div className="topbar-left">
-        <span className="wordmark">OmniBeat</span>
-        <span className="chip chip-spec" data-testid="spec-chip">
-          MCP 2025-11-25
-        </span>
-      </div>
-
-      <div className="topbar-badges" aria-label="source modes seen on the wire">
-        {badges.length === 0 ? (
-          <span className="chip chip-muted">no frames yet</span>
-        ) : (
-          badges.map((b) => (
-            <span key={b} className={`chip chip-badge badge-${b.toLowerCase()}`} data-testid={`badge-${b}`}>
-              {b}
-            </span>
-          ))
-        )}
+    <header className="topbar">
+      <div className="brand">
+        <span className="brand-mark" aria-hidden="true" />
+        <span className="brand-name">OmniBeat</span>
+        <span className="brand-sub">Alexa+ lab</span>
       </div>
 
       <div className="topbar-right">
-        <span
-          className={`chip conn-${status}`}
-          data-testid="conn-chip"
-          title={statusDetail}
-        >
-          trace {status === "open" ? "connected" : status === "connecting" ? "connecting" : "offline"}
+        <span className={`chip chip-conn conn-${status}`} title={statusDetail} data-testid="conn-chip">
+          <span className="dot" aria-hidden="true" />
+          {status === "open" ? "LIVE WS" : status === "connecting" ? "CONNECTING" : "OFFLINE"}
         </span>
 
+        <span className="chip chip-muted" data-testid="mcp-state-chip" title={`MCP session: ${mcpState}`}>
+          MCP {mcpState}
+        </span>
+
+        {/* The money switch: one control, two hosts' worth of behaviour. */}
         <button
           type="button"
           role="switch"
           aria-checked={mcpOn}
           className={`switch ${mcpOn ? "switch-on" : "switch-off"}`}
-          onClick={() => onMcpToggle(!mcpOn)}
           data-testid="mcp-switch"
+          onClick={() => onMcpToggle(!mcpOn)}
         >
-          MCP {mcpOn ? "ON" : "OFF"}
+          <span className="switch-knob" aria-hidden="true" />
+          <span className="switch-text">{mcpOn ? "MCP ON" : "MCP OFF"}</span>
         </button>
 
-        <div className="surface-group" role="radiogroup" aria-label="surface">
-          {SURFACES.map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              role="radio"
-              aria-checked={surface === s.id}
-              className={`surface-btn ${surface === s.id ? "surface-active" : ""}`}
-              onClick={() => onSurfaceChange(s.id)}
-              data-testid={`surface-${s.id}`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
+        <Rise delayMs={80}>
+          <button
+            type="button"
+            className={`btn btn-quiet system-btn ${systemOpen ? "is-open" : ""}`}
+            data-testid="system-toggle"
+            aria-expanded={systemOpen}
+            onClick={onToggleSystem}
+          >
+            System
+            <span className={`chip chip-mini breaker-${breakerClass(breakerState)}`} data-testid="breaker-chip">
+              {breakerState}
+            </span>
+          </button>
+        </Rise>
       </div>
     </header>
   );
+}
+
+function breakerClass(state: string): string {
+  const s = state.toLowerCase();
+  if (s === "closed") return "closed";
+  if (s === "open") return "open";
+  if (s.startsWith("half")) return "half";
+  return "unknown";
 }

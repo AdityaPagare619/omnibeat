@@ -1,129 +1,94 @@
-import { useState } from "react";
-import type { TranscriptLine, TtsView } from "../derive";
+/**
+ * VoiceStage — the Alexa+ orb and the one-click demo surface.
+ *
+ * Orb states are derived from the host's own signals (pending request, or
+ * `tts.playing` in the last /turn response) — never a decorative loop that
+ * claims activity that isn't happening.
+ */
+interface Preset {
+  label: string;
+  text: string;
+}
 
-interface Props {
-  speaking: boolean;
-  transcripts: TranscriptLine[];
-  tts: TtsView | null;
+interface VoiceStageProps {
+  orb: "idle" | "thinking" | "speaking";
+  orbSub: string;
+  presets: Preset[];
   onSubmit: (text: string) => void;
-  disabled: boolean;
+  busy: boolean;
 }
 
-/** Split TTS text at the barge-in cut: the cut point is shown struck through (§6.5). */
-function cutSegments(tts: TtsView): { spoken: string; cut: string | null } {
-  if (tts.cutIndex === undefined) {
-    // A cancellation arrived but no word index — strike the whole bubble honestly.
-    return { spoken: "", cut: tts.text };
-  }
-  const words = tts.text.split(/(\s+)/);
-  let wordCount = 0;
-  let cutAt = words.length;
-  for (let i = 0; i < words.length; i += 1) {
-    const seg = words[i];
-    if (seg === undefined) continue;
-    if (!/^\s+$/.test(seg)) {
-      wordCount += 1;
-      if (wordCount > tts.cutIndex) {
-        cutAt = i;
-        break;
-      }
-    }
-  }
-  return { spoken: words.slice(0, cutAt).join(""), cut: words.slice(cutAt).join("") || null };
-}
+const STATE_LABEL: Record<VoiceStageProps["orb"], string> = {
+  idle: "Ready",
+  thinking: "Thinking…",
+  speaking: "Speaking",
+};
 
-export function VoiceStage(props: Props): JSX.Element {
-  const { speaking, transcripts, tts, onSubmit, disabled } = props;
-  const [text, setText] = useState("");
-
-  const submit = (): void => {
-    const t = text.trim();
-    if (t.length === 0) return;
-    onSubmit(t);
-    setText("");
-  };
-
-  const lastFinal = [...transcripts].reverse().find((t) => t.final);
-  const lastPartial = [...transcripts].reverse().find((t) => !t.final);
-
+export function VoiceStage({ orb, orbSub, presets, onSubmit, busy }: VoiceStageProps): JSX.Element {
   return (
-    <section className="panel voice" aria-label="voice stage">
-      <h2 className="panel-title">Voice</h2>
-
-      <div className="orb-row">
-        <div className={`orb ${speaking ? "orb-speaking" : ""}`} aria-hidden="true" />
-        <div className="orb-state">
-          <span className="state-label">{speaking ? "speaking" : "idle"}</span>
-          <span className="state-sub">VAD: on-device (Phase 4)</span>
+    <section className="stage" aria-label="Voice">
+      <div className="orb-block">
+        <div
+          className={`orb orb-${orb}`}
+          data-testid="orb"
+          role="img"
+          aria-label={`Alexa+ assistant: ${STATE_LABEL[orb]}`}
+        >
+          <span className="orb-halo" aria-hidden="true" />
+          <span className="orb-core" aria-hidden="true" />
+        </div>
+        <div className="orb-meta">
+          <p className="orb-state" data-testid="orb-state">
+            {STATE_LABEL[orb]}
+          </p>
+          <p className="orb-sub">{orbSub}</p>
         </div>
       </div>
 
       <form
-        className="say-row"
+        className="ask"
         onSubmit={(e) => {
           e.preventDefault();
-          submit();
+          const el = e.currentTarget.elements.namedItem("utterance") as HTMLInputElement | null;
+          const value = el?.value.trim() ?? "";
+          if (value.length > 0) onSubmit(value);
         }}
       >
-        <label className="sr-only" htmlFor="say-input">
-          say something
+        <label className="sr-only" htmlFor="utterance">
+          Say something to Alexa+
         </label>
         <input
-          id="say-input"
-          className="say-input"
-          placeholder="say something…"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          disabled={disabled}
+          id="utterance"
+          name="utterance"
+          className="ask-input"
+          type="text"
+          autoComplete="off"
+          placeholder={'try "play raja ji"'}
+          disabled={busy}
         />
-        <button type="submit" className="btn btn-say" disabled={disabled || text.trim().length === 0}>
-          Say
+        <button type="submit" className="btn btn-primary" data-testid="ask-btn" disabled={busy}>
+          {busy ? "thinking…" : "Ask"}
         </button>
-        <button
-          type="button"
-          className="btn btn-mic"
-          disabled
-          aria-disabled="true"
-          title="mic in Phase 4"
-        >
-          Mic
-        </button>
-        <span className="mic-hint">mic in Phase 4</span>
       </form>
 
-      <div className="transcripts" aria-live="polite">
-        {lastFinal && (
-          <p className="transcript transcript-final" data-testid="transcript-final">
-            <span className="transcript-tag">heard</span> {lastFinal.text}
-          </p>
-        )}
-        {lastPartial && (
-          <p className="transcript transcript-partial" data-testid="transcript-partial">
-            <span className="transcript-tag">partial</span> {lastPartial.text}
-          </p>
-        )}
-        {!lastFinal && !lastPartial && (
-          <p className="transcript transcript-empty">no transcript in trace yet</p>
-        )}
+      <div className="presets" aria-label="Preset utterances">
+        {presets.map((p) => (
+          <button
+            key={p.text}
+            type="button"
+            className="chip chip-preset"
+            data-testid={`preset-${slug(p.text)}`}
+            disabled={busy}
+            onClick={() => onSubmit(p.text)}
+          >
+            “{p.label}”
+          </button>
+        ))}
       </div>
-
-      {tts && (
-        <div className="tts-bubble" data-testid="tts-bubble">
-          <span className="tts-tag">TTS</span>{" "}
-          {(() => {
-            const { spoken, cut } = cutSegments(tts);
-            return (
-              <>
-                {spoken}
-                {cut && <s className="tts-cut">{cut}</s>}
-                {cut && tts.cutIndex === undefined && (
-                  <span className="tts-cut-note"> (cut point not reported)</span>
-                )}
-              </>
-            );
-          })()}
-        </div>
-      )}
     </section>
   );
+}
+
+function slug(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
