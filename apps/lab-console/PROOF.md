@@ -114,3 +114,15 @@ dropped and counted, never rendered.
   view says "not in trace" rather than inventing a value.
 - No audio path is claimed: the mic button is present but disabled with the
   tooltip "mic in Phase 4".
+
+## ORCH verification run 2026-10-20 (post B-CONSOLE p2)
+- `npx tsc --noEmit` -> exit 0 (TurnEntry forwards `playing` to SpokenBubble; App passes `i===0 && speaking`)
+- `npm run build` -> exit 0 (dist 174 kB js / 23.5 kB css, 922 ms)
+- `npm test` -> 7 passed / 7
+- `node scripts/live-check.mjs` -> 9/9 PASS against RUNNING stack (host :4000, MCP :8080)
+
+DECISION LINES (real, captured live):
+A/MCP-ON    status=200 mode=mcp   decision=ask  confidence=0.95 candidates=3 badge=FIXTURE latencyMs=630 traceId=trn-4c3fe488 spoken="Did you mean Raja Ji (Insta Mix) or Raja Ji (feat. Gurlez Akhtar)?"
+B/MCP-OFF   status=200 mode=naive decision=play confidence=1    candidates=1 badge=FIXTURE latencyMs=624 traceId=trn-a3b5d2dc spoken="Playing Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi."
+WS trace: replay window 201 frames on connect; 216 frames during turns; frameSchema fields verified.
+Fixes this run: favicon (data:,) + StrictMode CONNECTING-socket warning guard in transport.close().

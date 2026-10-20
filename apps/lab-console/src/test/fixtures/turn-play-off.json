@@ -1,0 +1,255 @@
+{
+  "traceId": "trn-7720c44f",
+  "badge": "FIXTURE",
+  "asrLabel": "TYPED",
+  "mode": "naive",
+  "heard": "play raja ji",
+  "alternatives": [
+    {
+      "text": "play raja ji",
+      "confidence": 1
+    }
+  ],
+  "decision": "play",
+  "spoken": "Playing Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi. Say stop or next any time.",
+  "spokenPrompt": {
+    "speak_short": "Playing Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi.",
+    "speak_normal": "Playing Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi. Say stop or next any time.",
+    "speak_long": "I'll play Raja Ji (Insta Mix) by Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi. You can say stop, next, or the name of another song whenever you like."
+  },
+  "candidates": [
+    {
+      "candidate_id": "it_6762846296",
+      "title": "Raja Ji (Insta Mix)",
+      "artist": "Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi",
+      "year": 2024,
+      "version": "remix",
+      "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/09/4c/e2094c26-29f6-21b0-8a58-d514b8485767/198588099131.jpg/100x100bb.jpg",
+      "untrusted": true
+    }
+  ],
+  "confidence": 1,
+  "responseStyle": "normal",
+  "tts": {
+    "playing": true,
+    "durationMs": 5500,
+    "marks": [
+      {
+        "index": 0,
+        "word": "Playing",
+        "startMs": 0,
+        "endMs": 250
+      },
+      {
+        "index": 1,
+        "word": "Raja",
+        "startMs": 250,
+        "endMs": 500
+      },
+      {
+        "index": 2,
+        "word": "Ji",
+        "startMs": 500,
+        "endMs": 750
+      },
+      {
+        "index": 3,
+        "word": "(Insta",
+        "startMs": 750,
+        "endMs": 1000
+      },
+      {
+        "index": 4,
+        "word": "Mix)",
+        "startMs": 1000,
+        "endMs": 1250
+      },
+      {
+        "index": 5,
+        "word": "by",
+        "startMs": 1250,
+        "endMs": 1500
+      },
+      {
+        "index": 6,
+        "word": "Anurag",
+        "startMs": 1500,
+        "endMs": 1750
+      },
+      {
+        "index": 7,
+        "word": "Saikia,",
+        "startMs": 1750,
+        "endMs": 2000
+      },
+      {
+        "index": 8,
+        "word": "Arya",
+        "startMs": 2000,
+        "endMs": 2250
+      },
+      {
+        "index": 9,
+        "word": "Nand",
+        "startMs": 2250,
+        "endMs": 2500
+      },
+      {
+        "index": 10,
+        "word": "Singh,",
+        "startMs": 2500,
+        "endMs": 2750
+      },
+      {
+        "index": 11,
+        "word": "Manoj",
+        "startMs": 2750,
+        "endMs": 3000
+      },
+      {
+        "index": 12,
+        "word": "Tiwari",
+        "startMs": 3000,
+        "endMs": 3250
+      },
+      {
+        "index": 13,
+        "word": "&",
+        "startMs": 3250,
+        "endMs": 3500
+      },
+      {
+        "index": 14,
+        "word": "Shashwat",
+        "startMs": 3500,
+        "endMs": 3750
+      },
+      {
+        "index": 15,
+        "word": "Dwivedi.",
+        "startMs": 3750,
+        "endMs": 4000
+      },
+      {
+        "index": 16,
+        "word": "Say",
+        "startMs": 4000,
+        "endMs": 4250
+      },
+      {
+        "index": 17,
+        "word": "stop",
+        "startMs": 4250,
+        "endMs": 4500
+      },
+      {
+        "index": 18,
+        "word": "or",
+        "startMs": 4500,
+        "endMs": 4750
+      },
+      {
+        "index": 19,
+        "word": "next",
+        "startMs": 4750,
+        "endMs": 5000
+      },
+      {
+        "index": 20,
+        "word": "any",
+        "startMs": 5000,
+        "endMs": 5250
+      },
+      {
+        "index": 21,
+        "word": "time.",
+        "startMs": 5250,
+        "endMs": 5500
+      }
+    ],
+    "words": 22
+  },
+  "latencyMs": 425,
+  "mcp": {
+    "state": "online",
+    "sessionId": "3b33b48e-4f21-44f5-8068-aa13ac12b5c0",
+    "serverInfo": {
+      "name": "omnibeat-mcp",
+      "version": "0.1.0"
+    },
+    "reconnectAttempt": 0,
+    "url": "http://localhost:8080/mcp"
+  },
+  "breaker": {
+    "state": "closed",
+    "consecutiveFails": 0,
+    "recentRttMs": [
+      4,
+      4,
+      480,
+      1,
+      419
+    ],
+    "slowInWindow": 0,
+    "openedAt": null,
+    "transitions": 3,
+    "lastTransitionAt": 1792481408697,
+    "lastTransitionReason": "healthz status 200",
+    "edgeMode": false
+  },
+  "edgeMode": false,
+  "track": {
+    "candidate_id": "it_6762846296",
+    "title": "Raja Ji (Insta Mix)",
+    "artist": "Anurag Saikia, Arya Nand Singh, Manoj Tiwari & Shashwat Dwivedi",
+    "year": 2024,
+    "version": "remix",
+    "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/09/4c/e2094c26-29f6-21b0-8a58-d514b8485767/198588099131.jpg/100x100bb.jpg",
+    "untrusted": true
+  },
+  "resolutionId": "res_1feebd73-de59-4c55-adfc-9ccd80fd96a0",
+  "evidence": [
+    {
+      "source": "heard",
+      "signal": "raw \"play raja ji\" -> peeled \"raja ji\"",
+      "weight": 0.1
+    },
+    {
+      "source": "peel",
+      "signal": "removed [play]; stage 0.069 ms / budget 2 ms (inline locale table, SWAP POINT for B-PHON)",
+      "weight": 0.05
+    },
+    {
+      "source": "deezer",
+      "signal": "FIXTURE skipped: adapter not shipped in P1: demoted/off by default (DEC-0010, CLM-MUS-010..013) (0 ms)",
+      "weight": 0
+    },
+    {
+      "source": "autocomplete",
+      "signal": "FIXTURE skipped: kill-switch off by default (blueprint 8.4, CLM-MUS-003 family) (0 ms)",
+      "weight": 0
+    },
+    {
+      "source": "itunes",
+      "signal": "LIVE 3 hit(s) in 77 ms - attribution: provided courtesy of iTunes (CLM-MUS-003)",
+      "weight": 0.2
+    },
+    {
+      "source": "musicbrainz",
+      "signal": "LIVE network: fetch failed (401 ms)",
+      "weight": 0
+    },
+    {
+      "source": "runner",
+      "signal": "hedged soft cutoff at 77 ms (pending sources kept to their 600 ms cap; no duplicate requests - upstream rate budgets respected)",
+      "weight": 0.05
+    },
+    {
+      "source": "naive-baseline",
+      "signal": "admin naive mode: FIRST provider hit used verbatim (itunes/LIVE), confidence forced to 1.0 - stock catalog search A/B baseline",
+      "weight": 1
+    }
+  ],
+  "degradationLevel": "L0",
+  "serverTraceId": "tr_70b288df-9a94-4dc2-ba28-c210f59a3aca"
+}

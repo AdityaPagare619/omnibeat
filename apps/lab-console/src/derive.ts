@@ -1,456 +1,211 @@
 /**
- * Derivation layer — pure functions from REAL trace envelopes to view state.
+ * Derivation layer — pure functions from REAL host payloads to view state.
  *
- * Everything the console shows outside the wire table is derived here, from
- * frames that arrived on the wire. No component invents state; when a field
- * is not present in the trace the views say so ("not in trace") rather than
- * filling in a plausible default (blueprint §2 row 3, §4.2 truth-in-labelling).
- *
- * Payload discovery is deliberately tolerant: the raw JSON-RPC frame nests the
- * tool result differently across MCP SDK versions (result.structuredContent,
- * result.content[0].text as JSON, result itself, notification params). We walk
- * every plausible location and take the newest frame that yields data.
+ * Two inputs, no invention:
+ *   • a POST /turn response (TurnResponse) drives the face;
+ *   • trace frames drive the proof strip.
+ * When a field is absent the view says so ("not reported by the host")
+ * rather than filling in a plausible default (§4.2 truth-in-labelling).
  */
-import type { SourceBadge, TraceEnvelope } from "./types";
+import type { Frame, MusicCandidate, SourceBadge, TurnResponse } from "./types";
 
-/* ------------------------------------------------------------------ helpers */
+/* ------------------------------------------------------------------ frames */
 
-function asRecord(x: unknown): Record<string, unknown> | undefined {
-  return typeof x === "object" && x !== null && !Array.isArray(x)
-    ? (x as Record<string, unknown>)
-    : undefined;
-}
+/** Window the proof strip keeps: the host replays at most 200 frames anyway. */
+export const MAX_FRAMES = 200;
 
-function asString(x: unknown): string | undefined {
-  return typeof x === "string" && x.length > 0 ? x : undefined;
-}
-
-function asNumber(x: unknown): number | undefined {
-  return typeof x === "number" && Number.isFinite(x) ? x : undefined;
-}
-
-function asBool(x: unknown): boolean | undefined {
-  return typeof x === "boolean" ? x : undefined;
-}
-
-function firstString(r: Record<string, unknown>, keys: readonly string[]): string | undefined {
-  for (const k of keys) {
-    const v = asString(r[k]);
-    if (v !== undefined) return v;
-  }
-  return undefined;
-}
-
-/** Try to parse a value as JSON; pass through non-strings. */
-function parseJsonMaybe(x: unknown): unknown {
-  if (typeof x !== "string") return x;
-  const t = x.trim();
-  if (!t.startsWith("{") && !t.startsWith("[")) return undefined;
-  try {
-    return JSON.parse(t);
-  } catch {
-    return undefined;
-  }
+export interface FrameRow {
+  /** Stable React key: the host's `seq` is unique per emission. */
+  key: number;
+  frame: Frame;
 }
 
 /**
- * Every plausible payload location inside one raw JSON-RPC frame, outermost
- * first. The tool result for music_resolve_request may live in any of these
- * depending on the SDK's content encoding.
+ * Merge incoming frames into the window by `seq` (later reconnect replays are
+ * deduplicated, not double-rendered). Wire order = emission order = seq order.
  */
-export function payloadLocations(frame: unknown): Record<string, unknown>[] {
-  const root = asRecord(frame);
-  if (!root) return [];
-  const out: Record<string, unknown>[] = [];
-  const consider = (v: unknown): void => {
-    const r = asRecord(parseJsonMaybe(v));
-    if (r) out.push(r);
-  };
-  consider(root);
-  consider(root["params"]);
-  const result = asRecord(root["result"]);
-  if (result) {
-    consider(result);
-    consider(result["structuredContent"]);
-    const content = result["content"];
-    if (Array.isArray(content)) {
-      for (const item of content) {
-        const c = asRecord(item);
-        if (c) {
-          consider(c["structuredContent"]);
-          consider(c["text"]);
-        }
-      }
-    }
-  }
-  consider(root["structuredContent"]);
-  return out;
+export function mergeFrames(prev: readonly FrameRow[], incoming: readonly Frame[]): FrameRow[] {
+  if (incoming.length === 0) return [...prev];
+  const seen = new Map<number, FrameRow>();
+  for (const r of prev) seen.set(r.key, r);
+  for (const f of incoming) if (!seen.has(f.seq)) seen.set(f.seq, { key: f.seq, frame: f });
+  const next = [...seen.values()].sort((a, b) => a.key - b.key);
+  return next.length > MAX_FRAMES ? next.slice(next.length - MAX_FRAMES) : next;
 }
 
-/* ------------------------------------------------- badges (top bar, §4.2) */
-
 /** Distinct source badges actually seen on the wire, in first-seen order. */
-export function badgesSeen(frames: readonly TraceEnvelope[]): SourceBadge[] {
+export function badgesSeen(frames: readonly Frame[]): SourceBadge[] {
   const seen: SourceBadge[] = [];
-  for (const f of frames) {
-    if (!seen.includes(f.badge)) seen.push(f.badge);
-  }
+  for (const f of frames) if (!seen.includes(f.badge)) seen.push(f.badge);
   return seen;
 }
 
-/* ------------------------------------------------------ resolution (centre) */
-
-export interface CandidateView {
-  id?: string;
-  title: string;
-  artist?: string;
-  language?: string;
-  year?: number;
-  /** Blueprint §5.6: metadata from the open web is data, never instructions. */
-  untrusted: boolean | undefined;
+/** Frames the proof strip highlights as real JSON-RPC traffic (not host internals). */
+export function isWireCall(f: Frame): boolean {
+  return f.direction !== "internal";
 }
 
-export interface EvidenceView {
-  source: string;
-  signal: string;
-  weight?: number;
+export function frameLatency(f: Frame): string {
+  return f.latencyMs === undefined ? "—" : `${f.latencyMs} ms`;
 }
-
-export interface ResolutionView {
-  heard: string;
-  decision: string;
-  confidence?: number;
-  candidates: CandidateView[];
-  evidence: EvidenceView[];
-  thresholds: { play?: number; ask?: number };
-  explanation?: string;
-  receipt?: Record<string, unknown>;
-  trace_id: string;
-  /** Provenance: the event_id of the frame this view was derived from. */
-  event_id: string;
-  badge: SourceBadge;
-}
-
-const DECISION_KEYS = ["decision", "decision_policy"] as const;
-
-function normaliseDecision(raw: string): string {
-  const d = raw.trim().toUpperCase().replace(/[\s-]+/g, "_");
-  if (d === "NOT_FOUND" || d === "NOTFOUND" || d === "NO_MATCH" || d === "NO_MATCH_FOUND") return "NOT_FOUND";
-  return d;
-}
-
-function looksLikeResolution(r: Record<string, unknown>): boolean {
-  const hasDecision = firstString(r, DECISION_KEYS) !== undefined;
-  const hasConfidence = asNumber(r["confidence"]) !== undefined || asNumber(r["p1"]) !== undefined;
-  const hasCandidates = Array.isArray(r["candidates"]);
-  return hasDecision || (hasConfidence && hasCandidates);
-}
-
-function readThresholds(r: Record<string, unknown>): { play?: number; ask?: number } {
-  const containers: Record<string, unknown>[] = [r];
-  for (const key of ["thresholds", "config", "policy", "decision_config"]) {
-    const c = asRecord(r[key]);
-    if (c) containers.push(c);
-  }
-  const out: { play?: number; ask?: number } = {};
-  for (const c of containers) {
-    if (out.play === undefined) {
-      out.play =
-        asNumber(c["t_play"]) ??
-        asNumber(c["T_play"]) ??
-        asNumber(c["play_threshold"]) ??
-        asNumber(c["playThreshold"]);
-    }
-    if (out.ask === undefined) {
-      out.ask =
-        asNumber(c["t_ask"]) ??
-        asNumber(c["T_ask"]) ??
-        asNumber(c["ask_threshold"]) ??
-        asNumber(c["askThreshold"]);
-    }
-  }
-  return out;
-}
-
-function readCandidates(r: Record<string, unknown>): CandidateView[] {
-  const arr = Array.isArray(r["candidates"]) ? r["candidates"] : [];
-  const out: CandidateView[] = [];
-  for (const item of arr) {
-    const c = asRecord(item);
-    if (!c) continue;
-    const track = asRecord(c["track"]) ?? c; // tolerate candidates wrapping a track object
-    const title = firstString(track, ["title", "name"]);
-    if (title === undefined) continue;
-    const v: CandidateView = { title, untrusted: asBool(track["untrusted"]) ?? asBool(c["untrusted"]) };
-    const id = firstString(track, ["id", "candidate_id", "musicbrainz_id", "isrc"]);
-    if (id !== undefined) v.id = id;
-    const artist = firstString(track, ["artist", "artist_name"]);
-    if (artist !== undefined) v.artist = artist;
-    const language = firstString(track, ["language", "lang", "locale"]);
-    if (language !== undefined) v.language = language;
-    const year = asNumber(track["year"]) ?? asNumber(track["release_year"]);
-    if (year !== undefined) v.year = year;
-    out.push(v);
-  }
-  return out;
-}
-
-function readEvidence(r: Record<string, unknown>): EvidenceView[] {
-  const arr = Array.isArray(r["evidence"]) ? r["evidence"] : [];
-  const out: EvidenceView[] = [];
-  for (const item of arr) {
-    const e = asRecord(item);
-    if (!e) continue;
-    const source = firstString(e, ["source", "name"]) ?? "unknown source";
-    const signal = firstString(e, ["signal", "detail", "reason"]) ?? "";
-    const v: EvidenceView = { source, signal };
-    const weight = asNumber(e["weight"]);
-    if (weight !== undefined) v.weight = weight;
-    out.push(v);
-  }
-  return out;
-}
-
-/** Newest frame carrying a resolution payload wins (turn-over-turn state). */
-export function deriveResolution(frames: readonly TraceEnvelope[]): ResolutionView | null {
-  for (let i = frames.length - 1; i >= 0; i -= 1) {
-    const f = frames[i];
-    if (!f) continue;
-    for (const r of payloadLocations(f.mcp?.frame)) {
-      if (!looksLikeResolution(r)) continue;
-      const decisionRaw = firstString(r, DECISION_KEYS) ?? "UNKNOWN";
-      const spoken = asRecord(r["spoken_prompt"]);
-      const heard =
-        firstString(r, ["heard", "heard_text", "transcript", "query"]) ??
-        "";
-      const thresholds = readThresholds(r);
-      const v: ResolutionView = {
-        heard,
-        decision: normaliseDecision(decisionRaw),
-        candidates: readCandidates(r),
-        evidence: readEvidence(r),
-        thresholds,
-        trace_id: f.trace_id,
-        event_id: f.event_id,
-        badge: f.badge,
-      };
-      const confidence = asNumber(r["confidence"]) ?? asNumber(r["p1"]);
-      if (confidence !== undefined) v.confidence = confidence;
-      const explanation = firstString(r, ["explanation", "why"]) ?? (spoken ? undefined : undefined);
-      if (explanation !== undefined) v.explanation = explanation;
-      const receipt = asRecord(r["receipt"]);
-      if (receipt) v.receipt = receipt;
-      return v;
-    }
-  }
-  return null;
-}
-
-/* ------------------------------------------------- breaker / edge (right) */
-
-export type BreakerState = "closed" | "open" | "half-open" | "unknown";
-
-export interface ContinuityView {
-  breaker: BreakerState;
-  /** Raw value as it appeared in the trace, for the drill-down caption. */
-  breakerRaw?: string;
-  edgeMode: boolean | undefined;
-  breakerEventId?: string;
-}
-
-function normaliseBreaker(raw: string): BreakerState | undefined {
-  const v = raw.trim().toLowerCase().replace(/[\s-]+/g, "_");
-  if (v === "closed") return "closed";
-  if (v === "open") return "open";
-  if (v === "half_open" || v === "halfopen") return "half-open";
-  return undefined;
-}
-
-const BREAKER_KEYS = ["breaker", "breaker_state", "circuit_breaker", "circuit"] as const;
-const CONTAINER_KEYS = ["health", "continuity", "breaker", "breakers", "network"] as const;
-
-/** Newest health/breaker signal in the trace wins; otherwise state is honestly "unknown". */
-export function deriveContinuity(frames: readonly TraceEnvelope[]): ContinuityView {
-  const view: ContinuityView = { breaker: "unknown", edgeMode: undefined };
-  for (let i = frames.length - 1; i >= 0; i -= 1) {
-    const f = frames[i];
-    if (!f) continue;
-    for (const r of payloadLocations(f.mcp?.frame)) {
-      const containers: Record<string, unknown>[] = [r];
-      for (const k of CONTAINER_KEYS) {
-        const c = asRecord(r[k]);
-        if (c) containers.push(c);
-      }
-      for (const c of containers) {
-        for (const bk of BREAKER_KEYS) {
-          const raw = asString(c[bk]);
-          if (raw === undefined) continue;
-          const state = normaliseBreaker(raw);
-          if (state !== undefined && view.breaker === "unknown") {
-            view.breaker = state;
-            view.breakerRaw = raw;
-            view.breakerEventId = f.event_id;
-          }
-        }
-        if (view.edgeMode === undefined) {
-          const em = asBool(c["edge_mode"]) ?? asBool(c["offline"]) ?? asBool(c["edge_mode_active"]);
-          if (em !== undefined) view.edgeMode = em;
-        }
-      }
-      if (view.breaker !== "unknown" && view.edgeMode !== undefined) return view;
-    }
-  }
-  return view;
-}
-
-/* ------------------------------------------ speaking / ASR / TTS (left) */
-
-export interface TranscriptLine {
-  text: string;
-  final: boolean;
-  event_id: string;
-}
-
-/** Host speaking state, when a frame reports it; undefined = not reported. */
-export function deriveSpeaking(frames: readonly TraceEnvelope[]): boolean | undefined {
-  for (let i = frames.length - 1; i >= 0; i -= 1) {
-    const f = frames[i];
-    if (!f) continue;
-    for (const r of payloadLocations(f.mcp?.frame)) {
-      const speaking = asBool(r["speaking"]);
-      if (speaking !== undefined) return speaking;
-      const state = firstString(r, ["state", "status", "host_state"]);
-      if (state !== undefined) {
-        const s = state.toLowerCase();
-        if (s === "speaking" || s === "tts" || s === "saying") return true;
-        if (s === "listening" || s === "idle" || s === "thinking") return false;
-      }
-    }
-    const method = f.mcp?.method?.toLowerCase();
-    if (method !== undefined) {
-      if (/(tts|speech|speak)/.test(method) && /(start|begin|speaking)/.test(method)) return true;
-      if (/(tts|speech|speak)/.test(method) && /(stop|end|done|complete|idle|silence)/.test(method)) return false;
-    }
-  }
-  return undefined;
-}
-
-/** Partial and final ASR lines, oldest → newest, most recent 8 kept. */
-export function deriveTranscripts(frames: readonly TraceEnvelope[]): TranscriptLine[] {
-  const out: TranscriptLine[] = [];
-  for (const f of frames) {
-    if (f.kind !== "notification" && f.kind !== "request" && f.kind !== "response") continue;
-    for (const r of payloadLocations(f.mcp?.frame)) {
-      const text = firstString(r, ["partial", "transcript", "text", "heard_text"]);
-      if (text === undefined) continue;
-      const final = asBool(r["final"]) ?? asBool(r["is_final"]) ?? asBool(r["isFinal"]) ?? f.kind === "response";
-      const last = out[out.length - 1];
-      if (last && last.text === text && last.final === final) {
-        last.event_id = f.event_id;
-      } else {
-        out.push({ text, final, event_id: f.event_id });
-      }
-      break; // one transcript payload per frame
-    }
-  }
-  return out.slice(-8);
-}
-
-export interface TtsView {
-  text: string;
-  /** Word index of the barge-in cut, when the host reports speech marks. */
-  cutIndex?: number;
-  cutReported: boolean;
-  event_id: string;
-}
-
-/** Newest spoken-text payload; cut state overlaid by the newest cancellation frame. */
-export function deriveTts(frames: readonly TraceEnvelope[]): TtsView | null {
-  let tts: TtsView | null = null;
-  let cut: { index?: number; reported: boolean; event_id: string } | null = null;
-
-  for (let i = frames.length - 1; i >= 0; i -= 1) {
-    const f = frames[i];
-    if (!f) continue;
-    if (tts === null) {
-      for (const r of payloadLocations(f.mcp?.frame)) {
-        const spoken = asRecord(r["spoken_prompt"]);
-        const text =
-          firstString(r, ["tts", "spoken", "say", "spoken_text"]) ??
-          (spoken ? (firstString(spoken, ["speak_normal", "speak_short", "speak_long"]) ?? undefined) : undefined);
-        if (text === undefined) continue;
-        const v: TtsView = { text, cutReported: false, event_id: f.event_id };
-        tts = v;
-        break;
-      }
-    }
-    if (cut === null && (f.kind === "cancellation" || f.mcp?.method === "notifications/cancelled")) {
-      let index: number | undefined;
-      for (const r of payloadLocations(f.mcp?.frame)) {
-        index =
-          asNumber(r["word_index"]) ??
-          asNumber(r["last_word_index"]) ??
-          asNumber(r["cut_index"]) ??
-          asNumber(r["speech_mark"]);
-        if (index !== undefined) break;
-      }
-      cut = index !== undefined ? { index, reported: true, event_id: f.event_id } : { reported: true, event_id: f.event_id };
-    }
-    if (tts !== null && cut !== null) break;
-  }
-
-  if (cut !== null) {
-    if (tts === null) {
-      tts = { text: "(spoken text not reported in trace)", cutReported: cut.reported, event_id: cut.event_id };
-    } else {
-      tts.cutReported = cut.reported;
-      if (cut.index !== undefined) tts.cutIndex = cut.index;
-    }
-  }
-  return tts;
-}
-
-/* ------------------------------------------------- "why did you play that" */
-
-function stringifyField(x: unknown): string | undefined {
-  if (typeof x === "string") return x;
-  if (typeof x === "number" || typeof x === "boolean") return String(x);
-  return undefined;
-}
-
-/** Pull a human explanation out of a turn payload or receipt, if one is present. */
-export function findExplanation(obj: unknown): string | undefined {
-  const r = asRecord(obj);
-  if (!r) return undefined;
-  const direct = stringifyField(r["explanation"]) ?? stringifyField(r["why"]);
-  if (direct !== undefined) return direct;
-  const receipt = asRecord(r["receipt"]) ?? asRecord(r["action_receipt"]);
-  if (receipt) {
-    const rx = stringifyField(receipt["explanation"]);
-    if (rx !== undefined) return rx;
-    const parts: string[] = [];
-    const heard = stringifyField(receipt["heard"]) ?? stringifyField(receipt["heard_text"]);
-    if (heard !== undefined) parts.push(`heard: ${heard}`);
-    const matched =
-      stringifyField(receipt["matched"]) ?? stringifyField(receipt["chosen"]) ?? stringifyField(receipt["track"]);
-    if (matched !== undefined) parts.push(`matched: ${matched}`);
-    const confidence = stringifyField(r["confidence"]) ?? stringifyField(receipt["confidence"]);
-    if (confidence !== undefined) parts.push(`confidence: ${confidence}`);
-    const trigger = stringifyField(receipt["trigger"]);
-    if (trigger !== undefined) parts.push(`trigger: ${trigger}`);
-    if (parts.length > 0) return parts.join(" · ");
-  }
-  return undefined;
-}
-
-/* -------------------------------------------------------------- misc view */
 
 /** HH:MM:SS.mmm from an ISO timestamp; falls back to the raw string. */
-export function formatTs(iso: string): string {
+export function formatClock(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   const p = (n: number, w = 2): string => String(n).padStart(w, "0");
   return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}.${p(d.getMilliseconds(), 3)}`;
 }
 
-export const MAX_FRAMES = 500;
+/* ------------------------------------------------------------------- turns */
+
+export type DecisionTone = "good" | "warn" | "info" | "bad" | "neutral";
+
+export interface DecisionView {
+  /** Uppercase label shown in the chip — always paired with its colour. */
+  label: string;
+  tone: DecisionTone;
+  /** One-line meaning for a non-engineer judge. */
+  gloss: string;
+}
+
+const DECISIONS: Record<string, DecisionView> = {
+  play: { label: "PLAY", tone: "good", gloss: "confident enough to act without asking" },
+  ask: { label: "ASK", tone: "warn", gloss: "ambiguous — asked you instead of guessing" },
+  repair: { label: "REPAIR", tone: "info", gloss: "understood the intent, needs a different phrasing" },
+  not_found: { label: "NOT_FOUND", tone: "bad", gloss: "no match — said so rather than inventing one" },
+  error: { label: "ERROR", tone: "bad", gloss: "the host refused to answer rather than guess" },
+};
+
+export function decisionView(turn: TurnResponse): DecisionView {
+  return DECISIONS[turn.decision] ?? { label: String(turn.decision).toUpperCase(), tone: "neutral", gloss: "" };
+}
+
+/**
+ * The words the host actually spoke: `spoken` is the string the speech marks
+ * were built from (verified: words(spoken) === tts.words on both A/B fixtures).
+ */
+export function spokenText(turn: TurnResponse): string {
+  if (typeof turn.spoken === "string" && turn.spoken.length > 0) return turn.spoken;
+  const inline = typeof turn.spoken === "object" ? turn.spoken : undefined;
+  const p = turn.spokenPrompt ?? inline;
+  return p?.speak_normal ?? p?.speak_short ?? p?.speak_long ?? "";
+}
+
+/** The primary track to feature: `track` when the host resolved one, else top candidate. */
+export function primaryCandidate(turn: TurnResponse): MusicCandidate | null {
+  const t = turn.track as MusicCandidate | undefined;
+  if (t && typeof t === "object" && t.title) return t;
+  return turn.candidates[0] ?? null;
+}
+
+/* ------------------------------------------- thresholds (CALM confidence) */
+
+export interface Thresholds {
+  /** Minimum calibrated confidence to auto-play. */
+  tPlay?: number;
+  /** Required margin between top-1 and top-2. */
+  margin?: number;
+  /** Cumulative p(top-3) needed for an ask. */
+  tCover?: number;
+  /** Values actually observed this turn. */
+  p1?: number;
+  gotMargin?: number;
+  top3?: number;
+  /** Verbatim host policy sentence (evidence `local:decision`), when present. */
+  policy?: string;
+  /** `naive` mode applies no policy — say that instead of showing markers. */
+  note?: string;
+}
+
+const NUM = (re: RegExp, s: string): number | undefined => {
+  const m = re.exec(s);
+  if (!m || m[1] === undefined) return undefined;
+  const v = Number(m[1]);
+  return Number.isFinite(v) ? v : undefined;
+};
+
+/**
+ * Thresholds are the HOST's, parsed from its own evidence line — never
+ * hardcoded here (§8.8 configuration, not code). Example (live):
+ *   "play if p1>=0.85 AND margin>=0.25; ask if top3>=0.7 …; got p1=0.909 …"
+ */
+export function thresholdsFromEvidence(turn: TurnResponse): Thresholds {
+  const ev = (turn.evidence ?? []).find((e) => e.source === "local:decision");
+  const out: Thresholds = {};
+  if (turn.mode === "naive") {
+    out.note = "naive path — no decision policy applied (host sent `naive-baseline` evidence only)";
+    return out;
+  }
+  if (!ev?.signal) {
+    out.note = "host reported no decision-policy evidence for this turn";
+    return out;
+  }
+  const s = ev.signal;
+  out.policy = s;
+  out.tPlay = NUM(/p1\s*>=\s*([0-9.]+)/, s);
+  out.margin = NUM(/margin\s*>=\s*([0-9.]+)/, s);
+  out.tCover = NUM(/top3\s*>=\s*([0-9.]+)/, s);
+  out.p1 = NUM(/got\s+p1\s*=\s*([0-9.]+)/, s);
+  out.gotMargin = NUM(/margin\s*=\s*([0-9.]+)/, s);
+  out.top3 = NUM(/top3\s*=\s*([0-9.]+)/, s);
+  return out;
+}
+
+/* ---------------------------------------------------------------- A/B view */
+
+export interface AbSummary {
+  heard: string;
+  mode: "mcp" | "naive";
+  decision: string;
+  decisionLabel: string;
+  tone: DecisionTone;
+  confidence: number;
+  candidateCount: number;
+  spoken: string;
+  latencyMs: number;
+  traceId: string;
+  badge: SourceBadge;
+  /** Naive path played the first hit without asking — the contrast. */
+  stockFirstHit: boolean;
+}
+
+export function abSummary(turn: TurnResponse): AbSummary {
+  const dv = decisionView(turn);
+  return {
+    heard: turn.heard,
+    mode: turn.mode,
+    decision: turn.decision,
+    decisionLabel: dv.label,
+    tone: dv.tone,
+    confidence: turn.confidence,
+    candidateCount: turn.candidates.length,
+    spoken: spokenText(turn),
+    latencyMs: turn.latencyMs,
+    traceId: turn.traceId,
+    badge: turn.badge,
+    stockFirstHit: turn.mode === "naive" && turn.decision === "play" && turn.candidates.length <= 1,
+  };
+}
+
+/** Key that groups the two sides of the A/B: the same utterance, both modes. */
+export function abKey(turn: TurnResponse): string {
+  return turn.heard.trim().toLowerCase();
+}
+
+/* ---------------------------------------------------------- small helpers */
+
+export function pct(n: number): string {
+  return `${Math.round(n * 100)}%`;
+}
+
+export function fixed(n: number, digits = 3): string {
+  return n.toFixed(digits);
+}
+
+/** Strike-through target for a barge-in cut: word index from the host. */
+export function cutWordIndex(cutAtWord: number | null, wordsCompleted: number): number | null {
+  if (cutAtWord !== null && Number.isFinite(cutAtWord)) return cutAtWord;
+  if (Number.isFinite(wordsCompleted) && wordsCompleted > 0) return wordsCompleted;
+  return null;
+}
