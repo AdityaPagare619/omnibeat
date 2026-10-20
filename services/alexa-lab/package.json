@@ -1,0 +1,33 @@
+{
+  "name": "alexa-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Simulated Alexa+ host: MCP client (Streamable HTTP), trace bus, fixture ASR, TTS speech marks, barge-in, circuit breaker. Port 4000.",
+  "scripts": {
+    "prebuild": "node scripts/ensure-schemas.mjs",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "npm run build && node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "probe": "node scripts/probe.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@omnibeat/schemas": "file:../../packages/schemas",
+    "express": "4.21.2",
+    "ws": "8.18.0",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.21",
+    "@types/node": "22.10.2",
+    "@types/ws": "8.5.13",
+    "typescript": "5.6.3",
+    "vitest": "2.1.8"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

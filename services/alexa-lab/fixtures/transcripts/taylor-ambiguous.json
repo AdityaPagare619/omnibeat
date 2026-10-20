@@ -1,0 +1,11 @@
+{
+  "id": "taylor-ambiguous",
+  "heard": "play taylor",
+  "locale": "en-IN",
+  "alternatives": [
+    { "text": "play taylor", "confidence": 0.72 },
+    { "text": "play taylor swift", "confidence": 0.18 },
+    { "text": "play tailer", "confidence": 0.05 }
+  ],
+  "note": "Ambiguous artist-first-name fixture: expected decision is `ask` with ≤3 candidates, never a silent guess (blueprint §6.2)."
+}

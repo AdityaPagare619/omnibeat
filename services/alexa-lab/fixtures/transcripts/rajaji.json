@@ -1,0 +1,12 @@
+{
+  "id": "rajaji",
+  "heard": "play raja ji",
+  "locale": "en-IN",
+  "alternatives": [
+    { "text": "play raja ji", "confidence": 0.54 },
+    { "text": "play rajaji", "confidence": 0.28 },
+    { "text": "play raja ji songs", "confidence": 0.11 },
+    { "text": "play rajaji hits", "confidence": 0.07 }
+  ],
+  "note": "Deliberate mis-segmentation fixture: 'Rajaji' (artist) split across two tokens by ASR — the resolver must ask rather than guess (blueprint §6.1)."
+}
