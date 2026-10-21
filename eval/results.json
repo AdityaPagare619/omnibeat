@@ -1,7 +1,7 @@
 {
   "schema": "omnibeat.eval-results.v1",
-  "run_at": "2026-10-21T06:10:55.945Z",
-  "run_count": 4,
+  "run_at": "2026-10-21T06:27:25.954Z",
+  "run_count": 5,
   "split": "heldout",
   "regenerate_command": "node packages/eval/dist/cli.js run",
   "corpus": {
@@ -54,7 +54,7 @@
     "nodeVersion": "v24.15.0"
   },
   "server": {
-    "pid": 4508,
+    "pid": 11380,
     "replay_only": true,
     "killed_after_run": true
   },
@@ -72,35 +72,35 @@
         0,
         0
       ],
-      "ask_rate": 0.16,
+      "ask_rate": 0.28,
       "ask_ci95": [
-        0.04,
-        0.32
+        0.08,
+        0.44
       ],
-      "top1_accuracy": 0.08,
+      "top1_accuracy": 0.24,
       "top1_ci95": [
-        0,
-        0.2
+        0.08,
+        0.4
       ],
       "error_count": 0
     },
     {
       "name": "Baseline A (naive first-hit)",
       "n": 25,
-      "wrong_play_rate": 0.04,
+      "wrong_play_rate": 0.12,
       "wrong_play_ci95": [
         0,
-        0.12
+        0.24
       ],
       "ask_rate": 0,
       "ask_ci95": [
         0,
         0
       ],
-      "top1_accuracy": 0.12,
+      "top1_accuracy": 0.16,
       "top1_ci95": [
-        0,
-        0.24
+        0.04,
+        0.32
       ],
       "error_count": 0
     },
@@ -147,7 +147,7 @@
       },
       {
         "system": "Baseline A (naive first-hit)",
-        "count": 1
+        "count": 3
       },
       {
         "system": "Baseline B (token top-1)",
@@ -156,28 +156,25 @@
     ],
     "divergent_utterances": 24,
     "replay_lookup_miss": {
-      "count": 21,
+      "count": 18,
       "ids": [
-        "1a72a0012f442e42",
         "1edfebb6f8d711cd",
         "22c96d7a699888f8",
         "2d9c98cef7e955cf",
+        "333a55005d8ddce0",
         "39baaeb6ca9bca7d",
         "5291c907357de215",
         "5d1cb6415c7941df",
-        "69ec96a1ebf4ebb2",
         "7178cbd6365add21",
         "7c79e66a70c30bb3",
         "8128955e3a9fb0a0",
         "946e8fffc2771859",
-        "96923f7bf34e9b52",
         "9cee9220ad740b02",
         "aca6d0f5c827d4cf",
         "b37e0361f3fcd0ff",
         "b9bc6b61b059167b",
         "be57b079ef7d58ad",
         "e16d70510dead01f",
-        "ef5eccb144466290",
         "f0fd05a5d2902544"
       ]
     },
@@ -188,8 +185,8 @@
         "locale": "hi-IN",
         "expect": "Lollipop Lagelu",
         "outcomes": {
-          "OmniBeat": "refused (not_found)",
-          "Baseline A (naive first-hit)": "refused (not_found)",
+          "OmniBeat": "ask (top-1 \"Lollipop Lagelu\")",
+          "Baseline A (naive first-hit)": "played \"Lollipop Lagelu\"",
           "Baseline B (token top-1)": "played \"Lollipop Lagelu\""
         }
       },
@@ -232,8 +229,8 @@
         "locale": "es-US",
         "expect": "Ya No Me Llamas",
         "outcomes": {
-          "OmniBeat": "ask (top-1 \"Ya No Me Llamas (feat. Shaka & Benny)\")",
-          "Baseline A (naive first-hit)": "played WRONG \"Ya No Me Llamas (feat. Shaka & Benny)\"",
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
           "Baseline B (token top-1)": "played \"Ya No Me Llamas\""
         }
       },
@@ -265,7 +262,7 @@
         "locale": "en-US",
         "expect": "Smells Like Teen Spirit",
         "outcomes": {
-          "OmniBeat": "ask (top-1 \"Smells Like Teen Spirit (Alt Mix)\")",
+          "OmniBeat": "ask (top-1 \"Smells Like Teen Spirit\")",
           "Baseline A (naive first-hit)": "played \"Smells Like Teen Spirit\"",
           "Baseline B (token top-1)": "played \"Smells Like Teen Spirit\""
         }
@@ -287,8 +284,8 @@
         "locale": "en-US",
         "expect": "Blinding Lights",
         "outcomes": {
-          "OmniBeat": "refused (not_found)",
-          "Baseline A (naive first-hit)": "refused (not_found)",
+          "OmniBeat": "ask (top-1 \"Blinding Lights\")",
+          "Baseline A (naive first-hit)": "played WRONG \"Blinding Lights (Remix)\"",
           "Baseline B (token top-1)": "played \"Blinding Lights\""
         }
       },
@@ -342,8 +339,8 @@
         "locale": "hi-IN",
         "expect": "Raja Ji",
         "outcomes": {
-          "OmniBeat": "refused (not_found)",
-          "Baseline A (naive first-hit)": "refused (not_found)",
+          "OmniBeat": "ask (top-1 \"Raja Ji (Insta Mix)\")",
+          "Baseline A (naive first-hit)": "played WRONG \"Raja Ji (Insta Mix)\"",
           "Baseline B (token top-1)": "played \"Raja Ji\""
         }
       },
@@ -430,8 +427,8 @@
         "locale": "en-US",
         "expect": "Blinding Lights",
         "outcomes": {
-          "OmniBeat": "refused (not_found)",
-          "Baseline A (naive first-hit)": "refused (not_found)",
+          "OmniBeat": "ask (top-1 \"Blinding Lights\")",
+          "Baseline A (naive first-hit)": "played WRONG \"Blinding Lights (Remix)\"",
           "Baseline B (token top-1)": "played \"Blinding Lights\""
         }
       },
@@ -451,18 +448,6 @@
   "worst_failures": {
     "OmniBeat": [
       {
-        "id": "1a72a0012f442e42",
-        "input": "hey alexa play lollipop lagelu live",
-        "expect": "Lollipop Lagelu",
-        "locale": "hi-IN",
-        "decision": "not_found",
-        "confidence": 0,
-        "chosenTitle": null,
-        "top1Title": null,
-        "candidateCount": 0,
-        "latencyMs": 27
-      },
-      {
         "id": "1edfebb6f8d711cd",
         "input": "blinding lites",
         "expect": "Blinding Lights",
@@ -472,7 +457,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 12
+        "latencyMs": 41
       },
       {
         "id": "22c96d7a699888f8",
@@ -484,7 +469,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 12
+        "latencyMs": 31
       },
       {
         "id": "2d9c98cef7e955cf",
@@ -496,7 +481,19 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 10
+        "latencyMs": 68
+      },
+      {
+        "id": "333a55005d8ddce0",
+        "input": "hey alexa ya no me llamaz",
+        "expect": "Ya No Me Llamas",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 20
       },
       {
         "id": "39baaeb6ca9bca7d",
@@ -508,7 +505,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 10
+        "latencyMs": 22
       },
       {
         "id": "5291c907357de215",
@@ -520,7 +517,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 9
+        "latencyMs": 22
       },
       {
         "id": "5d1cb6415c7941df",
@@ -532,19 +529,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 11
-      },
-      {
-        "id": "69ec96a1ebf4ebb2",
-        "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
-        "expect": "Blinding Lights",
-        "locale": "en-US",
-        "decision": "not_found",
-        "confidence": 0,
-        "chosenTitle": null,
-        "top1Title": null,
-        "candidateCount": 0,
-        "latencyMs": 8
+        "latencyMs": 33
       },
       {
         "id": "7178cbd6365add21",
@@ -556,7 +541,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 10
+        "latencyMs": 21
       },
       {
         "id": "7c79e66a70c30bb3",
@@ -568,25 +553,11 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 8
-      }
-    ],
-    "Baseline A (naive first-hit)": [
-      {
-        "id": "333a55005d8ddce0",
-        "input": "hey alexa ya no me llamaz",
-        "expect": "Ya No Me Llamas",
-        "locale": "es-US",
-        "decision": "play",
-        "confidence": 1,
-        "chosenTitle": "Ya No Me Llamas (feat. Shaka & Benny)",
-        "top1Title": "Ya No Me Llamas (feat. Shaka & Benny)",
-        "candidateCount": 1,
-        "latencyMs": 9
+        "latencyMs": 31
       },
       {
-        "id": "1a72a0012f442e42",
-        "input": "hey alexa play lollipop lagelu live",
+        "id": "8128955e3a9fb0a0",
+        "input": "hey alexa par चलाओ lollipop lagelu spotify",
         "expect": "Lollipop Lagelu",
         "locale": "hi-IN",
         "decision": "not_found",
@@ -594,7 +565,45 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 9
+        "latencyMs": 27
+      }
+    ],
+    "Baseline A (naive first-hit)": [
+      {
+        "id": "69ec96a1ebf4ebb2",
+        "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
+        "expect": "Blinding Lights",
+        "locale": "en-US",
+        "decision": "play",
+        "confidence": 1,
+        "chosenTitle": "Blinding Lights (Remix)",
+        "top1Title": "Blinding Lights (Remix)",
+        "candidateCount": 1,
+        "latencyMs": 17
+      },
+      {
+        "id": "96923f7bf34e9b52",
+        "input": "hey alexa raja ji sunao",
+        "expect": "Raja Ji",
+        "locale": "hi-IN",
+        "decision": "play",
+        "confidence": 1,
+        "chosenTitle": "Raja Ji (Insta Mix)",
+        "top1Title": "Raja Ji (Insta Mix)",
+        "candidateCount": 1,
+        "latencyMs": 25
+      },
+      {
+        "id": "ef5eccb144466290",
+        "input": "hey alexa play blinding lights by the weeknd on spotify",
+        "expect": "Blinding Lights",
+        "locale": "en-US",
+        "decision": "play",
+        "confidence": 1,
+        "chosenTitle": "Blinding Lights (Remix)",
+        "top1Title": "Blinding Lights (Remix)",
+        "candidateCount": 1,
+        "latencyMs": 56
       },
       {
         "id": "1edfebb6f8d711cd",
@@ -606,7 +615,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 9
+        "latencyMs": 57
       },
       {
         "id": "22c96d7a699888f8",
@@ -618,7 +627,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 8
+        "latencyMs": 16
       },
       {
         "id": "2d9c98cef7e955cf",
@@ -630,7 +639,19 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 6
+        "latencyMs": 26
+      },
+      {
+        "id": "333a55005d8ddce0",
+        "input": "hey alexa ya no me llamaz",
+        "expect": "Ya No Me Llamas",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 44
       },
       {
         "id": "39baaeb6ca9bca7d",
@@ -642,7 +663,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 7
+        "latencyMs": 24
       },
       {
         "id": "5291c907357de215",
@@ -654,7 +675,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 8
+        "latencyMs": 19
       },
       {
         "id": "5d1cb6415c7941df",
@@ -666,31 +687,7 @@
         "chosenTitle": null,
         "top1Title": null,
         "candidateCount": 0,
-        "latencyMs": 7
-      },
-      {
-        "id": "69ec96a1ebf4ebb2",
-        "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
-        "expect": "Blinding Lights",
-        "locale": "en-US",
-        "decision": "not_found",
-        "confidence": 0,
-        "chosenTitle": null,
-        "top1Title": null,
-        "candidateCount": 0,
-        "latencyMs": 8
-      },
-      {
-        "id": "7178cbd6365add21",
-        "input": "reproduce la bamba en spotify",
-        "expect": "La Bamba",
-        "locale": "es-US",
-        "decision": "not_found",
-        "confidence": 0,
-        "chosenTitle": null,
-        "top1Title": null,
-        "candidateCount": 0,
-        "latencyMs": 7
+        "latencyMs": 27
       }
     ],
     "Baseline B (token top-1)": [
