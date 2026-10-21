@@ -38,6 +38,14 @@ export interface PeelResult {
 }
 
 const WAKE_PHRASES = [
+  // Alexa family (blueprint 6.1 S0: wake word must never reach the query).
+  "hey alexa",
+  "ok alexa",
+  "hey echo",
+  "ok echo",
+  "alexa",
+  "echo",
+  // OmniBeat family.
   "hey omnibeat",
   "ok omnibeat",
   "omni beat",
@@ -45,7 +53,6 @@ const WAKE_PHRASES = [
   "ok omni",
   "omnibeat",
   "omni",
-  "alexa",
   "computer",
 ];
 
@@ -195,10 +202,28 @@ export function peel(rawTranscript: string, _locale?: string): PeelResult {
     return stripped;
   };
 
-  // 1. wake words, 2. verbs (repeated: "hey omni please play ...")
-  stripFromFront(WAKE_PHRASES);
-  stripFromFront(VERB_PHRASES);
-  stripFromFront(WAKE_PHRASES);
+  // 1-3. S0 front strip: wake words, leading fillers and verbs, REPEATEDLY
+  // until stable (blueprint 6.1). Order matters between iterations: "hey
+  // alexa play X" needs the filler "hey" gone before the wake word "alexa"
+  // can match, and the verb "play" gone before a second wake word (a host
+  // may emit wake + wake + verb). Each pass only removes tokens, so the
+  // loop terminates.
+  const stripLeadingFillers = (): boolean => {
+    let stripped = false;
+    while (tokens.length > 0 && FILLER_WORDS.has(lowers[0] as string)) {
+      removed.push(tokens[0] as string);
+      tokens = tokens.slice(1);
+      lowers = lower(tokens);
+      stripped = true;
+    }
+    return stripped;
+  };
+  for (;;) {
+    const woke = stripFromFront(WAKE_PHRASES);
+    const filled = stripLeadingFillers();
+    const verbed = stripFromFront(VERB_PHRASES);
+    if (!woke && !filled && !verbed) break;
+  }
 
   // 3. trailing provider suffix: "on <provider>" (possibly over filler words)
   const stripTrailingProvider = (): void => {
@@ -236,11 +261,7 @@ export function peel(rawTranscript: string, _locale?: string): PeelResult {
     }
   };
   stripTrailingWords([FILLER_WORDS, TRAILING_NOUNS]);
-  while (tokens.length > 0 && FILLER_WORDS.has(lowers[0] as string)) {
-    removed.push(tokens[0] as string);
-    tokens = tokens.slice(1);
-    lowers = lower(tokens);
-  }
+  stripLeadingFillers(); // no-op after the S0 loop; kept for trailing-strip fallout
 
   // 5. artist hint: trailing "by <artist>"
   let artistHint: string | undefined;
