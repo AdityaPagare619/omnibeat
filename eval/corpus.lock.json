@@ -1,0 +1,451 @@
+{
+  "schema": "omnibeat.eval-corpus.v1",
+  "split": "tune",
+  "seed": "omnibeat-eval-split-v1",
+  "created_at": "2026-10-21T06:10:54.704Z",
+  "entry_count": 49,
+  "corpus_sha256": "bba0d2731dac4dd5df3ce4304bdc31ddfc62d00273b0507f51d5c09af100791d",
+  "entries": [
+    {
+      "id": "0deafe83e4dd3ddd",
+      "input": "play don't stop me now live",
+      "expect": "Dont Stop Me Now",
+      "locale": "en-US",
+      "fixtureLine": 12,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "126d5765604770c4",
+      "input": "hey alexa rajoo ji",
+      "expect": "Raja Ji",
+      "locale": "hi-IN",
+      "fixtureLine": 10,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "1bec51f353a09b8a",
+      "input": "sunao lollipop lagelu by nusrat",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 7,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "2bd3c465f91eca2d",
+      "input": "hey alexa blinding lites",
+      "expect": "Blinding Lights",
+      "locale": "en-US",
+      "fixtureLine": 8,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "2de8a187c363f37f",
+      "input": "hey alexa hey alexa lollipop lagelu baja do spotify",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 3,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "3822e0ab5be2b816",
+      "input": "mujhe tum yaad aana chahiye via spotify",
+      "expect": "Mujhe Tum Yaad Aana",
+      "locale": "hi-IN",
+      "fixtureLine": 1,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "3eee99b1d2d77c9d",
+      "input": "oye reproduce macarena por favor",
+      "expect": "Macarena",
+      "locale": "es-US",
+      "fixtureLine": 4,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "446028c0b88ce47b",
+      "input": "queue the wall by pink floyd",
+      "expect": "The Wall",
+      "locale": "en-US",
+      "fixtureLine": 5,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "4472bf538803de6c",
+      "input": "hey alexa sunao lollipop lagelu by nusrat",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 7,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "45e67e09d124d2c9",
+      "input": "chahiye sunao mujhe",
+      "expect": "Mujhe",
+      "locale": "hi-IN",
+      "fixtureLine": 6,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "45f701974cd99173",
+      "input": "reproduce en vivo bailando",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 7,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "487c3568c5bd3eb6",
+      "input": "hey alexa alexa, find \"bohemian rhapsody\" please",
+      "expect": "Bohemian Rhapsody",
+      "locale": "en-US",
+      "fixtureLine": 6,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "4c114886d751b4dc",
+      "input": "reproduce bailando remix en spotify",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 5,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "4d2622f479e2619f",
+      "input": "ya no me yamas",
+      "expect": "Ya No Me Llamas",
+      "locale": "es-US",
+      "fixtureLine": 9,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "502d2c27ecddc4d1",
+      "input": "raja ji sunao",
+      "expect": "Raja Ji",
+      "locale": "hi-IN",
+      "fixtureLine": 13,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "57023d0aecb2e169",
+      "input": "play wonderwall by oasis live",
+      "expect": "Wonderwall",
+      "locale": "en-US",
+      "fixtureLine": 7,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "5955f422749b2af0",
+      "input": "could you queue bicycle race please",
+      "expect": "Bicycle Race",
+      "locale": "en-US",
+      "fixtureLine": 2,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "634900eb89251dd3",
+      "input": "par चलाओ lollipop lagelu spotify",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 12,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "65142460a8644dab",
+      "input": "hey alexa shaam savere chalao",
+      "expect": "Shaam Savere",
+      "locale": "hi-IN",
+      "fixtureLine": 4,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "6576c84adbf51ba7",
+      "input": "ya no me llamaz",
+      "expect": "Ya No Me Llamas",
+      "locale": "es-US",
+      "fixtureLine": 11,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "6644a85d03fb2ac4",
+      "input": "hey alexa मुझे तुम याद आना",
+      "expect": "Mujhe Tum Yaad Aana",
+      "locale": "hi-IN",
+      "fixtureLine": 2,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "6663f1bd98d15253",
+      "input": "hey alexa mujhe tum yaad aana chahiye via spotify",
+      "expect": "Mujhe Tum Yaad Aana",
+      "locale": "hi-IN",
+      "fixtureLine": 1,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "75e1eb043c69dcb3",
+      "input": "hey alexa oye reproduce macarena por favor",
+      "expect": "Macarena",
+      "locale": "es-US",
+      "fixtureLine": 4,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "7a6e6f2dc799a940",
+      "input": "hey alexa dansa kuduro",
+      "expect": "Danza Kuduro",
+      "locale": "es-US",
+      "fixtureLine": 12,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "858f46bc4718746c",
+      "input": "dansa kuduro",
+      "expect": "Danza Kuduro",
+      "locale": "es-US",
+      "fixtureLine": 12,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "910597f6c890c174",
+      "input": "smels like teen spirit",
+      "expect": "Smells Like Teen Spirit",
+      "locale": "en-US",
+      "fixtureLine": 10,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "95022d004edc5e91",
+      "input": "hey alexa play wonderwall by oasis live",
+      "expect": "Wonderwall",
+      "locale": "en-US",
+      "fixtureLine": 7,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "9754918641453100",
+      "input": "don't stop me now",
+      "expect": "Dont Stop Me Now",
+      "locale": "en-US",
+      "fixtureLine": 4,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "9be4c7fa7346b334",
+      "input": "roger g",
+      "expect": "Raja Ji",
+      "locale": "hi-IN",
+      "fixtureLine": 9,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "a3b8bca183f60544",
+      "input": "hey alexa don't stop me now",
+      "expect": "Dont Stop Me Now",
+      "locale": "en-US",
+      "fixtureLine": 4,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "a5e59aefc087ccf5",
+      "input": "nite fever",
+      "expect": "Night Fever",
+      "locale": "en-US",
+      "fixtureLine": 9,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "ae57602827720dba",
+      "input": "hey alexa चाँद सितारे spotify",
+      "expect": "Chaand Sitaare",
+      "locale": "hi-IN",
+      "fixtureLine": 5,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "afcf4235ffc21522",
+      "input": "hey alexa despasito",
+      "expect": "Despacito",
+      "locale": "es-US",
+      "fixtureLine": 10,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "b105c560b3e32503",
+      "input": "play lollipop lagelu live",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 11,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "b1f479a6ef59c4b6",
+      "input": "hey alexa queue the wall by pink floyd",
+      "expect": "The Wall",
+      "locale": "en-US",
+      "fixtureLine": 5,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "b210fd9b9662f18a",
+      "input": "despasito",
+      "expect": "Despacito",
+      "locale": "es-US",
+      "fixtureLine": 10,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "b4e94a67c8bc5a86",
+      "input": "hey alexa reproduce la canción despacito en spotify",
+      "expect": "Despacito",
+      "locale": "es-US",
+      "fixtureLine": 1,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "c0a01cddefeb04ae",
+      "input": "चाँद सितारे spotify",
+      "expect": "Chaand Sitaare",
+      "locale": "hi-IN",
+      "fixtureLine": 5,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "c76b45f9f0a63c7a",
+      "input": "hey alexa could you queue bicycle race please",
+      "expect": "Bicycle Race",
+      "locale": "en-US",
+      "fixtureLine": 2,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "cfdc8353af88048e",
+      "input": "hey alexa nite fever",
+      "expect": "Night Fever",
+      "locale": "en-US",
+      "fixtureLine": 9,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "d0f2a114f728c40e",
+      "input": "hey alexa chahiye sunao mujhe",
+      "expect": "Mujhe",
+      "locale": "hi-IN",
+      "fixtureLine": 6,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "d44d9e1689731001",
+      "input": "hey alexa reproduce asereje en spotify",
+      "expect": "Asereje",
+      "locale": "es-US",
+      "fixtureLine": 6,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "d4d11ba4d7ddbc55",
+      "input": "hey alexa ya no me yamas",
+      "expect": "Ya No Me Llamas",
+      "locale": "es-US",
+      "fixtureLine": 9,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "d54b74beec9d0615",
+      "input": "SHUFFLE wonderwall!!",
+      "expect": "Wonderwall",
+      "locale": "en-US",
+      "fixtureLine": 3,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "dc2a60bfe22e73cd",
+      "input": "lolly pop la gelu",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 8,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "e29f2e14015bf773",
+      "input": "hey alexa reproduce la canción bailando en spotify",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 3,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "ea6fac047936fe7e",
+      "input": "hey alexa reproduce bailando en spotify",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 2,
+      "variant": "wake-prefix",
+      "split": "tune"
+    },
+    {
+      "id": "f40333e6a2be9808",
+      "input": "reproduce la canción bailando en spotify",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 3,
+      "variant": "base",
+      "split": "tune"
+    },
+    {
+      "id": "fda0d300c2c463f5",
+      "input": "hey alexa roger g",
+      "expect": "Raja Ji",
+      "locale": "hi-IN",
+      "fixtureLine": 9,
+      "variant": "wake-prefix",
+      "split": "tune"
+    }
+  ]
+}

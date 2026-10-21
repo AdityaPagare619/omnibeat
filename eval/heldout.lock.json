@@ -1,0 +1,235 @@
+{
+  "schema": "omnibeat.eval-corpus.v1",
+  "split": "heldout",
+  "seed": "omnibeat-eval-split-v1",
+  "created_at": "2026-10-21T06:10:54.706Z",
+  "entry_count": 25,
+  "corpus_sha256": "ff41eb6ffd2d9e9d4c3a5797a6946be9f7eb1ceac6da3dd616fcc31996537886",
+  "entries": [
+    {
+      "id": "1a72a0012f442e42",
+      "input": "hey alexa play lollipop lagelu live",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 11,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "1edfebb6f8d711cd",
+      "input": "blinding lites",
+      "expect": "Blinding Lights",
+      "locale": "en-US",
+      "fixtureLine": 8,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "22c96d7a699888f8",
+      "input": "hey alexa SHUFFLE wonderwall!!",
+      "expect": "Wonderwall",
+      "locale": "en-US",
+      "fixtureLine": 3,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "2d9c98cef7e955cf",
+      "input": "hey alexa reproduce bailando remix en spotify",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 5,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "333a55005d8ddce0",
+      "input": "hey alexa ya no me llamaz",
+      "expect": "Ya No Me Llamas",
+      "locale": "es-US",
+      "fixtureLine": 11,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "39baaeb6ca9bca7d",
+      "input": "reproduce bailando en spotify",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 2,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "5291c907357de215",
+      "input": "hey alexa bohemian rhapsoddy",
+      "expect": "Bohemian Rhapsody",
+      "locale": "en-US",
+      "fixtureLine": 11,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "5300caef546e66f8",
+      "input": "hey alexa smels like teen spirit",
+      "expect": "Smells Like Teen Spirit",
+      "locale": "en-US",
+      "fixtureLine": 10,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "5d1cb6415c7941df",
+      "input": "hey alexa lollipop lagelu baja do spotify",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 3,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "69ec96a1ebf4ebb2",
+      "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
+      "expect": "Blinding Lights",
+      "locale": "en-US",
+      "fixtureLine": 1,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "7178cbd6365add21",
+      "input": "reproduce la bamba en spotify",
+      "expect": "La Bamba",
+      "locale": "es-US",
+      "fixtureLine": 8,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "7c79e66a70c30bb3",
+      "input": "bohemian rhapsoddy",
+      "expect": "Bohemian Rhapsody",
+      "locale": "en-US",
+      "fixtureLine": 11,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "8128955e3a9fb0a0",
+      "input": "hey alexa par चलाओ lollipop lagelu spotify",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 12,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "946e8fffc2771859",
+      "input": "reproduce la canción despacito en spotify",
+      "expect": "Despacito",
+      "locale": "es-US",
+      "fixtureLine": 1,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "96923f7bf34e9b52",
+      "input": "hey alexa raja ji sunao",
+      "expect": "Raja Ji",
+      "locale": "hi-IN",
+      "fixtureLine": 13,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "9cee9220ad740b02",
+      "input": "reproduce asereje en spotify",
+      "expect": "Asereje",
+      "locale": "es-US",
+      "fixtureLine": 6,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "a5738ae2e5bbef6c",
+      "input": "alexa, find \"bohemian rhapsody\" please",
+      "expect": "Bohemian Rhapsody",
+      "locale": "en-US",
+      "fixtureLine": 6,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "aca6d0f5c827d4cf",
+      "input": "मुझे तुम याद आना",
+      "expect": "Mujhe Tum Yaad Aana",
+      "locale": "hi-IN",
+      "fixtureLine": 2,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "b37e0361f3fcd0ff",
+      "input": "hey alexa lolly pop la gelu",
+      "expect": "Lollipop Lagelu",
+      "locale": "hi-IN",
+      "fixtureLine": 8,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "b9bc6b61b059167b",
+      "input": "hey alexa play don't stop me now live",
+      "expect": "Dont Stop Me Now",
+      "locale": "en-US",
+      "fixtureLine": 12,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "be57b079ef7d58ad",
+      "input": "hey alexa reproduce la bamba en spotify",
+      "expect": "La Bamba",
+      "locale": "es-US",
+      "fixtureLine": 8,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "cbbf569b5a0683be",
+      "input": "shaam savere chalao",
+      "expect": "Shaam Savere",
+      "locale": "hi-IN",
+      "fixtureLine": 4,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "e16d70510dead01f",
+      "input": "hey alexa reproduce en vivo bailando",
+      "expect": "Bailando",
+      "locale": "es-US",
+      "fixtureLine": 7,
+      "variant": "wake-prefix",
+      "split": "heldout"
+    },
+    {
+      "id": "ef5eccb144466290",
+      "input": "hey alexa play blinding lights by the weeknd on spotify",
+      "expect": "Blinding Lights",
+      "locale": "en-US",
+      "fixtureLine": 1,
+      "variant": "base",
+      "split": "heldout"
+    },
+    {
+      "id": "f0fd05a5d2902544",
+      "input": "rajoo ji",
+      "expect": "Raja Ji",
+      "locale": "hi-IN",
+      "fixtureLine": 10,
+      "variant": "base",
+      "split": "heldout"
+    }
+  ]
+}
