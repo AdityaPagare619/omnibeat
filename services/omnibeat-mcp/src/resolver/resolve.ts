@@ -28,6 +28,7 @@ import type { LabConfig } from "../config.js";
 import { log, transcriptField } from "../logging.js";
 import type { OmniBeatStore } from "../store/store.js";
 import { peel } from "./peeler.js";
+import { pickPackId, scoreTitlePhonetics, type TitlePhonetics } from "./phonetic.js";
 import { decide, scoreCandidate, thresholdsFor, tokenSimilarity, type Decision } from "./scoring.js";
 
 export const DEADLINE_CONFIDENCE_FACTOR = 0.75;
@@ -173,6 +174,11 @@ export async function resolveRequest(
     const peelMs = Number(process.hrtime.bigint() - peelStart) / 1e6;
 
     const primaryQuery = peeled.peeled;
+
+    // B-PHON swap: locale pack chosen up-front so the peel evidence card can
+    // name it; actual title scoring happens after S1 (needs candidates).
+    const phoneticPackId = pickPackId(input.transcript, input.locale);
+
     const evidence: EvidenceEntry[] = [
       {
         source: "heard",
@@ -181,7 +187,7 @@ export async function resolveRequest(
       },
       {
         source: "peel",
-        signal: `removed [${peeled.removed.join(", ") || "none"}]; stage ${peelMs.toFixed(3)} ms / budget ${base.latency.peel} ms (inline locale table, SWAP POINT for B-PHON)`,
+        signal: `removed [${peeled.removed.join(", ") || "none"}]; stage ${peelMs.toFixed(3)} ms / budget ${base.latency.peel} ms (S0 frame grammar tables; phonetics via @omnibeat/phonetic-core pack ${phoneticPackId})`,
         weight: 0.05,
       },
     ];
@@ -306,6 +312,19 @@ export async function resolveRequest(
         : NEUTRAL_ASR_CONFIDENCE;
 
     const similarityQueries = [primaryQuery, ...alternatives.map((a) => a.text)];
+
+    // B-PHON: articulatory phonetic distance of every candidate title against
+    // the peeled query + ASR n-best alternatives (pack loaded once at startup).
+    const phonetics = scoreTitlePhonetics(
+      primaryQuery,
+      alternatives.map((a) => a.text),
+      generation.fused.map((f) => f.hit.track.title),
+      input.locale,
+    );
+    const phoneticByTitle = new Map<string, TitlePhonetics>(
+      phonetics.perTitle.map((p) => [p.title, p]),
+    );
+
     const scored: ScoredCandidate[] = generation.fused.map((fused) => {
       let similarity = 0;
       for (const q of similarityQueries) {
@@ -327,12 +346,15 @@ export async function resolveRequest(
         artistHintMatch = s >= 0.6 ? 1 : s >= 0.35 ? 0.5 : 0;
       }
 
+      const phoneticSimilarity = phoneticByTitle.get(fused.hit.track.title)?.similarity;
+
       const score = scoreCandidate({
         similarity,
         agreement: fused.agreement,
         versionMatch,
         asrConfidence,
         artistHintMatch,
+        phoneticSimilarity,
       });
       return { fused, score, similarity, versionMatch, artistHintMatch };
     });
@@ -363,6 +385,23 @@ export async function resolveRequest(
       tCover: base.decision.thresholds.tCover,
       askMaxCandidates: base.decision.thresholds.askMaxCandidates,
     });
+
+    // B-PHON evidence card: pack, per-title distance + winning variant + time.
+    if (phonetics.packId !== undefined) {
+      const top = scored.slice(0, 3);
+      evidence.push({
+        source: "local:phonetic",
+        signal: `@omnibeat/phonetic-core pack ${phonetics.packId}: ${top
+          .map((r) => {
+            const p = phoneticByTitle.get(r.fused.hit.track.title);
+            return p
+              ? `${r.fused.hit.track.candidate_id} d=${p.distance.toFixed(2)} sim=${p.similarity.toFixed(2)} variant "${p.variant}"`
+              : `${r.fused.hit.track.candidate_id} n/a`;
+          })
+          .join("; ") || "no candidates"} (stage ${phonetics.elapsedMs.toFixed(3)} ms / budget 10 ms)`,
+        weight: 0.3,
+      });
+    }
 
     evidence.push({
       source: "local:scoring",

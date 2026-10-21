@@ -87,8 +87,9 @@ const MATCH_THRESHOLD = 0.5;
  *  - meanBest   = mean of the best ratio per query token
  *  - combined   = 0.5 * coverage + 0.5 * meanBest
  * Order-insensitive on purpose (ASR word order is unreliable), which is also
- * why this is NOT a phonetic score: B-PHON's articulatory distance replaces
- * this function at the swap point noted in peeler.ts.
+ * why this is NOT a phonetic score: the B-PHON articulatory distance from
+ * resolver/phonetic-core (resolver/phonetic.ts) is a SEPARATE scoring feature
+ * (see ScoreFeatures.phoneticSimilarity); both are fed to the logistic model.
  */
 export function tokenSimilarity(query: string, candidate: string): number {
   const q = tokenize(query);
@@ -121,7 +122,17 @@ export const SCORE_WEIGHTS = {
   version: 0.4,
   asr: 0.4,
   artistHint: 0.5,
+  /**
+   * B-PHON: @omnibeat/phonetic-core articulatory similarity. Centered on 0.5
+   * so an ABSENT phonetic feature contributes exactly 0 (the Phase-1 score is
+   * unchanged when no pack loaded) while a present one adds +/-1.0 at the
+   * extremes. Still uncalibrated like every weight above.
+   */
+  phonetic: 2.0,
 } as const;
+
+/** Neutral value when the phonetic feature is unavailable (pack load failed). */
+export const PHONETIC_NEUTRAL = 0.5;
 
 export function logistic(z: number): number {
   if (z >= 0) {
@@ -143,18 +154,25 @@ export interface ScoreFeatures {
   asrConfidence: number;
   /** 1 = "by <artist>" matched, 0 = mismatch, 0.5 = no artist hint said. */
   artistHintMatch: number;
+  /**
+   * B-PHON phonetic similarity (0..1) from @omnibeat/phonetic-core distance
+   * (resolver/phonetic.ts). Omit / undefined = feature neutral (PHONETIC_NEUTRAL).
+   */
+  phoneticSimilarity?: number;
 }
 
 /** Uncalibrated v0 weights - see the CONTRACT DRAFT banner at the top. */
 export function scoreCandidate(f: ScoreFeatures): number {
   const agreementTerm = Math.min(f.agreement, 2) / 2; // 0, 0.5 or 1
+  const phonetic = (f.phoneticSimilarity ?? PHONETIC_NEUTRAL) - PHONETIC_NEUTRAL;
   const z =
     SCORE_WEIGHTS.bias +
     SCORE_WEIGHTS.similarity * f.similarity +
     SCORE_WEIGHTS.agreement * agreementTerm +
     SCORE_WEIGHTS.version * f.versionMatch +
     SCORE_WEIGHTS.asr * f.asrConfidence +
-    SCORE_WEIGHTS.artistHint * f.artistHintMatch;
+    SCORE_WEIGHTS.artistHint * f.artistHintMatch +
+    SCORE_WEIGHTS.phonetic * phonetic;
   return Math.max(0, Math.min(1, logistic(z)));
 }
 
