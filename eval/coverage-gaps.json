@@ -1,0 +1,64 @@
+{
+  "schema": "omnibeat.eval-coverage-gaps.v1",
+  "generated_at": "2026-10-21T05:47:35.283Z",
+  "method": "services/omnibeat-mcp/scripts/expand-catalog.mjs - live iTunes Search + MusicBrainz WS/2 capture per corpus expected title",
+  "expected_titles_total": 21,
+  "expected_titles_covered": 19,
+  "gap_titles": 2,
+  "gaps": [
+    {
+      "expected_title": "Mujhe",
+      "normalized": "mujhe",
+      "heldout_rows": 0,
+      "tune_rows": 2,
+      "upstream": {
+        "itunes": {
+          "url": "https://itunes.apple.com/search?term=Mujhe&entity=song&media=music&limit=8",
+          "http_status": 200,
+          "latency_ms": 1881,
+          "attempts": 1,
+          "mapped": 8,
+          "of_results": 8,
+          "exact_title_hits": 0
+        },
+        "musicbrainz": {
+          "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Mujhe",
+          "http_status": 200,
+          "latency_ms": 244,
+          "attempts": 1,
+          "mapped": 8,
+          "of_recordings": 8,
+          "exact_title_hits": 0
+        }
+      },
+      "note": "captured upstream responses, but no returned track title normalizes to the expected title; excluded from the answerable denominator"
+    },
+    {
+      "expected_title": "Mujhe Tum Yaad Aana",
+      "normalized": "mujhe tum yaad aana",
+      "heldout_rows": 1,
+      "tune_rows": 3,
+      "upstream": {
+        "itunes": {
+          "url": "https://itunes.apple.com/search?term=Mujhe%20Tum%20Yaad%20Aana&entity=song&media=music&limit=8",
+          "http_status": 200,
+          "latency_ms": 655,
+          "attempts": 1,
+          "mapped": 8,
+          "of_results": 8,
+          "exact_title_hits": 0
+        },
+        "musicbrainz": {
+          "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Mujhe%20Tum%20Yaad%20Aana",
+          "http_status": 200,
+          "latency_ms": 358,
+          "attempts": 1,
+          "mapped": 8,
+          "of_recordings": 8,
+          "exact_title_hits": 0
+        }
+      },
+      "note": "captured upstream responses, but no returned track title normalizes to the expected title; excluded from the answerable denominator"
+    }
+  ]
+}

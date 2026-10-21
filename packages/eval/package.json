@@ -1,0 +1,24 @@
+{
+  "name": "@omnibeat/eval",
+  "version": "0.1.0",
+  "description": "OmniBeat evaluation harness: deterministic corpus locks, heldout-split runner against omnibeat-mcp (replay-only), wrong-play-rate metrics vs two baselines, regenerable report.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "run": "node dist/cli.js run",
+    "corpus": "node dist/cli.js corpus",
+    "tune": "node dist/cli.js tune"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "typescript": "5.6.3",
+    "vitest": "2.1.8"
+  }
+}

@@ -1,0 +1,735 @@
+{
+  "schema": "omnibeat.eval-results.v1",
+  "run_at": "2026-10-21T06:10:55.945Z",
+  "run_count": 4,
+  "split": "heldout",
+  "regenerate_command": "node packages/eval/dist/cli.js run",
+  "corpus": {
+    "total": 74,
+    "tune": 49,
+    "heldout": 25,
+    "corpus_sha256": "d00bbdc61de1e6d5008a745eaf5669b66383649292bde5de72f9bacde0a639a3",
+    "heldout_sha256": "ff41eb6ffd2d9e9d4c3a5797a6946be9f7eb1ceac6da3dd616fcc31996537886",
+    "fixtures": [
+      {
+        "locale": "en-US",
+        "fixtures": 12
+      },
+      {
+        "locale": "hi-IN",
+        "fixtures": 13
+      },
+      {
+        "locale": "es-US",
+        "fixtures": 12
+      }
+    ],
+    "replay_catalog_entries": 26,
+    "replay_catalog_titles": 162,
+    "answerable": {
+      "total": 24,
+      "with_catalog_title": 24,
+      "excluded_capture_gaps": 1,
+      "excluded_titles": [
+        "Mujhe Tum Yaad Aana"
+      ],
+      "heldout_total_before_exclusions": 25
+    },
+    "coverage_gaps": {
+      "present": true,
+      "generated_at": "2026-10-21T05:47:35.283Z",
+      "gap_titles": [
+        "Mujhe",
+        "Mujhe Tum Yaad Aana"
+      ]
+    }
+  },
+  "machine": {
+    "platform": "Windows_NT x64",
+    "arch": "x64",
+    "cpuModel": "Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz",
+    "cpuCount": 8,
+    "totalMemGb": 7.8,
+    "hostname": "AdisDesk",
+    "nodeVersion": "v24.15.0"
+  },
+  "server": {
+    "pid": 4508,
+    "replay_only": true,
+    "killed_after_run": true
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261021,
+    "method": "percentile"
+  },
+  "systems": [
+    {
+      "name": "OmniBeat",
+      "n": 25,
+      "wrong_play_rate": 0,
+      "wrong_play_ci95": [
+        0,
+        0
+      ],
+      "ask_rate": 0.16,
+      "ask_ci95": [
+        0.04,
+        0.32
+      ],
+      "top1_accuracy": 0.08,
+      "top1_ci95": [
+        0,
+        0.2
+      ],
+      "error_count": 0
+    },
+    {
+      "name": "Baseline A (naive first-hit)",
+      "n": 25,
+      "wrong_play_rate": 0.04,
+      "wrong_play_ci95": [
+        0,
+        0.12
+      ],
+      "ask_rate": 0,
+      "ask_ci95": [
+        0,
+        0
+      ],
+      "top1_accuracy": 0.12,
+      "top1_ci95": [
+        0,
+        0.24
+      ],
+      "error_count": 0
+    },
+    {
+      "name": "Baseline B (token top-1)",
+      "n": 25,
+      "wrong_play_rate": 0.08,
+      "wrong_play_ci95": [
+        0,
+        0.2
+      ],
+      "ask_rate": 0,
+      "ask_ci95": [
+        0,
+        0
+      ],
+      "top1_accuracy": 0.88,
+      "top1_ci95": [
+        0.76,
+        1
+      ],
+      "error_count": 0
+    }
+  ],
+  "verdict": {
+    "beats_baseline_a_on_wrong_play": true,
+    "ties_baseline_a_on_wrong_play": false,
+    "statement": "OmniBeat beats baseline A on wrong-play rate in this run (answerable coverage 24/24 (100.0%))."
+  },
+  "diagnostics": {
+    "answerable_coverage": {
+      "with_catalog_title": 24,
+      "total": 24,
+      "fraction": 1,
+      "excluded_capture_gaps": 1,
+      "excluded_titles": [
+        "Mujhe Tum Yaad Aana"
+      ]
+    },
+    "wrong_plays": [
+      {
+        "system": "OmniBeat",
+        "count": 0
+      },
+      {
+        "system": "Baseline A (naive first-hit)",
+        "count": 1
+      },
+      {
+        "system": "Baseline B (token top-1)",
+        "count": 2
+      }
+    ],
+    "divergent_utterances": 24,
+    "replay_lookup_miss": {
+      "count": 21,
+      "ids": [
+        "1a72a0012f442e42",
+        "1edfebb6f8d711cd",
+        "22c96d7a699888f8",
+        "2d9c98cef7e955cf",
+        "39baaeb6ca9bca7d",
+        "5291c907357de215",
+        "5d1cb6415c7941df",
+        "69ec96a1ebf4ebb2",
+        "7178cbd6365add21",
+        "7c79e66a70c30bb3",
+        "8128955e3a9fb0a0",
+        "946e8fffc2771859",
+        "96923f7bf34e9b52",
+        "9cee9220ad740b02",
+        "aca6d0f5c827d4cf",
+        "b37e0361f3fcd0ff",
+        "b9bc6b61b059167b",
+        "be57b079ef7d58ad",
+        "e16d70510dead01f",
+        "ef5eccb144466290",
+        "f0fd05a5d2902544"
+      ]
+    },
+    "divergences": [
+      {
+        "id": "1a72a0012f442e42",
+        "input": "hey alexa play lollipop lagelu live",
+        "locale": "hi-IN",
+        "expect": "Lollipop Lagelu",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Lollipop Lagelu\""
+        }
+      },
+      {
+        "id": "1edfebb6f8d711cd",
+        "input": "blinding lites",
+        "locale": "en-US",
+        "expect": "Blinding Lights",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Blinding Lights\""
+        }
+      },
+      {
+        "id": "22c96d7a699888f8",
+        "input": "hey alexa SHUFFLE wonderwall!!",
+        "locale": "en-US",
+        "expect": "Wonderwall",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Wonderwall\""
+        }
+      },
+      {
+        "id": "2d9c98cef7e955cf",
+        "input": "hey alexa reproduce bailando remix en spotify",
+        "locale": "es-US",
+        "expect": "Bailando",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Bailando\""
+        }
+      },
+      {
+        "id": "333a55005d8ddce0",
+        "input": "hey alexa ya no me llamaz",
+        "locale": "es-US",
+        "expect": "Ya No Me Llamas",
+        "outcomes": {
+          "OmniBeat": "ask (top-1 \"Ya No Me Llamas (feat. Shaka & Benny)\")",
+          "Baseline A (naive first-hit)": "played WRONG \"Ya No Me Llamas (feat. Shaka & Benny)\"",
+          "Baseline B (token top-1)": "played \"Ya No Me Llamas\""
+        }
+      },
+      {
+        "id": "39baaeb6ca9bca7d",
+        "input": "reproduce bailando en spotify",
+        "locale": "es-US",
+        "expect": "Bailando",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Bailando\""
+        }
+      },
+      {
+        "id": "5291c907357de215",
+        "input": "hey alexa bohemian rhapsoddy",
+        "locale": "en-US",
+        "expect": "Bohemian Rhapsody",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Bohemian Rhapsody\""
+        }
+      },
+      {
+        "id": "5300caef546e66f8",
+        "input": "hey alexa smels like teen spirit",
+        "locale": "en-US",
+        "expect": "Smells Like Teen Spirit",
+        "outcomes": {
+          "OmniBeat": "ask (top-1 \"Smells Like Teen Spirit (Alt Mix)\")",
+          "Baseline A (naive first-hit)": "played \"Smells Like Teen Spirit\"",
+          "Baseline B (token top-1)": "played \"Smells Like Teen Spirit\""
+        }
+      },
+      {
+        "id": "5d1cb6415c7941df",
+        "input": "hey alexa lollipop lagelu baja do spotify",
+        "locale": "hi-IN",
+        "expect": "Lollipop Lagelu",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Lollipop Lagelu\""
+        }
+      },
+      {
+        "id": "69ec96a1ebf4ebb2",
+        "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
+        "locale": "en-US",
+        "expect": "Blinding Lights",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Blinding Lights\""
+        }
+      },
+      {
+        "id": "7178cbd6365add21",
+        "input": "reproduce la bamba en spotify",
+        "locale": "es-US",
+        "expect": "La Bamba",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"La Bamba\""
+        }
+      },
+      {
+        "id": "7c79e66a70c30bb3",
+        "input": "bohemian rhapsoddy",
+        "locale": "en-US",
+        "expect": "Bohemian Rhapsody",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Bohemian Rhapsody\""
+        }
+      },
+      {
+        "id": "8128955e3a9fb0a0",
+        "input": "hey alexa par चलाओ lollipop lagelu spotify",
+        "locale": "hi-IN",
+        "expect": "Lollipop Lagelu",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Lollipop Lagelu\""
+        }
+      },
+      {
+        "id": "946e8fffc2771859",
+        "input": "reproduce la canción despacito en spotify",
+        "locale": "es-US",
+        "expect": "Despacito",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Despacito\""
+        }
+      },
+      {
+        "id": "96923f7bf34e9b52",
+        "input": "hey alexa raja ji sunao",
+        "locale": "hi-IN",
+        "expect": "Raja Ji",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Raja Ji\""
+        }
+      },
+      {
+        "id": "9cee9220ad740b02",
+        "input": "reproduce asereje en spotify",
+        "locale": "es-US",
+        "expect": "Asereje",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Aserejé\""
+        }
+      },
+      {
+        "id": "a5738ae2e5bbef6c",
+        "input": "alexa, find \"bohemian rhapsody\" please",
+        "locale": "en-US",
+        "expect": "Bohemian Rhapsody",
+        "outcomes": {
+          "OmniBeat": "ask (top-1 \"Bohemian Rhapsody\")",
+          "Baseline A (naive first-hit)": "played \"Bohemian Rhapsody\"",
+          "Baseline B (token top-1)": "played \"Bohemian Rhapsody\""
+        }
+      },
+      {
+        "id": "b37e0361f3fcd0ff",
+        "input": "hey alexa lolly pop la gelu",
+        "locale": "hi-IN",
+        "expect": "Lollipop Lagelu",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played WRONG \"La Bamba\""
+        }
+      },
+      {
+        "id": "b9bc6b61b059167b",
+        "input": "hey alexa play don't stop me now live",
+        "locale": "en-US",
+        "expect": "Dont Stop Me Now",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Don't Stop Me Now\""
+        }
+      },
+      {
+        "id": "be57b079ef7d58ad",
+        "input": "hey alexa reproduce la bamba en spotify",
+        "locale": "es-US",
+        "expect": "La Bamba",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"La Bamba\""
+        }
+      },
+      {
+        "id": "cbbf569b5a0683be",
+        "input": "shaam savere chalao",
+        "locale": "hi-IN",
+        "expect": "Shaam Savere",
+        "outcomes": {
+          "OmniBeat": "ask (top-1 \"Shaam Savere\")",
+          "Baseline A (naive first-hit)": "played \"Shaam Savere\"",
+          "Baseline B (token top-1)": "played \"Shaam Savere\""
+        }
+      },
+      {
+        "id": "e16d70510dead01f",
+        "input": "hey alexa reproduce en vivo bailando",
+        "locale": "es-US",
+        "expect": "Bailando",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Bailando\""
+        }
+      },
+      {
+        "id": "ef5eccb144466290",
+        "input": "hey alexa play blinding lights by the weeknd on spotify",
+        "locale": "en-US",
+        "expect": "Blinding Lights",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played \"Blinding Lights\""
+        }
+      },
+      {
+        "id": "f0fd05a5d2902544",
+        "input": "rajoo ji",
+        "locale": "hi-IN",
+        "expect": "Raja Ji",
+        "outcomes": {
+          "OmniBeat": "refused (not_found)",
+          "Baseline A (naive first-hit)": "refused (not_found)",
+          "Baseline B (token top-1)": "played WRONG \"Ji ji ji\""
+        }
+      }
+    ]
+  },
+  "worst_failures": {
+    "OmniBeat": [
+      {
+        "id": "1a72a0012f442e42",
+        "input": "hey alexa play lollipop lagelu live",
+        "expect": "Lollipop Lagelu",
+        "locale": "hi-IN",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 27
+      },
+      {
+        "id": "1edfebb6f8d711cd",
+        "input": "blinding lites",
+        "expect": "Blinding Lights",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 12
+      },
+      {
+        "id": "22c96d7a699888f8",
+        "input": "hey alexa SHUFFLE wonderwall!!",
+        "expect": "Wonderwall",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 12
+      },
+      {
+        "id": "2d9c98cef7e955cf",
+        "input": "hey alexa reproduce bailando remix en spotify",
+        "expect": "Bailando",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 10
+      },
+      {
+        "id": "39baaeb6ca9bca7d",
+        "input": "reproduce bailando en spotify",
+        "expect": "Bailando",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 10
+      },
+      {
+        "id": "5291c907357de215",
+        "input": "hey alexa bohemian rhapsoddy",
+        "expect": "Bohemian Rhapsody",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 9
+      },
+      {
+        "id": "5d1cb6415c7941df",
+        "input": "hey alexa lollipop lagelu baja do spotify",
+        "expect": "Lollipop Lagelu",
+        "locale": "hi-IN",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 11
+      },
+      {
+        "id": "69ec96a1ebf4ebb2",
+        "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
+        "expect": "Blinding Lights",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 8
+      },
+      {
+        "id": "7178cbd6365add21",
+        "input": "reproduce la bamba en spotify",
+        "expect": "La Bamba",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 10
+      },
+      {
+        "id": "7c79e66a70c30bb3",
+        "input": "bohemian rhapsoddy",
+        "expect": "Bohemian Rhapsody",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 8
+      }
+    ],
+    "Baseline A (naive first-hit)": [
+      {
+        "id": "333a55005d8ddce0",
+        "input": "hey alexa ya no me llamaz",
+        "expect": "Ya No Me Llamas",
+        "locale": "es-US",
+        "decision": "play",
+        "confidence": 1,
+        "chosenTitle": "Ya No Me Llamas (feat. Shaka & Benny)",
+        "top1Title": "Ya No Me Llamas (feat. Shaka & Benny)",
+        "candidateCount": 1,
+        "latencyMs": 9
+      },
+      {
+        "id": "1a72a0012f442e42",
+        "input": "hey alexa play lollipop lagelu live",
+        "expect": "Lollipop Lagelu",
+        "locale": "hi-IN",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 9
+      },
+      {
+        "id": "1edfebb6f8d711cd",
+        "input": "blinding lites",
+        "expect": "Blinding Lights",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 9
+      },
+      {
+        "id": "22c96d7a699888f8",
+        "input": "hey alexa SHUFFLE wonderwall!!",
+        "expect": "Wonderwall",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 8
+      },
+      {
+        "id": "2d9c98cef7e955cf",
+        "input": "hey alexa reproduce bailando remix en spotify",
+        "expect": "Bailando",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 6
+      },
+      {
+        "id": "39baaeb6ca9bca7d",
+        "input": "reproduce bailando en spotify",
+        "expect": "Bailando",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 7
+      },
+      {
+        "id": "5291c907357de215",
+        "input": "hey alexa bohemian rhapsoddy",
+        "expect": "Bohemian Rhapsody",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 8
+      },
+      {
+        "id": "5d1cb6415c7941df",
+        "input": "hey alexa lollipop lagelu baja do spotify",
+        "expect": "Lollipop Lagelu",
+        "locale": "hi-IN",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 7
+      },
+      {
+        "id": "69ec96a1ebf4ebb2",
+        "input": "hey alexa hey alexa play blinding lights by the weeknd on spotify",
+        "expect": "Blinding Lights",
+        "locale": "en-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 8
+      },
+      {
+        "id": "7178cbd6365add21",
+        "input": "reproduce la bamba en spotify",
+        "expect": "La Bamba",
+        "locale": "es-US",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 7
+      }
+    ],
+    "Baseline B (token top-1)": [
+      {
+        "id": "b37e0361f3fcd0ff",
+        "input": "hey alexa lolly pop la gelu",
+        "expect": "Lollipop Lagelu",
+        "locale": "hi-IN",
+        "decision": "play",
+        "confidence": 0.5,
+        "chosenTitle": "La Bamba",
+        "top1Title": "La Bamba",
+        "candidateCount": 1,
+        "latencyMs": 0
+      },
+      {
+        "id": "f0fd05a5d2902544",
+        "input": "rajoo ji",
+        "expect": "Raja Ji",
+        "locale": "hi-IN",
+        "decision": "play",
+        "confidence": 1,
+        "chosenTitle": "Ji ji ji",
+        "top1Title": "Ji ji ji",
+        "candidateCount": 1,
+        "latencyMs": 0
+      },
+      {
+        "id": "aca6d0f5c827d4cf",
+        "input": "मुझे तुम याद आना",
+        "expect": "Mujhe Tum Yaad Aana",
+        "locale": "hi-IN",
+        "decision": "not_found",
+        "confidence": 0,
+        "chosenTitle": null,
+        "top1Title": null,
+        "candidateCount": 0,
+        "latencyMs": 0
+      }
+    ]
+  }
+}
