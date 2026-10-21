@@ -1,7 +1,7 @@
 {
   "schema": "omnibeat.replay-catalog.v0",
-  "captured_at": "2026-10-19T15:11:55.247Z",
-  "notes": "REAL upstream responses (iTunes Search + MusicBrainz WS/2) captured from this machine by scripts/capture-fixtures.mjs. Served badged REPLAY. Previews are never persisted (CLM-MUS-003).",
+  "captured_at": "2026-10-21T05:47:35.302Z",
+  "notes": "REAL upstream responses (iTunes Search + MusicBrainz WS/2) captured from this machine by scripts/capture-fixtures.mjs + scripts/expand-catalog.mjs (corpus-coverage expansion). Served badged REPLAY. Previews are never persisted (CLM-MUS-003).",
   "entries": [
     {
       "key": "raja ji",
@@ -962,6 +962,4146 @@
                 "year": 2026,
                 "version": "unknown",
                 "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f4/ac/7b/f4ac7b12-61a9-b554-30eb-11f660761c50/1151200.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "asereje",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:45:44.553Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Asereje&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1387977051",
+                "title": "Aserejé (Spanish Version)",
+                "artist": "Las Ketchup",
+                "year": 2000,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/11/65/32/116532c7-18c0-74d0-38ac-d70d5a530ee8/192562539507.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1387975293",
+                "title": "Aserejé (Spanglish Version)",
+                "artist": "Las Ketchup",
+                "year": 1995,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/11/65/32/116532c7-18c0-74d0-38ac-d70d5a530ee8/192562539507.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1387976211",
+                "title": "Aserejé (Hippy)",
+                "artist": "Las Ketchup",
+                "year": 2000,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/11/65/32/116532c7-18c0-74d0-38ac-d70d5a530ee8/192562539507.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1440861190",
+                "title": "Aserejé (2018 Radio Mix)",
+                "artist": "Las Ketchup",
+                "year": 2002,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/20/63/7c/20637c60-fe69-3846-cdf8-759fa29187ec/193483093796.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1708994711",
+                "title": "Aserejé",
+                "artist": "Jean Massey",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/7b/36/21/7b3621d8-5b80-d8e0-d8d3-9aefe2990d16/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1806851947",
+                "title": "Aserejé (Remix)",
+                "artist": "MESTIZA & Las Ketchup",
+                "year": 2025,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/1f/ad/20/1fad20a4-e7cb-066f-c30e-6c4710df947a/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1807858077",
+                "title": "Asereje",
+                "artist": "Las Ketchup",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/7c/8a/f27c8a5b-b9f7-ec02-9d95-5301f8651c71/198704461514_Cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_250606235",
+                "title": "Aserejé",
+                "artist": "La Sonora Dinamita",
+                "year": 2002,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/7c/40/2f/7c402ff0-8f28-f001-bcb2-473605dc05d2/mzi.rylhpmqr.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:45:44.553Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Asereje",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_fe7b9003-4ae0-442f-be01-a3f858797812",
+                "title": "Asereje",
+                "artist": "Girlzz",
+                "year": 2002,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "fe7b9003-4ae0-442f-be01-a3f858797812"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_5dd009f1-5fd0-4454-83fc-a582d35943d2",
+                "title": "Asereje",
+                "artist": "M-Essential",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "5dd009f1-5fd0-4454-83fc-a582d35943d2"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_d10ad738-819c-4915-a9a6-0e281f0ffee0",
+                "title": "Asereje",
+                "artist": "Valentina Ponzone",
+                "year": 2010,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "d10ad738-819c-4915-a9a6-0e281f0ffee0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2c6dfb59-9bf8-4a27-bdd4-f57404bf60db",
+                "title": "Asereje",
+                "artist": "Darina, Judith & Mar Contreras",
+                "year": 2002,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2c6dfb59-9bf8-4a27-bdd4-f57404bf60db"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c364d57d-e69b-4d35-87dd-22f3ce12215f",
+                "title": "Asereje",
+                "artist": "Otu",
+                "year": 2023,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "c364d57d-e69b-4d35-87dd-22f3ce12215f"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "bailando",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:45:52.743Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Bailando&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1440819669",
+                "title": "Bailando (English Version) [feat. Sean Paul, Descemer Bueno & Gente de Zona]",
+                "artist": "Enrique Iglesias",
+                "year": 2008,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c7/18/3e/c7183ef7-49f1-8941-03cf-ad17ca8b97ea/00602537854097.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1440820189",
+                "title": "Bailando (Spanish Version) [feat. Descemer Bueno & Gente de Zona]",
+                "artist": "Enrique Iglesias",
+                "year": 1998,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c7/18/3e/c7183ef7-49f1-8941-03cf-ad17ca8b97ea/00602537854097.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_383840422",
+                "title": "Bailando",
+                "artist": "Paradisio",
+                "year": 1996,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/05/6b/5a/056b5acc-7fc8-c179-c5c8-133e002cdd05/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1720320078",
+                "title": "Bailando",
+                "artist": "Grupo Bryndis & La Fiera de Ojinaga",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/6e/c8/76/6ec876b6-ea52-4a0c-c5a3-393833c6c4e1/197190493559.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1443206642",
+                "title": "Bailando (feat. Descemer Bueno & Gente de Zona) [Spanish Version]",
+                "artist": "Enrique Iglesias",
+                "year": 2014,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/78/24/ef/7824ef28-730b-6f71-12b2-0d9ec420f83d/00602537854080.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1442963282",
+                "title": "Bailando (feat. Sean Paul, Descemer Bueno & Gente de Zona) [English Version]",
+                "artist": "Enrique Iglesias",
+                "year": 2008,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d4/ec/f5/d4ecf56c-2fb8-d529-b6bd-27ffcd43bb17/00602547230461.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1443206483",
+                "title": "Bailando (feat. Sean Paul, Descemer Bueno & Gente de Zona)",
+                "artist": "Enrique Iglesias",
+                "year": 2014,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/78/24/ef/7824ef28-730b-6f71-12b2-0d9ec420f83d/00602537854080.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1442964014",
+                "title": "Bailando (feat. Descemer Bueno & Gente de Zona) [Spanish Version]",
+                "artist": "Enrique Iglesias",
+                "year": 1998,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d4/ec/f5/d4ecf56c-2fb8-d529-b6bd-27ffcd43bb17/00602547230461.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:45:52.743Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Bailando",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_d38e9fc8-0f6b-4f96-8045-07359fa872a7",
+                "title": "Bailando bailando",
+                "artist": "Grupo La Libertad",
+                "year": 1990,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "d38e9fc8-0f6b-4f96-8045-07359fa872a7"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ae30ef17-6752-4651-9b99-f2c321d6c30c",
+                "title": "Bailando, Bailando",
+                "artist": "Inti Illimani Histórico",
+                "year": 2016,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ae30ef17-6752-4651-9b99-f2c321d6c30c"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f25aa128-fa36-46f5-b4cc-633512d03df6",
+                "title": "Bailando, Bailando",
+                "artist": "Inti‐Illimani",
+                "year": 2013,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f25aa128-fa36-46f5-b4cc-633512d03df6"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ba27c881-bba3-4178-86c4-39d407e91bea",
+                "title": "Bailando bailando",
+                "artist": "Inspector",
+                "year": 2018,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ba27c881-bba3-4178-86c4-39d407e91bea"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_420a982b-549c-4965-845d-0a469f30cb8a",
+                "title": "Bailando Bailando",
+                "artist": "Permiso extraordinario",
+                "year": 2007,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "420a982b-549c-4965-845d-0a469f30cb8a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_11140c17-cbcc-4b4d-a8df-5b6c104be27e",
+                "title": "Bailando bailando",
+                "artist": "Vanda Lopes",
+                "year": 2016,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "11140c17-cbcc-4b4d-a8df-5b6c104be27e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_34505e75-30fd-40ce-a636-383b3723969c",
+                "title": "Bailando, bailando",
+                "artist": "Inti‐Illimani",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "34505e75-30fd-40ce-a636-383b3723969c"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_eb018b58-6d52-4f7b-a6aa-cf485469c9a9",
+                "title": "Bailando, bailando",
+                "artist": "Inti‐Illimani",
+                "year": 1986,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "eb018b58-6d52-4f7b-a6aa-cf485469c9a9"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "bicycle race",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:45:57.318Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Bicycle%20Race&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_6781079509",
+                "title": "Bicycle Race",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9e/ae/4a/9eae4a23-130a-4ed7-d590-bfa701f9acaf/602527717685.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781080938",
+                "title": "Bicycle Race",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/c7/55/15c755bc-7603-3ce3-e243-e59f1f9863ea/602527724171.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1862861089",
+                "title": "Bicycle Race",
+                "artist": "Ravyn Lenae",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9a/15/41/9a1541ad-5eb0-0c78-6153-ffddfcc36081/075679590664.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1440940230",
+                "title": "Bicycle Race",
+                "artist": "Between the Buried and Me",
+                "year": 2006,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/cc/e7/2d/cce72df4-3336-401b-e765-03a93b4990fc/00886443186637.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_314711868",
+                "title": "Bicycle Race",
+                "artist": "Rockabye Baby!",
+                "year": 2009,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music/7a/a8/6d/mzi.otenlvuy.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781080311",
+                "title": "Bicycle Race",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b0/ca/05/b0ca05aa-29c9-4e01-5a16-f6fa06bce05c/602527594347.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781076107",
+                "title": "Bicycle Race",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b0/28/a7/b028a7a4-9e6f-62fb-bce2-103a633449a9/602527717678.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781462226",
+                "title": "Bicycle Race (Live, European Tour / 1979)",
+                "artist": "Queen",
+                "year": 1979,
+                "version": "live",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f4/42/ae/f442aeba-0de2-f4b5-e5a0-75286bef1f6e/602527584232.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:45:57.318Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Bicycle%20Race",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_7e70769d-0716-4097-9e79-25b92a6340f2",
+                "title": "Bicycle Race",
+                "artist": "Mamas Gun",
+                "year": 2011,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "7e70769d-0716-4097-9e79-25b92a6340f2"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_b258dd6b-5033-4452-bb90-109acfe0cd8f",
+                "title": "Bicycle Race",
+                "artist": "Ra",
+                "year": 2021,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "b258dd6b-5033-4452-bb90-109acfe0cd8f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_208ee1cd-4105-450a-87d0-448e0ba0809b",
+                "title": "Bicycle Race",
+                "artist": "Blümchen",
+                "year": 2003,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "208ee1cd-4105-450a-87d0-448e0ba0809b"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_e69dae4c-08c3-48fe-b7be-412579d0e4ac",
+                "title": "Bicycle Race",
+                "artist": "Donna Summer",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "e69dae4c-08c3-48fe-b7be-412579d0e4ac"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_66f1face-7ffe-4262-99d2-87c7ff2253dd",
+                "title": "Bicycle Race",
+                "artist": "Queen + Adam Lambert",
+                "year": 2022,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "66f1face-7ffe-4262-99d2-87c7ff2253dd"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8bc6a500-b379-4729-a9ce-850bf23a1610",
+                "title": "Bicycle Race",
+                "artist": "System Nipel",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8bc6a500-b379-4729-a9ce-850bf23a1610"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c2ede9c9-7fa1-4124-a5d8-0549ad0005a8",
+                "title": "Bicycle Race",
+                "artist": "Michael Armstrong",
+                "year": 2009,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "c2ede9c9-7fa1-4124-a5d8-0549ad0005a8"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_5140de21-91ea-4d85-8888-4e4d416e4b83",
+                "title": "Bicycle Race",
+                "artist": "Blümchen",
+                "year": 1997,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "5140de21-91ea-4d85-8888-4e4d416e4b83"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "blinding lights",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:03.379Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Blinding%20Lights&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1542842761",
+                "title": "Blinding Lights (Remix)",
+                "artist": "The Weeknd & ROSALÍA",
+                "year": 2020,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/61/e7/3f/61e73f94-018d-5f50-50ec-8521952bc72e/20UM1IM11629.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1513133940",
+                "title": "Blinding Lights",
+                "artist": "Teddy Swims",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/8a/e6/47/8ae64750-3dcf-ac4d-b0f6-c70c92893494/054391934000.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1531252590",
+                "title": "Blinding Lights",
+                "artist": "KIDZ BOP Kids",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a3/5f/07/a35f074c-a9cd-a148-3d05-5ec1988f6c99/20CRGIM24141.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1627610546",
+                "title": "Blinding Lights",
+                "artist": "All Time Low",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/10/7a/52/107a52d6-0f4e-44c2-7f7c-1671ecd05345/075679740731.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1556108146",
+                "title": "Blinding Lights",
+                "artist": "X Ambassadors",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/25/86/75/2586751e-538c-9a96-9d84-02d27f57cba3/21UMGIM17253.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1735024505",
+                "title": "Blinding Lights (Country Version)",
+                "artist": "Tebey",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0c/08/60/0c08603c-2eff-4dc7-4393-7cb1182bd666/198391497544.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1499378607",
+                "title": "Blinding Lights",
+                "artist": "The Weeknd",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/6f/bc/e6/6fbce6c4-c38c-72d8-4fd0-66cfff32f679/20UMGIM12176.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1505683988",
+                "title": "Blinding Lights",
+                "artist": "The Weeknd",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/03/e1/67/03e167d6-ee05-eb32-55e9-c5040f55a8bf/20UMGIM21166.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:03.379Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Blinding%20Lights",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_c1ae0525-e646-4c1a-bff7-6985a5cb80b1",
+                "title": "Blinding Lights",
+                "artist": "Ravenlight",
+                "year": 2022,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "c1ae0525-e646-4c1a-bff7-6985a5cb80b1"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_825e38a9-d35b-425a-8091-482bcd95010a",
+                "title": "Blinding Lights",
+                "artist": "Giacomo Bucci",
+                "year": 2026,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "825e38a9-d35b-425a-8091-482bcd95010a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9ac8eaeb-890c-4c3b-bb93-61991d4d1ca0",
+                "title": "Blinding Lights",
+                "artist": "The Weeknd feat. ROSALÍA",
+                "year": 2021,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "9ac8eaeb-890c-4c3b-bb93-61991d4d1ca0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_31e6710c-ce7e-47c8-8373-7b7cd79d8f88",
+                "title": "Blinding Lights",
+                "artist": "Pop Goes Ambient, Vancouver Sleep Clinic & Amelia Magdalena",
+                "year": 2023,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "31e6710c-ce7e-47c8-8373-7b7cd79d8f88"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_6763626e-d78c-4c05-bd8d-34a06d8bf038",
+                "title": "Blinding Lights",
+                "artist": "1 Hit Blunder",
+                "year": 2021,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "6763626e-d78c-4c05-bd8d-34a06d8bf038"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_30cda0c7-7d19-4b5d-a3b7-7c1a7f2d1088",
+                "title": "Blinding Lights",
+                "artist": "Blu Sanders",
+                "year": 2020,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "30cda0c7-7d19-4b5d-a3b7-7c1a7f2d1088"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8aaa7abe-3af5-4ce4-b6bd-8d197a0ce5f6",
+                "title": "Blinding Lights",
+                "artist": "Jet Jaguar",
+                "year": 2020,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8aaa7abe-3af5-4ce4-b6bd-8d197a0ce5f6"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "bohemian rhapsody",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:07.972Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Bohemian%20Rhapsody&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_6781024437",
+                "title": "Bohemian Rhapsody",
+                "artist": "Queen",
+                "year": 1975,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/0a/ea/8b0aea60-6f4a-195b-5958-cdf459c2333b/602527644271.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1125281672",
+                "title": "Bohemian Rhapsody",
+                "artist": "Panic! At the Disco",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2f/76/c0/2f76c0c7-5aaf-eb97-2002-f40c9ecde722/075679910486.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781080934",
+                "title": "Bohemian Rhapsody",
+                "artist": "Queen",
+                "year": 1975,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/c7/55/15c755bc-7603-3ce3-e243-e59f1f9863ea/602527724171.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1212561324",
+                "title": "Bohemian Rhapsody",
+                "artist": "Pentatonix",
+                "year": 2017,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/71/0f/6e/710f6ebb-156d-f04c-a935-79ed81f4351a/886446401423.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781027700",
+                "title": "Bohemian Rhapsody (Live Aid)",
+                "artist": "Queen",
+                "year": 2018,
+                "version": "live",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/62/2e/97/622e97c4-d620-2ae1-2a47-a32e16a01492/602567988847.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781024442",
+                "title": "Bohemian Rhapsody (Operatic Section / 2011 A Cappella Mix)",
+                "artist": "Queen",
+                "year": 1975,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/0a/ea/8b0aea60-6f4a-195b-5958-cdf459c2333b/602527644271.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781462245",
+                "title": "Bohemian Rhapsody (Live, European Tour / 1979)",
+                "artist": "Queen",
+                "year": 1979,
+                "version": "live",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f4/42/ae/f442aeba-0de2-f4b5-e5a0-75286bef1f6e/602527584232.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781080302",
+                "title": "Bohemian Rhapsody",
+                "artist": "Queen",
+                "year": 1975,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b0/ca/05/b0ca05aa-29c9-4e01-5a16-f6fa06bce05c/602527594347.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:07.972Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Bohemian%20Rhapsody",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_17eb3129-0f17-403f-bea0-b524d6ffb770",
+                "title": "Bohemian Rhapsody",
+                "artist": "The Phones",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "17eb3129-0f17-403f-bea0-b524d6ffb770"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_d480d302-577d-44c0-b502-99b678d11640",
+                "title": "Bohemian Rhapsody",
+                "artist": "Áspid",
+                "year": 2004,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "d480d302-577d-44c0-b502-99b678d11640"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ea1bf0b5-e7a9-45d8-bbee-bf058f62537d",
+                "title": "Bohemian Rhapsody",
+                "artist": "California Guitar Trio",
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "ea1bf0b5-e7a9-45d8-bbee-bf058f62537d"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f2f4639e-5238-4061-ad9d-4ac16d40c805",
+                "title": "Bohemian Rhapsody",
+                "artist": "The Hampton String Quartet",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f2f4639e-5238-4061-ad9d-4ac16d40c805"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_79d660ef-dd32-4c5c-b2aa-a9d736cd2396",
+                "title": "Bohemian Rhapsody",
+                "artist": "The Allen Toussaint Orchestra",
+                "year": 1988,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "79d660ef-dd32-4c5c-b2aa-a9d736cd2396"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_3c80c42d-ac05-4ec1-a0c4-26d9fe74794e",
+                "title": "Bohemian Rhapsody",
+                "artist": "The Chant Masters",
+                "year": 2005,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "3c80c42d-ac05-4ec1-a0c4-26d9fe74794e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_622f47b3-5353-432f-b6da-248a9414067b",
+                "title": "Bohemian Rhapsody",
+                "artist": "Robert Wells",
+                "year": 2001,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "622f47b3-5353-432f-b6da-248a9414067b"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c05ade77-7a1f-44d3-b9b5-838f227c73f3",
+                "title": "Bohemian Rhapsody",
+                "artist": "The Nerds",
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "c05ade77-7a1f-44d3-b9b5-838f227c73f3"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "chaand sitaare",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:12.422Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Chaand%20Sitaare&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1741984216",
+                "title": "Chaand Sitaare",
+                "artist": "Synchronizers The Band",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/29/82/a1/2982a1ef-564f-c564-e656-207170086e92/859787108948_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1735510783",
+                "title": "Chaand Sitaare Maanjai",
+                "artist": "Manav S Doshi",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/8c/fe/66/8cfe663c-fa33-c304-4976-d06157397b02/8447181400700.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6764028315",
+                "title": "Lost In Love (feat. Shahid Hussain)",
+                "artist": "Humnava, Zain Zohaib & Damsaaz",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/98/ad/38/98ad384a-d94e-2692-3821-681f085fde41/8718521235659.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1364843580",
+                "title": "Chand Sitare",
+                "artist": "Kumar Sanu",
+                "year": 1999,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/57/a5/e0/57a5e064-f087-e318-582f-27ab8eb71496/192562328149.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1650465469",
+                "title": "Chann Sitare (From \"Oye Makhna\")",
+                "artist": "Ammy Virk, Avvy Sra & Harmanjeet Singh",
+                "year": 2022,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/86/09/18860987-20be-4ceb-9903-e545620e1150/197187227402.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1282126989",
+                "title": "Bade Achhe Lagte Hain",
+                "artist": "Amit Kumar",
+                "year": 1976,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/d4/ea/03/d4ea0342-8f2c-9a71-e4b4-c91216d48cc6/191773222758.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1720441872",
+                "title": "Sitaare",
+                "artist": "Shreya, Sukrit Srivastava & BHAWNA AGGARWAL",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/01/92/10/01921020-2529-adde-7ee4-4ef82e4d659c/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1835532050",
+                "title": "Chaand",
+                "artist": "CHINANSHA SHARMA",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/65/6f/d0/656fd08d-a524-1db2-1405-eeb4eb2a58d4/859715721546_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:12.422Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Chaand%20Sitaare",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_f912de4b-97e5-41bb-a369-8a16fe1b91c5",
+                "title": "Sitaare",
+                "artist": "Arijit Singh",
+                "year": 2025,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f912de4b-97e5-41bb-a369-8a16fe1b91c5"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_87edba82-ec96-4578-85da-3f25b1b47477",
+                "title": "Sitaare",
+                "artist": "Adi & Suhail",
+                "year": 2014,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "87edba82-ec96-4578-85da-3f25b1b47477"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ebd18ca7-020e-4555-83c8-ef396f2f2268",
+                "title": "Chaand",
+                "artist": "Baalti & Lapgan",
+                "year": 2026,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ebd18ca7-020e-4555-83c8-ef396f2f2268"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_6f5e453f-bfd9-4c4c-9c9a-6a1f2a12a388",
+                "title": "Chaand",
+                "artist": "Shweta Shetty",
+                "year": 1994,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "6f5e453f-bfd9-4c4c-9c9a-6a1f2a12a388"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f11c85df-ba27-4116-986e-b329461f5ed3",
+                "title": "Chaand",
+                "artist": "D Flect",
+                "year": 2021,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f11c85df-ba27-4116-986e-b329461f5ed3"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8029873d-73ee-40fe-98ec-c160646f27ed",
+                "title": "Chaand",
+                "artist": "Silajit Majumder",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8029873d-73ee-40fe-98ec-c160646f27ed"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f9fff276-ead4-4e6d-a628-159b484e2f59",
+                "title": "Chaand",
+                "artist": "Dexter Britain",
+                "year": 2023,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f9fff276-ead4-4e6d-a628-159b484e2f59"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_aed93c21-b133-4c44-badf-bf42179be437",
+                "title": "Chaand",
+                "artist": "Faheem Abdullah",
+                "year": 2026,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "aed93c21-b133-4c44-badf-bf42179be437"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "danza kuduro",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:16.844Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Danza%20Kuduro&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1440636498",
+                "title": "Danza Kuduro (feat. Lucenzo)",
+                "artist": "Don Omar",
+                "year": 2010,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/be/9d/22/be9d22c2-99b2-9e26-11dd-d1a043779b8d/10UMGIM27798.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6807820149",
+                "title": "Danza Kuduro (Super Slowed)",
+                "artist": "T3NZU",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/1c/69/15/1c6915ff-2c56-bf9e-7e01-d942cc2b755c/5064115913193_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6799269262",
+                "title": "Danza Kuduro (EDM Version)",
+                "artist": "AhZed",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ed/29/a7/ed29a76c-3e9e-183f-c3d4-de602f70511a/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1772880812",
+                "title": "Danza Kuduro (Remix)",
+                "artist": "Dj R'an",
+                "year": 2023,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/34/ef/7a/34ef7a48-b814-5fa7-6e98-d96e931a1d0c/3664216072748.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1740668517",
+                "title": "Danza Kuduro (Tiësto Remix)",
+                "artist": "Don Omar, Lucenzo & Tiësto",
+                "year": 2024,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/d2/a7/dfd2a793-1388-9c9e-9b7d-641765a512cf/24UMGIM38409.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1440781761",
+                "title": "Danza Kuduro (feat. Lucenzo)",
+                "artist": "Don Omar",
+                "year": 2010,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/9d/de/92/9dde92c3-5b15-2c2f-0964-a1b4cda36e50/11ABKIM00016.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1442784095",
+                "title": "Danza Kuduro (feat. Lucenzo)",
+                "artist": "Don Omar & Lucenzo",
+                "year": 2010,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/b3/a6/e9/b3a6e924-6496-4fd4-6e7b-11ccaf6e79a4/10UMGIM27799.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:16.844Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Danza%20Kuduro",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_ef89a28c-2b85-4902-b230-acce49debeef",
+                "title": "Danza Kuduro",
+                "artist": "Lucenzo feat. Don Omar",
+                "year": 2017,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ef89a28c-2b85-4902-b230-acce49debeef"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9d43f888-f9d3-40f6-92c3-b2f0f4127322",
+                "title": "Danza Kuduro",
+                "artist": "Party",
+                "year": 2011,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "9d43f888-f9d3-40f6-92c3-b2f0f4127322"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_fd1a86f1-b8cb-4923-817b-8657f3783917",
+                "title": "Danza kuduro",
+                "artist": "Collectif Métissé",
+                "year": 2022,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "fd1a86f1-b8cb-4923-817b-8657f3783917"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_3111faf7-b575-42a6-bac5-5a93a0d603b0",
+                "title": "Danza Kuduro",
+                "artist": "Toni Os Company",
+                "year": 2014,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "3111faf7-b575-42a6-bac5-5a93a0d603b0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9c14fb96-0fa4-4b8b-b1ef-df0e2bdd6646",
+                "title": "Danza Kuduro",
+                "artist": "Reggaeton Latino Band",
+                "year": 2011,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "9c14fb96-0fa4-4b8b-b1ef-df0e2bdd6646"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_16d6c51c-0fb6-4bb5-969e-66d93a78078e",
+                "title": "Danza Kuduro",
+                "artist": "Jose Diaz",
+                "year": 2014,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "16d6c51c-0fb6-4bb5-969e-66d93a78078e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_529d425a-cc2f-4013-8231-a7f1f7505920",
+                "title": "Danza Kuduro",
+                "artist": "Ana Malhoa",
+                "year": 2011,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "529d425a-cc2f-4013-8231-a7f1f7505920"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_b901c050-f0b7-4714-9166-52e4946dd38f",
+                "title": "Danza Kuduro",
+                "artist": "Ana Malhoa",
+                "year": 2011,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "b901c050-f0b7-4714-9166-52e4946dd38f"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "despacito",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:21.087Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Despacito&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1447401620",
+                "title": "Despacito",
+                "artist": "Luis Fonsi & Daddy Yankee",
+                "year": 2017,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e2/ef/f0/e2eff0bc-c51d-7de5-9280-6891ddcee71b/18UMGIM85289.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1447401626",
+                "title": "Despacito (feat. Justin Bieber) [Remix]",
+                "artist": "Luis Fonsi & Daddy Yankee",
+                "year": 2017,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e2/ef/f0/e2eff0bc-c51d-7de5-9280-6891ddcee71b/18UMGIM85289.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1445011795",
+                "title": "Despacito (Versión Urbana/Sky)",
+                "artist": "Luis Fonsi & Daddy Yankee",
+                "year": 2017,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/11/d6/58/11d658ed-2ee0-31bb-da65-3377b879f7fe/00602557543537.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1445038004",
+                "title": "Despacito (Mandarin Version) [feat. JJ Lin]",
+                "artist": "Luis Fonsi",
+                "year": 2018,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/e7/93/2b/e7932ba8-b6c0-c197-96a9-5004b1361186/00602567340683.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1844369309",
+                "title": "Despacito (feat. FOLA)",
+                "artist": "Blaqbonez",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9f/d8/4f/9fd84f45-8194-4d49-38d1-b5ad4a5624ad/5026854091686.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1444896177",
+                "title": "Despacito (Versión Salsa) [feat. Victor Manuelle]",
+                "artist": "Luis Fonsi",
+                "year": 2017,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/62/d0/a4/62d0a440-68d7-14c6-bf1b-cbec3d3c9d24/00602557530926.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1261427980",
+                "title": "Despacito",
+                "artist": "2CELLOS",
+                "year": 2017,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/5b/42/9b/5b429b85-38ce-c524-c9eb-42f078be91d0/886446636191.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:21.087Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Despacito",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_91b32ec7-c379-4b12-9797-86913db7f742",
+                "title": "Despacito... despacito",
+                "artist": "Gracia Montes",
+                "year": 1999,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "91b32ec7-c379-4b12-9797-86913db7f742"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ed6da6f1-ec53-4ee0-b084-77b796eac2bc",
+                "title": "Despacito",
+                "artist": "Sheena & D Marco",
+                "year": 2006,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "ed6da6f1-ec53-4ee0-b084-77b796eac2bc"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2a130e3f-6300-4c4c-918b-e5dc3415b119",
+                "title": "Despacito",
+                "artist": "Beloved Melodies",
+                "year": 2022,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2a130e3f-6300-4c4c-918b-e5dc3415b119"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c9f3a0a0-feda-4352-9256-f9541df4ed19",
+                "title": "Despacito",
+                "artist": "Andre Soueid",
+                "year": 2017,
+                "version": "cover",
+                "canonical_ids": {
+                  "musicbrainz": "c9f3a0a0-feda-4352-9256-f9541df4ed19"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_d21f3c76-5145-439c-94b1-8cdb7efa9d5a",
+                "title": "Despacito",
+                "artist": "Luis Fonsi feat. Víctor Manuelle",
+                "year": 2017,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "d21f3c76-5145-439c-94b1-8cdb7efa9d5a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ed38f47d-0cc0-40c9-a706-58675db525ac",
+                "title": "Despacito",
+                "artist": "S.B.S.",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ed38f47d-0cc0-40c9-a706-58675db525ac"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_d95261b1-f92c-43e4-bf8e-0099bac08f61",
+                "title": "Despacito",
+                "artist": "Las Hermanas Padilla",
+                "year": 2010,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "d95261b1-f92c-43e4-bf8e-0099bac08f61"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2fddd20e-3cc3-4076-8a01-7cb713f0e0a4",
+                "title": "Despacito",
+                "artist": "Fernando Echavarría & La Familia André",
+                "year": 2015,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2fddd20e-3cc3-4076-8a01-7cb713f0e0a4"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "dont stop me now",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:25.523Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Dont%20Stop%20Me%20Now&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_6781079518",
+                "title": "Don't Stop Me Now",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9e/ae/4a/9eae4a23-130a-4ed7-d590-bfa701f9acaf/602527717685.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781027711",
+                "title": "Don't Stop Me Now (...Revisited)",
+                "artist": "Queen",
+                "year": 2018,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/62/2e/97/622e97c4-d620-2ae1-2a47-a32e16a01492/602567988847.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781079522",
+                "title": "Don't Stop Me Now (With Long-Lost Guitars)",
+                "artist": "Queen",
+                "year": 2011,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9e/ae/4a/9eae4a23-130a-4ed7-d590-bfa701f9acaf/602527717685.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781080941",
+                "title": "Don't Stop Me Now",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/c7/55/15c755bc-7603-3ce3-e243-e59f1f9863ea/602527724171.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1447260597",
+                "title": "Don't Stop Me Now",
+                "artist": "The Regrettes",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/01/78/1e/01781e14-2653-3ab1-cf7a-acea03ab8f1c/054391946638.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781080314",
+                "title": "Don't Stop Me Now",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b0/ca/05/b0ca05aa-29c9-4e01-5a16-f6fa06bce05c/602527594347.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1810089063",
+                "title": "DONT STOP ME NOW",
+                "artist": "Boys Don't Cry",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7d/cd/05/7dcd05c3-851f-0908-f2a8-790a8c5dfc6f/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781076300",
+                "title": "Don't Stop Me Now",
+                "artist": "Queen",
+                "year": 1978,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b0/28/a7/b028a7a4-9e6f-62fb-bce2-103a633449a9/602527717678.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:25.523Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Dont%20Stop%20Me%20Now",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_57dfac07-762b-44ef-9143-4ee2ee9e0a54",
+                "title": "Dont Stop Me Now",
+                "artist": "James Fairchild, Leland Orr, Steve Pettinger, Danny Morgan & Miles Davenport",
+                "year": 2012,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "57dfac07-762b-44ef-9143-4ee2ee9e0a54"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_21f1dd3f-69e6-4433-90b6-9472b0f55b0e",
+                "title": "Dont Stop Me Now (album edit)",
+                "artist": "Global Deejays",
+                "year": 2006,
+                "version": "cover",
+                "canonical_ids": {
+                  "musicbrainz": "21f1dd3f-69e6-4433-90b6-9472b0f55b0e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c43a4b83-c488-4a07-8cce-f78d59683313",
+                "title": "Dont Stop Me Now (Edited remix)",
+                "artist": "Loft",
+                "year": 1995,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "c43a4b83-c488-4a07-8cce-f78d59683313"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_3b3f799d-ee2c-4d71-86f3-30e4b94f052d",
+                "title": "(Don't Try and) Stop Me Now I've Started",
+                "artist": "Aina",
+                "year": 1985,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "3b3f799d-ee2c-4d71-86f3-30e4b94f052d"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_5a03906d-be40-4db5-a1af-f64fa9fa2b3b",
+                "title": "Dont Stop Now",
+                "artist": "Willy Mason",
+                "year": 2013,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "5a03906d-be40-4db5-a1af-f64fa9fa2b3b"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_e752cb64-492e-4c35-8185-17aa61409bb2",
+                "title": "Dont Stop Now",
+                "artist": "Jack In Box & DBL",
+                "year": 2023,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "e752cb64-492e-4c35-8185-17aa61409bb2"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_50d99ce8-726c-48eb-a13b-a37ecd95bf14",
+                "title": "Dont stop now",
+                "artist": "DJ Crisps",
+                "year": 2023,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "50d99ce8-726c-48eb-a13b-a37ecd95bf14"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_06ac58d5-5b1c-4aa4-84e0-ebd19f76d61e",
+                "title": "dont stop now",
+                "artist": "anemoia",
+                "year": 2021,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "06ac58d5-5b1c-4aa4-84e0-ebd19f76d61e"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "la bamba",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:30.044Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=La%20Bamba&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_118142371",
+                "title": "La Bamba",
+                "artist": "Ritchie Valens",
+                "year": 1958,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/7b/e3/aa/7be3aa70-5cbe-26ce-b368-363d1cb6ae5e/mzi.gninxwgv.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_342347879",
+                "title": "La Bamba",
+                "artist": "Los Lobos",
+                "year": 1987,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music/11/ac/57/mzi.gihwdlmg.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1543307430",
+                "title": "La Bamba",
+                "artist": "Selena",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/ef/21/7f/ef217fad-1556-c8d4-4229-c1c1ca646968/20UM1IM05050.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_473419043",
+                "title": "La Bamba",
+                "artist": "Tlen Huicani & Lino Chávez",
+                "year": 1988,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/94/31/1b/94311bf5-6751-db16-d706-b6afa0a2e6d2/mzi.jzdsdznd.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_299597148",
+                "title": "La Bamba",
+                "artist": "Mariachi Vargas de Tecalitlán",
+                "year": 1967,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/8d/6f/89/8d6f89ce-83e8-586e-5394-e2fca613c25d/dj.wcdgzhht.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_989254352",
+                "title": "La Bamba",
+                "artist": "Ritchie Valens",
+                "year": 1959,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/06/6d/e5/066de506-3711-44b1-5ede-149ace7ccaeb/889176888137.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_466357994",
+                "title": "La Bamba",
+                "artist": "Ritchie Valens",
+                "year": 1958,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/08/bb/23/08bb23ae-ff61-5a82-4ff7-c649cda74ca6/mzi.fewiedaj.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1222901088",
+                "title": "La Bamba",
+                "artist": "Ritchie Valens",
+                "year": 1958,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c4/73/c7/c473c70b-2b3f-68fb-fd56-9933005e07c8/084247966046.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:30.044Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=La%20Bamba",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_62479668-419a-477f-a18f-addff5a98c78",
+                "title": "La Bamba (La Bamba)",
+                "artist": "Hugo Strasser und sein Tanzorchester",
+                "year": 2010,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "62479668-419a-477f-a18f-addff5a98c78"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_cf735c55-7b62-4065-a2df-baf440adc43f",
+                "title": "La Bamba: la Bamba",
+                "artist": "The London Starlight Orchestra & Singers",
+                "year": 1990,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "cf735c55-7b62-4065-a2df-baf440adc43f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_88268720-25d8-42b8-a038-a4a1b4aec83a",
+                "title": "La Bamba (La Bamba)",
+                "artist": "The Tuxedo Band and Combo",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "88268720-25d8-42b8-a038-a4a1b4aec83a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_fb3fcdbd-3f0c-4ffe-8df7-5aea281abb9f",
+                "title": "La bamba (La bamba)",
+                "artist": "David H. Yakobian",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "fb3fcdbd-3f0c-4ffe-8df7-5aea281abb9f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_48c9a860-2eb5-4547-875f-aaf07d6eddc0",
+                "title": "La Bamba (La Bamba)",
+                "artist": "Γιώργος Αλκαίος",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "48c9a860-2eb5-4547-875f-aaf07d6eddc0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_86ed1cc6-c0ef-4b27-b026-16d8009d2976",
+                "title": "La Bamba (La Bamba)",
+                "artist": "Ritchie Valens",
+                "year": 1992,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "86ed1cc6-c0ef-4b27-b026-16d8009d2976"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_91d8523f-bc2c-4cd1-968f-c39da3378ece",
+                "title": "La Bamba (La Bamba)",
+                "artist": "Γιώργος Αλκαίος",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "91d8523f-bc2c-4cd1-968f-c39da3378ece"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2a397a77-a52b-4e3a-9c77-0e96ca6bd806",
+                "title": "La Bamba (La Bamba)",
+                "artist": "Piccadilly Orchestra",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2a397a77-a52b-4e3a-9c77-0e96ca6bd806"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "lollipop lagelu",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:34.423Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Lollipop%20Lagelu&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1776548316",
+                "title": "Lollipop Lagelu",
+                "artist": "Deepak Dabangi",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/6c/10/746c10d7-3c52-558e-0f54-f35d72ad8f5f/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1642490443",
+                "title": "Lollipop Lagelu 2",
+                "artist": "Pawan Singh & Priyanka Singh",
+                "year": 2022,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/40/6c/ce/406cce7c-0fa4-9708-cb23-4fbccbb9f6c2/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1763278980",
+                "title": "Lollipop Lagelu",
+                "artist": "Roshni Singh",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2c/1e/27/2c1e27a1-6203-79b6-e230-3b3725b850e2/8905510753267.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6769711057",
+                "title": "Lollipop Lagelu",
+                "artist": "Jakir Ali",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8f/f8/d3/8ff8d364-c885-6088-eba9-a38117420e9c/8447721455672.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1691607509",
+                "title": "Lollipop Lagelu (Recreated)",
+                "artist": "Diptarka Bose",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/25/0c/7d/250c7dcc-3f58-2065-02ef-67a309817d00/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1870695667",
+                "title": "Lollipop lagelu",
+                "artist": "Gaurav Chaudhary",
+                "year": 2025,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/70/8b/02/708b02b1-193b-0653-9449-42b0a1a32abc/5063906116539_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1387528597",
+                "title": "Lollipop (feat. Meghdhanush)",
+                "artist": "Karan Patel, Sani Shah & Jainam Modi",
+                "year": 2018,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/27/fc/35/27fc355b-9fce-f764-c6a6-ef109e576977/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6790469579",
+                "title": "Lollipop Lagelu",
+                "artist": "Naveen Yadav",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/59/d1/6a/59d16a33-daed-fc7c-6ac4-5a00db4d6186/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:34.423Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Lollipop%20Lagelu",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_33b21627-8d23-4a2b-a970-0bc99e66ae8b",
+                "title": "Lollipop",
+                "artist": "The Red Squares",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "33b21627-8d23-4a2b-a970-0bc99e66ae8b"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_979e5f1d-af98-4daf-85cf-ecd6b59f2e07",
+                "title": "Lollipop",
+                "artist": "The Silhouettes of Bucknell University",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "979e5f1d-af98-4daf-85cf-ecd6b59f2e07"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_d83c5232-85f6-47bf-8cb5-898fd07f9238",
+                "title": "Lollipop",
+                "artist": "Alice Babs",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "d83c5232-85f6-47bf-8cb5-898fd07f9238"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_46555827-8141-458e-8266-8425616a5484",
+                "title": "Lollipop",
+                "artist": "Alice Babs",
+                "year": 1999,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "46555827-8141-458e-8266-8425616a5484"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_812c5edc-306d-4e8e-8ae0-fc790d04928a",
+                "title": "Lollipop",
+                "artist": "Volker Rosin",
+                "year": 1995,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "812c5edc-306d-4e8e-8ae0-fc790d04928a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_fe05c371-b63e-478f-899f-ad78e9c01c12",
+                "title": "Lollipop",
+                "artist": "Woody Herman & His Orchestra",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "fe05c371-b63e-478f-899f-ad78e9c01c12"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_dc420985-995b-4267-9009-a30fdd3a0050",
+                "title": "Lollipop",
+                "artist": "Frechbax",
+                "year": 2005,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "dc420985-995b-4267-9009-a30fdd3a0050"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_5d9dce18-c462-415d-96b2-cd20ab853e14",
+                "title": "Lollipop",
+                "artist": "The Max Weinberg 7",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "5d9dce18-c462-415d-96b2-cd20ab853e14"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "macarena",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:38.738Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Macarena&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_258647008",
+                "title": "Macarena (Bayside Boys Remix)",
+                "artist": "Los del Río",
+                "year": 1995,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/a1/2d/6a/a12d6a7b-6173-ed2e-9682-a30d245ed7fe/mzi.ndplymif.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_258647542",
+                "title": "Macarena (Original Version)",
+                "artist": "Los del Río",
+                "year": 1995,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/a1/2d/6a/a12d6a7b-6173-ed2e-9682-a30d245ed7fe/mzi.ndplymif.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1595921351",
+                "title": "Macarena",
+                "artist": "The Girly Team",
+                "year": 2020,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a3/ff/b6/a3ffb65b-7635-c8a3-42af-f80b19996dd9/3663729125934_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_258647588",
+                "title": "Macarena (River Re-Mix)",
+                "artist": "Los del Río",
+                "year": 1993,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/a1/2d/6a/a12d6a7b-6173-ed2e-9682-a30d245ed7fe/mzi.ndplymif.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1409101806",
+                "title": "Macarena",
+                "artist": "Big Bird, Elmo, Prairie Dawn, Rosita, Zoé & Count Von Count",
+                "year": 1997,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/95/67/cb/9567cb16-e74d-81ed-4daa-903aa2a16c48/886788825758.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1886097631",
+                "title": "Macarena - Slowed & Reverb / Operation Desert Storm Version",
+                "artist": "PANTHEON",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/11/e2/b1/11e2b112-c3b6-2519-d262-7d6c3fdf975f/663918921975.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_300160910",
+                "title": "Macarena (Dance Radio Edit)",
+                "artist": "2 Locos In a Room",
+                "year": 2004,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music/9c/82/bc/mzi.niczkgfk.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_715902319",
+                "title": "Macarena",
+                "artist": "The Party Cats",
+                "year": 2006,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/15/ca/fb/15cafbcb-d58c-a760-ee17-d3f2d97d4190/13UAAIM01536.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:38.738Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Macarena",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_4a8efcbc-844a-49ac-a49c-6377bfe3014b",
+                "title": "Macarena (macarena)",
+                "artist": "[unknown]",
+                "year": 2008,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "4a8efcbc-844a-49ac-a49c-6377bfe3014b"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c884c2fb-3f16-4c66-9a08-1b1b5303f17a",
+                "title": "Macarena Macarena",
+                "artist": "Devan Ekambaram, Sowmya Raoh & S. J. Surya",
+                "year": 2000,
+                "version": "studio",
+                "canonical_ids": {
+                  "musicbrainz": "c884c2fb-3f16-4c66-9a08-1b1b5303f17a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_315689f3-62da-4748-af00-dfde0fab214e",
+                "title": "Barbie macarena (Macarena)",
+                "artist": "Barbie",
+                "year": 1998,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "315689f3-62da-4748-af00-dfde0fab214e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_5543760a-ffee-45f3-93b4-488ea68f919e",
+                "title": "Macarena",
+                "artist": "Los del Mar",
+                "year": 1996,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "5543760a-ffee-45f3-93b4-488ea68f919e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_6ea95a6c-9f55-488c-9007-6d53ee651b6b",
+                "title": "Macarena",
+                "artist": "Los del Mar",
+                "year": 1996,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "6ea95a6c-9f55-488c-9007-6d53ee651b6b"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_a122382e-e27b-477d-8e53-5a262bfaf02e",
+                "title": "Macarena",
+                "artist": "Los del Río",
+                "year": 1997,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "a122382e-e27b-477d-8e53-5a262bfaf02e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2c3abe95-f449-41f1-ac1f-0c30b646305a",
+                "title": "Macarena",
+                "artist": "2 Locos In A Room",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2c3abe95-f449-41f1-ac1f-0c30b646305a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_1d51e0e5-e2e4-4298-bb7e-204f2d9d144e",
+                "title": "Macarena",
+                "artist": "The Caribbeans",
+                "year": 1997,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "1d51e0e5-e2e4-4298-bb7e-204f2d9d144e"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "mujhe",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:53.964Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Mujhe&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1136363098",
+                "title": "Kya Mujhe Pyaar Hai",
+                "artist": "Pritam & KK",
+                "year": 2006,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/23/f2/02/23f2021c-ae86-a637-ee5a-6e9e9b1bcc26/8902894601832_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1133344523",
+                "title": "Kaise Mujhe",
+                "artist": "Benny Dayal & Shreya Ghoshal",
+                "year": 2008,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/b1/2a/54/b12a5476-65db-75b9-be67-611bede2596e/8902894628464_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1443906791",
+                "title": "Aise Na Mujhe",
+                "artist": "Kishore Kumar",
+                "year": 1977,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/67/c0/6c/67c06c66-1531-7a34-697b-accda236decf/00602498247600.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1660656728",
+                "title": "Mujhe Pyaar Hua tha (Original Soundtrack)",
+                "artist": "Kaifi Khalil",
+                "year": 2022,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/d9/ff/43/d9ff43a0-5555-9252-1bf6-f65a86d9b24a/859768632929_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1878743164",
+                "title": "Mujhe Peene Do",
+                "artist": "Darshan Raval",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c1/b7/6e/c1b76e4e-5d92-ac2f-5868-0b1e4b50b117/3616409907672.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1136363173",
+                "title": "Kya Mujhe Pyar Hai (Remix)",
+                "artist": "Pritam, KK, Dj A-Myth & DJ Kiran",
+                "year": 2006,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/23/f2/02/23f2021c-ae86-a637-ee5a-6e9e9b1bcc26/8902894601832_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_442915277",
+                "title": "Le Jaa Tu Mujhe",
+                "artist": "Atif Aslam & Sachin-Jigar",
+                "year": 2011,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c4/ab/e6/c4abe6df-3cc3-f93f-97f8-ae2fdadc517e/886443087507.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1073371970",
+                "title": "Mujhe Neend Na Aaye",
+                "artist": "Anuradha Paudwal & Udit Narayan",
+                "year": 1990,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music49/v4/b3/1e/a4/b31ea49e-7a64-8eea-8b50-91382df7a602/8902894610230_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:53.964Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Mujhe",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_ad563515-1efd-4630-9052-202f26e8761d",
+                "title": "Gham Mujhe Hasrat Mujhe",
+                "artist": "Jagjit Singh",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ad563515-1efd-4630-9052-202f26e8761d"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_faed9459-aef3-48c7-b424-e9f05d7b529f",
+                "title": "Mujhe Bekhudi",
+                "artist": "Abida Parveen",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "faed9459-aef3-48c7-b424-e9f05d7b529f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_2a16289a-d2d5-4d30-a2c1-c064f7a87c52",
+                "title": "Mujhe Seene",
+                "artist": "Shreya Ghoshal, Precha & Spike",
+                "year": 2004,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2a16289a-d2d5-4d30-a2c1-c064f7a87c52"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_63e0c0e6-b9d1-4278-9c7b-b5fa794afd61",
+                "title": "Mujhe Pyar",
+                "artist": "Ahmed Jahanzeb",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "63e0c0e6-b9d1-4278-9c7b-b5fa794afd61"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_55867635-22b0-4749-b9cc-168f5e3b8e42",
+                "title": "Phir mujhe",
+                "artist": "Nisa azeezi",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "55867635-22b0-4749-b9cc-168f5e3b8e42"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8b157e0e-4546-4894-9343-0925e230fe8f",
+                "title": "Mujhe Kya?",
+                "artist": "Neyhal",
+                "year": 2024,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8b157e0e-4546-4894-9343-0925e230fe8f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_eceba765-e39b-4bc8-ab55-f6894e40198d",
+                "title": "Mujhe Naulakha",
+                "artist": "Harry Anand",
+                "year": 2004,
+                "version": "remix",
+                "canonical_ids": {
+                  "musicbrainz": "eceba765-e39b-4bc8-ab55-f6894e40198d"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_6442dda5-46c1-49a0-82f9-dbed7f35f0e5",
+                "title": "Mujhe Pyar",
+                "artist": "Ahmad Jahanzeb",
+                "year": 2003,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "6442dda5-46c1-49a0-82f9-dbed7f35f0e5"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "mujhe tum yaad aana",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:46:59.612Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Mujhe%20Tum%20Yaad%20Aana&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1337264739",
+                "title": "Mujhe Tum Yaad Karna",
+                "artist": "Lata Mangeshkar & Kishore Kumar",
+                "year": 1983,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/49/32/99/49329919-6303-2db9-e5ab-ead33fcdface/191773204488.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1753021533",
+                "title": "Aakhri Khat",
+                "artist": "Sunny Khan Durrani",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/67/11/0d/67110d39-9c92-b509-c718-627379c7861b/5059654476025.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1784179594",
+                "title": "Neta G’s",
+                "artist": "Mad Trip, Little Bhatia & Aditya Pushkarna",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/6a/34/f0/6a34f002-fd07-afd4-4871-ede6fcc85aee/199066199237.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1666249754",
+                "title": "Yaad Na Aana",
+                "artist": "Tabish Pasha",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/61/d3/f1/61d3f126-3bd2-0d9a-2c5a-a697b8a3bf21/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1741346500",
+                "title": "Mujhe Tum Yaad Karna",
+                "artist": "Tshering Dukpa, Tshering & Hemangini Khumari",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/bd/80/f7/bd80f773-b4e0-e5ae-9d72-43e11224a4d3/198391828966.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1867704509",
+                "title": "Yaad Na Aana",
+                "artist": "Tabish Pasha",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a6/4d/48/a64d4840-7309-6022-95ee-d31ef41a6658/3617055451977.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1522651191",
+                "title": "Aana Hoga",
+                "artist": "Girish Mathur",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/5e/9c/a4/5e9ca470-cd63-f1a6-2ae0-e68e76cc9cc9/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1826080325",
+                "title": "Papa Yaad Aate Ho Tum (Father Song)",
+                "artist": "Vicky D Parekh",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9e/93/38/9e93383d-1c80-501b-253e-c5cf44f5766b/859711176630_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:46:59.612Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Mujhe%20Tum%20Yaad%20Aana",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_919b39f5-ac2c-4d2c-aa3d-83e18b384542",
+                "title": "Aaye tum yaad mujhe",
+                "artist": "Kumar Sanu",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "919b39f5-ac2c-4d2c-aa3d-83e18b384542"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_a2495f4a-9f30-40d1-a64c-5da4cb51911e",
+                "title": "Mujhe Tum Yaad Rakhna",
+                "artist": "Sukhpreet Kaur",
+                "year": 2023,
+                "version": "studio",
+                "canonical_ids": {
+                  "musicbrainz": "a2495f4a-9f30-40d1-a64c-5da4cb51911e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f85b6d9c-79fb-4058-b7f8-48a5d8921cc4",
+                "title": "Aaye Tum Yaad Mujhe",
+                "artist": "Kishore Kumar",
+                "year": 1975,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f85b6d9c-79fb-4058-b7f8-48a5d8921cc4"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f9ae6172-7392-453f-9ea5-35d009c43173",
+                "title": "Mujhe Tum Yaad Aate Ho",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2018,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f9ae6172-7392-453f-9ea5-35d009c43173"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_e9d159b0-b1df-4404-94ea-262ea7c7c623",
+                "title": "Mujhe Tum Yaad Aate Ho",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2014,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "e9d159b0-b1df-4404-94ea-262ea7c7c623"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_117d9cbd-ee9a-4c26-9822-57fb64173753",
+                "title": "Mujhe Tum Yaad Aate Ho",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2018,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "117d9cbd-ee9a-4c26-9822-57fb64173753"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_8a6fd71e-de0b-44ce-9c2c-57c404a08cba",
+                "title": "Mujhe Tum Yaad Aate Ho",
+                "artist": "Nusrat Fateh Ali Khan",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "8a6fd71e-de0b-44ce-9c2c-57c404a08cba"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "night fever",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:47:04.155Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Night%20Fever&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1445664307",
+                "title": "Night Fever (From \"Saturday Night Fever\" Soundtrack)",
+                "artist": "Bee Gees",
+                "year": 1977,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/b4/00/8f/b4008f7c-72b9-d856-60fa-2ac5cfce2d18/16UMGIM86640.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1442259731",
+                "title": "Night Fever (Serban Mix)",
+                "artist": "Bee Gees",
+                "year": 1977,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/45/db/1d/45db1dac-fe00-3681-b216-266deea6e4cc/17UM1IM26789.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1442259185",
+                "title": "Stayin' Alive",
+                "artist": "Bee Gees",
+                "year": 1977,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/45/db/1d/45db1dac-fe00-3681-b216-266deea6e4cc/17UM1IM26789.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1575914984",
+                "title": "Night Fever",
+                "artist": "Dee Gees",
+                "year": 2021,
+                "version": "live",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/f8/ed/83/f8ed8330-50c0-db44-a92b-8cbddc8197db/886449425303.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1442259373",
+                "title": "Night Fever",
+                "artist": "Bee Gees",
+                "year": 1977,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/45/db/1d/45db1dac-fe00-3681-b216-266deea6e4cc/17UM1IM26789.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_555899815",
+                "title": "Night Fever (Glee Cast Version)",
+                "artist": "Glee Cast",
+                "year": 2012,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/04/26/a3/0426a3a1-3d0a-9c4f-a7be-3cc52db56711/886443620544.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1445663765",
+                "title": "Night Fever (From \"Saturday Night Fever\" Soundtrack)",
+                "artist": "Bee Gees",
+                "year": 1977,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/63/7a/33/637a3301-f7a9-dce5-e312-b9da8f4022a1/17UMGIM87578.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1445668465",
+                "title": "Night Fever (From \"Saturday Night Fever\" Soundtrack)",
+                "artist": "Bee Gees",
+                "year": 1977,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/74/c1/73/74c17380-b75d-4d74-31d8-99f8e8b20c36/17UM1IM27905.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:47:04.155Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Night%20Fever",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_28c0f85f-67f7-46d8-8ef0-c7c5a33c7fdf",
+                "title": "Night Fever (Night Fever)",
+                "artist": "Hugo Strasser und sein Tanzorchester",
+                "year": 2010,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "28c0f85f-67f7-46d8-8ef0-c7c5a33c7fdf"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_ab48bbe8-cee0-40b9-9d93-ddcc1bcb5ae9",
+                "title": "Night Fever (Night Fever)",
+                "artist": "Hugo Strasser",
+                "year": 1994,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "ab48bbe8-cee0-40b9-9d93-ddcc1bcb5ae9"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_49ff5ca3-0f9a-4768-8df2-6261caa74958",
+                "title": "Night Fever (Saturday Night Fever)",
+                "artist": "Movie Sound Orchestra",
+                "year": 1987,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "49ff5ca3-0f9a-4768-8df2-6261caa74958"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_6c162f77-eea7-41f9-8c56-e96ea9856e62",
+                "title": "Night Fever (Saturday Night Fever)",
+                "artist": "[unknown]",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "6c162f77-eea7-41f9-8c56-e96ea9856e62"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9e6e84b2-3aa2-4aee-b1b5-163168cbccf8",
+                "title": "Saturday Night Fever: Night Fever",
+                "artist": "Bee Gees",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "9e6e84b2-3aa2-4aee-b1b5-163168cbccf8"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c4f63f09-419e-491b-9dec-a9aad395c92a",
+                "title": "Night Fever",
+                "artist": "B3",
+                "version": "cover",
+                "canonical_ids": {
+                  "musicbrainz": "c4f63f09-419e-491b-9dec-a9aad395c92a"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9bc3417c-b067-491d-a76a-dc59a0663396",
+                "title": "Night Fever",
+                "artist": "Boogie Wonder Band",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "9bc3417c-b067-491d-a76a-dc59a0663396"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_55a33d09-1c85-42f4-b153-bede93de1ebf",
+                "title": "Night Fever",
+                "artist": "Berry Lipman",
+                "year": 2001,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "55a33d09-1c85-42f4-b153-bede93de1ebf"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "shaam savere",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:47:08.620Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Shaam%20Savere&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1453010234",
+                "title": "Shaam Savere",
+                "artist": "Derick Nathaniel",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f7/1b/61/f71b61f2-b0a6-dacf-e2c4-c264005d148f/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1759959500",
+                "title": "Shaam Savere",
+                "artist": "Natiq",
+                "year": 2022,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4b/9d/b5/4b9db501-5b32-5127-7c9f-9bf1954025ef/197207949741.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1872956962",
+                "title": "Shaam Savere",
+                "artist": "Raghav Sehgal & Kaater",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5f/fe/e8/5ffee818-bd59-8176-6b18-ae8508b309ca/198704957635_Cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1546954031",
+                "title": "Shaam Savere",
+                "artist": "Shubham Kaul",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/15/f6/8e/15f68ea1-4a67-99f3-f742-e467e5bff4c0/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1686528972",
+                "title": "Shaam Savere",
+                "artist": "Derick Nathaniel",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c5/30/2b/c5302b46-cc56-5fa8-3e00-f0a58ccdc53b/193829530176.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1835570235",
+                "title": "Shaam Savere",
+                "artist": "Nirasir",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/11/8f/6f/118f6f9e-415a-fe18-5156-45baff21cd20/859715755640_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1198548454",
+                "title": "Shaam Savere",
+                "artist": "Gautam Ganesh",
+                "year": 2016,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music111/v4/c0/45/6b/c0456bca-9df0-1ec7-f83f-4299227e1b81/8903431615763_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1711671157",
+                "title": "Shaam Savere",
+                "artist": "Nirasir",
+                "year": 2023,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/45/d2/07/45d2074e-d420-de43-751e-33ab066147b7/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:47:08.620Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Shaam%20Savere",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_2a5d9f17-aebe-4558-afa4-8fa8fc9049fd",
+                "title": "Shaam Savere Nain Bichha Ke",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2014,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "2a5d9f17-aebe-4558-afa4-8fa8fc9049fd"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_42f141b7-3ac1-4e59-9373-cdd3f40d1759",
+                "title": "Shaam Savere Nain Bichha Ke",
+                "artist": "Nusrat Fateh Ali Khan",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "42f141b7-3ac1-4e59-9373-cdd3f40d1759"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_bc71707d-a197-4c29-a6a4-0447e6f951b5",
+                "title": "Savere Savere",
+                "artist": "Ghulam Farid Sabri",
+                "year": 1994,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "bc71707d-a197-4c29-a6a4-0447e6f951b5"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_802f3323-d9b4-4a7b-a4b4-e521e17acc66",
+                "title": "Savere Savere",
+                "artist": "Sabri Brothers",
+                "year": 2015,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "802f3323-d9b4-4a7b-a4b4-e521e17acc66"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_c3fbd487-ae62-4602-8d5a-0994b11d1a45",
+                "title": "Savere Savere",
+                "artist": "Sabri Brothers",
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "c3fbd487-ae62-4602-8d5a-0994b11d1a45"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_623b0749-4de4-4ca7-a4c3-3ce924d98279",
+                "title": "Koi paas aye savere savere",
+                "artist": "Jagjit Singh",
+                "year": 2004,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "623b0749-4de4-4ca7-a4c3-3ce924d98279"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_850dae70-5f42-4cb9-9da2-e7847c68db57",
+                "title": "Sham Savere",
+                "artist": "Nusrat Fateh Ali Khan",
+                "year": 2018,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "850dae70-5f42-4cb9-9da2-e7847c68db57"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_4238ef8a-e726-4217-ac76-56b9e93c4d6c",
+                "title": "Roz Savere",
+                "artist": "Geeta Zaildar",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "4238ef8a-e726-4217-ac76-56b9e93c4d6c"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "smells like teen spirit",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:47:13.152Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Smells%20Like%20Teen%20Spirit&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1440783625",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Nirvana",
+                "year": 1991,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/95/fd/b9/95fdb9b2-6d2b-92a6-97f2-51c1a6d77f1a/00602527874609.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1572968191",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Malia J",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/63/55/bc/6355bc11-3902-6b56-f2a7-9d0f95d5d49b/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1632621739",
+                "title": "Smells Like Teen Spirit (Alt Mix)",
+                "artist": "Witchz",
+                "year": 2022,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/c6/1c/ee/c61cee32-35e1-be75-c74f-397504c70ab6/4651bc83-4aa3-49f6-b4e3-04d034060921.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6782131336",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Dean Lewis",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/98/10/99/981099cd-a437-ced6-f51b-179a722daba8/634607878511.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1653121393",
+                "title": "Smells Like Teen Spirit (R3hab Vip Remix)",
+                "artist": "R3HAB & Amba Shepherd",
+                "year": 2021,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/21/da/6d/21da6dc2-c9cc-7a6b-30de-7eaf81f8b2be/5054526607361.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1413921155",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Nirvana",
+                "year": 1991,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7b/58/c2/7b58c21a-2b51-2bb2-e59a-9bb9b96ad8c3/00602567924166.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1453357740",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Robyn Adele Anderson",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/25/4f/71/254f71ab-4523-c9f7-da71-0e23d9d85151/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1586410661",
+                "title": "Smells Like Teen Spirit (Remastered)",
+                "artist": "Nirvana",
+                "year": 1991,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/5c/53/5d/5c535d31-9c80-c752-3ea3-887615eb7d51/21UM1IM09416.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:47:13.152Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Smells%20Like%20Teen%20Spirit",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_140e147b-7b45-4e1c-80e0-ab68e5e2c2c1",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Xorcist",
+                "year": 1993,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "140e147b-7b45-4e1c-80e0-ab68e5e2c2c1"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_fee1f850-0572-4dbb-99b4-6b7cf596c6ee",
+                "title": "smells like teen spirit",
+                "artist": "386 DX",
+                "year": 2001,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "fee1f850-0572-4dbb-99b4-6b7cf596c6ee"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f103cdda-be77-40f7-8aaa-d7a3612f182c",
+                "title": "Smells Like Teen Spirit",
+                "artist": "Tori Amos",
+                "year": 1992,
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "f103cdda-be77-40f7-8aaa-d7a3612f182c"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "the wall",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:47:17.641Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=The%20Wall&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1065975638",
+                "title": "Another Brick In the Wall, Pt. 2",
+                "artist": "Pink Floyd",
+                "year": 1979,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3e/17/ec/3e17ec6d-f980-c64f-19e0-a6fd8bbf0c10/886445635850.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6821714253",
+                "title": "Through the Wall",
+                "artist": "Tokyo Chill Music",
+                "year": 2026,
+                "version": "remix",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/97/75/ea/9775ea85-4efa-dddf-839c-376e7740cf51/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6822479007",
+                "title": "Back against the wall",
+                "artist": "Gucci Mane",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f8/27/95/f8279501-2279-a3d9-1416-81b83f13e326/075679559166.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_741055496",
+                "title": "The Wall",
+                "artist": "Bruce Springsteen",
+                "year": 2014,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/93/27/9e/93279e05-c7c8-dd4c-514c-9b245171c5a9/886444329491.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_158580943",
+                "title": "The Wall",
+                "artist": "Kansas",
+                "year": 1976,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/98/1a/fb/981afb81-415b-c6f1-f725-147769022da6/mzi.dgzjndad.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_825517896",
+                "title": "The Wall (Live)",
+                "artist": "Johnny Cash",
+                "year": 1968,
+                "version": "live",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/f3/75/c1/f375c1d8-9666-0119-c54b-f06e9759da5b/886444492690.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_190656381",
+                "title": "The Wall",
+                "artist": "Kansas",
+                "year": 1976,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music/56/5b/88/mzi.hpnqhyuu.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1439311275",
+                "title": "The Wall",
+                "artist": "Amerie",
+                "year": 2018,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/9b/d0/b5/9bd0b53b-5f52-9060-980d-cf2ad9b32e87/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:47:17.641Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=The%20Wall",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_923d7bf7-ed9d-4bc7-942e-7abd573dafd2",
+                "title": "The Wall: The Wall",
+                "artist": "Ron Jones",
+                "year": 2018,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "923d7bf7-ed9d-4bc7-942e-7abd573dafd2"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_aa4e6cc6-5fbf-4096-8ae7-dfcac63cc04f",
+                "title": "The Wall: Outside the Wall",
+                "artist": "Pink Floyd",
+                "year": 1999,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "aa4e6cc6-5fbf-4096-8ae7-dfcac63cc04f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_25dad310-7590-455b-a4c8-da8a7dde9643",
+                "title": "The Wall",
+                "artist": "Trevor Jones",
+                "year": 1998,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "25dad310-7590-455b-a4c8-da8a7dde9643"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_3c117ad1-604c-4b21-8857-cf9781e8c078",
+                "title": "The Wall",
+                "artist": "Paul Panzer",
+                "year": 2000,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "3c117ad1-604c-4b21-8857-cf9781e8c078"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9bf80b51-e1ea-486e-99fc-ff085bf5cf1c",
+                "title": "The Wall",
+                "artist": "Jim Croce",
+                "year": 2003,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "9bf80b51-e1ea-486e-99fc-ff085bf5cf1c"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_9abfc77a-6f56-4efa-a6b9-f2c85b76a5d6",
+                "title": "The Wall",
+                "artist": "Johnny Cash",
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "9abfc77a-6f56-4efa-a6b9-f2c85b76a5d6"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_b519205c-71ff-48fd-8513-dc6ace349a7f",
+                "title": "The Wall",
+                "artist": "Root",
+                "year": 1992,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "b519205c-71ff-48fd-8513-dc6ace349a7f"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_f5c0103b-a076-4327-8d03-0476ccccedf0",
+                "title": "The Wall",
+                "artist": "Analog System",
+                "year": 2003,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "f5c0103b-a076-4327-8d03-0476ccccedf0"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "wonderwall",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:47:24.840Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Wonderwall&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1517447333",
+                "title": "Wonderwall",
+                "artist": "Oasis",
+                "year": 1995,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/04/92/e0/0492e08b-cbcc-9969-9ad6-8f5a0888068c/5051961007107.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1821193283",
+                "title": "Wonderwall (Unplugged)",
+                "artist": "Oasis",
+                "year": 2025,
+                "version": "live",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ce/e3/0d/cee30d80-d3e7-66ae-de84-4b62d8bc3b4d/5051961151107.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1440853667",
+                "title": "Wonderwall",
+                "artist": "Ryan Adams",
+                "year": 2004,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/db/63/f3/db63f3c3-1bd0-123d-0cfc-7c75f5a7fc4c/00602537989355.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_6781236469",
+                "title": "Wonderwall",
+                "artist": "Josh Fawaz",
+                "year": 2026,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/db/f3/06/dbf3060d-84c2-2ca2-e293-41e534034107/8721555466784.png/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1649889178",
+                "title": "Wonderwall (Apple Music Sessions)",
+                "artist": "Little Big Town",
+                "year": 2022,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/1f/30/db/1f30db7f-ff07-94b4-f56a-6acd32dfd619/22UM1IM09263.rgb.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1522136238",
+                "title": "Wonderwall",
+                "artist": "Teemid",
+                "year": 2020,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0e/1e/87/0e1e8756-9ea5-912c-79cd-ca8609dd4a04/3616405587823_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1525933490",
+                "title": "Wonderwall (Remastered)",
+                "artist": "Oasis",
+                "year": 1995,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/34/2e/cb/342ecb17-ef19-816a-4ce5-e60b9ceec161/5051961073164.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1821192766",
+                "title": "Wonderwall (Remastered)",
+                "artist": "Oasis",
+                "year": 1995,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ce/e3/0d/cee30d80-d3e7-66ae-de84-4b62d8bc3b4d/5051961151107.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:47:24.840Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Wonderwall",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_60d55be6-d829-496e-a21d-7cdce74e19e7",
+                "title": "Wonderwall",
+                "artist": "Elias & the Wizzkids",
+                "year": 2007,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "60d55be6-d829-496e-a21d-7cdce74e19e7"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_70bea84d-1354-47b4-824e-539881fca60e",
+                "title": "Wonderwall",
+                "artist": "The Cooltrane Quartet",
+                "year": 2006,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "70bea84d-1354-47b4-824e-539881fca60e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_16ffe481-ac72-4483-ab9c-055d0ba4fd76",
+                "title": "Wonderwall",
+                "artist": "Howie Day",
+                "version": "live",
+                "canonical_ids": {
+                  "musicbrainz": "16ffe481-ac72-4483-ab9c-055d0ba4fd76"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_bc77698a-febd-4575-bb22-25ac12155ed9",
+                "title": "Wonderwall",
+                "artist": "Ten Masked Men",
+                "year": 1999,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "bc77698a-febd-4575-bb22-25ac12155ed9"
+                },
+                "untrusted": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ya no me llamas",
+      "groups": [
+        {
+          "origin": "itunes",
+          "captured_at": "2026-10-21T05:47:29.364Z",
+          "upstream": {
+            "source": "itunes-search",
+            "url": "https://itunes.apple.com/search?term=Ya%20No%20Me%20Llamas&entity=song&media=music&limit=8",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "it_1178322609",
+                "title": "Ya No Me Llamas (feat. Shaka & Benny)",
+                "artist": "Nicky Jam",
+                "year": 2004,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/7c/c2/b4/7cc2b415-1968-0035-362e-8851f2de0383/654827030421_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1474190338",
+                "title": "Si Mañana No Me Llamas",
+                "artist": "Jose Manuel",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/73/83/44/738344fe-6741-0b2b-b507-c92df34406ed/816144021012_Cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1780677317",
+                "title": "Ya No Me Llamas",
+                "artist": "Malakai",
+                "year": 2024,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/83/ba/b5/83bab523-a7e3-4134-9eca-ea62fcfff143/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1525895686",
+                "title": "No Me Llamas (Original Version)",
+                "artist": "T-RiEr",
+                "year": 2018,
+                "version": "studio",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/9a/25/28/9a252854-b6c1-857c-4013-2dc4c2a58c47/050742394004_cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1779328566",
+                "title": "Me Llamas (En Vivo) [feat. Banda Sinaloense La Tuyia de Culiacan Sinaloa.]",
+                "artist": "Los Plebes del Rancho de Ariel Camacho",
+                "year": 2019,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e2/0e/69/e20e690c-3833-add4-0af1-581113df9b8e/cover.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1405078354",
+                "title": "No Me Llamas",
+                "artist": "Oub LCK",
+                "year": 2015,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/4b/d3/a8/4bd3a8b9-5e49-d401-3d53-518c6bc197d1/192914528364.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1588524073",
+                "title": "YA NO ME (LLAMAS)",
+                "artist": "SICKLYTWISTED",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ab/9b/47/ab9b47f0-fe05-269d-5d3b-d1797a57c4e7/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "it_1552818560",
+                "title": "Ya no me llamas",
+                "artist": "Big Man & Martin Flow",
+                "year": 2021,
+                "version": "unknown",
+                "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/2e/95/4d/2e954ddb-fe0e-a90f-4d19-dcf2e43909cf/artwork.jpg/100x100bb.jpg",
+                "untrusted": true
+              }
+            }
+          ]
+        },
+        {
+          "origin": "musicbrainz",
+          "captured_at": "2026-10-21T05:47:29.364Z",
+          "upstream": {
+            "source": "musicbrainz-ws2-recording",
+            "url": "https://musicbrainz.org/ws/2/recording?fmt=json&limit=8&query=Ya%20No%20Me%20Llamas",
+            "http_status": 200
+          },
+          "tracks": [
+            {
+              "track": {
+                "candidate_id": "mb_76e623f9-50cf-4677-91bf-c95df2773f69",
+                "title": "Ya no me llamas",
+                "artist": "Nicky Jam feat. Shaka & Benny",
+                "year": 2004,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "76e623f9-50cf-4677-91bf-c95df2773f69"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_230447e5-21e6-4f02-ae6b-84b9abb3b3a0",
+                "title": "Ya no me llames",
+                "artist": "Benny G",
+                "year": 2004,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "230447e5-21e6-4f02-ae6b-84b9abb3b3a0"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_cd149a2e-108c-4117-ba2f-c01cac29ad1d",
+                "title": "ya no llamas...",
+                "artist": "Yung Dupe & LIL COOKIE",
+                "year": 2025,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "cd149a2e-108c-4117-ba2f-c01cac29ad1d"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_6792d4ad-fee8-4dd2-ab0d-79066891b14e",
+                "title": "Ya nunca me llamas",
+                "artist": "Las Dianas",
+                "year": 2024,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "6792d4ad-fee8-4dd2-ab0d-79066891b14e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_5d4c8a69-77b7-43b5-afd1-5f3df95e1d3e",
+                "title": "No me llamas",
+                "artist": "Gocho “El Lápiz de Platino”",
+                "year": 2015,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "5d4c8a69-77b7-43b5-afd1-5f3df95e1d3e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_0c9dfd3a-914b-4ce1-bb98-5420544b638e",
+                "title": "No Me Llamas",
+                "artist": "Baby J & MLSHBTS",
+                "year": 2020,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "0c9dfd3a-914b-4ce1-bb98-5420544b638e"
+                },
+                "untrusted": true
+              }
+            },
+            {
+              "track": {
+                "candidate_id": "mb_401a649b-70a8-4c4e-8592-99422a304afa",
+                "title": "No Me Llamas",
+                "artist": "Baby Jey",
+                "year": 2020,
+                "version": "unknown",
+                "canonical_ids": {
+                  "musicbrainz": "401a649b-70a8-4c4e-8592-99422a304afa"
+                },
                 "untrusted": true
               }
             }
