@@ -1,14 +1,18 @@
 /**
  * S0 frame peel (blueprint 6.1): strip wake word, verbs, provider suffix and
  * filler, and detect explicit intent words (live, remix, ...) plus "by <artist>"
- * hints - using a SMALL INLINE LOCALE TABLE, not a learned model.
+ * hints.
  *
  * ###########################################################################
- * # SWAP POINT for @omnibeat/phonetic-core (B-PHON)                        #
- * # This inline table is the deliberate Phase-1 placeholder for the locale  #
- * # packs (blueprint 7.1: grammar is DATA, not code). B-PHON replaces this  #
- * # file's tables with data-driven packs (rules + respelling variants +     #
- * # transliteration keys) without touching the pipeline around it.          #
+ * # B-PHON SWAP DONE (this file keeps only S0 FRAME grammar)               #
+ * # The phonetic layer flagged here as "SWAP POINT" is now data-driven:     #
+ * # resolver/phonetic.ts loads the @omnibeat/phonetic-core locale packs     #
+ * # (rules + respelling variants + translit keys) at startup and scores     #
+ * # candidate titles by articulatory distance (S5, wired in resolve.ts).    #
+ * # What remains inline below is the S0 frame grammar (wake/verb/filler/    #
+ * # provider + intent-enum extraction) that produces the peel evidence      #
+ * # trail; pack-grammar stripping for phonetics happens inside             #
+ * # resolveSkeletons().                                                     #
  * # Budget: peel must stay under config.latency.peel (2 ms, blueprint 6.1). #
  * ###########################################################################
  *
