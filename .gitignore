@@ -1,0 +1,32 @@
+# dependencies / builds
+node_modules/
+dist/
+*.tsbuildinfo
+
+# env & secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# runtime data
+*.db
+*.sqlite
+data/
+services/omnibeat-mcp/data/
+
+# logs & process output
+*.log
+.omni/logs/
+probe-out.txt
+
+# human originals (preserved on disk, seeded+hashed in research/seed/)
+_originals/
+
+# tooling scratch
+.playwright-mcp/
+.cache/
+coverage/
+
+# os
+Thumbs.db
+.DS_Store

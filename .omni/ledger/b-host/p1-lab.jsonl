@@ -1,0 +1,7 @@
+{"note":"scaffolded services/alexa-lab: mcp-client, trace-bus, agent-loop, asr+tts, barge-in, breaker, server routes on :4000","task":"p1-lab","event":"shell","agent":"b-host","ts":"2026-10-19T15:02:43.5403705+00:00"}
+{"note":"npm run build exit 0; npm test exit 0: 7 files / 48 tests (breaker 5, logger 4, asr 6, trace-bus 5, barge-in 8, mcp-offline 7, server 13)","task":"p1-lab","event":"self_check","agent":"b-host","ts":"2026-10-19T15:07:43.5403705+00:00"}
+{"note":"bug: zero mcp->host frames; tap.diagnose proved SSE data: text was passed to an objects-only parser (also CRLF event boundary)","task":"p1-lab","event":"decision","agent":"b-host","ts":"2026-10-19T15:12:43.5403705+00:00"}
+{"note":"fix: parseJsonRpcText + CRLF-safe SSE boundary + keep-alive skip; response frames now carry latencyMs and sseEventId","task":"p1-lab","event":"decision","agent":"b-host","ts":"2026-10-19T15:17:43.5403705+00:00"}
+{"event":"shell","cmd":"npm run build (ORCH resume)","exit_code":0,"ts":"2026-10-20T06:54:44.9673961Z"}
+{"event":"shell","cmd":"npm test (ORCH resume)","exit_code":0,"note":"7 files / 48 tests passed","ts":"2026-10-20T06:54:44.9673961Z"}
+{"event":"self_check","check":"build+tests green after resume; PROOF/README committed","result":"pass","ts":"2026-10-20T06:54:44.9673961Z"}

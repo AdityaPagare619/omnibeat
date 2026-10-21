@@ -1,0 +1,282 @@
+<subagent sessionID="ses_eabd186a8ffeALIVXehrw7PypJ" state="completed">
+**R-AWS → ORCH — claim cards (all sources opened 2026-10-19; ledger at `.omni/ledger/r-aws/p0-research.jsonl`, 36 web_fetch + 10 web_search + self_check). Note: this machine has NO AWS CLI and NO credentials — nothing was executed against AWS (fixture/REPLAY path active, ESC-001 open).**
+
+```yaml
+- id: CLM-AWS-001
+  statement: "Amazon Bedrock Converse (POST /model/{modelId}/converse) accepts a top-level toolConfig object of type ToolConfiguration carrying tools[] (toolSpec with name/description/inputSchema.json) and optional toolChoice; Converse requires bedrock:InvokeModel."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html", title: "Converse API Reference", publisher: "AWS (docs.aws.amazon.com)", version_or_date: "latest, retrieved 2026-10-19", retrieved_at: "2026-10-19", locator: "Request Syntax + Request Body > toolConfig", paraphrase: "Request syntax lists toolConfig {toolChoice, tools}; body description: Type ToolConfiguration, Required No"}
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html", title: "Inference using Converse API", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Request fields list", paraphrase: "toolConfig is the Converse field used to include a tool; content block types include toolUse and toolResult (retrieved via search index of the official URL)"}
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html", title: "Use a tool to complete a model response", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Modes table", paraphrase: "Client-side tool use is available with the Responses, Chat Completions, Converse and InvokeModel APIs; server-side tool use is currently Responses-API only"}
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-AWS-01, mcp-orchestration-shape]
+
+- id: CLM-AWS-002
+  statement: "ConverseStream also accepts toolConfig, and streams tool calls as structured events: messageStart → contentBlockStart (tool use only) → contentBlockDelta (text | reasoningContent | toolUse partial JSON) → contentBlockStop → messageStop (carries stopReason) → metadata (usage+metrics). The AWS CLI does not support ConverseStream; streaming support per model is discoverable via GetFoundationModel.responseStreamingSupported."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html", title: "ConverseStream API Reference", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Request Syntax; Response Syntax > contentBlockStart (ContentBlockStartEvent)", paraphrase: "toolConfig present in request; response stream includes contentBlockStart typed ContentBlockStartEvent"}
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html", title: "Inference using Converse API", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "ConverseStream response event-order diagram", paraphrase: "contentBlockStart is 'tool use only'; contentBlockDelta carries toolUse partial input JSON; messageStop carries stopReason (search-index retrieval)"}
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-AWS-01, realtime-latency-budget]
+
+- id: CLM-AWS-003
+  statement: "Client-side tool loop on Converse: when stopReason == 'tool_use', read output.message.content blocks of type toolUse {name, toolUseId, input}; execute the tool; send a new user-role message whose content is [{toolResult: {toolUseId, content, status}}] with the same toolConfig. toolChoice 'auto' is supported by every tool-use model; 'any' and 'tool' are model-dependent and raise ValidationException if unsupported; a model with no tool support fails every toolChoice with 'This model doesn't support tool use.' Bedrock-generated toolUseId values start with 'tooluse_' (22 chars) and can also come from the provider unchanged."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use-client-side.html", title: "Client-side tool use", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Python sample (generate_text) + 'Choosing which tool the model requests' + 'About the tool use ID'", paraphrase: "Sample shows converse(..., toolConfig) loop with stopReason check, toolUse extraction and toolResult user message; toolChoice behaviour and toolUseId prefix rules documented verbatim"}
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-AWS-01, tool-runner-implementation]
+
+- id: CLM-AWS-004
+  statement: "Three concrete, currently-listed model IDs that support tool use on Converse (VOLATILE list): (a) amazon.nova-pro-v1:0 — in-region us-east-1 yes, geo IDs us./eu./apac.; (b) us.amazon.nova-lite-v1:0 — used verbatim in AWS's own Nova tool-use Converse sample with toolConfig; (c) us.anthropic.claude-haiku-4-5-20251001-v1:0 / global.anthropic.claude-haiku-4-5-20251001-v1:0 — card lists 'Client-side tool calling' as supported on bedrock-runtime, lifecycle Active, but the bare ID is rejected on bedrock-runtime (geo/global inference profile required; in-region us-east-1 not supported). Also usable: anthropic.claude-sonnet-4-5-20250929-v1:0 (geo us./eu./au./jp. + global only — no in-region us-east-1), lifecycle Legacy."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-pro.html", title: "Nova Pro model card", publisher: "AWS", version_or_date: "lifecycle Active, launch 2024-12-05", retrieved_at: "2026-10-19", locator: "Programmatic Access table; Regional availability", paraphrase: "Model ID amazon.nova-pro-v1:0 with geo inference IDs; us-east-1 in-region supported"}
+    - {url: "https://docs.aws.amazon.com/nova/latest/userguide/tool-use-definition.html", title: "Amazon Nova — Defining a tool", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Converse API example + toolChoice note", paraphrase: "converse(modelId='us.amazon.nova-lite-v1:0', ..., toolConfig=tool_config); Nova supports toolChoice auto/any/tool; Nova ToolInputSchema limited to top-level Object with type/properties/required; temperature 0 recommended"}
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html", title: "Claude Haiku 4.5 model card", publisher: "AWS", version_or_date: "lifecycle Active, launch 2025-10-16", retrieved_at: "2026-10-19", locator: "Capabilities > Features (bedrock-runtime) + Programmatic Access + Important note", paraphrase: "bedrock-runtime supported features include 'Client-side tool calling'; Model ID column is N/A on runtime — geo profile us.anthropic.claude-haiku-4-5-20251001-v1:0 or global.* required"}
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-sonnet-4-5.html", title: "Claude Sonnet 4.5 model card", publisher: "AWS", version_or_date: "lifecycle Legacy, launch 2025-09-30", retrieved_at: "2026-10-19", locator: "Programmatic Access + Regional availability", paraphrase: "anthropic.claude-sonnet-4-5-20250929-v1:0; in-region us-east-1 not-supported, geo+global supported"}
+  corroboration: 3
+  status: PARTIAL
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-01, model-selection, cost-table]
+
+- id: CLM-AWS-005
+  statement: "Tool use + streaming are independent capabilities: the following models accept toolConfig only on non-streaming Converse and reject it on ConverseStream with 'This model doesn't support tool use in streaming mode.' — Llama 3.1 8B/70B, Llama 3.3 70B, Llama 4 Scout/Maverick 17B, Mistral Large 1 (24.02), Mistral Large 2 (24.07), Pixtral Large (25.02), Writer Palmyra X4/X5."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use-client-side.html", title: "Client-side tool use", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "'Tool use with response streaming'", paraphrase: "Lists models that reject tools on ConverseStream and says to call Converse instead; response streaming itself works for all of them"}
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-01, streaming-design]
+
+- id: CLM-AWS-006
+  statement: "The official Bedrock tool-use code sample still passes model_id='cohere.command-r-v1:0', but that model reached end of life on 2026-08-19 and now fails with ResourceNotFoundException — copy-pasting the current AWS sample yields a dead model. Its card does list 'Client-side tool calling' as a supported feature, confirming the feature row exists on model cards (Nova Pro / Claude Sonnet 4.5 cards do not show it)."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use-client-side.html", title: "Client-side tool use", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "sample main(): model_id = 'cohere.command-r-v1:0'", paraphrase: "Example uses that model ID for a Converse tool-use call"}
+    - {url: "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-cohere-command-r.html", title: "Cohere Command R model card", publisher: "AWS", version_or_date: "EOL 2026-08-19", retrieved_at: "2026-10-19", locator: "Important callout + Model lifecycle", paraphrase: "Command R reached end of life 2026-08-19 and is no longer available; requests fail with ResourceNotFoundException"}
+  corroboration: 2
+  status: CONTRADICTED
+  contradictions: ["AWS tool-use sample references a model that the model card declares EOL"]
+  volatility: STABLE
+  used_in: [RQ-AWS-01, sample-code-review]
+
+- id: CLM-AWS-007
+  statement: "Transcribe streaming supports all of our target locales: en-US, en-IN, hi-IN, es-US, ko-KR, ja-JP, pt-BR and en-ZA are all listed 'batch, streaming' (hi-IN also supports custom language models and acronyms in batch; redaction 'no'). NEGATIVE RESULT: there is no en-NG (Nigerian English) language code — the only Nigeria-coded row is ha-NG (Hausa), batch-only; en-NG also does not appear in StartStreamTranscription's LanguageCode valid-values list."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html", title: "Supported languages and language-specific features", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Data input column rows for English variants, Hindi, Spanish (US), Korean, Japanese, Portuguese (Brazilian), Hausa", paraphrape_note: "", paraphrase: "Each named locale shows 'batch, streaming'; footnote limits streaming only for languages marked streaming* (none of ours); no English (Nigeria) row"}
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html", title: "StartStreamTranscription API Reference", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "LanguageCode > Valid Values", paraphrase: "Enumerated codes include en-US, en-IN, en-ZA, es-US, hi-IN, ja-JP, ko-KR, pt-BR; en-NG absent"}
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-02, locale-matrix]
+
+- id: CLM-AWS-008
+  statement: "Transcribe streaming emits partial results: each Result carries IsPartial (true = segment incomplete) and an Alternatives[] array whose Items[] carry per-word Confidence (0–1, present on complete segments) plus Stable/VocabularyFilterMatch flags. The streaming Alternative object has only Entities | Items | Transcript — there is no alternative-level Confidence field and AWS documents no N-best/alternatives-count parameter for streaming; all opened examples show exactly one alternative."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html", title: "Streaming and partial results", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "IsPartial paragraph; 'Each word within a complete segment has an associated confidence score' 0–1", paraphrase: "Partial results exposed via Results + IsPartial; word-level confidence stated explicitly; example JSON shows single-alternative structure"}
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_Alternative.html", title: "Streaming Alternative API Reference", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Contents", paraphrase: "Fields: Entities, Items, Transcript only — no Confidence"}
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_TranscriptResultStream.html", title: "TranscriptResultStream / TranscriptEvent", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Response example", paraphrase: "Results[].Alternatives[].Items[].Confidence and IsPartial present; one alternative in example (search-index retrieval)"}
+  corroboration: 3
+  status: PARTIAL
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-AWS-02, confidence-gating]
+
+- id: CLM-AWS-009
+  statement: "Low-latency partials are available via partial-result stabilization: EnablePartialResultsStabilization + PartialResultsStability = low|medium|high. Documented trade-off: 'Low stability provides the highest accuracy. High stability transcribes faster, but with slightly lower accuracy'; stabilized words are flagged Stable=true/false (only the last few words can change); activation 'may impact accuracy'."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html", title: "Streaming and partial results > Partial-result stabilization", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "stabilization section + worked example with Stable flags", paraphrase: "Stabilization reduces latency/revision at an accuracy cost; Stable field semantics defined; side-by-side transcript example"}
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html", title: "StartStreamTranscription", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "EnablePartialResultsStabilization / PartialResultsStability", paraphrase: "Params and valid values high|medium|low; 'can reduce latency in your output, but may impact accuracy'"}
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-AWS-02, realtime-latency-budget]
+
+- id: CLM-AWS-010
+  statement: "Custom vocabularies work with streaming transcription: StartStreamTranscription exposes x-amzn-transcribe-vocabulary-name (VocabularyName), vocabulary-names (multi), vocabulary-filter-name(s) and language-model-name headers, and AWS documents custom vocabulary usage in the Real-time transcription console. Limits: custom vocabularies usable with all supported languages, up to 100 files/account, 50 KB/file, ≤256 chars/entry, must be created in the same Region as the transcription; quota 'Custom vocabulary size limit' 51,200 bytes/Region."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html", title: "StartStreamTranscription API Reference", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Request Syntax headers + VocabularyName/IdentifyMultipleLanguages descriptions", paraphrase: "VocabularyName/VocabularyNames/VocabularyFilterName(s) accepted on the streaming API; IdentifyMultipleLanguages can carry VocabularyNames"}
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html", title: "Custom vocabularies", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Intro + Considerations list + console tip", paraphrase: "'can be used with all supported languages'; 100 files, 50 KB, 256 chars, same-Region rule; console Real-time transcription supports custom vocabulary"}
+    - {url: "https://docs.aws.amazon.com/general/latest/gr/transcribe.html", title: "Amazon Transcribe endpoints and quotas", publisher: "AWS", version_or_date: "page live 2026", retrieved_at: "2026-10-19", locator: "Service quotas table", paraphrase: "Custom vocabulary size limit 51,200 bytes per Region; total vocabulary limit 100"}
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-02, domain-term-accuracy]
+
+- id: CLM-AWS-011
+  statement: "Transcribe streaming concurrency: default quota is 25 concurrent stream transcription sessions (HTTP/2 + WebSocket) per account per Region (adjustable). Streaming endpoints exist in us-east-1/us-east-2/us-west-2 and 20+ other Regions; hitting LimitExceededException usually means the concurrent-stream quota was exceeded (retry with exponential backoff). Max session duration is a hard, non-increaseable limit."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/general/latest/gr/transcribe.html", title: "Amazon Transcribe endpoints and quotas", publisher: "AWS", version_or_date: "retrieved 2026-10-19", retrieved_at: "2026-10-19", locator: "Service quotas > 'Number of concurrent streams (HTTP/2 + Websocket)'; streaming endpoints table", paraphrase: "Default 25 concurrent streams per Region, adjustable; transcribestreaming.* endpoints listed"}
+    - {url: "https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html", title: "Transcribing streaming audio", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Handling LimitExceededException errors", paraphrase: "Concurrent-stream quota, max session duration (hard limit), and ramp-up causes enumerated"}
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-02, capacity-planning]
+
+- id: CLM-AWS-012
+  statement: "Polly neural voices for our locales (voice IDs from the neural list): en-US = Danielle, Gregory, Ivy, Joanna, Kendra, Kimberly, Salli, Joey, Justin, Kevin, Matthew, Ruth, Stephen; en-IN and hi-IN = Kajal (bilingual); es-US = Lupe, Pedro; ko-KR = Seoyeon; ja-JP = Takumi, Kazuha, Tomoko; pt-BR = Camila, Vitória, Thiago; en-ZA = Ayanda. NEGATIVE RESULT: no en-NG / Nigerian-English voice exists in the Polly voice list. Caveats: neural voices are not available in all Regions (list includes us-east-1, us-west-2, ap-south-1, ap-northeast-1/2, eu-*, af-south-1); Polly may silently fall back to the Standard engine for letter-by-letter spelling."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/polly/latest/dg/neural-voices.html", title: "Neural voices", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "'Available neural voices' table (36 rows) + 'Feature and region compatibility'", paraphrase: "Neural voice IDs per language code as listed; 19 supported Regions enumerated; possible Standard-engine switch noted"}
+    - {url: "https://docs.aws.amazon.com/polly/latest/dg/voicelist.html", title: "Available voices", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Full voice table with Generative/Long-form/Neural/Standard columns", paraphrase: "Corroborates engine support per voice (e.g., en-IN Aditi/Raveena standard-only, Kajal neural); no Nigerian-English row"}
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-03, locale-matrix, tts-provider-choice]
+
+- id: CLM-AWS-013
+  statement: "Polly speech marks: SpeechMarkTypes accepts sentence | ssml | viseme | word (max 4, ≥1 required); 'Speechmarks are available when using neural, long-form, or standard text-to-speech engines' and the neural voice page explicitly lists 'All speech marks' as supported. Format/latency caveats: a speech-mark request returns line-delimited JSON INSTEAD of audio ('No audio output is generated with the request'), each object has time = milliseconds from the start of the corresponding audio stream plus start/end BYTE offsets into the input text; marks are voice-specific (worked example is Joanna), so a second voice or text yields different timings — synchronizing marks with audio requires matching text/voice and (per docs) a separate audio request."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/polly/latest/dg/speechmarks.html", title: "Speech marks", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Intro paragraph", paraphrase: "Metadata instead of synthesized speech when requested; available for neural, long-form, standard engines"}
+    - {url: "https://docs.aws.amazon.com/polly/latest/dg/neural-voices.html", title: "Neural voices", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "features supported for neural voices bullet list", paraphrase: "'All speech marks' supported for neural voices"}
+    - {url: "https://docs.aws.amazon.com/polly/latest/dg/output.html", title: "Speech mark output", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "field definitions + example", paraphrase: "time/type/start/end/value; byte offsets; example {'time':373,...,'value':'had'} for Joanna; metadata may differ for another voice"}
+    - {url: "https://docs.aws.amazon.com/polly/latest/dg/using-speechmarks.html", title: "Speech mark types / SynthesizeSpeech", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "SpeechMarkTypes + OutputFormat + Engine", paraphrase: "Valid values sentence|word|viseme|ssml; OutputFormat json for speech marks; Engine standard|neural|long-form|generative (search-index retrieval)"}
+  corroboration: 4
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-AWS-03, subtitle-sync, lip-sync]
+
+- id: CLM-AWS-014
+  statement: "Amazon Polly pricing (US commercial): Standard $4.00 / 1M characters, Neural $16.00 / 1M, Long-Form $100.00 / 1M, Generative $30.00 / 1M — speech and Speech Marks requests are both billed per character. Free tier: 5M chars/mo standard and 1M chars/mo neural 'for the first 12 months' (Long-Form 500k, Generative 100k); since 2025-07-15 new AWS accounts get up to $200 in Free Tier credits (free plan 6 months, credits must be used within 12 months)."
+  type: number
+  sources:
+    - {url: "https://aws.amazon.com/polly/pricing/", title: "Amazon Polly Pricing", publisher: "AWS", version_or_date: "page as retrieved 2026-10-19", retrieved_at: "2026-10-19", locator: "Pay-as-you-go model + Free tier + pricing examples (e.g. 2.5k speech + 2.5k marks)", paraphrase: "Per-M-character rates and free-tier allowances quoted; speech marks billed as characters in examples"}
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-03, cost-table, per-turn-cost]
+
+- id: CLM-AWS-015
+  statement: "Amazon Transcribe pricing: both streaming and batch are billed monthly on audio seconds with no minimum; the official worked examples state us-east-1 rates of $0.01 per minute for streaming and $0.006 per minute for batch, and that custom vocabularies, vocabulary filtering, speaker diarization and language identification are included (PII redaction and custom language models are add-ons: redaction T1 $0.0024/min for the first 250,000 min). Free tier: 60 audio minutes per month for the first 12 months."
+  type: number
+  sources:
+    - {url: "https://aws.amazon.com/transcribe/pricing/", title: "Amazon Transcribe Pricing", publisher: "AWS", version_or_date: "page as retrieved 2026-10-19", retrieved_at: "2026-10-19", locator: "Standard pricing paragraph; 'Standard streaming' example ('$0.01 per minute'); batch example ('$0.006 per minute'); Free tier", paraphrase: "Streaming/batch per-minute example rates, included features, 60-min/month free tier for 12 months"}
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-02, cost-table, per-turn-cost]
+
+- id: CLM-AWS-016
+  statement: "AWS App Runner pricing shape for a low-traffic HTTPS service (us-east-1/us-east-2/us-west-2/eu-west-1): Active container instances $0.064 per vCPU-hour + $0.007 per GB-hour; Provisioned (idle/warm) instances $0.007 per GB-hour — default minimum 1 provisioned instance, so an idle 1 vCPU/2 GB service still costs ~$0.34/day (~$10/mo) unless paused; billing is per second with a 1-minute minimum charge on vCPU each time an instance starts handling requests. Smallest config 0.25 vCPU/0.5 GB. No free tier is stated on the App Runner pricing page. Container basics: app listens on Port (default 8080), PORT env var injected, 5-minute instance startup window. Quotas (per Region, default): 30 services, 10 connections, 10 auto-scaling configurations, 10 VPC connectors, 1 VPC ingress connection per service; instance scaling is bounded by the Fargate on-demand vCPU quota."
+  type: number
+  sources:
+    - {url: "https://aws.amazon.com/apprunner/pricing/", title: "AWS App Runner Pricing", publisher: "AWS", version_or_date: "retrieved 2026-10-19", retrieved_at: "2026-10-19", locator: "Provisioned/Active container instances + Supported configurations + Example cost breakdown", paraphrase: "$0.064/vCPU-hr, $0.007/GB-hr active; $0.007/GB-hr provisioned; Tokyo $0.081/$0.009; dev example totals $4.80/month with service paused 22h/day"}
+    - {url: "https://docs.aws.amazon.com/general/latest/gr/apprunner.html", title: "AWS App Runner endpoints and quotas", publisher: "AWS", version_or_date: "published 2026-09-24", retrieved_at: "2026-10-19", locator: "Service quotas table", paraphrase: "30 services, 10 connections, 10 auto scaling configs, 10 observability configs, 10 VPC connectors, 1 VPC ingress per service (search-index retrieval)"}
+    - {url: "https://docs.aws.amazon.com/apprunner/latest/api/API_ImageConfiguration.html", title: "App Runner ImageConfiguration / InstanceConfiguration / develop", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Port (Default 8080); PORT env var; 5-minute startup", paraphrase: "Container listening port default 8080; PORT variable available; startup 5 min with 1-minute minimum charge (search-index retrieval)"}
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-04, hosting-choice, cost-table]
+
+- id: CLM-AWS-017
+  statement: "AWS Fargate on-demand pricing shape (us-east-1, Linux/x86, from the pricing page's own worked example): $0.000011244 per vCPU-second ≈ $0.0405 per vCPU-hour, and $0.000001235 per GB-second ≈ $0.00445 per GB-hour (ephemeral storage $0.0000000308/GB-second ≈ $0.00011/GB-hour, first 20 GB free); ARM/Graviton is cheaper: $0.0000089944/vCPU-second ≈ $0.0324/vCPU-hour and $0.0000009889/GB-second ≈ $0.00356/GB-hour. Billing per second with a 1-minute minimum, from image pull to task termination. Per-hour figures are derived (×3600) from AWS's per-second numbers — no Fargate free tier is stated. Rough shape: a 0.25 vCPU/0.5 GB task ≈ $0.0123/hour ≈ $8.85/month if run continuously."
+  type: number
+  sources:
+    - {url: "https://aws.amazon.com/fargate/pricing/", title: "AWS Fargate Pricing", publisher: "AWS", version_or_date: "retrieved 2026-10-19", retrieved_at: "2026-10-19", locator: "Pricing details → Linux/x86 and Linux/ARM examples; Duration; Supported Configurations", paraphrase: "Per-vCPU-second and per-GB-second rates quoted verbatim in the two worked examples; 1-minute minimum; 20 GB ephemeral storage included"}
+  corroboration: 1
+  status: PARTIAL
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-04, hosting-choice, cost-table]
+
+- id: CLM-AWS-018
+  statement: "YES — Amazon Bedrock AgentCore Runtime officially hosts MCP servers. Requirements: containerized MCP server on streamable-HTTP at path 0.0.0.0:8000/mcp (Host 0.0.0.0, Port 8000, ARM64 platform), FastMCP with stateless_http=True by default (stateful stateless_http=False for elicitation/sampling), OAuth/Cognito authorizer (CUSTOM_JWT via `agentcore add agent --protocol MCP`), deploy with `agentcore deploy` → runtime ARN arn:aws:bedrock-agentcore:...; the platform injects/returns an Mcp-Session-Id header for microVM affinity and passes InvokeAgentRuntime payloads through, so MCP RPC is proxied."
+  type: fact
+  sources:
+    - {url: "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-mcp.html", title: "Deploy MCP servers in AgentCore Runtime", publisher: "AWS", version_or_date: "latest (notes dated 2025-10-07)", retrieved_at: "2026-10-19", locator: "'How Amazon Bedrock AgentCore supports MCP' + Step 3 Deploy + Container requirements", paraphrase: "Runtime deploys MCP servers at 0.0.0.0:8000/mcp; CLI scaffolds MCP protocol project; sample on github.com/awslabs/amazon-bedrock-agentcore-samples"}
+    - {url: "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-mcp-protocol-contract.html", title: "MCP protocol contract", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Container requirements; /mcp POST; session management", paraphrase: "Streamable-http required, ARM64 container, port 8000, Mcp-Session-Id routing/stickiness (search-index retrieval)"}
+    - {url: "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html", title: "Host agent or tools with AgentCore Runtime", publisher: "AWS", version_or_date: "latest", retrieved_at: "2026-10-19", locator: "Protocol support bullet", paraphrase: "AgentCore Runtime lets agents communicate via MCP or A2A (search-index retrieval)"}
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-04, mcp-hosting-choice]
+
+- id: CLM-AWS-019
+  statement: "Hackathon AWS credit program is CLOSED: rules offer '$150 in AWS Promotional Credits' per registered individual via form forms.gle/5hyhr1u6x3fuV2aW7, requestable only by individuals registered for the hackathon, by October 21st 12:00 pm PT, subject to aws.amazon.com/awscredits terms, non-redeemable for cash, with entrants responsible for any overage — but the same section carries 'October 7th Update: We are out of credit codes and will no longer be accepting credit requests.' AWS Promotional Credit T&C (last updated 2026-09-24): one code per one AWS account, non-transferable, no cash value, expires on the code's stated date, not combinable with other offers, ineligible services excluded (Marketplace, Route 53 registration, Enterprise Support, etc.), overage billed to the account's card."
+  type: policy
+  sources:
+    - {url: "https://amazonappdev2026.devpost.com/rules", title: "Build, Ship, Shape: Amazon Developer Hackathon — Official Rules", publisher: "Amazon Developer / Devpost", version_or_date: "page published 2026-09-16", retrieved_at: "2026-10-19", locator: "Section 4 How To Enter, AWS bullet (direct fetch returned HTTP 403 bot-protection; text obtained from two independent search-index retrievals of this URL; R-PLATFORM ledger records a direct HTTP 200 fetch of the same URL on 2026-10-19)", paraphrase: "$150 credit request mechanics, Oct 21 12pm PT form deadline, AWS credits terms pointer, overage note, and the Oct 7 out-of-credits update"}
+    - {url: "https://aws.amazon.com/awscredits/", title: "AWS Promotional Credit Terms & Conditions", publisher: "AWS", version_or_date: "Last Updated: September 24, 2026", retrieved_at: "2026-10-19", locator: "Sections 1–4, 9, 10", paraphrase: "Eligible-services restriction, one code/one account, no transfer/cash, expiry forfeiture, invalid-if-account-created-solely-for-credits"}
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23"
+  used_in: [RQ-AWS-05, esc-001-update, budget]
+
+- id: CLM-AWS-020
+  statement: "Hackathon economics around AWS credits (VOLATILE, expires at deadline): Submission Period Aug 31 – Oct 23 2026 12:00 pm PT; Alexa+ Track prizes — 1st $25,000 cash + $15,000 AWS Credits, 2nd $15,000 + $5,000, 3rd $4,000 + $1,000; AWS Builder mini-challenge $5,000 cash + $5,000 AWS Credits (any primary-track project with documented AWS integrations — Bedrock, AgentCore, Strands SDK, SageMaker, etc.). Credits from prizes are awarded after judging; they are not a pre-submission budget."
+  type: policy
+  sources:
+    - {url: "https://amazonappdev2026.devpost.com/rules", title: "Official Rules — Dates and Timing; Prizes; Mini Challenges", publisher: "Amazon Developer / Devpost", version_or_date: "page published 2026-09-16", retrieved_at: "2026-10-19", locator: "Sections 1, 7 (mini challenges), 8 (prize table)", paraphrase: "Submission period Oct 23 2026 12:00 PT; Alexa+ track 1st/2nd/3rd with cash+AWS credit splits; AWS Builder mini-challenge credit prize (search-index retrievals; direct fetch 403)"}
+  corroboration: 1
+  status: PARTIAL
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23"
+  used_in: [RQ-AWS-05, strategy, deadline]
+
+- id: CLM-AWS-021
+  statement: "Amazon Bedrock per-token list prices could NOT be verified from an AWS-official page: aws.amazon.com/bedrock/pricing collapses the Amazon Nova and Anthropic tables in its markdown render and emits server template placeholders ({priceOf!bedrock/bedrock!...}) in its static HTML — the numbers are resolved client-side. Best available (PARTIAL, AWS-hosted but community-authored, 'Checked Sept 15, 2026 — verify at aws.amazon.com/bedrock/pricing'): Nova Lite $0.06 in / $0.24 out, Nova Micro $0.035 / $0.14, Nova Pro $0.80 / $3.20, Claude Haiku 4.5 $1 / $5, Claude Sonnet 5 $2 / $10, per 1M tokens."
+  type: number
+  sources:
+    - {url: "https://aws.amazon.com/bedrock/pricing/", title: "Amazon Bedrock pricing", publisher: "AWS", version_or_date: "retrieved 2026-10-19 (markdown + HTML renders)", retrieved_at: "2026-10-19", locator: "Amazon Nova section (headings only in markdown); Nova rows in HTML contain {priceOf!...} placeholders", paraphrase: "No numeric Nova/Anthropic prices present in static output — cannot be claimed from this page"}
+    - {url: "https://builder.aws.com/content/3JMGosWc2bn6FL0I2tlUWLOq2ZQ/know-your-models-amazon-bedrock-cheat-sheet", title: "Know Your Models: Amazon Bedrock Cheat Sheet (AWS Builder Center)", publisher: "AWS Builder Center (community author, Nasim Raj Laskar)", version_or_date: "published 2026-09-15, 'Checked Sept 15, 2026'", retrieved_at: "2026-10-19", locator: "Amazon Nova table; Claude table", paraphrase: "Nova Lite $0.06/$0.24, Nova Micro $0.035/$0.14, Nova Pro $0.80/$3.20, Claude Haiku 4.5 $1/$5 per 1M tokens; page itself says verify at the official pricing page"}
+  corroboration: 2
+  status: PARTIAL
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-19"
+  used_in: [RQ-AWS-01, cost-table, per-turn-cost]
+```
+
+**5-line summary — cheapest credible LIVE speech path + top risks**
+
+1. **Path & per-turn cost:** Transcribe streaming ($0.01/min, us-east-1 example) + Polly neural ($16.00/M chars, speech marks billed as chars too) + Bedrock Converse on Nova Lite (~$0.06/$0.24 per 1M tok) ⇒ for an 10-second turn with a 150-char spoken reply and ~2,000 in / 250 out tokens: $0.0017 (ASR) + $0.0024 (TTS) + ~$0.0002 (LLM) ≈ **$0.004 per turn; ≈$0.007 if you also request speech marks** — i.e. ~$4–7 per 1,000 turns.
+2. **Sources for that arithmetic:** aws.amazon.com/transcribe/pricing (streaming $0.01/min), aws.amazon.com/polly/pricing (Neural $16/M chars, marks billed per char), builder.aws.com Bedrock cheat sheet for the Nova rates — the last is PARTIAL because AWS's own Bedrock pricing page serves only JS-resolved `{priceOf!…}` placeholders (CLM-AWS-021).
+3. **Risk #1 (blocking):** no AWS CLI/credentials on this machine (ESC-001) **and** the hackathon's $150 credit pool is exhausted since Oct 7 — every LIVE call would be out-of-pocket on a card, with the deadline Oct 23 12:00 pm PT (CLM-AWS-019, CLM-AWS-020).
+4. **Risk #2 (locale/plumbing):** en-NG exists in neither Transcribe nor Polly (only ha-NG batch-only) so Nigerian-English is unbuildable; hi-IN's only neural voice is the bilingual Kajal; Claude models on `bedrock-runtime` reject bare model IDs (geo/global inference-profile IDs required) and several model families reject `toolConfig` on `ConverseStream` — each failure mode cannot be smoke-tested without credentials.
+5. **Not a risk:** MCP hosting is officially covered — AgentCore Runtime deploys MCP servers (0.0.0.0:8000/mcp, streamable-http, ARM64, Cognito/CUSTOM_JWT, `agentcore deploy`), and the Converse/ConverseStream tool-use contract (`toolConfig` → `toolUse` → `toolResult`, `stopReason`) is fully documented — so the remaining unknowns are credentials/budget, not API shape.
+</subagent>

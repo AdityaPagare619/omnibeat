@@ -1,0 +1,691 @@
+<subagent sessionID="ses_eabd186b8ffe3BR3SaCuxRrHCO" state="completed">
+Ledger written: 26 web_fetch events + 1 self_check. Full findings for ORCH below.
+
+---
+
+# R-SPEC P0 Findings — MCP 2025-11-25 + TypeScript SDK (retrieved 2026-10-19)
+
+**Method note:** All facts below come from spec text at modelcontextprotocol.io (versioned 2025-11-25 pages), the authoritative `schema/2025-11-25/schema.ts` in the `modelcontextprotocol/specification` repo, npm registry metadata, and SDK source at git tag `1.32.1` on GitHub. No blog summaries were used. Two earlier assumptions in the question set were overturned by primary sources (flagged inline).
+
+```yaml
+- id: CLM-SPEC-001
+  statement: >
+    MCP-Protocol-Version header semantics (2025-11-25): after initialization the client
+    MUST include `MCP-Protocol-Version: <protocol-version>` on ALL subsequent HTTP
+    requests; the value SHOULD be the negotiated version. If the server receives no
+    header and cannot otherwise identify the version, it SHOULD assume `2025-03-26`
+    (backwards compat). If the server receives an invalid or unsupported value it MUST
+    respond `400 Bad Request`.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports.md
+      title: "MCP Specification 2025-11-25 — Transports"
+      publisher: modelcontextprotocol.io
+      version_or_date: spec revision 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Section 'Protocol Version Header' (Streamable HTTP)"
+      paraphrase: "Client MUST include header on all subsequent requests; missing => server SHOULD assume 2025-03-26; invalid/unsupported => server MUST 400."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/2025-11-25/schema.ts
+      title: "MCP 2025-11-25 schema.ts (authoritative types)"
+      publisher: modelcontextprotocol/specification
+      version_or_date: schema/2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "LATEST_PROTOCOL_VERSION = '2025-11-25' (top of file)"
+      paraphrase: "Schema pins latest protocol version string '2025-11-25'."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-01, session-negotiation design, OmniBeat transport layer]
+
+- id: CLM-SPEC-002
+  statement: >
+    Version negotiation at initialize: client MUST send a supported protocolVersion
+    (SHOULD be its latest). Server MUST echo the same version if supported, else MUST
+    respond with another version it supports (SHOULD be its latest). If the client does
+    not support the server's response version it SHOULD disconnect. Lifecycle note: over
+    HTTP the client MUST then send the MCP-Protocol-Version header on subsequent requests.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle.md
+      title: "MCP Specification 2025-11-25 — Lifecycle"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Section 'Initialization' > 'Version Negotiation'"
+      paraphrase: "Server echoes supported version or substitutes its own; client SHOULD disconnect on mismatch."
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-01]
+
+- id: CLM-SPEC-003
+  statement: >
+    Mcp-Session-Id lifecycle (Streamable HTTP): server MAY assign session id at init via
+    the `Mcp-Session-Id` response header (SHOULD be globally unique, cryptographically
+    secure, visible ASCII 0x21-0x7E). Client MUST echo it on all subsequent requests.
+    Servers requiring a session SHOULD answer requests lacking the header (other than
+    init) with 400. Server MAY terminate at any time; afterwards it MUST answer requests
+    bearing that session id with 404. On 404, client MUST start a fresh session with a
+    new InitializeRequest (no session id). Client SHOULD terminate via HTTP DELETE with
+    the header; server MAY answer 405.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports.md
+      title: "MCP Specification 2025-11-25 — Transports"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Section 'Session Management' items 1-5"
+      paraphrase: "Session id rules: 400 when required-but-missing, 404 after termination, re-init on 404, DELETE for shutdown."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/server/webStandardStreamableHttp.ts
+      title: "typescript-sdk@1.32.1 server transport source"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "handleRequest/session guards: createJsonErrorResponse(404,...'Session not found') and (400,...'Mcp-Session-Id header is required')"
+      paraphrase: "SDK implements exactly the spec's 400-missing / 404-unknown-session behavior."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-01, session store design]
+
+- id: CLM-SPEC-004
+  statement: >
+    Origin validation: in Streamable HTTP, servers MUST validate the `Origin` header on
+    all incoming connections to prevent DNS rebinding; if Origin is present and invalid,
+    server MUST respond 403 Forbidden (body MAY be an id-less JSON-RPC error). Servers
+    SHOULD bind localhost only when local. The 2025-11-25 changelog lists the 403
+    clarification as a minor change (PR #1439).
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports.md
+      title: "MCP Specification 2025-11-25 — Transports"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Security Warning' callout under 'Streamable HTTP'"
+      paraphrase: "MUST validate Origin; invalid+present => 403."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/changelog.md
+      title: "MCP 2025-11-25 Key Changes"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Minor changes item 3 (PR #1439)"
+      paraphrase: "Clarified servers MUST respond 403 for invalid Origin headers."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-01, server hardening]
+
+- id: CLM-SPEC-005
+  statement: >
+    SDK pin recommendation: `@modelcontextprotocol/sdk@1.32.1` (npm `latest` as of
+    2026-10-19, published 2026-10-05, gitHead ff07b00). v1.x is explicitly the
+    MAINTENANCE line: its README states it "implements the MCP spec up to 2025-11-25"
+    and support for the newer 2026-07-28 spec is NOT planned for v1.x — that is v2,
+    which ships as separate packages `@modelcontextprotocol/server` and
+    `@modelcontextprotocol/client`. v1.x receives bug/security fixes for >=6 months
+    after the v2 release (v2 released 2026-07-27). The SDK's own
+    LATEST_PROTOCOL_VERSION is '2025-11-25' with SUPPORTED list
+    ['2025-11-25','2025-06-18','2025-03-26','2024-11-05','2024-10-07'].
+  type: fact
+  sources:
+    - url: https://registry.npmjs.org/@modelcontextprotocol/sdk/latest
+      title: "npm registry: @modelcontextprotocol/sdk@1.32.1"
+      publisher: npm
+      version_or_date: 1.32.1 (published 2026-10-05T11:42:59Z per GitHub release API)
+      retrieved_at: 2026-10-19
+      locator: "version field; dist.tarball; exports incl. ./experimental/tasks"
+      paraphrase: "Latest = 1.32.1; exports include experimental/tasks."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/README.md
+      title: "typescript-sdk README @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "First paragraph (maintenance-line banner)"
+      paraphrase: "v1.x = maintenance line, spec up to 2025-11-25; 2026-07-28 support lives in v2 packages."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts
+      title: "typescript-sdk src/types.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "LATEST_PROTOCOL_VERSION / SUPPORTED_PROTOCOL_VERSIONS constants (top of file)"
+      paraphrase: "Latest '2025-11-25'; default negotiated fallback '2025-03-26'."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, dependency pin decision]
+
+- id: CLM-SPEC-006
+  statement: >
+    SDK 1.32.1 CLIENT-side Streamable HTTP (src/client/streamableHttp.ts) implements:
+    sends `mcp-protocol-version` header once a version is set (transport.protocolVersion
+    setter); opens GET SSE with `Last-Event-ID` for resume (resumptionToken /
+    onresumptiontoken / replayMessageId callbacks); terminates session via HTTP DELETE
+    with the session header; reconnection backoff options (maxRetries default 2).
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/client/streamableHttp.ts
+      title: "typescript-sdk src/client/streamableHttp.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "headers['mcp-protocol-version'] assignment; 'Include Last-Event-ID header for resumable streams'; protocolVersion setter; DELETE with Mcp-Session-Id docblock"
+      paraphrase: "Client transport covers protocol-version header, session header, Last-Event-ID resumption, DELETE termination."
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02]
+
+- id: CLM-SPEC-007
+  statement: >
+    SDK 1.32.1 SERVER-side Streamable HTTP (src/server/webStandardStreamableHttp.ts,
+    wrapped for Node by src/server/streamableHttp.ts) implements: 404 'Session not found'
+    for unknown session ids and after close; 400 when Mcp-Session-Id required but
+    missing; validateProtocolVersion() => 400 for unsupported mcp-protocol-version, and
+    missing header is ACCEPTED defaulting to the version negotiated at initialization
+    (comment block states this); Origin/Host allow-list validation returning 403 — BUT
+    the options allowedOrigins/allowedHosts/enableDnsRebindingProtection are marked
+    `@deprecated` in favor of external middleware, and validation is OFF unless
+    configured; EventStore interface (storeEvent/replayEventsAfter/getStreamIdForEventId)
+    for resumability.
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/server/webStandardStreamableHttp.ts
+      title: "typescript-sdk src/server/webStandardStreamableHttp.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "options docblock ('@deprecated Use external middleware'), validateProtocolVersion() private method, session guards, EventStore interface"
+      paraphrase: "Server implements spec status codes; Origin validation exists but is deprecated-and-off-by-default."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/server/streamableHttp.ts
+      title: "typescript-sdk src/server/streamableHttp.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "class docblock: 'Requests with invalid session IDs are rejected with 404 Not Found; Non-initialization requests without a session ID are rejected with 400 Bad Request'"
+      paraphrase: "Node wrapper documents same semantics."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-01, RQ-SPEC-02, server implementation]
+
+- id: CLM-SPEC-008
+  statement: >
+    SDK 1.32.1 supports FORM-mode elicitation: ElicitRequestFormParamsSchema (mode
+    literal 'form', optional for back-compat; message; requestedSchema restricted to
+    object of PrimitiveSchemaDefinition entries — "Only top-level properties are allowed,
+    without nesting"); ElicitResultSchema content is a record of string|number|boolean|
+    string[]; high-level API server.server.elicitInput({mode:'form',...}); SDK
+    auto-validates responses against requestedSchema; 'applyDefaults' is a documented
+    TypeScript-SDK EXTENSION, not part of the protocol spec.
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts
+      title: "typescript-sdk src/types.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "ElicitRequestFormParamsSchema (~line 1980-2001), PrimitiveSchemaDefinitionSchema union (~line 1976), ElicitResultSchema (~line 2066)"
+      paraphrase: "Form mode typed; nested schemas rejected; result content flat primitives + string arrays only."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/docs/capabilities.md
+      title: "typescript-sdk docs/capabilities.md @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "'Elicitation > Form elicitation' incl. applyDefaults note"
+      paraphrase: "elicitInput usage; applyDefaults flagged as SDK extension."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, RQ-SPEC-03]
+
+- id: CLM-SPEC-009
+  statement: >
+    SDK 1.32.1 supports URL-mode elicitation IN THE SDK (contradicts any prior
+    assumption it was missing): ElicitRequestURLParamsSchema (mode:'url', message,
+    elicitationId, url — z.string().url()); ElicitationCompleteNotificationSchema for
+    notifications/elicitation/complete; server helper createElicitationCompletionNotifier;
+    runnable examples elicitationUrlExample.ts in src/examples/server AND
+    src/examples/client. URL mode is flagged in the SPEC as a New feature that "may
+    change in future protocol revisions"; the SDK exposes elicitInput({mode:'url',...}).
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts
+      title: "typescript-sdk src/types.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "ElicitRequestURLParamsSchema (~line 2006-2024), ElicitationCompleteNotificationSchema (~line 2058)"
+      paraphrase: "URL-mode params + completion notification are typed at tag 1.32.1."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/docs/capabilities.md
+      title: "typescript-sdk docs/capabilities.md @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "'URL elicitation' section + 'Complete Notification' + createElicitationCompletionNotifier example"
+      paraphrase: "mode:'url' via elicitInput; notifier API; client must show URL + consent."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/README.md
+      title: "typescript-sdk README @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "Server examples table: 'URL elicitation server' row"
+      paraphrase: "elicitationUrlExample.ts listed as shipped example."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, URL-elicitation flow]
+
+- id: CLM-SPEC-010
+  statement: >
+    SDK 1.32.1 supports TASKS but as EXPERIMENTAL: npm export path
+    `@modelcontextprotocol/sdk/experimental/tasks`; docs say APIs live under the
+    experimental '.experimental.tasks' namespace and "may change without notice";
+    server: TaskStore implementation + tasks capability + registerToolTask; client:
+    experimental.tasks.callToolStream / getTask / getTaskResult. Spec side: tasks were
+    introduced in 2025-11-25 and are explicitly "currently considered experimental."
+    In-memory TaskStore ships (src/experimental/tasks/stores/in-memory.ts); with it,
+    tasks are reachable only from the creating session.
+  type: fact
+  sources:
+    - url: https://registry.npmjs.org/@modelcontextprotocol/sdk/latest
+      title: "npm registry metadata @ 1.32.1"
+      publisher: npm
+      version_or_date: 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "exports['./experimental/tasks']"
+      paraphrase: "Dedicated experimental/tasks export exists."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/docs/capabilities.md
+      title: "typescript-sdk docs/capabilities.md @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "'Task-based execution (experimental)' section"
+      paraphrase: "registerToolTask, callToolStream, TaskStore; may change without notice; in-memory store session-bound."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks.md
+      title: "MCP Specification 2025-11-25 — Tasks"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Top Note callout"
+      paraphrase: "Tasks introduced in 2025-11-25, experimental, may evolve."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, long-running tool design]
+
+- id: CLM-SPEC-011
+  statement: >
+    SSE resumability is supported client AND server side at 1.32.1: client reconnects
+    with Last-Event-ID (src/client/streamableHttp.ts, also documented "Opens a GET SSE
+    connection with Last-Event-ID header to replay missed events"); server replay is
+    opt-in via the EventStore interface (src/server/webStandardStreamableHttp.ts) —
+    resumability is DISABLED unless the app supplies an eventStore. Spec: resumption is
+    ALWAYS via HTTP GET with Last-Event-ID regardless of how the stream started; server
+    MAY attach ids; ids MUST be unique per session/stream.
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/client/streamableHttp.ts
+      title: "typescript-sdk client transport @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "'Include Last-Event-ID header for resumable streams if provided'; openStream docblock"
+      paraphrase: "Client sends Last-Event-ID when resuming."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports.md
+      title: "MCP Specification 2025-11-25 — Transports"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Section 'Resumability and Redelivery' items 1-2"
+      paraphrase: "Server MAY attach ids; client resumption via GET + Last-Event-ID; no cross-stream replay."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02]
+
+- id: CLM-SPEC-012
+  statement: >
+    notifications/cancelled handling is implemented in SDK 1.32.1
+    (src/shared/protocol.ts): registers a handler for CancelledNotificationSchema that
+    calls _oncancel -> aborts the per-request AbortController with the notification's
+    reason; when the LOCAL caller aborts/times out, the SDK sends
+    `notifications/cancelled` {requestId, reason} over the transport. Spec alignment:
+    transports.md says disconnection must NOT be interpreted as cancellation; clients
+    SHOULD send an explicit CancelledNotification.
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/shared/protocol.ts
+      title: "typescript-sdk src/shared/protocol.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "setNotificationHandler(CancelledNotificationSchema,...) + _oncancel(); cancel() sending 'notifications/cancelled'"
+      paraphrase: "Both directions of cancellation are wired."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports.md
+      title: "MCP Specification 2025-11-25 — Transports"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Sending Messages to the Server' item 6 (disconnection vs cancellation)"
+      paraphrase: "Explicit CancelledNotification is the prescribed cancel path."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, MRTR retry design]
+
+- id: CLM-SPEC-013
+  statement: >
+    Form-mode elicitation schema restrictions (spec): requestedSchema is a RESTRICTED
+    subset of JSON Schema — flat objects with primitive properties only. Allowed:
+    string (title, description, minLength, maxLength, pattern, format email|uri|date|
+    date-time, default), number/integer (min/max/default), boolean (default), enum
+    single-select via `enum` or titled via `oneOf[{const,title}]`, multi-select via
+    array with items enum or items anyOf[{const,title}] (+min/maxItems, default).
+    Explicitly NOT supported: "complex nested structures, arrays of objects (beyond
+    enums), and other advanced JSON Schema features". Defaults supported (changelog
+    minor item 9, SEP-1034); titled/untitled single/multi-select enums added in
+    2025-11-25 (changelog major item 5, SEP-1330).
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation.md
+      title: "MCP Specification 2025-11-25 — Elicitation"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Form Mode Elicitation Requests' > 'Requested Schema' (four numbered schema kinds + closing note)"
+      paraphrase: "Flat primitives + enum patterns only; nesting intentionally unsupported."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/changelog.md
+      title: "MCP 2025-11-25 Key Changes"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Major item 5 (SEP-1330); Minor item 9 (SEP-1034)"
+      paraphrase: "Standards-based enums and defaults are new in this revision."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/2025-11-25/schema.ts
+      title: "MCP 2025-11-25 schema.ts"
+      publisher: modelcontextprotocol/specification
+      version_or_date: schema/2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "ElicitRequestFormParams.requestedSchema: 'Only top-level properties are allowed, without nesting'; EnumSchema union type"
+      paraphrase: "Machine-readable confirmation of the flat-only restriction."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-03, form UI generation]
+
+- id: CLM-SPEC-014
+  statement: >
+    NEGATIVE/BOUNDARY result: resource links are NOT permitted inside form-mode
+    elicitation — neither in requestedSchema (properties must be PrimitiveSchemaDefinition:
+    string|number|boolean|enum variants) nor in the result (ElicitResult.content is
+    `{[key:string]: string | number | boolean | string[]}`; SDK zod mirrors this).
+    `resource_link` content blocks exist only in TOOL RESULTS (tools.md 'Resource
+            Links' section) and embedded resources in tool output — not in elicitation. Form
+    results also cannot carry annotations.
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/2025-11-25/schema.ts
+      title: "MCP 2025-11-25 schema.ts"
+      publisher: modelcontextprotocol/specification
+      version_or_date: schema/2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "ElicitResult.content type (~line 2485); ElicitRequestFormParams (~line 2170)"
+      paraphrase: "Result content = flat primitives + string[]; no resource refs."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/server/tools.md
+      title: "MCP Specification 2025-11-25 — Tools"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Resource Links' subsection under 'Tool Result'"
+      paraphrase: "resource_link is a tool-result content type only."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts
+      title: "typescript-sdk src/types.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "ElicitResultSchema content z.record(...string|number|boolean|string[])"
+      paraphrase: "SDK rejects non-primitive elicitation content at parse time."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-03]
+
+- id: CLM-SPEC-015
+  statement: >
+    -32042 IS DEFINED IN THE SPEC (contradicts the hypothesis that the blueprint
+    invented it): schema.ts declares `URL_ELICITATION_REQUIRED = -32042` under
+    "Implementation-specific JSON-RPC error codes [-32000, -32099]" with interface
+    URLElicitationRequiredError whose error.data MUST contain
+    `elicitations: ElicitRequestURLParams[]`. Spec section 'URL Elicitation Required
+    Error': server MAY return -32042 when a request cannot be processed until an
+    elicitation completes; MUST NOT return it for any other reason; the error MUST
+    include the list of required elicitations, each of which MUST be URL mode with an
+    elicitationId. Elicitation 'Error Handling' repeats: -32042 for
+    elicitation-required; clients MUST return -32602 when a server requests an
+    undeclared elicitation mode.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation.md
+      title: "MCP Specification 2025-11-25 — Elicitation"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'URL Elicitation Required Error' section; 'Error Handling' section"
+      paraphrase: "-32042 = URLElicitationRequiredError with mandatory data.elicitations[] of URL-mode entries."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/2025-11-25/schema.ts
+      title: "MCP 2025-11-25 schema.ts"
+      publisher: modelcontextprotocol/specification
+      version_or_date: schema/2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "URL_ELICITATION_REQUIRED = -32042 + URLElicitationRequiredError interface (~lines 170-200)"
+      paraphrase: "Constant and error shape are part of the authoritative schema."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts
+      title: "typescript-sdk src/types.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "ErrorCode.UrlElicitationRequired = -32042; UrlElicitationRequiredError class; getErrorData parser (~lines 204, 2322-2345)"
+      paraphrase: "SDK ships the code + a typed error class that parses data.elicitations."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-04, MRTR error contract]
+
+- id: CLM-SPEC-016
+  statement: >
+    What the spec prescribes for elicitation-required signalling, precisely: (a)
+    proactive path — server sends elicitation/create (form or url) NESTED in the
+    ongoing request; (b) error path — server returns -32042 with data.elicitations[]
+    (URL mode only) when the original request must be retried after out-of-band
+    completion; (c) completion — server MAY send notifications/elicitation/complete
+    with elicitationId; clients MUST ignore unknown/completed ids, MAY use it to
+    auto-retry (MRTR), SHOULD still offer manual retry/cancel; (d) form-mode
+    elicitation is NOT signalled via -32042. Response actions are exactly
+    accept/decline/cancel.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation.md
+      title: "MCP Specification 2025-11-25 — Elicitation"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Completion Notifications for URL Mode Elicitation'; 'URL Mode With Elicitation Required Error Flow' sequence diagram; 'Response Actions'"
+      paraphrase: "Full prescribed flow: error -> consent -> open URL -> optional complete notification -> retry."
+  corroboration: 1
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-04]
+
+- id: CLM-SPEC-017
+  statement: >
+    SDK-side MRTR retry support: protocol.ts RequestOptions accepts `relatedTask`;
+    the spec docs for clients that receive -32042 say clients "MAY wait for this
+    notification to automatically retry requests that received a
+    URLElicitationRequiredError". The SDK does NOT auto-retry for you — the client
+    handler must catch UrlElicitationRequiredError, present consent, open URL, and
+    re-issue the original request after notifications/elicitation/complete.
+  type: fact
+  sources:
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts
+      title: "typescript-sdk src/types.ts @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "UrlElicitationRequiredError class (extends McpError) — it is a typed throw, no retry machinery attached"
+      paraphrase: "Error surfaces to app code; no built-in retry loop."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation.md
+      title: "MCP Specification 2025-11-25 — Elicitation"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Completion Notifications' client bullets"
+      paraphrase: "Retry-after-complete is a client MAY, with mandatory manual fallback."
+  corroboration: 2
+  status: PARTIAL
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, RQ-SPEC-04, MRTR retry design]
+  note: "PARTIAL only in the sense that 'no auto-retry' is inferred from absence of retry machinery + presence of a typed error; the error class and notification both read directly from source/spec."
+
+- id: CLM-SPEC-018
+  statement: >
+    YES, the spec contains untrusted-data / prompt-injection guidance, at three loci:
+    (1) spec index 'Security and Trust & Safety' > Key Principle 3 'Tool Safety':
+    tool descriptions/annotations "should be considered untrusted, unless obtained from
+    a trusted server" (SHOULD-level); (2) tools.md: clients MUST consider tool
+    annotations untrusted unless from trusted servers (MUST-level, Warning box), plus
+    Security Considerations: servers MUST sanitize tool outputs, clients SHOULD validate
+    tool results before passing to LLM, show tool inputs before calling to avoid
+    exfiltration, human-in-the-loop; (3) security_best_practices.md documents 'Session
+    Hijack Prompt Injection' (attacker injects payloads via shared queues/resumable
+    streams keyed by stolen session id) and 'Local MCP Server Compromise' (untrusted
+    servers, data exfiltration, command injection via URLs) with mitigations.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/
+      title: "MCP Specification 2025-11-25 — Specification index"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Security and Trust & Safety' > Key Principles item 3"
+      paraphrase: "Tool descriptions/annotations untrusted unless from trusted server."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/server/tools.md
+      title: "MCP Specification 2025-11-25 — Tools"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Warning box under 'Tool' data type; 'Security Considerations' section"
+      paraphrase: "MUST treat annotations as untrusted; validate results before LLM; sanitize outputs."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices.md
+      title: "MCP Specification 2025-11-25 — Security Best Practices"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Session Hijacking' > 'Session Hijack Prompt Injection'; 'Local MCP Server Compromise'"
+      paraphrase: "Concrete prompt-injection attack model + mitigations (secure non-deterministic session ids, bind to user id, MUST NOT use sessions for auth)."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-05, threat model]
+
+- id: CLM-SPEC-019
+  statement: >
+    NEGATIVE result (scoped): the 2025-11-25 spec has NO dedicated 'prompt injection'
+    section for tool RESULT content or resource CONTENT specifically. resources.md
+    Security Considerations is only 4 bullets (validate URIs, access controls, proper
+    binary encoding, check permissions) with no injection guidance. Injection language
+    exists for tool ANNOTATIONS (tools.md) and session-hijack payloads
+    (security_best_practices.md), but 'treat tool results / resource text as
+    untrusted data against prompt injection' is NOT spelled out in the 2025-11-25 spec
+    text — implementations must derive it from the general principles. (A newer spec
+    revision 2026-07-28 exists and may extend this — NOT inspected for this claim.)
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/server/resources.md
+      title: "MCP Specification 2025-11-25 — Resources"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "'Security Considerations' (final section, 4 items) — no injection guidance"
+      paraphrase: "Only URI validation/access control/encoding/permission bullets."
+    - url: https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices.md
+      title: "MCP Specification 2025-11-25 — Security Best Practices"
+      publisher: modelcontextprotocol.io
+      version_or_date: 2025-11-25
+      retrieved_at: 2026-10-19
+      locator: "Section headers enumeration (Confused Deputy, Token Passthrough, SSRF, Session Hijacking, Local Server Compromise, OAuth URL Validation, stdio Proxy, Scope Minimization)"
+      paraphrase: "No 'untrusted tool results / resource content prompt injection' section exists."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: STABLE
+  used_in: [RQ-SPEC-05]
+
+- id: CLM-SPEC-020
+  statement: >
+    Context risk claim: a newer MCP spec revision 2026-07-28 is live (docs index lists
+    it first) and SDK v2 targets it via new packages @modelcontextprotocol/server and
+    @modelcontextprotocol/client. Targeting 2025-11-25 with SDK 1.x is coherent but is
+    a decision to ride a maintenance line; v1.x will not implement 2026-07-28.
+  type: fact
+  sources:
+    - url: https://modelcontextprotocol.io/llms.txt
+      title: "modelcontextprotocol.io docs index"
+      publisher: modelcontextprotocol.io
+      version_or_date: lists 2026-07-28 first, then 2025-11-25 / 2025-06-18 / 2025-03-26 / 2024-11-05
+      retrieved_at: 2026-10-19
+      locator: "First entries under /docs/2026-07-28/"
+      paraphrase: "Newer spec revision published and documented."
+    - url: https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/README.md
+      title: "typescript-sdk README @ 1.32.1"
+      publisher: modelcontextprotocol/typescript-sdk
+      version_or_date: tag 1.32.1
+      retrieved_at: 2026-10-19
+      locator: "Maintenance-line banner (first paragraph)"
+      paraphrase: "v1.x explicitly will not add 2026-07-28 support; v2 packages carry it."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: 2026-11-18
+  used_in: [RQ-SPEC-02, dependency strategy]
+```
+
+## Five-line risk summary (biggest architectural risks found)
+
+1. **SDK 1.x is a maintenance line**: pin `@modelcontextprotocol/sdk@1.32.1` exactly (supports spec through 2025-11-25 only); do not float `^1.32` expecting new features — URL elicitation and tasks are in 1.32.1, but the future is v2 packages (`@modelcontextprotocol/server`/`client`, spec 2026-07-28). *(CLM-005, 020)*
+2. **-32042 is spec-defined, not invented** — good news for the blueprint — but the spec REQUIRES `data.elicitations[]` of URL-mode entries each with `elicitationId`, and forbids using it for anything else; a bare `-32042` with custom data will be non-conformant and unparseable by the SDK's `UrlElicitationRequiredError`. *(CLM-015, 016, 017)*
+3. **URL-mode elicitation IS in SDK 1.32.1** (`elicitInput({mode:'url'})`, completion notifier, examples) — no hand-writing needed — but it is spec-flagged as volatile, and clients MUST show full URL + consent and MUST NOT auto-fetch; our UI must implement that flow, and secrets must never go through form mode. *(CLM-009, 016)*
+4. **Tasks are experimental on both sides** (spec note + SDK `.experimental.tasks`, in-memory store is session-bound) — build the demo so the core loop degrades gracefully if task APIs shift; MRTR retry on `-32042` is a client-side responsibility, the SDK gives you only a typed error to catch. *(CLM-010, 017)*
+5. **Origin validation is MUST in the spec but opt-in and `@deprecated` in the SDK server transport** — with no `allowedOrigins`/middleware configured we ship a DNS-rebinding hole; also remember 400-on-missing-header vs 404-on-dead-session semantics exactly as in CLM-001/003, and form elicitation is FLAT primitives only (no resource links, no nesting) — resource_link belongs to tool results only. *(CLM-003, 004, 007, 014, 018, 019)*
+
+Ledger:27 events appended to `.omni/ledger/r-spec/p0-research.jsonl` (26 pages incl. one recorded 404 for a nonexistent CHANGELOG.md at tag; 1 self_check PASS).
+</subagent>

@@ -1,0 +1,27 @@
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/llms.txt","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/basic/transports.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/server/tools.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/server/resources.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://modelcontextprotocol.io/specification/2025-11-25/changelog.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://registry.npmjs.org/@modelcontextprotocol/sdk/latest","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://registry.npmjs.org/-/package/@modelcontextprotocol%2fsdk/dist-tags","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://github.com/modelcontextprotocol/typescript-sdk/releases","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://api.github.com/repos/modelcontextprotocol/typescript-sdk/releases/tags/1.32.1","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://api.github.com/repos/modelcontextprotocol/typescript-sdk/git/trees/1.32.1?recursive=1","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://api.github.com/repos/modelcontextprotocol/typescript-sdk/contents/src/client?ref=1.32.1","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://api.github.com/search/code?q=%22-32042%22+repo:modelcontextprotocol/typescript-sdk","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/README.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/CHANGELOG.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":404,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/docs/capabilities.md","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/client/streamableHttp.ts","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/server/streamableHttp.ts","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/server/webStandardStreamableHttp.ts","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/types.ts","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/1.32.1/src/shared/protocol.ts","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"web_fetch","url":"https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/2025-11-25/schema.ts","retrieved_at":"2026-10-19T12:57:06Z","http_status":200,"ts":"2026-10-19T12:57:06Z"}
+{"event":"self_check","check":"every claim has >=1 primary source url + retrieval date","result":"PASS - all CLM-SPEC-001..024 backed by modelcontextprotocol.io spec pages, specification-repo schema.ts, npm registry metadata, or typescript-sdk source at tag 1.32.1; negative result for resource_link-in-form recorded as CLM-SPEC-015","ts":"2026-10-19T12:57:06Z"}

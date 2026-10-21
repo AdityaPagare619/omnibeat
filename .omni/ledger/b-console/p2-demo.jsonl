@@ -1,0 +1,6 @@
+{"event":"shell","cmd":"tsc --noEmit","exit_code":0,"ts":"2026-10-20T08:05:58.0415281Z"}
+{"event":"shell","cmd":"npm run build","exit_code":0,"ts":"2026-10-20T08:05:58.0415281Z"}
+{"event":"shell","cmd":"npm test (7/7)","exit_code":0,"ts":"2026-10-20T08:05:58.0415281Z"}
+{"event":"shell","cmd":"node scripts/live-check.mjs (9/9; A ask/0.95 vs B naive play/1)","exit_code":0,"ts":"2026-10-20T08:05:58.0415281Z"}
+{"event":"decision","id":"DEC-P2-1","question":"finish dead B-CONSOLE session in-orchestrator","chosen":"ORCH applied the 3 small fixes directly","reason":"session at step cap; edits were <20 lines","reversibility":"reversible","ts":"2026-10-20T08:05:58.0415281Z"}
+{"event":"self_check","check":"judge-first face + real-MCP proof strip verified live","result":"pass","ts":"2026-10-20T08:05:58.0415281Z"}

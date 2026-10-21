@@ -1,0 +1,355 @@
+<subagent sessionID="ses_eabd186b7ffeHoaeQpvWBEv38P" state="completed">
+Ledger written. Here are the claim cards for ORCH.
+
+```yaml
+- id: CLM-PLAT-001
+  statement: "Submission deadline is Friday, October 23, 2026, 12:00 pm Pacific Time (PDT, = 19:00 UTC / 3:00 pm EDT). Submission Period opened Aug 31, 2026 10:15 am PT; Judging Period Nov 9–Nov 20, 2026; winners on/around Dec 3, 2026."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Build, Ship, Shape: Amazon Developer Hackathon — Official Rules (§1 Dates and Timing)"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "§1 Dates and Timing"
+      paraphrase: "Submission Period: Monday, August 31, 2026 (10:15 am Pacific Time) – Friday, October 23, 2026 (12:00 pm Pacific Time). Judging Period: Nov 9 (12pm PT) – Nov 20, 2026 (12pm PT). Winners announced on or around Thursday, December 3, 2026."
+    - url: https://amazonappdev2026.devpost.com/
+      title: "Hackathon overview page — deadline banner"
+      publisher: Devpost
+      version_or_date: live page
+      retrieved_at: 2026-10-19
+      locator: "header banner"
+      paraphrase: "Deadline: Oct 23, 2026 @ 12:00pm PDT."
+    - url: https://builder.aws.com/content/3JP06xAFFqTUXpD9kECgYcjVHWQ/aws-hackathons-still-open-build-compete-and-ship-before-october-ends
+      title: "AWS Hackathons Still Open (Amazon official blog)"
+      publisher: AWS
+      version_or_date: 2026-09-16
+      retrieved_at: 2026-10-19
+      locator: "event listing"
+      paraphrase: "Submissions open now through October 23, 2026."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01, schedule/risk planning]
+
+- id: CLM-PLAT-002
+  statement: "Judging is two-stage: Stage One pass/fail on baseline viability (fits theme, applies required APIs/SDKs); Stage Two scores four EQUALLY WEIGHTED criteria — (1) Tech Implementation, (2) Design, (3) Potential Impact, (4) Quality of the Idea. No numeric percentages are published. Friction-log entries earn a recommended bonus of up to 10% applied by the Stage 2 panel. Tie-breaks resolve by criterion order 1→4."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules §6 Judges & Criteria"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "§6, 'Judging Criteria' list and 'Bonus Points' paragraph"
+      paraphrase: "Stage One pass/fail on viability. Stage Two: equally weighted criteria — Tech Implementation, Design, Potential Impact, Quality of the Idea (with obvious-vs-creative examples per track; Alexa+ creative examples: agentic workflow across services, state across sessions, purchasing, media cards/carousels, MCP Apps, Agent Skills). Bonus Points: friction log up to 10%, recommended by Amazon's internal review team, applied by Stage 2 panel."
+    - url: https://community.amazondeveloper.com/t/build-ship-shape-amazon-developer-hackathon/29097
+      title: "Amazon Developer Community announcement thread"
+      publisher: Amazon Developer (official sponsor channel)
+      version_or_date: 2026-08-31
+      retrieved_at: 2026-10-19
+      locator: "announcement body"
+      paraphrase: "Document your friction log and get up to a 10% bonus on your final judging score."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-11-20T12:00:00-07:00"
+  used_in: [RQ-PLAT-01, judging strategy, friction-log workstream]
+
+- id: CLM-PLAT-003
+  statement: "Demo video must be under 3 minutes (rules say judges 'are not required to watch beyond three minutes' — treat as hard cap), uploaded publicly to YouTube or Vimeo, in English (or with English translation), must show the project functioning, and must not include third-party trademarks or copyrighted music/footage without permission."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules — Submission Requirements (video bullets) + Language Requirements"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "Submission Requirements → 'Include a demonstration video'"
+      paraphrase: "Video should be less than three (3) minutes; judges are not required to watch beyond three minutes; must be public on YouTube or Vimeo; must show project functioning on its target platform; no third-party trademarks/copyrighted material without permission. All submission materials must be in English or translated."
+    - url: https://amazonappdev2026.devpost.com/
+      title: "Hackathon overview — What to Submit"
+      publisher: Devpost
+      version_or_date: live page
+      retrieved_at: 2026-10-19
+      locator: "'A demo video under 3 minutes: YouTube or Vimeo, public and in English.'"
+      paraphrase: "Same requirement restated in plain language."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01, video production plan]
+
+- id: CLM-PLAT-004
+  statement: "A SIMULATED Alexa+ experience is an explicitly permitted alternate path in the Alexa+ track: 'built using any AI or agentic tool of their choice, no specific framework, SDK, or MCP-shaped surface required.' It is exempt from the runtime-technology-hook requirement that applies to Alexa+/Bee/Ring submissions, but the repo must include the simulation's source code and the demo video must clearly show the simulated experience working. A web page acting as a real MCP client (initialize/tools-list/tools-call over Streamable HTTP) satisfies the requirement."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules — Submission Requirements, Alexa+ bullet"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "Alexa+ submission-requirements bullet"
+      paraphrase: "'Alternatively, entrants may submit a simulated Alexa+ experience instead — built using any AI or agentic tool of their choice, no specific framework, SDK, or MCP-shaped surface required. This alternate path is exempt from the runtime-technology-hook requirement above; the code repository must still include the simulation's source code, and the demo video must clearly show the simulated experience.'"
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — 'can I demo my self-hosted MCP server through a web page that acts as a real MCP client, instead of a device?'"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "FAQ answer"
+      paraphrase: "'Yes. A web page that acts as an actual MCP client (sending initialize, tools-list, and tools-call requests over Streamable HTTP) satisfies the requirement — this is the simulated-experience path ... since there's no way for any participant to connect a self-hosted MCP server to a real Alexa+ device or developer console.'"
+    - url: https://amazonappdev2026.devpost.com/
+      title: "Hackathon overview — Alexa+ track"
+      publisher: Devpost
+      version_or_date: live page
+      retrieved_at: 2026-10-19
+      locator: "'New to MCP? Build a simulated Alexa+ experience in a web app using your preferred agentic tool.'"
+      paraphrase: "Simulated path advertised on the main page."
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01, RQ-PLAT-04, OmniBeat architecture decision]
+
+- id: CLM-PLAT-005
+  statement: "Open Source mini-challenge: create a NEW additional open-source project (with open-source license file) or contribute to an EXISTING public repository (new repo, branch, fork, or pull request — PRs need not be merged) during the hackathon window, alongside a primary-track submission. Contribution must live on GitHub (FAQ: no GitLab or other hosts). Submission must include contribution URL, project repository URL, GitHub username, and a description. No separate mini-challenge deadline — 'during the hackathon window' means by the main deadline Oct 23, 2026 12:00pm PT. Each project can win one track prize and one mini-challenge prize."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules — Mini Challenges (Open Source) + Submission Requirements + Prizes table"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "Open Source mini-challenge bullet; 'For Open Source (Mini Challenge)' submission fields; Prize table row 'Open Source' ($5,000 cash + $5,000 AWS credits)"
+      paraphrase: "'Create a new, additional open-source project or contribute to an existing public repository during the hackathon window, alongside a primary track submission. Contributions can be a new repo (with open-source license), a branch, a fork, or a pull request. PRs do not need to be merged... Required: contribution URL, project repository URL, GitHub username, and a description.'"
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — 'Can I submit a GitLab (or other non-GitHub) repository?'"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "FAQ answer"
+      paraphrase: "'No — the Official Rules require your code repository to be hosted on GitHub specifically.'"
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01, open-source mini-challenge plan]
+
+- id: CLM-PLAT-006
+  statement: "AWS is NOT required for a primary-track Alexa+ submission. AWS usage is only mandated for the separate AWS Builder mini-challenge ($5,000 cash + $5,000 credits; any primary-track project incorporating AWS services — Bedrock, AgentCore, Strands SDK, Kiro Crew, SageMaker etc. — with documented integrations). $150 AWS Promotional Credits were per-individual (not per-team), requestable via form by Oct 21 12pm PT, but an Oct 7 update says credit codes are OUT OF STOCK and no longer accepted. A Kiro Crew mini-challenge counts without calling a runtime AWS service."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules — How To Enter (AWS credits), Mini Challenges (AWS Builder, Kiro Crew), Prizes table"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "AWS credit paragraph + 'October 7th Update'; AWS Builder prize row"
+      paraphrase: "$150 credits per registered individual while supplies last, form deadline Oct 21 12pm PT; 'October 7th Update: We are out of credit codes and will no longer be accepting credit requests.' AWS Builder eligible submissions = primary-track projects incorporating AWS services with documented integrations."
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — AWS credits per individual; AWS cost management"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "FAQ answers"
+      paraphrase: "Credits requested per individual, not per team; judging runs Nov 9-20 so services need not run continuously; no official Bedrock offline emulator — mock/stub for early dev."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01, AWS strategy / cost control]
+
+- id: CLM-PLAT-007
+  statement: "No maximum team size. Entrants may be individuals, teams, or organizations; a team appoints one Representative to submit; an individual may join more than one team and also enter solo."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules §3 Eligibility + Team Representation"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "§3; 'Team Representation'"
+      paraphrase: "Open to individuals at/above age of majority, teams of eligible individuals, and organizations; representative model; no numeric team cap anywhere in rules text."
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — 'Is there a maximum number of members per team?'"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "FAQ answer"
+      paraphrase: "'No. The Official Rules don't set a maximum team size — you can enter solo, as a team, or as an organization.'"
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01]
+
+- id: CLM-PLAT-008
+  statement: "Eligibility: individuals above age of majority in country of residence, worldwide, EXCEPT residents/domiciliaries of Brazil, Quebec (Canada), Russia, Crimea, Cuba, Iran, North Korea, and any other OFAC-comprehensively-sanctioned jurisdiction; promotion entities, judges and their employers, and conflict-of-interest cases excluded."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules §3 Eligibility (IS / IS NOT open to)"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "§3"
+      paraphrase: "Names Brazil, Quebec, Russia, Crimea, Cuba, Iran, North Korea and OFAC-sanctioned territories; standard promotion-entity/judge exclusions."
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — country restriction"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "FAQ answer"
+      paraphrase: "Restates the same country exclusions."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-01]
+
+- id: CLM-PLAT-009
+  statement: "An official registration path for MCP servers with Alexa+ EXISTS in Amazon's docs (Alexa+ MCP Toolkit: add-on registry + discovery layer, alexa-ai CLI 'configure/new/deploy/submit', Add-on Agent Skill, web simulator, MCP spec 2025-01-26/2025-11-25 via Streamable HTTP, US-only) — but it is gated: the tools (Category SDK, MCP Toolkit, CLI, Web Simulator) are in Private Preview, select-partners-only, and the hackathon FAQ states there is NO way for hackathon participants to apply for or gain access."
+  type: fact
+  sources:
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/mcp-toolkit-overview.html
+      title: "Alexa+ MCP Toolkit Overview"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "docs as of 2026"
+      retrieved_at: 2026-10-19
+      locator: "'How it all connects'"
+      paraphrase: "Alexa+ acts as the MCP client; deploying an Alexa+ MCP add-on registers it with 'an add-on registry and discovery layer'; supports MCP spec 2025-11-25 and MCP Apps extension; toolkit available in the United States."
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/alexa-plus-add-on-development-stages.html
+      title: "Build Alexa+ Add-ons: Development Stages"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "published 2026-07-10"
+      retrieved_at: 2026-10-19
+      locator: "Stage 1: Discover"
+      paraphrase: "'After you decide to proceed, you request access to the Private Preview. After approval, you receive credentials and install the tooling, specifically the Alexa-AI command line interface (CLI) with an Add-on Agent Skill.'"
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — 'Will hackathon participants get access to the gated Alexa+ developer tools (Category SDK, MCP Toolkit, CLI, or Web Simulator)?'"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "FAQ answer"
+      paraphrase: "'No. ...in preview and available to select partners only — there is currently no way for hackathon participants to apply for or gain access... build a self-hosted MCP server (or Agent Skill) per the Official Rules, and demo it via your own web-based simulator or front end.'"
+  corroboration: 3
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-02, RQ-PLAT-04, friction-log material]
+
+- id: CLM-PLAT-010
+  statement: "What a host can pass to a tool (documented): the Alexa+ MCP client sends STANDARD MCP traffic only — initialize, tools/list, tools/call with {name, arguments} JSON-RPC over Streamable HTTP. No raw transcript, no n-best list, and no per-call locale appear in any documented payload; locale is an add-on-level config (alexa-ai new mcp --locale, default en-US). Conversation history stays host-side: 'Before initiating a tool call, the Alexa+ client reviews conversation history... extracts key details such as timestamps, user information, and contextual data. This generates a focused prompt that guides effective tool selection.' Account linking enables personalization. MCP Apps widgets additionally receive a hostContext object (deviceClass, maxWidth, maxHeight, isMobile, platform, displayMode, safeAreaInsets, deviceCapabilities, theme) over a postMessage bridge, re-sent on host-context-changed. Absence of transcript/n-best is an inference from the documented payloads (no explicit 'we never send X' statement found)."
+  type: fact
+  sources:
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/mcp-toolkit-client-lifecycle.html
+      title: "Alexa+ MCP Client and App Lifecycle"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "docs as of 2026"
+      retrieved_at: 2026-10-19
+      locator: "'Alexa+ MCP add-on registration', 'MCP tool call payload', 'Alexa+ lifecycle MCP session', 'Resource handling and elicitation'"
+      paraphrase: "All MCP calls follow standard MCP protocol; tool-call payload example contains only name+arguments; session context is host-internal; elicitation goes through the MCP protocol; account-linked servers can personalize."
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/mcp-addon-layout-and-rendering.html
+      title: "Design Guide: Layout and Rendering (hostContext)"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "docs as of 2026"
+      retrieved_at: 2026-10-19
+      locator: "'How your widget learns its surface'"
+      paraphrase: "hostContext delivered over postMessage with deviceClass/maxWidth/maxHeight/isMobile/platform/displayMode/safeAreaInsets/deviceCapabilities/theme; re-sent on host-context-changed; MCP wire identical across surfaces."
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/alexa-ai-cli-reference.html
+      title: "Alexa AI CLI Reference"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "docs as of 2026"
+      retrieved_at: 2026-10-19
+      locator: "'alexa-ai new' options table"
+      paraphrase: "--locale is a scaffold-time add-on setting (default en-US), not per-request context."
+  corroboration: 3
+  status: PARTIAL
+  contradictions: []
+  volatility: STABLE
+  expires_at: null
+  used_in: [RQ-PLAT-02, OmniBeat host-context design, friction-log material]
+
+- id: CLM-PLAT-011
+  statement: "Alexa+ add-on surfaces (official): add-ons run on TWO device modalities — 'Headless devices' (voice alone; if the add-on needs a screen, Alexa tells the customer at runtime that screen-enabled devices support the request) and 'Devices with screens' (fragments + full-screen experiences). Official hardware guidance: Echo Show for multimodal testing, Echo Dot for voice-only testing. Customer-facing Alexa+ runs on most Echo devices (not Echo/Echo Dot/Echo Show 1st/2nd gen, Echo Spot 1st gen, Amazon Tap, Echo Plus 1st gen), Fire TV (Cube 3rd gen, Stick 4K/4K Max 2nd gen, Omni/4-Series/2-Series + select Panasonic/Hisense), Fire tablets on Fire OS 8+, the Alexa app, and the alexa.com browser experience. Alexa+ is currently English/US-only (device language must be en-US). Add-on visual assets are used 'across different surfaces where your add-on appears, such as the Alexa app, Echo Show devices, and Fire TV.'"
+  type: fact
+  sources:
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/alexa-plus-add-on-development-stages.html
+      title: "Build Alexa+ Add-ons: Development Stages — UI implementation"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "published 2026-07-10"
+      retrieved_at: 2026-10-19
+      locator: "'User interface (UI) implementation'"
+      paraphrase: "Two modalities: headless (voice only) vs devices with screens (fragments/full-screen); 'You should design for both modalities.'"
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/set-up-your-development-environment.html
+      title: "Set Up Your Development Environment — hardware requirements"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "docs as of 2026"
+      retrieved_at: 2026-10-19
+      locator: "'Hardware requirements (optional — for physical device testing)'"
+      paraphrase: "'An Alexa-enabled device, ideally a multimodal Alexa device, such as Amazon Echo Show. For testing voice-only, consider the Amazon Echo Dot.'"
+    - url: https://developer.amazon.com/docs/alexaplus/add-ons/overview.html
+      title: "Alexa+ Add-ons overview"
+      publisher: Amazon (Alexa+ Builder Docs)
+      version_or_date: "published 2026-07-10"
+      retrieved_at: 2026-10-19
+      locator: "'Assets'"
+      paraphrase: "Alexa+ uses assets across surfaces such as the Alexa app, Echo Show devices, and Fire TV."
+    - url: https://alexa.com/faqs/?p=139
+      title: "Alexa FAQ — compatible devices & languages"
+      publisher: Amazon (alexa.com)
+      version_or_date: "live FAQ"
+      retrieved_at: 2026-10-19
+      locator: "FAQ Q2, Q3"
+      paraphrase: "Alexa+ works on most Echo devices, listed Fire TV models, Fire tablets Fire OS 8+, Alexa app and browser; English US only; older Echo/Echo Show/Echo Spot generations excluded."
+  corroboration: 4
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-12-31T00:00:00-08:00"
+  used_in: [RQ-PLAT-03, voice-surface adaptation design]
+
+- id: CLM-PLAT-012
+  statement: "The hackathon provides NO Alexa+ sandbox, MCP client tooling, or simulator to participants. The gated Web Simulator / MCP Toolkit / CLI / Category SDK are preview, select-partners-only, with no application path. What IS publicly usable: the MCP open standard itself (modelcontextprotocol.io docs are the rules' starting point), self-hosted MCP servers, MCP Inspector (standard OSS tool, suggested by Amazon docs for local testing), and any self-built web frontend acting as MCP client. Amazon's own Local Inspector and web simulator are documented but access-gated with the rest of the preview tooling."
+  type: policy
+  sources:
+    - url: https://amazonappdev2026.devpost.com/details/faqs
+      title: "Official FAQ — gated Alexa+ developer tools"
+      publisher: Amazon Developer / Devpost
+      version_or_date: live FAQ
+      retrieved_at: 2026-10-19
+      locator: "first FAQ answer; MCP-client-webpage FAQ answer"
+      paraphrase: "'No... there is currently no way for hackathon participants to apply for or gain access... demo it via your own web-based simulator or front end.'"
+    - url: https://amazonappdev2026.devpost.com/rules
+      title: "Official Rules §4 How To Enter — Alexa+"
+      publisher: Amazon Developer / Devpost
+      version_or_date: "rules updated 2026-09-16"
+      retrieved_at: 2026-10-19
+      locator: "§4 tool links"
+      paraphrase: "The only Alexa+ starting point given to participants is the open-source MCP docs at modelcontextprotocol.io; no Amazon-hosted simulator or sandbox is linked."
+  corroboration: 2
+  status: VERIFIED
+  contradictions: []
+  volatility: VOLATILE
+  expires_at: "2026-10-23T12:00:00-07:00"
+  used_in: [RQ-PLAT-04, RQ-PLAT-02]
+```
+
+**6-line summary for ORCH:**
+1. **DEADLINE: Friday, October 23, 2026, 12:00 pm PDT (19:00 UTC)** — no extensions found; the rules were already amended once (Sept 16), so re-check the rules page before final submit.
+2. **Riskiest rules uncertainty:** judging is four equally-weighted criteria with NO published percentages, gated by a subjective Stage-1 downselection, plus a friction-log bonus of up to 10% decided by an internal Amazon review team — we cannot reverse-engineer a scoring target, so the friction log is free upside and must be submitted.
+3. Secondary watch-items: AWS credit codes ran out Oct 7 (don't plan on $150 credits), video "<3 min" is soft-worded but judge-enforced in effect, GitHub-only repos, and the Open Source mini-challenge contribution must exist publicly by the same Oct 23 deadline.
+4. **Our simulated-host design is EXPLICITLY PERMITTED** — the rules name a "simulated Alexa+ experience" alternate path exempt from the runtime-hook requirement (source in repo + video must clearly show it working), and the official FAQ confirms a web page acting as a real MCP client satisfies the Alexa+ track.
+5. RQ-PLAT-02 finding: a real MCP registration path exists in official docs (MCP Toolkit, add-on registry, alexa-ai CLI) but is Private Preview / select-partners-only with no application path — friction-log gold; host→tool context is standard MCP only (name+arguments, no transcript/n-best, no per-call locale; locale is add-on config, default en-US).
+6. RQ-PLAT-03/04: official surfaces are headless (Echo Dot class, voice-only — screen-requiring features get a runtime "try a screen-enabled device" message) vs screens (Echo Show, Alexa app, Fire TV, browser); en-US only — no hackathon-provided sandbox exists at all.
+</subagent>

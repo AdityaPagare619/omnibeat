@@ -53,3 +53,9 @@
 - Dispatch DOC-JUDGE, ARCH, T-TEST, RED-TEAM, R-SPEC, R-PLATFORM, R-AWS, R-MUSIC (parallel).
 - Collect reports; persist claim cards; PROC-AUDIT reviews Phase-0 ledgers.
 - Convene G0 (PROC-AUDIT, J-PRODUCT, J-DEMO, DOC-JUDGE). Open Phase 1 only on PASS/CONDITIONAL.
+
+## Cycle 1 — 2026-10-20 (Phase 1 SHIPPED)
+- All four P1 branches merged (e4ea41f): phonetic-core (120 tests), omnibeat-mcp (7 smoke, 8 tools LIVE), alexa-lab (48 tests, real MCP client + trace bus), lab-console (5 tests).
+- ORCH live E2E verified: ask-on-collision vs naive wrong-play A/B proven on real wire; honest L2/REPLAY evidence trail; badges truthful.
+- Stack left RUNNING for human manual test (MCP :8080, lab :4000, console :3000 via npm run dev).
+- Next: B-PHON swap-in to resolver, G1 contract ratification, eval harness (B-EVAL), Phase 2.
